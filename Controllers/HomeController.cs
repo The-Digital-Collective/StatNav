@@ -10,6 +10,7 @@ namespace StatNav.Controllers
     {
         public ActionResult Index()
         {
+            //comment
             return View();
         }
 
