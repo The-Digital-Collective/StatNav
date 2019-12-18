@@ -11,7 +11,7 @@ namespace StatNav.WebApplication.Controllers
 {
     public class HomeController : BaseController
     {
-        private StatNavContext _db = new StatNavContext();
+        
         public ActionResult Index()
         {
             //comment
@@ -35,7 +35,7 @@ namespace StatNav.WebApplication.Controllers
         [Authorize]
         public ActionResult Programmes()
         {
-            List < ExperimentProgramme > progs = _db.ExperimentProgrammes
+            List < ExperimentProgramme > progs = Db.ExperimentProgrammes
                                           .OrderBy(x => x.Name)
                                           .Include(x=>x.ExperimentStatus)
                                           .OrderBy(x=>x.Id)
