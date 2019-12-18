@@ -4,11 +4,13 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using StatNav.WebApplication.DAL;
 
 namespace StatNav.WebApplication.Controllers
 {
-    public class BaseController : Controller
+    public abstract class BaseController : Controller
     {
+        protected readonly StatNavContext Db = new StatNavContext();
         protected override void OnException(ExceptionContext context)
         {
             if (!context.ExceptionHandled)

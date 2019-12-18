@@ -15,13 +15,17 @@ namespace StatNav.WebApplication.Models
 
         public string Name { get; set; }
 
+        [DataType(DataType.MultilineText)]
         public string Problem { get; set; }
 
         [Display(Name = "Problem Validation")]
+        [DataType(DataType.MultilineText)]
         public string ProblemValidation { get; set; }
 
+        [DataType(DataType.MultilineText)]
         public string Hypothesis { get; set; }
 
+        [DataType(DataType.MultilineText)]
         public string Method { get; set; }
 
         [ForeignKey("TargetMetricModel")]
@@ -42,9 +46,11 @@ namespace StatNav.WebApplication.Models
         [Display(Name = "Impact Value")]
         public float ImpactValue { get; set; }
 
+        [DataType(DataType.MultilineText)]
         [Display(Name = "Success Outcome")]
         public string SuccessOutcome { get; set; }
 
+        [DataType(DataType.MultilineText)]
         [Display(Name = "Failure Outcome")]
         public string FailureOutcome { get; set; }
 
@@ -54,6 +60,7 @@ namespace StatNav.WebApplication.Models
 
         public ExperimentStatus ExperimentStatus { get; set; }
 
+        [DataType(DataType.MultilineText)]
         public string Notes { get; set; }
     }
 }
