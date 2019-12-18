@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StatNav.WebApplication.Models
@@ -56,5 +57,8 @@ namespace StatNav.WebApplication.Models
 
         [DataType(DataType.MultilineText)]
         public string Notes { get; set; }
+
+        [ForeignKey("ExperimentProgrammeId")]
+        public ICollection<ExperimentIteration> ExperimentIterations { get; set; }
     }
 }

@@ -1,0 +1,11 @@
+﻿@model StatNav.WebApplication.Models.ExperimentProgramme
+@{
+    ViewBag.Title = "Details";
+}
+
+<h4>Programme Details</h4>
+@Html.Partial("_detail", Model)
+
+@Html.ActionLink("Edit", "Edit", new { Id = Model.Id }, new { @class = "btn btn-primary" })
+@Html.ActionLink("Delete", "Delete", new { Id = Model.Id }, new { @class = "btn btn-danger" })
+@Html.ActionLink("Back to List", "Index")

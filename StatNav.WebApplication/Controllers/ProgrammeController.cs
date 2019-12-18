@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using StatNav.WebApplication.Models;
 
@@ -19,7 +19,16 @@ namespace StatNav.WebApplication.Controllers
         // GET: Programme/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            ExperimentProgramme thisProg = Db.ExperimentProgrammes
+                .Where((x => x.Id == id))
+                .FirstOrDefault();
+            if (thisProg == null)
+            {
+                return HttpNotFound();
+            }
+
+
+            return View(thisProg);
         }
 
         // GET: Programme/Create
@@ -33,17 +42,26 @@ namespace StatNav.WebApplication.Controllers
 
         // POST: Programme/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(ExperimentProgramme newProg)
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    Db.ExperimentProgrammes.Add(newProg);
+                    Db.SaveChanges();
+                    return RedirectToAction("Programmes", "Home");
+                }
+                ViewBag.Action = "Create";
+                SetDDLs();
+                return View("Edit", newProg);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", ex.Message);
+                ViewBag.Action = "Create";
+                SetDDLs();
+                return View(newProg);
             }
         }
 
@@ -51,50 +69,71 @@ namespace StatNav.WebApplication.Controllers
         public ActionResult Edit(int id)
         {
             ViewBag.Action = "Edit";
-           ExperimentProgramme thisProg = Db.ExperimentProgrammes
-                                            .Where((x=>x.Id==id))
-                                            .FirstOrDefault();
+            ExperimentProgramme thisProg = Db.ExperimentProgrammes
+                                             .Where((x => x.Id == id))
+                                             .FirstOrDefault();
             if (thisProg == null)
             {
                 return HttpNotFound();
             }
 
             SetDDLs();
-            
+
             return View(thisProg);
         }
 
         // POST: Programme/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(ExperimentProgramme editedProg)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    Db.Entry(editedProg).State = EntityState.Modified;
+                    Db.SaveChanges();
+                    return RedirectToAction("Programmes", "Home");
+                }
+                ViewBag.Action = "Edit";
+                SetDDLs();
+                return View("Edit", editedProg);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", ex.Message);
+                ViewBag.Action = "Edit";
+                SetDDLs();
+                return View("Edit", editedProg);
             }
         }
 
         // GET: Programme/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            ExperimentProgramme delProg = Db.ExperimentProgrammes
+                .Where((x => x.Id == id))
+                .FirstOrDefault();
+            if (delProg == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(delProg);
         }
 
         // POST: Programme/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
         {
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                var progToDel = Db.ExperimentProgrammes
+                                  .Include(x => x.ExperimentIterations)
+                                  .FirstOrDefault(x => x.Id == id);
+                progToDel?.ExperimentIterations.ToList().ForEach(n => Db.ExperimentIterations.Remove(n));
+                Db.ExperimentProgrammes.Remove(progToDel);
+                Db.SaveChanges();
+                return RedirectToAction("Programmes","Home");
             }
             catch
             {
