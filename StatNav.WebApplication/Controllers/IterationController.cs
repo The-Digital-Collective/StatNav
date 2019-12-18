@@ -8,7 +8,7 @@ using StatNav.WebApplication.Models;
 namespace StatNav.WebApplication.Controllers
 {
     [Authorize]
-    public class ProgrammeController : BaseController
+    public class IterationController : BaseController
     {
         // GET: Programme
         public ActionResult Index()
@@ -17,8 +17,9 @@ namespace StatNav.WebApplication.Controllers
                 .OrderBy(x => x.Name)
                 .Include(x => x.ExperimentStatus)
                 .ToList();
-            ViewBag.SelectedType = "Programme";
+            ViewBag.SelectedType = "Iteration";
             return View(progs);
+            
         }
 
         // GET: Programme/Details/5

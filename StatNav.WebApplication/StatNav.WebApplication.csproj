@@ -188,6 +188,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IterationController.cs" />
     <Compile Include="Controllers\ProgrammeController.cs" />
     <Compile Include="DAL\StatNavContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -226,6 +227,7 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\common.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -358,6 +360,9 @@
     <Content Include="Views\Programme\_detail.cshtml" />
     <Content Include="Views\Programme\Details.cshtml" />
     <Content Include="Views\Programme\Delete.cshtml" />
+    <Content Include="Views\Programme\Index.cshtml" />
+    <Content Include="Views\Shared\_ExperimentTypeSelect.cshtml" />
+    <Content Include="Views\Iteration\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
