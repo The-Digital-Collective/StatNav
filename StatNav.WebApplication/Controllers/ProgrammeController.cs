@@ -10,6 +10,7 @@ namespace StatNav.WebApplication.Controllers
     [Authorize]
     public class ProgrammeController : BaseController
     {
+        [Authorize]
         // GET: Programme
         public ActionResult Index()
         {
