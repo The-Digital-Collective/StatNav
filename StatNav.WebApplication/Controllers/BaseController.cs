@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Web;
+﻿using System.Diagnostics;
 using System.Web.Mvc;
 using StatNav.WebApplication.DAL;
 
@@ -11,15 +7,15 @@ namespace StatNav.WebApplication.Controllers
     public abstract class BaseController : Controller
     {
         protected readonly StatNavContext Db = new StatNavContext();
-        protected override void OnException(ExceptionContext context)
+        protected override void OnException(ExceptionContext filterContext)
         {
-            if (!context.ExceptionHandled)
+            if (!filterContext.ExceptionHandled)
             {
                 EventLog myLog = new EventLog("Application");
                
-                myLog.WriteEntry(context.RouteData.Values["controller"].ToString() + "; " + context.RouteData.Values["action"].ToString() + "; " + context.Exception.Message);
-                context.ExceptionHandled = true;
-                context.Result = new ViewResult() { ViewName = "Error" };
+                myLog.WriteEntry(filterContext.RouteData.Values["controller"].ToString() + "; " + filterContext.RouteData.Values["action"].ToString() + "; " + filterContext.Exception.Message);
+                filterContext.ExceptionHandled = true;
+                filterContext.Result = new ViewResult() { ViewName = "Error" };
             }
         }
     }
