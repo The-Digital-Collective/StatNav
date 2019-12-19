@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using StatNav.WebApplication.DAL;
 using StatNav.WebApplication.Models;
 
 namespace StatNav.WebApplication.Controllers
@@ -10,151 +11,116 @@ namespace StatNav.WebApplication.Controllers
     [Authorize]
     public class IterationController : BaseController
     {
-        // GET: Programme
+        IterationLogic iLogic = new IterationLogic();
+
         public ActionResult Index()
         {
-            List<ExperimentProgramme> progs = Db.ExperimentProgrammes
-                .OrderBy(x => x.Name)
-                .Include(x => x.ExperimentStatus)
-                .ToList();
+            List<ExperimentIteration> iterations = iLogic.LoadList();
             ViewBag.SelectedType = "Iteration";
-            return View(progs);
+            return View(iterations);
             
         }
 
-        // GET: Programme/Details/5
         public ActionResult Details(int id)
         {
-            ExperimentProgramme thisProg = Db.ExperimentProgrammes
-                .Where((x => x.Id == id))
-                .FirstOrDefault();
-            if (thisProg == null)
+            ExperimentIteration thisIteration = iLogic.Load(id);
+            if (thisIteration == null)
             {
                 return HttpNotFound();
             }
-
-
-            return View(thisProg);
+            return View(thisIteration);
         }
 
-        // GET: Programme/Create
         public ActionResult Create()
         {
             ViewBag.Action = "Create";
-            SetDDLs();
-            ExperimentProgramme newProg = new ExperimentProgramme();
-            return View("Edit", newProg);
+            ExperimentIteration newIteration = new ExperimentIteration();
+            return View("Edit", newIteration);
         }
 
-        // POST: Programme/Create
         [HttpPost]
-        public ActionResult Create(ExperimentProgramme newProg)
+        public ActionResult Create(ExperimentIteration newIteration)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    Db.ExperimentProgrammes.Add(newProg);
-                    Db.SaveChanges();
+                    iLogic.Add(newIteration);
                     return RedirectToAction("Programmes", "Home");
                 }
                 ViewBag.Action = "Create";
-                SetDDLs();
-                return View("Edit", newProg);
+                //SetDDLs();
+                return View("Edit", newIteration);
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 ViewBag.Action = "Create";
-                SetDDLs();
-                return View(newProg);
+                //SetDDLs();
+                return View(newIteration);
             }
         }
 
-        // GET: Programme/Edit/5
         public ActionResult Edit(int id)
         {
             ViewBag.Action = "Edit";
-            ExperimentProgramme thisProg = Db.ExperimentProgrammes
-                                             .Where((x => x.Id == id))
-                                             .FirstOrDefault();
-            if (thisProg == null)
+            ExperimentIteration thisIteration = iLogic.Load(id);
+            if (thisIteration == null)
             {
                 return HttpNotFound();
             }
 
-            SetDDLs();
+            //SetDDLs();
 
-            return View(thisProg);
+            return View(thisIteration);
         }
 
-        // POST: Programme/Edit/5
         [HttpPost]
-        public ActionResult Edit(ExperimentProgramme editedProg)
+        public ActionResult Edit(ExperimentIteration editedIteration)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    Db.Entry(editedProg).State = EntityState.Modified;
-                    Db.SaveChanges();
+                    iLogic.Edit(editedIteration);
                     return RedirectToAction("Programmes", "Home");
                 }
                 ViewBag.Action = "Edit";
-                SetDDLs();
-                return View("Edit", editedProg);
+                //SetDDLs();
+                return View("Edit", editedIteration);
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 ViewBag.Action = "Edit";
-                SetDDLs();
-                return View("Edit", editedProg);
+                //SetDDLs();
+                return View("Edit", editedIteration);
             }
         }
 
-        // GET: Programme/Delete/5
         public ActionResult Delete(int id)
         {
-            ExperimentProgramme delProg = Db.ExperimentProgrammes
-                .Where((x => x.Id == id))
-                .FirstOrDefault();
-            if (delProg == null)
+            ExperimentIteration delIteration = iLogic.Load(id);
+            if (delIteration == null)
             {
                 return HttpNotFound();
             }
 
-            return View(delProg);
+            return View(delIteration);
         }
 
-        // POST: Programme/Delete/5
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
             try
             {
-                var progToDel = Db.ExperimentProgrammes
-                                  .Include(x => x.ExperimentIterations)
-                                  .FirstOrDefault(x => x.Id == id);
-                progToDel?.ExperimentIterations.ToList().ForEach(n => Db.ExperimentIterations.Remove(n));
-                Db.ExperimentProgrammes.Remove(progToDel);
-                Db.SaveChanges();
+                iLogic.Remove(id);
                 return RedirectToAction("Programmes","Home");
             }
             catch
             {
                 return View();
             }
-        }
-
-        private void SetDDLs()
-        {
-            IList<MetricModel> m = Db.MetricModels
-                                     .OrderBy(x => x.Title).ToList();
-            ViewBag.MetricModels = m;
-            IList<ExperimentStatus> s = Db.ExperimentStatuses
-                                          .OrderBy(x => x.DisplayOrder).ToList();
-            ViewBag.ExperimentStatuses = s;
         }
     }
 }
