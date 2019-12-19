@@ -188,9 +188,11 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\CandidateController.cs" />
     <Compile Include="Controllers\IterationController.cs" />
     <Compile Include="Controllers\ProgrammeController.cs" />
-    <Compile Include="DAL\CRUDLogic.cs" />
+    <Compile Include="DAL\CrudLogic.cs" />
+    <Compile Include="DAL\CandidateLogic.cs" />
     <Compile Include="DAL\IterationLogic.cs" />
     <Compile Include="DAL\ProgrammeLogic.cs" />
     <Compile Include="DAL\StatNavContext.cs" />
@@ -211,6 +213,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ExperimentIterations.cs" />
+    <Compile Include="Models\ExperimentCandidate.cs" />
     <Compile Include="Models\ExperimentProgramme.cs" />
     <Compile Include="Models\ExperimentStatus.cs" />
     <Compile Include="Models\MetricModel.cs" />

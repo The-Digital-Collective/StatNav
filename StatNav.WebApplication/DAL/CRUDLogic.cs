@@ -6,7 +6,7 @@ using System.Reflection;
 namespace StatNav.WebApplication.DAL
 {
 
-    public abstract class CRUDLogic<T> where T : class, new()
+    public abstract class CrudLogic<T> where T : class, new()
                                                   
     {
 
