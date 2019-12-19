@@ -190,6 +190,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IterationController.cs" />
     <Compile Include="Controllers\ProgrammeController.cs" />
+    <Compile Include="DAL\CRUDLogic.cs" />
+    <Compile Include="DAL\IterationLogic.cs" />
+    <Compile Include="DAL\ProgrammeLogic.cs" />
     <Compile Include="DAL\StatNavContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -201,6 +204,10 @@
     <Compile Include="Migrations\201912161304144_MoreTables.cs" />
     <Compile Include="Migrations\201912161304144_MoreTables.designer.cs">
       <DependentUpon>201912161304144_MoreTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912191001479_UpdateIterationTable.cs" />
+    <Compile Include="Migrations\201912191001479_UpdateIterationTable.designer.cs">
+      <DependentUpon>201912191001479_UpdateIterationTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ExperimentIterations.cs" />
@@ -385,6 +392,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912161304144_MoreTables.resx">
       <DependentUpon>201912161304144_MoreTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912191001479_UpdateIterationTable.resx">
+      <DependentUpon>201912191001479_UpdateIterationTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

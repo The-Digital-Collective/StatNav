@@ -6,7 +6,6 @@ namespace StatNav.WebApplication.Controllers
 {
     public abstract class BaseController : Controller
     {
-        protected readonly StatNavContext Db = new StatNavContext();
         protected override void OnException(ExceptionContext filterContext)
         {
             if (!filterContext.ExceptionHandled)

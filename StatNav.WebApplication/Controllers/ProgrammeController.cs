@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using StatNav.WebApplication.DAL;
 using StatNav.WebApplication.Models;
 
 namespace StatNav.WebApplication.Controllers
@@ -10,14 +11,11 @@ namespace StatNav.WebApplication.Controllers
     [Authorize]
     public class ProgrammeController : BaseController
     {
-        [Authorize]
+        ProgrammeLogic pLogic = new ProgrammeLogic();
         // GET: Programme
         public ActionResult Index()
         {
-            List<ExperimentProgramme> progs = Db.ExperimentProgrammes
-                .OrderBy(x => x.Name)
-                .Include(x => x.ExperimentStatus)
-                .ToList();
+            List<ExperimentProgramme> progs = pLogic.LoadList();
             ViewBag.SelectedType = "Programme";
             return View(progs);
         }
@@ -25,15 +23,12 @@ namespace StatNav.WebApplication.Controllers
         // GET: Programme/Details/5
         public ActionResult Details(int id)
         {
-            ExperimentProgramme thisProg = Db.ExperimentProgrammes
-                .Where((x => x.Id == id))
-                .FirstOrDefault();
+            ExperimentProgramme thisProg = pLogic.Load(id);
+
             if (thisProg == null)
             {
                 return HttpNotFound();
             }
-
-
             return View(thisProg);
         }
 
@@ -54,8 +49,7 @@ namespace StatNav.WebApplication.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    Db.ExperimentProgrammes.Add(newProg);
-                    Db.SaveChanges();
+                    pLogic.Add(newProg);
                     return RedirectToAction("Programmes", "Home");
                 }
                 ViewBag.Action = "Create";
@@ -75,9 +69,7 @@ namespace StatNav.WebApplication.Controllers
         public ActionResult Edit(int id)
         {
             ViewBag.Action = "Edit";
-            ExperimentProgramme thisProg = Db.ExperimentProgrammes
-                                             .Where((x => x.Id == id))
-                                             .FirstOrDefault();
+            ExperimentProgramme thisProg = pLogic.Load(id);
             if (thisProg == null)
             {
                 return HttpNotFound();
@@ -96,8 +88,7 @@ namespace StatNav.WebApplication.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    Db.Entry(editedProg).State = EntityState.Modified;
-                    Db.SaveChanges();
+                    pLogic.Edit(editedProg);
                     return RedirectToAction("Programmes", "Home");
                 }
                 ViewBag.Action = "Edit";
@@ -116,9 +107,7 @@ namespace StatNav.WebApplication.Controllers
         // GET: Programme/Delete/5
         public ActionResult Delete(int id)
         {
-            ExperimentProgramme delProg = Db.ExperimentProgrammes
-                .Where((x => x.Id == id))
-                .FirstOrDefault();
+            ExperimentProgramme delProg = pLogic.Load(id);
             if (delProg == null)
             {
                 return HttpNotFound();
@@ -133,12 +122,7 @@ namespace StatNav.WebApplication.Controllers
         {
             try
             {
-                var progToDel = Db.ExperimentProgrammes
-                                  .Include(x => x.ExperimentIterations)
-                                  .FirstOrDefault(x => x.Id == id);
-                progToDel?.ExperimentIterations.ToList().ForEach(n => Db.ExperimentIterations.Remove(n));
-                Db.ExperimentProgrammes.Remove(progToDel);
-                Db.SaveChanges();
+                pLogic.Remove(id);
                 return RedirectToAction("Programmes","Home");
             }
             catch
@@ -149,12 +133,8 @@ namespace StatNav.WebApplication.Controllers
 
         private void SetDDLs()
         {
-            IList<MetricModel> m = Db.MetricModels
-                                     .OrderBy(x => x.Title).ToList();
-            ViewBag.MetricModels = m;
-            IList<ExperimentStatus> s = Db.ExperimentStatuses
-                                          .OrderBy(x => x.DisplayOrder).ToList();
-            ViewBag.ExperimentStatuses = s;
+            ViewBag.MetricModels = pLogic.GetMetricModels(); 
+            ViewBag.ExperimentStatuses = pLogic.GetStatuses();
         }
     }
 }
