@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Web.Mvc;
 using StatNav.WebApplication.DAL;
 using StatNav.WebApplication.Models;
@@ -7,105 +9,107 @@ using StatNav.WebApplication.Models;
 namespace StatNav.WebApplication.Controllers
 {
     [Authorize]
-    public class ProgrammeController : BaseController
+    public class CandidateController : BaseController
     {
-        private readonly ProgrammeLogic _pLogic = new ProgrammeLogic();
-        
+        private readonly CandidateLogic _cLogic = new CandidateLogic();
+
         public ActionResult Index()
         {
-            List<ExperimentProgramme> progs = _pLogic.LoadList();
-            ViewBag.SelectedType = "Programme";
-            return View(progs);
+            List<ExperimentIteration> iterations = iLogic.LoadList();
+            ViewBag.SelectedType = "Iteration";
+            return View(iterations);
+            
         }
 
         public ActionResult Details(int id)
         {
-            ExperimentProgramme thisProg = _pLogic.Load(id);
-
-            if (thisProg == null)
+            ExperimentIteration thisIteration = iLogic.Load(id);
+            if (thisIteration == null)
             {
                 return HttpNotFound();
             }
-            return View(thisProg);
+            return View(thisIteration);
         }
 
         public ActionResult Create()
         {
             ViewBag.Action = "Create";
+            ExperimentIteration newIteration = new ExperimentIteration();
+            newIteration.StartDateTime = DateTime.Today;
+            newIteration.EndDateTime = DateTime.Today;
             SetDDLs();
-            ExperimentProgramme newProg = new ExperimentProgramme();
-            return View("Edit", newProg);
+            return View("Edit", newIteration);
         }
 
         [HttpPost]
-        public ActionResult Create(ExperimentProgramme newProg)
+        public ActionResult Create(ExperimentIteration newIteration)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _pLogic.Add(newProg);
+                    iLogic.Add(newIteration);
                     return RedirectToAction("Index");
                 }
                 ViewBag.Action = "Create";
                 SetDDLs();
-                return View("Edit", newProg);
+                return View("Edit", newIteration);
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 ViewBag.Action = "Create";
                 SetDDLs();
-                return View(newProg);
+                return View("Edit", newIteration);
             }
         }
 
         public ActionResult Edit(int id)
         {
             ViewBag.Action = "Edit";
-            ExperimentProgramme thisProg = _pLogic.Load(id);
-            if (thisProg == null)
+            ExperimentIteration thisIteration = iLogic.Load(id);
+            if (thisIteration == null)
             {
                 return HttpNotFound();
             }
 
             SetDDLs();
 
-            return View(thisProg);
+            return View(thisIteration);
         }
 
         [HttpPost]
-        public ActionResult Edit(ExperimentProgramme editedProg)
+        public ActionResult Edit(ExperimentIteration editedIteration)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _pLogic.Edit(editedProg);
+                    iLogic.Edit(editedIteration);
                     return RedirectToAction("Index");
                 }
                 ViewBag.Action = "Edit";
                 SetDDLs();
-                return View("Edit", editedProg);
+                return View("Edit", editedIteration);
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 ViewBag.Action = "Edit";
                 SetDDLs();
-                return View("Edit", editedProg);
+                return View("Edit", editedIteration);
             }
         }
 
         public ActionResult Delete(int id)
         {
-            ExperimentProgramme delProg = _pLogic.Load(id);
-            if (delProg == null)
+            ExperimentIteration delIteration = iLogic.Load(id);
+            if (delIteration == null)
             {
                 return HttpNotFound();
             }
 
-            return View(delProg);
+            return View(delIteration);
         }
 
         [HttpPost, ActionName("Delete")]
@@ -113,19 +117,18 @@ namespace StatNav.WebApplication.Controllers
         {
             try
             {
-                _pLogic.Remove(id);
+                iLogic.Remove(id);
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View("Delete");
             }
         }
 
         private void SetDDLs()
         {
-            ViewBag.MetricModels = _pLogic.GetMetricModels(); 
-            ViewBag.ExperimentStatuses = _pLogic.GetStatuses();
+            ViewBag.ExperimentProgrammes = iLogic.GetProgrammes();
         }
     }
 }

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
 using System.Web.Mvc;
 using StatNav.WebApplication.DAL;
 using StatNav.WebApplication.Models;
@@ -11,11 +9,11 @@ namespace StatNav.WebApplication.Controllers
     [Authorize]
     public class IterationController : BaseController
     {
-        IterationLogic iLogic = new IterationLogic();
+        private readonly IterationLogic _iLogic = new IterationLogic();
 
         public ActionResult Index()
         {
-            List<ExperimentIteration> iterations = iLogic.LoadList();
+            List<ExperimentIteration> iterations = _iLogic.LoadList();
             ViewBag.SelectedType = "Iteration";
             return View(iterations);
             
@@ -23,7 +21,7 @@ namespace StatNav.WebApplication.Controllers
 
         public ActionResult Details(int id)
         {
-            ExperimentIteration thisIteration = iLogic.Load(id);
+            ExperimentIteration thisIteration = _iLogic.Load(id);
             if (thisIteration == null)
             {
                 return HttpNotFound();
@@ -34,9 +32,11 @@ namespace StatNav.WebApplication.Controllers
         public ActionResult Create()
         {
             ViewBag.Action = "Create";
-            ExperimentIteration newIteration = new ExperimentIteration();
-            newIteration.StartDateTime = DateTime.Today;
-            newIteration.EndDateTime = DateTime.Today;
+            ExperimentIteration newIteration = new ExperimentIteration
+            {
+                StartDateTime = DateTime.Today,
+                EndDateTime = DateTime.Today
+            };
             SetDDLs();
             return View("Edit", newIteration);
         }
@@ -48,7 +48,7 @@ namespace StatNav.WebApplication.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    iLogic.Add(newIteration);
+                    _iLogic.Add(newIteration);
                     return RedirectToAction("Index");
                 }
                 ViewBag.Action = "Create";
@@ -67,7 +67,7 @@ namespace StatNav.WebApplication.Controllers
         public ActionResult Edit(int id)
         {
             ViewBag.Action = "Edit";
-            ExperimentIteration thisIteration = iLogic.Load(id);
+            ExperimentIteration thisIteration = _iLogic.Load(id);
             if (thisIteration == null)
             {
                 return HttpNotFound();
@@ -85,7 +85,7 @@ namespace StatNav.WebApplication.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    iLogic.Edit(editedIteration);
+                    _iLogic.Edit(editedIteration);
                     return RedirectToAction("Index");
                 }
                 ViewBag.Action = "Edit";
@@ -103,7 +103,7 @@ namespace StatNav.WebApplication.Controllers
 
         public ActionResult Delete(int id)
         {
-            ExperimentIteration delIteration = iLogic.Load(id);
+            ExperimentIteration delIteration = _iLogic.Load(id);
             if (delIteration == null)
             {
                 return HttpNotFound();
@@ -117,7 +117,7 @@ namespace StatNav.WebApplication.Controllers
         {
             try
             {
-                iLogic.Remove(id);
+                _iLogic.Remove(id);
                 return RedirectToAction("Index");
             }
             catch
@@ -128,7 +128,7 @@ namespace StatNav.WebApplication.Controllers
 
         private void SetDDLs()
         {
-            ViewBag.ExperimentProgrammes = iLogic.GetProgrammes();
+            ViewBag.ExperimentProgrammes = _iLogic.GetProgrammes();
         }
     }
 }

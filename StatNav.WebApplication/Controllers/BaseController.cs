@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using System.Web.Mvc;
-using StatNav.WebApplication.DAL;
 
 namespace StatNav.WebApplication.Controllers
 {

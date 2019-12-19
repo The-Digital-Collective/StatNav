@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using StatNav.WebApplication.Models;
 
 namespace StatNav.WebApplication.DAL
 {
-    public class IterationLogic : CRUDLogic<ExperimentIteration>
+    public class IterationLogic : CrudLogic<ExperimentIteration>
     {
         public override List<ExperimentIteration> LoadList()
         {
@@ -16,6 +14,16 @@ namespace StatNav.WebApplication.DAL
                                                      .ToList();
             return iterations;
 
+        }
+
+        public override ExperimentIteration Load(int id)
+        {
+            ExperimentIteration programme = Db.ExperimentIterations
+                .Where(x => x.Id == id)
+                .Include(x => x.ExperimentProgramme)
+                .FirstOrDefault();
+
+            return programme;
         }
         public override void Remove(int id)
         {
