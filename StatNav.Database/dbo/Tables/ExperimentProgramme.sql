@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[ExperimentProgramme] (
     [Id]                  INT            IDENTITY (1, 1) NOT NULL,
-    [Name]                NVARCHAR (MAX) NULL,
+    [Name]                NVARCHAR (MAX) NOT NULL,
     [Problem]             NVARCHAR (MAX) NULL,
     [ExperimentStatusId]  INT            NOT NULL,
     [ProblemValidation]   NVARCHAR (MAX) NULL,

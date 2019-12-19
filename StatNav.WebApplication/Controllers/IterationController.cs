@@ -35,6 +35,9 @@ namespace StatNav.WebApplication.Controllers
         {
             ViewBag.Action = "Create";
             ExperimentIteration newIteration = new ExperimentIteration();
+            newIteration.StartDateTime = DateTime.Today;
+            newIteration.EndDateTime = DateTime.Today;
+            SetDDLs();
             return View("Edit", newIteration);
         }
 
@@ -46,18 +49,18 @@ namespace StatNav.WebApplication.Controllers
                 if (ModelState.IsValid)
                 {
                     iLogic.Add(newIteration);
-                    return RedirectToAction("Programmes", "Home");
+                    return RedirectToAction("Index");
                 }
                 ViewBag.Action = "Create";
-                //SetDDLs();
+                SetDDLs();
                 return View("Edit", newIteration);
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 ViewBag.Action = "Create";
-                //SetDDLs();
-                return View(newIteration);
+                SetDDLs();
+                return View("Edit", newIteration);
             }
         }
 
@@ -70,7 +73,7 @@ namespace StatNav.WebApplication.Controllers
                 return HttpNotFound();
             }
 
-            //SetDDLs();
+            SetDDLs();
 
             return View(thisIteration);
         }
@@ -83,17 +86,17 @@ namespace StatNav.WebApplication.Controllers
                 if (ModelState.IsValid)
                 {
                     iLogic.Edit(editedIteration);
-                    return RedirectToAction("Programmes", "Home");
+                    return RedirectToAction("Index");
                 }
                 ViewBag.Action = "Edit";
-                //SetDDLs();
+                SetDDLs();
                 return View("Edit", editedIteration);
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 ViewBag.Action = "Edit";
-                //SetDDLs();
+                SetDDLs();
                 return View("Edit", editedIteration);
             }
         }
@@ -115,12 +118,17 @@ namespace StatNav.WebApplication.Controllers
             try
             {
                 iLogic.Remove(id);
-                return RedirectToAction("Programmes","Home");
+                return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View("Delete");
             }
+        }
+
+        private void SetDDLs()
+        {
+            ViewBag.ExperimentProgrammes = iLogic.GetProgrammes();
         }
     }
 }
