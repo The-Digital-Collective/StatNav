@@ -18,6 +18,19 @@ namespace StatNav.WebApplication.DAL
             return programmes;
 
         }
+
+        public override ExperimentProgramme Load(int id)
+        {
+            ExperimentProgramme programme = Db.ExperimentProgrammes
+                                              .Where(x=>x.Id==id)
+                                              .Include(x=>x.ExperimentStatus)
+                                              .Include(x=>x.ImpactMetricModel)
+                                              .Include(x=>x.TargetMetricModel)
+                                              .Include(x => x.ExperimentIterations)
+                                              .FirstOrDefault();
+                
+            return programme;
+        }
         public override void Remove(int id)
         {
             Model = Db.ExperimentProgrammes

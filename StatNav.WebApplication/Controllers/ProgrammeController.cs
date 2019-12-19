@@ -50,7 +50,7 @@ namespace StatNav.WebApplication.Controllers
                 if (ModelState.IsValid)
                 {
                     pLogic.Add(newProg);
-                    return RedirectToAction("Programmes", "Home");
+                    return RedirectToAction("Index");
                 }
                 ViewBag.Action = "Create";
                 SetDDLs();
@@ -89,7 +89,7 @@ namespace StatNav.WebApplication.Controllers
                 if (ModelState.IsValid)
                 {
                     pLogic.Edit(editedProg);
-                    return RedirectToAction("Programmes", "Home");
+                    return RedirectToAction("Index");
                 }
                 ViewBag.Action = "Edit";
                 SetDDLs();
@@ -123,7 +123,7 @@ namespace StatNav.WebApplication.Controllers
             try
             {
                 pLogic.Remove(id);
-                return RedirectToAction("Programmes","Home");
+                return RedirectToAction("Index");
             }
             catch
             {

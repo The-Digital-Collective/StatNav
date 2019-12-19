@@ -9,6 +9,7 @@ namespace StatNav.WebApplication.Models
         public int Id { get; set; }
 
         [ForeignKey("ExperimentProgramme")]
+        [Display(Name = "Experiment Programme")]
         public int ExperimentProgrammeId { get; set; }
 
         public ExperimentProgramme ExperimentProgramme { get; set; }
@@ -16,12 +17,15 @@ namespace StatNav.WebApplication.Models
         [Required]
         public string Name { get; set; }
 
+        [Display(Name = "Required Duration For Significance")]
         public string RequiredDurationForSignificance { get; set; }
 
         public int IterationNumber { get; set; }
 
+        [DataType(DataType.Date), UIHint("DatePicker"), Display(Name = "Start Date")]
         public DateTime StartDateTime { get; set; }
 
+        [DataType(DataType.Date), UIHint("DatePicker"), Display(Name = "End Date")]
         public DateTime EndDateTime { get; set; }
     }
 }

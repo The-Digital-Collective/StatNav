@@ -1,0 +1,38 @@
+﻿@model StatNav.WebApplication.Models.ExperimentIteration
+
+<dl class="dl-horizontal">
+
+    @foreach (var prop in ViewData.ModelMetadata.Properties)
+    {
+        //exceptions in the case statements are for the complex object types
+        <dt>
+            @switch (prop.PropertyName)
+            {
+                case "ExperimentProgramme":
+                    break;
+                default:
+                    @(prop.DisplayName ?? prop.PropertyName)
+                    break;
+
+            }
+        </dt>
+        <dd>
+            @switch (prop.PropertyName)
+            {
+                case "ExperimentProgrammeId":
+                    @(Model.ExperimentProgramme != null ? Model.ExperimentProgramme.Name : "");
+                    break;
+                
+                case "ExperimentProgramme":
+               
+                    break;
+                default:
+                    @prop.Model
+                    break;
+            }
+        </dd>
+
+
+
+    }
+</dl>

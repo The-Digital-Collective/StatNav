@@ -5,6 +5,7 @@
     [IterationNumber]                 INT            NOT NULL,
     [StartDateTime]                   DATETIME       NOT NULL,
     [EndDateTime]                     DATETIME       NOT NULL,
+    [Name]                            NVARCHAR (MAX) DEFAULT ('') NOT NULL,
     CONSTRAINT [PK_dbo.ExperimentIteration] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_dbo.ExperimentIteration_dbo.ExperimentProgramme_ExperimentProgrammeId] FOREIGN KEY ([ExperimentProgrammeId]) REFERENCES [dbo].[ExperimentProgramme] ([Id])
 );
