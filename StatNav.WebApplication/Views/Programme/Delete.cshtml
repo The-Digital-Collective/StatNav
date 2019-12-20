@@ -9,7 +9,7 @@
 @Html.Partial("_detail", Model)
 @using (Html.BeginForm())
 {
-
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <input type="submit" value="Delete" class="btn btn-danger" />
     @Html.ActionLink("Back to List", "Index")
 }

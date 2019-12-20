@@ -116,9 +116,11 @@ namespace StatNav.WebApplication.Controllers
                 _pLogic.Remove(id);
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ExperimentProgramme thisProg = _pLogic.Load(id);
+                ModelState.AddModelError("", ex.Message);
+                return View(thisProg);
             }
         }
 

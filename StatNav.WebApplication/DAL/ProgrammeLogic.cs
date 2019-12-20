@@ -32,10 +32,11 @@ namespace StatNav.WebApplication.DAL
         public override void Remove(int id)
         {
             Model = Db.ExperimentProgrammes
-                      .Include(x => x.ExperimentIterations)
+                      .Include(x => x.ExperimentIterations.Select(c=>c.ExperimentCandidates))
                       .FirstOrDefault(x => x.Id == id);
             if (Model != null)
             {
+                Model?.ExperimentIterations.ToList().ForEach(c=>c.ExperimentCandidates.ToList().ForEach(n => Db.ExperimentCandidates.Remove(n)));
                 Model?.ExperimentIterations.ToList().ForEach(n => Db.ExperimentIterations.Remove(n));
                 Db.ExperimentProgrammes.Remove(Model);
                 Db.SaveChanges();

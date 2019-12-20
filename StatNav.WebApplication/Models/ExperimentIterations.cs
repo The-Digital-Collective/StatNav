@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -27,5 +28,8 @@ namespace StatNav.WebApplication.Models
 
         [DataType(DataType.Date), UIHint("DatePicker"), Display(Name = "End Date")]
         public DateTime EndDateTime { get; set; }
+
+        [ForeignKey("ExperimentIterationId")]
+        public ICollection<ExperimentCandidate> ExperimentCandidates { get; set; }
     }
 }

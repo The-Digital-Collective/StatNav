@@ -21,6 +21,7 @@ namespace StatNav.WebApplication.DAL
             ExperimentIteration programme = Db.ExperimentIterations
                 .Where(x => x.Id == id)
                 .Include(x => x.ExperimentProgramme)
+                .Include(x=>x.ExperimentCandidates)
                 .FirstOrDefault();
 
             return programme;
@@ -28,11 +29,11 @@ namespace StatNav.WebApplication.DAL
         public override void Remove(int id)
         {
             Model = Db.ExperimentIterations
-                     // .Include(x => x.ExperimentIterations) change this to candidates
+                      .Include(x => x.ExperimentCandidates) 
                       .FirstOrDefault(x => x.Id == id);
             if (Model != null)
             {
-                //Model?.ExperimentIterations.ToList().ForEach(n => Db.ExperimentIterations.Remove(n)); change this to candidates
+                Model?.ExperimentCandidates.ToList().ForEach(n => Db.ExperimentCandidates.Remove(n)); 
                 Db.ExperimentIterations.Remove(Model);
                 Db.SaveChanges();
             }

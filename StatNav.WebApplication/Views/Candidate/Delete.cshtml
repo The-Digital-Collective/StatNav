@@ -1,11 +1,11 @@
-﻿@model StatNav.WebApplication.Models.ExperimentIteration
+﻿@model StatNav.WebApplication.Models.ExperimentCandidate
 
 @{
     ViewBag.Title = "Delete";
 }
 
-<h4>Delete Iteration</h4>
-<div class="alert alert-danger">Are you sure you want to remove this iteration? Removing this iteration will also remove all its candidates</div>
+<h4>Delete Candidate</h4>
+<div class="alert alert-danger">Are you sure you want to remove this candidate?</div>
 @Html.Partial("_detail", Model)
 @using (Html.BeginForm())
 {

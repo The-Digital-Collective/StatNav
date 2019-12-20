@@ -120,9 +120,11 @@ namespace StatNav.WebApplication.Controllers
                 _iLogic.Remove(id);
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View("Delete");
+                ExperimentIteration thisIteration = _iLogic.Load(id);
+                ModelState.AddModelError("", ex.Message);
+                return View(thisIteration);
             }
         }
 

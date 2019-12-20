@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Web.Mvc;
+using Microsoft.ApplicationInsights;
 
 namespace StatNav.WebApplication.Controllers
 {
@@ -9,11 +10,14 @@ namespace StatNav.WebApplication.Controllers
         {
             if (!filterContext.ExceptionHandled)
             {
-                EventLog myLog = new EventLog("Application");
-               
-                myLog.WriteEntry(filterContext.RouteData.Values["controller"].ToString() + "; " + filterContext.RouteData.Values["action"].ToString() + "; " + filterContext.Exception.Message);
-                filterContext.ExceptionHandled = true;
-                filterContext.Result = new ViewResult() { ViewName = "Error" };
+                if (filterContext.HttpContext != null && filterContext.Exception != null)
+                {
+                    if (filterContext.HttpContext.IsCustomErrorEnabled)
+                    {
+                        var ai = new TelemetryClient();
+                        ai.TrackException(filterContext.Exception);
+                    }
+                }
             }
         }
     }
