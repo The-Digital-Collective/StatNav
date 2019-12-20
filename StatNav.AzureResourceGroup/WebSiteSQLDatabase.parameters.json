@@ -3,13 +3,22 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "hostingPlanName": {
-      "value": null
+      "value": "wvuk-statnav-hosting-plan"
     },
     "administratorLogin": {
-      "value": null
+      "value": "gilbertn"
+    },
+    "administratorLoginPassword": {
+      "value": "@statnav990"
     },
     "databaseName": {
-      "value": null
+      "value": "StatNavDB"
+    },
+    "webSiteName": {
+      "value": "wvuk-statnav-webapp"
+    },
+    "sqlserverName": {
+      "value": "wvuk-statnav-sql-server"
     }
   }
 }
