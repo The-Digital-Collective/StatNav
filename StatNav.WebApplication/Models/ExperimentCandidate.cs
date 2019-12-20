@@ -16,7 +16,7 @@ namespace StatNav.WebApplication.Models
 
         public bool Control { get; set; }
 
-        [ForeignKey("TargetMetric")]
+        [ForeignKey("TargetMetricModel")]
         [Display(Name = "Target Metric")]
         public int TargetMetricModelId { get; set; }
 
@@ -25,7 +25,7 @@ namespace StatNav.WebApplication.Models
         [Display(Name = "Target Met")]
         public bool TargetMet { get; set; }
 
-        [ForeignKey("ImpactMetric")]
+        [ForeignKey("ImpactMetricModel")]
         [Display(Name = "Impact Metric")]
         public int ImpactMetricModelId { get; set; }
 

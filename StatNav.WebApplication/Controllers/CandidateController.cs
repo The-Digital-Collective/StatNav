@@ -15,15 +15,15 @@ namespace StatNav.WebApplication.Controllers
 
         public ActionResult Index()
         {
-            List<ExperimentIteration> iterations = iLogic.LoadList();
-            ViewBag.SelectedType = "Iteration";
-            return View(iterations);
+            List<ExperimentCandidate> candidates = _cLogic.LoadList();
+            ViewBag.SelectedType = "Candidate";
+            return View(candidates);
             
         }
 
         public ActionResult Details(int id)
         {
-            ExperimentIteration thisIteration = iLogic.Load(id);
+            ExperimentCandidate thisIteration = _cLogic.Load(id);
             if (thisIteration == null)
             {
                 return HttpNotFound();
@@ -34,82 +34,81 @@ namespace StatNav.WebApplication.Controllers
         public ActionResult Create()
         {
             ViewBag.Action = "Create";
-            ExperimentIteration newIteration = new ExperimentIteration();
-            newIteration.StartDateTime = DateTime.Today;
-            newIteration.EndDateTime = DateTime.Today;
+            ExperimentCandidate newCandidate = new ExperimentCandidate();
+           
             SetDDLs();
-            return View("Edit", newIteration);
+            return View("Edit", newCandidate);
         }
 
         [HttpPost]
-        public ActionResult Create(ExperimentIteration newIteration)
+        public ActionResult Create(ExperimentCandidate newCandidate)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    iLogic.Add(newIteration);
+                    _cLogic.Add(newCandidate);
                     return RedirectToAction("Index");
                 }
                 ViewBag.Action = "Create";
                 SetDDLs();
-                return View("Edit", newIteration);
+                return View("Edit", newCandidate);
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 ViewBag.Action = "Create";
                 SetDDLs();
-                return View("Edit", newIteration);
+                return View("Edit", newCandidate);
             }
         }
 
         public ActionResult Edit(int id)
         {
             ViewBag.Action = "Edit";
-            ExperimentIteration thisIteration = iLogic.Load(id);
-            if (thisIteration == null)
+            ExperimentCandidate thisCandidate = _cLogic.Load(id);
+            if (thisCandidate == null)
             {
                 return HttpNotFound();
             }
 
             SetDDLs();
 
-            return View(thisIteration);
+            return View(thisCandidate);
         }
 
         [HttpPost]
-        public ActionResult Edit(ExperimentIteration editedIteration)
+        public ActionResult Edit(ExperimentCandidate editedCandidate)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    iLogic.Edit(editedIteration);
+                    _cLogic.Edit(editedCandidate);
                     return RedirectToAction("Index");
                 }
                 ViewBag.Action = "Edit";
                 SetDDLs();
-                return View("Edit", editedIteration);
+                return View("Edit", editedCandidate);
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 ViewBag.Action = "Edit";
                 SetDDLs();
-                return View("Edit", editedIteration);
+                return View("Edit", editedCandidate);
             }
         }
 
         public ActionResult Delete(int id)
         {
-            ExperimentIteration delIteration = iLogic.Load(id);
-            if (delIteration == null)
+            ExperimentCandidate delCandidate = _cLogic.Load(id);
+            if (delCandidate == null)
             {
                 return HttpNotFound();
             }
 
-            return View(delIteration);
+            return View(delCandidate);
         }
 
         [HttpPost, ActionName("Delete")]
@@ -117,18 +116,22 @@ namespace StatNav.WebApplication.Controllers
         {
             try
             {
-                iLogic.Remove(id);
+                _cLogic.Remove(id);
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View("Delete");
+                ExperimentCandidate thisCandidate = _cLogic.Load(id);
+                ModelState.AddModelError("", ex.Message);
+                return View(thisCandidate);
             }
         }
 
         private void SetDDLs()
         {
-            ViewBag.ExperimentProgrammes = iLogic.GetProgrammes();
+            ProgrammeLogic pLogic = new ProgrammeLogic();
+            ViewBag.MetricModels = pLogic.GetMetricModels();
+            ViewBag.ExperimentIterations = _cLogic.GetIterations();
         }
     }
 }

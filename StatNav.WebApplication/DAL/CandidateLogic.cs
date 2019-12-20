@@ -21,6 +21,8 @@ namespace StatNav.WebApplication.DAL
             ExperimentCandidate candidate = Db.ExperimentCandidates
                                               .Where(x => x.Id == id)
                                               .Include(x => x.ExperimentIteration)
+                                              .Include(x=>x.ImpactMetricModel)
+                                              .Include(x=>x.TargetMetricModel)
                                               .FirstOrDefault();
 
             return candidate;
