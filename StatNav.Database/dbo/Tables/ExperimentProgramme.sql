@@ -13,10 +13,14 @@
     [SuccessOutcome]      NVARCHAR (MAX) NULL,
     [FailureOutcome]      NVARCHAR (MAX) NULL,
     [Notes]               NVARCHAR (MAX) NULL,
+    [UserId]              INT            NULL,
+    [TeamId]              INT            NULL,
     CONSTRAINT [PK_dbo.ExperimentProgramme] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_dbo.ExperimentProgramme_dbo.ExperimentStatus_ExperimentStatusId] FOREIGN KEY ([ExperimentStatusId]) REFERENCES [dbo].[ExperimentStatus] ([Id]),
     CONSTRAINT [FK_dbo.ExperimentProgramme_dbo.MetricModel_ImpactMetricModelId] FOREIGN KEY ([ImpactMetricModelId]) REFERENCES [dbo].[MetricModel] ([Id]),
-    CONSTRAINT [FK_dbo.ExperimentProgramme_dbo.MetricModel_TargetMetricModelId] FOREIGN KEY ([TargetMetricModelId]) REFERENCES [dbo].[MetricModel] ([Id])
+    CONSTRAINT [FK_dbo.ExperimentProgramme_dbo.MetricModel_TargetMetricModelId] FOREIGN KEY ([TargetMetricModelId]) REFERENCES [dbo].[MetricModel] ([Id]),
+    CONSTRAINT [FK_dbo.ExperimentProgramme_dbo.Team_TeamId] FOREIGN KEY ([TeamId]) REFERENCES [dbo].[Team] ([Id]),
+    CONSTRAINT [FK_dbo.ExperimentProgramme_dbo.User_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[User] ([Id])
 );
 
 
@@ -33,4 +37,14 @@ CREATE NONCLUSTERED INDEX [IX_TargetMetricModelId]
 GO
 CREATE NONCLUSTERED INDEX [IX_ImpactMetricModelId]
     ON [dbo].[ExperimentProgramme]([ImpactMetricModelId] ASC);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_UserId]
+    ON [dbo].[ExperimentProgramme]([UserId] ASC);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_TeamId]
+    ON [dbo].[ExperimentProgramme]([TeamId] ASC);
 

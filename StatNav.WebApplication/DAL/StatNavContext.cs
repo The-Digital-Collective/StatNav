@@ -17,8 +17,11 @@ namespace StatNav.WebApplication.DAL
         public DbSet<Organisation> Organisations { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<MetricModel> MetricModels { get; set; }
-
         public DbSet<MetricModelStage> MetricModelStages { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<MetricCandidateResult> MetricCandidateResults { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();

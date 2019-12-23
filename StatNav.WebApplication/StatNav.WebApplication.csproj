@@ -242,6 +242,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IProgrammeUnitOfWork.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Migrations\201912161143163_InitialCreate.cs" />
     <Compile Include="Migrations\201912161143163_InitialCreate.designer.cs">
       <DependentUpon>201912161143163_InitialCreate.cs</DependentUpon>
@@ -258,15 +260,22 @@
     <Compile Include="Migrations\201912200830429_CandidateTable.designer.cs">
       <DependentUpon>201912200830429_CandidateTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912231026380_RemainingTables.cs" />
+    <Compile Include="Migrations\201912231026380_RemainingTables.designer.cs">
+      <DependentUpon>201912231026380_RemainingTables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ExperimentIterations.cs" />
     <Compile Include="Models\ExperimentCandidate.cs" />
     <Compile Include="Models\ExperimentProgramme.cs" />
     <Compile Include="Models\ExperimentStatus.cs" />
+    <Compile Include="Models\MetricCandidateResult.cs" />
     <Compile Include="Models\MetricModel.cs" />
     <Compile Include="Models\MetricModelStage.cs" />
     <Compile Include="Models\Organisation.cs" />
     <Compile Include="Models\Team.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -550,6 +559,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912200830429_CandidateTable.resx">
       <DependentUpon>201912200830429_CandidateTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912231026380_RemainingTables.resx">
+      <DependentUpon>201912231026380_RemainingTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

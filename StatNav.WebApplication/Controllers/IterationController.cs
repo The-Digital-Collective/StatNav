@@ -29,7 +29,7 @@ namespace StatNav.WebApplication.Controllers
             return View(thisIteration);
         }
 
-        public ActionResult Create()
+        public ActionResult Create(int? programmeId)
         {
             ViewBag.Action = "Create";
             ExperimentIteration newIteration = new ExperimentIteration
@@ -37,6 +37,8 @@ namespace StatNav.WebApplication.Controllers
                 StartDateTime = DateTime.Today,
                 EndDateTime = DateTime.Today
             };
+            if(programmeId != null) { newIteration.ExperimentProgrammeId = programmeId.GetValueOrDefault(); }
+          
             SetDDLs();
             return View("Edit", newIteration);
         }

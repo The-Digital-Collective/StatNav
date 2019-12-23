@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using StatNav.WebApplication.Interfaces;
 using StatNav.WebApplication.Models;
 
 namespace StatNav.WebApplication.DAL
 {
-    public class ProgrammeLogic : CrudLogic<ExperimentProgramme>
+    public class ProgrammeLogic : CrudLogic<ExperimentProgramme>, IProgrammeRepository
     {
         public override List<ExperimentProgramme> LoadList()
         {
