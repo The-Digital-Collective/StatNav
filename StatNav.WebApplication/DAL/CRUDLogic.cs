@@ -2,17 +2,21 @@
 using System.Linq;
 using System.Data.Entity;
 using System.Reflection;
+using StatNav.WebApplication.Interfaces;
 
 namespace StatNav.WebApplication.DAL
 {
 
-    public abstract class CrudLogic<T> where T : class, new()
-                                                  
+    public abstract class CrudLogic<T> : IRepository<T> where T : class, new()
     {
-
         protected StatNavContext Db = new StatNavContext();
         protected T Model;
 
+        //public CrudLogic(StatNavContext ctx, T model)
+        //{
+        //    this.Db = ctx;
+        //    this.Model = model;
+        //}
 
         public virtual List<T> LoadList()
         {

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
 using System.Web.Mvc;
 using StatNav.WebApplication.DAL;
 using StatNav.WebApplication.Models;
@@ -31,11 +29,12 @@ namespace StatNav.WebApplication.Controllers
             return View(thisIteration);
         }
 
-        public ActionResult Create()
+        public ActionResult Create(int? iterationId)
         {
             ViewBag.Action = "Create";
             ExperimentCandidate newCandidate = new ExperimentCandidate();
-           
+            if (iterationId != null) { newCandidate.ExperimentIterationId = iterationId.GetValueOrDefault(); }
+
             SetDDLs();
             return View("Edit", newCandidate);
         }

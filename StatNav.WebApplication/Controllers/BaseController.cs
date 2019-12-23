@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Microsoft.ApplicationInsights;
 
 namespace StatNav.WebApplication.Controllers
@@ -8,16 +7,10 @@ namespace StatNav.WebApplication.Controllers
     {
         protected override void OnException(ExceptionContext filterContext)
         {
-            if (!filterContext.ExceptionHandled)
+            if (!filterContext.ExceptionHandled && filterContext.HttpContext != null && filterContext.Exception != null && filterContext.HttpContext.IsCustomErrorEnabled)
             {
-                if (filterContext.HttpContext != null && filterContext.Exception != null)
-                {
-                    if (filterContext.HttpContext.IsCustomErrorEnabled)
-                    {
-                        var ai = new TelemetryClient();
+                var ai = new TelemetryClient();
                         ai.TrackException(filterContext.Exception);
-                    }
-                }
             }
         }
     }

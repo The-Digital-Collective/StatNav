@@ -8,6 +8,16 @@ namespace StatNav.WebApplication.Models
     {
         public int Id { get; set; }
 
+        [ForeignKey("User")]
+        public int? UserId { get; set; }
+
+        public User User { get; set; }
+
+        [ForeignKey("Team")]
+        public int? TeamId { get; set; }
+
+        public Team Team { get; set; }
+
         [Required]
         public string Name { get; set; }
 

@@ -50,6 +50,7 @@
     </div>
     <div class="col-md-6">
         <h4>Iterations</h4>
+        @Html.ActionLink("Create  Iteration for this Programme", "Create", "Iteration", new { programmeId = Model.Id }, null)
         @Html.Partial("../Iteration/_list", Model.ExperimentIterations)
     </div>
 </div>
