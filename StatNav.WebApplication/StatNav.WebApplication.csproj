@@ -233,7 +233,6 @@
     <Compile Include="Controllers\CandidateController.cs" />
     <Compile Include="Controllers\IterationController.cs" />
     <Compile Include="Controllers\ProgrammeController.cs" />
-    <Compile Include="DAL\CrudLogic.cs" />
     <Compile Include="DAL\CandidateLogic.cs" />
     <Compile Include="DAL\IterationLogic.cs" />
     <Compile Include="DAL\ProgrammeLogic.cs" />
@@ -242,7 +241,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\IProgrammeUnitOfWork.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Migrations\201912161143163_InitialCreate.cs" />
     <Compile Include="Migrations\201912161143163_InitialCreate.designer.cs">

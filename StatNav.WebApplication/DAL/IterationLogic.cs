@@ -10,15 +10,15 @@ namespace StatNav.WebApplication.DAL
     {
         protected StatNavContext Db = new StatNavContext();
 
-        public virtual void Add(ExperimentIteration iteration)
+        public virtual void Add(ExperimentIteration t)
         {
-            Db.Set<ExperimentIteration>().Add(iteration);
+            Db.Set<ExperimentIteration>().Add(t);
             Db.SaveChanges();
         }
 
-        public virtual void Edit(ExperimentIteration iteration)
+        public virtual void Edit(ExperimentIteration t)
         {
-            Db.Entry(iteration).State = EntityState.Modified;
+            Db.Entry(t).State = EntityState.Modified;
             Db.SaveChanges();
         }
         public List<ExperimentIteration> LoadList()
