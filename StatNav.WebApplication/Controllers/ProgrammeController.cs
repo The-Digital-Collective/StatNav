@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using StatNav.WebApplication.DAL;
+using StatNav.WebApplication.Interfaces;
 using StatNav.WebApplication.Models;
 
 namespace StatNav.WebApplication.Controllers
@@ -9,8 +10,19 @@ namespace StatNav.WebApplication.Controllers
     [Authorize]
     public class ProgrammeController : BaseController
     {
-        private readonly ProgrammeLogic _pLogic = new ProgrammeLogic();
-        
+        private readonly IProgrammeRepository _pLogic;
+
+        public ProgrammeController()
+            : this( new ProgrammeLogic())
+        {
+            
+        }
+
+        public ProgrammeController(IProgrammeRepository programmeRepository)
+        {
+            _pLogic = programmeRepository;
+        }
+
         public ActionResult Index()
         {
             List<ExperimentProgramme> progs = _pLogic.LoadList();
@@ -56,7 +68,7 @@ namespace StatNav.WebApplication.Controllers
                 ModelState.AddModelError("", ex.Message);
                 ViewBag.Action = "Create";
                 SetDDLs();
-                return View(newProg);
+                return View("Edit", newProg);
             }
         }
 

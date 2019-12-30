@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using StatNav.WebApplication.DAL;
+using StatNav.WebApplication.Interfaces;
 using StatNav.WebApplication.Models;
 
 namespace StatNav.WebApplication.Controllers
@@ -9,7 +10,18 @@ namespace StatNav.WebApplication.Controllers
     [Authorize]
     public class IterationController : BaseController
     {
-        private readonly IterationLogic _iLogic = new IterationLogic();
+        private readonly IIterationRepository _iLogic;
+
+        public IterationController()
+            : this(new IterationLogic())
+        {
+
+        }
+
+        public IterationController(IIterationRepository iterationRepository)
+        {
+            _iLogic = iterationRepository;
+        }
 
         public ActionResult Index()
         {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using StatNav.WebApplication.DAL;
+using StatNav.WebApplication.Interfaces;
 using StatNav.WebApplication.Models;
 
 namespace StatNav.WebApplication.Controllers
@@ -9,7 +10,18 @@ namespace StatNav.WebApplication.Controllers
     [Authorize]
     public class CandidateController : BaseController
     {
-        private readonly CandidateLogic _cLogic = new CandidateLogic();
+        private readonly ICandidateRepository _cLogic;
+
+        public CandidateController()
+            : this(new CandidateLogic())
+        {
+
+        }
+
+        public CandidateController(ICandidateRepository candidateRepository)
+        {
+            _cLogic = candidateRepository;
+        }
 
         public ActionResult Index()
         {
@@ -127,9 +139,8 @@ namespace StatNav.WebApplication.Controllers
         }
 
         private void SetDDLs()
-        {
-            ProgrammeLogic pLogic = new ProgrammeLogic();
-            ViewBag.MetricModels = pLogic.GetMetricModels();
+        {            
+            ViewBag.MetricModels = _cLogic.GetMetricModels();
             ViewBag.ExperimentIterations = _cLogic.GetIterations();
         }
     }

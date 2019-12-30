@@ -6,9 +6,24 @@ using StatNav.WebApplication.Models;
 
 namespace StatNav.WebApplication.DAL
 {
-    public class ProgrammeLogic : CrudLogic<ExperimentProgramme>, IProgrammeRepository
+    public class ProgrammeLogic : IProgrammeRepository
     {
-        public override List<ExperimentProgramme> LoadList()
+        protected StatNavContext Db = new StatNavContext();
+       
+
+        public virtual void Add(ExperimentProgramme programme)
+        {
+            Db.Set<ExperimentProgramme>().Add(programme);
+            Db.SaveChanges();
+        }
+
+        public virtual void Edit(ExperimentProgramme programme)
+        {
+            Db.Entry(programme).State = EntityState.Modified;
+            Db.SaveChanges();
+        }
+
+        public List<ExperimentProgramme> LoadList()
         {
             List<ExperimentProgramme> programmes = Db.ExperimentProgrammes
                 .OrderBy(x => x.Name)
@@ -18,7 +33,7 @@ namespace StatNav.WebApplication.DAL
 
         }
 
-        public override ExperimentProgramme Load(int id)
+        public ExperimentProgramme Load(int id)
         {
             ExperimentProgramme programme = Db.ExperimentProgrammes
                                               .Where(x=>x.Id==id)
@@ -30,16 +45,16 @@ namespace StatNav.WebApplication.DAL
                 
             return programme;
         }
-        public override void Remove(int id)
+        public void Remove(int id)
         {
-            Model = Db.ExperimentProgrammes
+            ExperimentProgramme ep = Db.ExperimentProgrammes
                       .Include(x => x.ExperimentIterations.Select(c=>c.ExperimentCandidates))
                       .FirstOrDefault(x => x.Id == id);
-            if (Model != null)
+            if (ep != null)
             {
-                Model?.ExperimentIterations.ToList().ForEach(c=>c.ExperimentCandidates.ToList().ForEach(n => Db.ExperimentCandidates.Remove(n)));
-                Model?.ExperimentIterations.ToList().ForEach(n => Db.ExperimentIterations.Remove(n));
-                Db.ExperimentProgrammes.Remove(Model);
+                ep?.ExperimentIterations.ToList().ForEach(c=>c.ExperimentCandidates.ToList().ForEach(n => Db.ExperimentCandidates.Remove(n)));
+                ep?.ExperimentIterations.ToList().ForEach(n => Db.ExperimentIterations.Remove(n));
+                Db.ExperimentProgrammes.Remove(ep);
                 Db.SaveChanges();
             }
         }
