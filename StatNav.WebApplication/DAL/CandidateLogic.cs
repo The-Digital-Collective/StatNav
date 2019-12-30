@@ -1,13 +1,27 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using StatNav.WebApplication.Interfaces;
 using StatNav.WebApplication.Models;
 
 namespace StatNav.WebApplication.DAL
 {
-    public class CandidateLogic : CrudLogic<ExperimentCandidate>
+    public class CandidateLogic : ICandidateRepository
     {
-        public override List<ExperimentCandidate> LoadList()
+        protected StatNavContext Db = new StatNavContext();
+
+        public virtual void Add(ExperimentCandidate candidate)
+        {
+            Db.Set<ExperimentCandidate>().Add(candidate);
+            Db.SaveChanges();
+        }
+
+        public virtual void Edit(ExperimentCandidate candidate)
+        {
+            Db.Entry(candidate).State = EntityState.Modified;
+            Db.SaveChanges();
+        }
+        public List<ExperimentCandidate> LoadList()
         {
             List<ExperimentCandidate> candidates = Db.ExperimentCandidates
                                                      .OrderBy(x => x.Name)
@@ -16,7 +30,7 @@ namespace StatNav.WebApplication.DAL
 
         }
 
-        public override ExperimentCandidate Load(int id)
+        public ExperimentCandidate Load(int id)
         {
             ExperimentCandidate candidate = Db.ExperimentCandidates
                                               .Where(x => x.Id == id)
@@ -24,10 +38,17 @@ namespace StatNav.WebApplication.DAL
                                               .Include(x=>x.ImpactMetricModel)
                                               .Include(x=>x.TargetMetricModel)
                                               .FirstOrDefault();
-
             return candidate;
         }
-        
+        public virtual void Remove(int id)
+        {
+            ExperimentCandidate candidate = Db.ExperimentCandidates.Find(id);
+            if (candidate != null)
+            {
+                Db.ExperimentCandidates.Remove(candidate);
+                Db.SaveChanges();
+            }
+        }
 
         public IList<ExperimentIteration> GetIterations()
         {
@@ -35,6 +56,11 @@ namespace StatNav.WebApplication.DAL
                                               .OrderBy(x => x.Name).ToList();
             return ei;
         }
-        
+        public IList<MetricModel> GetMetricModels()
+        {
+            IList<MetricModel> mm = Db.MetricModels
+              .OrderBy(x => x.Title).ToList();
+            return mm;
+        }
     }
 }

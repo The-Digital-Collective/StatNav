@@ -7,16 +7,20 @@ using StatNav.WebApplication.Interfaces;
 namespace StatNav.WebApplication.DAL
 {
 
-    public abstract class CrudLogic<T> : IRepository<T> where T : class, new()
+    public class CrudLogic<T> : IRepository<T> where T : class, new()
     {
-        protected StatNavContext Db = new StatNavContext();
+        protected StatNavContext Db;
         protected T Model;
 
-        //public CrudLogic(StatNavContext ctx, T model)
-        //{
-        //    this.Db = ctx;
-        //    this.Model = model;
-        //}
+        public CrudLogic()
+        {
+            this.Db = new StatNavContext();
+        }
+
+        public CrudLogic(StatNavContext ctx)
+        {
+            this.Db = ctx;
+        }
 
         public virtual List<T> LoadList()
         {

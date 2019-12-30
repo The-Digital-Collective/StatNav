@@ -1,13 +1,27 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using StatNav.WebApplication.Interfaces;
 using StatNav.WebApplication.Models;
 
 namespace StatNav.WebApplication.DAL
 {
-    public class IterationLogic : CrudLogic<ExperimentIteration>
+    public class IterationLogic : IIterationRepository
     {
-        public override List<ExperimentIteration> LoadList()
+        protected StatNavContext Db = new StatNavContext();
+
+        public virtual void Add(ExperimentIteration iteration)
+        {
+            Db.Set<ExperimentIteration>().Add(iteration);
+            Db.SaveChanges();
+        }
+
+        public virtual void Edit(ExperimentIteration iteration)
+        {
+            Db.Entry(iteration).State = EntityState.Modified;
+            Db.SaveChanges();
+        }
+        public List<ExperimentIteration> LoadList()
         {
             List<ExperimentIteration> iterations = Db.ExperimentIterations
                                                      .OrderBy(x => x.Name)
@@ -16,25 +30,25 @@ namespace StatNav.WebApplication.DAL
 
         }
 
-        public override ExperimentIteration Load(int id)
+        public ExperimentIteration Load(int id)
         {
-            ExperimentIteration programme = Db.ExperimentIterations
+            ExperimentIteration iteration = Db.ExperimentIterations
                 .Where(x => x.Id == id)
                 .Include(x => x.ExperimentProgramme)
                 .Include(x=>x.ExperimentCandidates)
                 .FirstOrDefault();
 
-            return programme;
+            return iteration;
         }
-        public override void Remove(int id)
+        public void Remove(int id)
         {
-            Model = Db.ExperimentIterations
+            ExperimentIteration iteration = Db.ExperimentIterations
                       .Include(x => x.ExperimentCandidates) 
                       .FirstOrDefault(x => x.Id == id);
-            if (Model != null)
+            if (iteration != null)
             {
-                Model?.ExperimentCandidates.ToList().ForEach(n => Db.ExperimentCandidates.Remove(n)); 
-                Db.ExperimentIterations.Remove(Model);
+                iteration?.ExperimentCandidates.ToList().ForEach(n => Db.ExperimentCandidates.Remove(n)); 
+                Db.ExperimentIterations.Remove(iteration);
                 Db.SaveChanges();
             }
         }
