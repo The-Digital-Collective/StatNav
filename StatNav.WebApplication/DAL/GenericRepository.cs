@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
-using System.Reflection;
 using StatNav.WebApplication.Interfaces;
 
 namespace StatNav.WebApplication.DAL
@@ -39,15 +38,15 @@ namespace StatNav.WebApplication.DAL
             else { return null; }
         }
 
-        public virtual void Add(T model)
+        public virtual void Add(T t)
         {
-            Db.Set<T>().Add(model);
+            Db.Set<T>().Add(t);
             Db.SaveChanges();
         }
 
-        public virtual void Edit(T model)
+        public virtual void Edit(T t)
         {
-            Db.Entry(model).State = EntityState.Modified;
+            Db.Entry(t).State = EntityState.Modified;
             Db.SaveChanges();
         }
 
