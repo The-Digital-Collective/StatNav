@@ -10,17 +10,18 @@
     @Html.ActionLink("Create New", "Create", "Programme")
 </p>
 <table class="table">
+    <caption>List of Experiment Programmes</caption>
     <tr>
-        <th>
+        <th scope="col">
             @Html.DisplayNameFor(model => model.Id)
         </th>
-        <th>
+        <th scope="col">
             @Html.DisplayNameFor(model => model.Name)
         </th>
-        <th>
+        <th scope="col">
             @Html.DisplayNameFor(model => model.ExperimentStatusId)
         </th>
-        <th>
+        <th scope="col">
             @Html.DisplayNameFor(model => model.Problem)
         </th>
 
