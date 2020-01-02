@@ -6,8 +6,7 @@ using System.Web.Mvc;
 using Moq;
 using StatNav.WebApplication.DAL;
 using StatNav.WebApplication.Models;
-using StatNav.WebApplication.Interfaces;
-using System.ComponentModel.DataAnnotations;
+using StatNav.UnitTests.TestData;
 
 namespace StatNav.UnitTests.Controllers
 {
@@ -15,26 +14,44 @@ namespace StatNav.UnitTests.Controllers
     public class ProgrammeControllerTest
     {
         private ProgrammeController _controller;
-        Mock<IProgrammeRepository> _mockRepository;
-        List<ExperimentProgramme> _programmes;
+        ExperimentProgramme prog1 = null;
+        ExperimentProgramme prog2 = null;
+        ExperimentProgramme prog3 = null;
+        List<ExperimentProgramme> _programmes = null;
+        DummyProgrammeRepository programmeRepository = null;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            _mockRepository = new Mock<IProgrammeRepository>();
-            _programmes = new List<ExperimentProgramme>();
-            _controller = new ProgrammeController(_mockRepository.Object);
+            //set up the dummy data for testing
+            prog1 = new ExperimentProgramme() { Name = "Programme0", Id = 0, ExperimentStatusId = 0, ImpactMetricModelId = 0, TargetMetricModelId = 0 };
+            prog2 = new ExperimentProgramme() { Name = "Programme1", Id = 1, ExperimentStatusId = 0, ImpactMetricModelId = 0, TargetMetricModelId = 0 };
+            prog3 = new ExperimentProgramme() { Name = "Programme2", Id = 2, ExperimentStatusId = 0, ImpactMetricModelId = 0, TargetMetricModelId = 0 };
+            _programmes = new List<ExperimentProgramme> { prog1, prog2, prog3 };
 
+            programmeRepository = new DummyProgrammeRepository(_programmes);
+            _controller = new ProgrammeController(programmeRepository);          
+        }
+
+        [TestMethod]
+        public void IndexViewBag_CorrectTypeReturned_And_ModelsReturned()
+        {
+            // Arrange
+
+            // Act
+            ViewResult result = _controller.Index() as ViewResult;
+            var model = (List<ExperimentProgramme>)result.Model;
+            // Assert
+            Assert.AreEqual("Programme", result.ViewBag.SelectedType);
+            CollectionAssert.Contains(model, prog1);
+            CollectionAssert.Contains(model, prog2);
+            CollectionAssert.Contains(model, prog3);
         }
 
         [TestMethod]
         public void ProgrammeDetailView_Is_Passed_Programme_Data()
         {
             // Arrange
-            _programmes.Add(new ExperimentProgramme() { Name = "Programme0", Id = 0, ExperimentStatusId = 0, ImpactMetricModelId = 0, TargetMetricModelId = 0 });
-            _programmes.Add(new ExperimentProgramme() { Name = "Programme1", Id = 1, ExperimentStatusId = 0, ImpactMetricModelId = 0, TargetMetricModelId = 0 });
-            _programmes.Add(new ExperimentProgramme() { Name = "Programme2", Id = 2, ExperimentStatusId = 0, ImpactMetricModelId = 0, TargetMetricModelId = 0 });
-            _mockRepository.Setup(x => x.Load(It.IsAny<int>())).Returns((int i) => _programmes[i]);
 
             // Act
             ViewResult result = (ViewResult)_controller.Details(1);
@@ -43,21 +60,11 @@ namespace StatNav.UnitTests.Controllers
 
             // Assert
             Assert.IsNotNull(ep, "The model used should be an Experient Programme");
-            Assert.AreEqual("Programme1", ep.Name);
+            Assert.AreEqual(ep, prog2);
         }
 
         [TestMethod]
-        public void IndexViewBag()
-        {
-            // Arrange
-
-            // Act
-            ViewResult result = _controller.Index() as ViewResult;
-            // Assert
-            Assert.AreEqual("Programme", result.ViewBag.SelectedType);
-        }
-
-        public void CreateReturnsCorrectAction()
+        public void CreateReturns_CorrectActionAndView()
         {
             // Arrange
 
@@ -65,6 +72,7 @@ namespace StatNav.UnitTests.Controllers
             ViewResult result = _controller.Create() as ViewResult;
             // Assert
             Assert.AreEqual("Create", result.ViewBag.Action);
+            Assert.AreEqual("Edit", result.ViewName);
         }
 
 
@@ -73,34 +81,22 @@ namespace StatNav.UnitTests.Controllers
         public void CreateValidProgramme()
         {
             //Arrange
-            ExperimentProgramme ep = new ExperimentProgramme { Name = "Programme0", Id = 0, ExperimentStatusId = 0, ImpactMetricModelId = 0, TargetMetricModelId = 0 };
+            ExperimentProgramme newProg = new ExperimentProgramme { Name = "ProgrammeNew", Id = 7, ExperimentStatusId = 0, ImpactMetricModelId = 0, TargetMetricModelId = 0 };
 
             //Act
-            var result = (RedirectToRouteResult)_controller.Create(ep);
+            var result = (RedirectToRouteResult)_controller.Create(newProg);
+            //get list of all programmes
+            List<ExperimentProgramme> progs = programmeRepository.LoadList();
 
             // Assert
+            CollectionAssert.Contains(progs, newProg);
             Assert.AreEqual("Index", result.RouteValues["action"]);
 
         }
 
-        [TestMethod]
-        public void CreateProgramme_ValidationOnNameGivesError()
-        {
-            //Arrange
-            ExperimentProgramme ep = new ExperimentProgramme { Name = null};
-            var context = new ValidationContext(ep,null,null);
-            var results = new List<ValidationResult>();
-            //Act
-            var isModelStateValid = Validator.TryValidateObject(ep, context, results, true);
-
-            // Assert
-            Assert.IsFalse(isModelStateValid);
-            Assert.AreEqual(1, results.Count);
-            Assert.AreEqual("The Name field is required.", results[0].ErrorMessage);
-        }
 
         [TestMethod]
-        public void CreateProgramme_ValidationErrorReturnsView()
+        public void CreateProgramme_ValidationErrorReturnsCorrectActionAndView()
         {
             //Arrange
             _controller.ModelState.AddModelError("test", "test");
@@ -113,6 +109,92 @@ namespace StatNav.UnitTests.Controllers
             Assert.AreEqual("Edit", result.ViewName);
         }
 
+        [TestMethod]
+        public void EditReturns_Is_Passed_Programme_Data()
+        {
+            // Arrange            
 
+            // Act
+            ViewResult result = (ViewResult)_controller.Edit(2);
+
+            ExperimentProgramme ep = result.ViewData.Model as ExperimentProgramme;
+
+            // Assert
+            Assert.IsNotNull(ep, "The model used should be an Experient Programme");
+            Assert.AreEqual(ep, prog3);
+        }
+
+        [TestMethod]
+        public void EditReturnsCorrectAction()
+        {
+            //Arrange
+
+            //Act
+            ViewResult result = _controller.Edit(2) as ViewResult;
+
+            // Assert
+            Assert.AreEqual("Edit", result.ViewBag.Action);
+            Assert.AreEqual("Edit", result.ViewName);
+        }
+
+        [TestMethod]
+        public void EditProgrammeEditsModel()
+        {
+            //Arrange
+            ExperimentProgramme editedProg = new ExperimentProgramme { Name = "ProgrammeEdited", Id = 1, ExperimentStatusId = 0, ImpactMetricModelId = 0, TargetMetricModelId = 0 };
+            //Act           
+            var result = (RedirectToRouteResult)_controller.Edit(editedProg);
+            //get list of all programmes
+            List<ExperimentProgramme> progs = programmeRepository.LoadList();
+
+            // Assert
+            CollectionAssert.Contains(progs, editedProg);
+            Assert.AreEqual("Index", result.RouteValues["action"]);
+        }
+
+        [TestMethod]
+        public void EditProgramme_ValidationErrorReturnsCorrectActionAndView()
+        {
+            //Arrange
+            _controller.ModelState.AddModelError("fakeError", "fakeError");
+            ExperimentProgramme thisProg = new ExperimentProgramme();
+            //Act
+            ViewResult result = _controller.Edit(thisProg) as ViewResult;
+
+            // Assert
+            Assert.AreEqual("Edit", result.ViewBag.Action);
+            Assert.AreEqual("Edit", result.ViewName);
+        }
+
+        [TestMethod]
+        public void Delete_Is_Passed_Programme_Data()
+        {
+            // Arrange            
+
+            // Act
+            ViewResult result = (ViewResult)_controller.Delete(1);
+
+            ExperimentProgramme ep = result.ViewData.Model as ExperimentProgramme;
+
+            // Assert
+            Assert.IsNotNull(ep, "The model used should be an Experient Programme");
+            Assert.AreEqual("Programme1", ep.Name);
+        }
+
+
+        [TestMethod]
+        public void DeleteProgrammeDeletesModel()
+        {
+            //Arrange
+           
+            //Act           
+            var result = (RedirectToRouteResult)_controller.DeleteConfirmed(1);
+            //get list of all programmes
+            List<ExperimentProgramme> progs = programmeRepository.LoadList();
+
+            // Assert
+            CollectionAssert.DoesNotContain(progs, prog2);
+            Assert.AreEqual("Index", result.RouteValues["action"]);
+        }
     }
 }

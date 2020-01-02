@@ -7,17 +7,17 @@ using StatNav.WebApplication.Interfaces;
 namespace StatNav.WebApplication.DAL
 {
 
-    public class CrudLogic<T> : IRepository<T> where T : class, new()
+    public class GenericRepository<T> : IRepository<T> where T : class, new()
     {
         protected StatNavContext Db;
         protected T Model;
 
-        public CrudLogic()
+        public GenericRepository()
         {
             this.Db = new StatNavContext();
         }
 
-        public CrudLogic(StatNavContext ctx)
+        public GenericRepository(StatNavContext ctx)
         {
             this.Db = ctx;
         }
@@ -38,18 +38,6 @@ namespace StatNav.WebApplication.DAL
             }
             else { return null; }
         }
-
-
-        public virtual T Refresh()
-        {
-            // reloads the data from the database and returns
-            PropertyInfo IdFeild = typeof(T).GetProperty("Id");
-            int IdValue = (int)IdFeild.GetValue(Model, null);
-            return Load(IdValue);
-        }
-
-
-
 
         public virtual void Add(T model)
         {

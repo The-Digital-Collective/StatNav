@@ -6,22 +6,9 @@ using StatNav.WebApplication.Models;
 
 namespace StatNav.WebApplication.DAL
 {
-    public class CandidateLogic : ICandidateRepository
+    public class CandidateRepository : GenericRepository<ExperimentCandidate>, ICandidateRepository
     {
-        protected StatNavContext Db = new StatNavContext();
-
-        public virtual void Add(ExperimentCandidate t)
-        {
-            Db.Set<ExperimentCandidate>().Add(t);
-            Db.SaveChanges();
-        }
-
-        public virtual void Edit(ExperimentCandidate t)
-        {
-            Db.Entry(t).State = EntityState.Modified;
-            Db.SaveChanges();
-        }
-        public List<ExperimentCandidate> LoadList()
+        public override List<ExperimentCandidate> LoadList()
         {
             List<ExperimentCandidate> candidates = Db.ExperimentCandidates
                                                      .OrderBy(x => x.Name)
@@ -30,7 +17,7 @@ namespace StatNav.WebApplication.DAL
 
         }
 
-        public ExperimentCandidate Load(int id)
+        public override ExperimentCandidate Load(int id)
         {
             ExperimentCandidate candidate = Db.ExperimentCandidates
                                               .Where(x => x.Id == id)
@@ -39,16 +26,7 @@ namespace StatNav.WebApplication.DAL
                                               .Include(x=>x.TargetMetricModel)
                                               .FirstOrDefault();
             return candidate;
-        }
-        public virtual void Remove(int id)
-        {
-            ExperimentCandidate candidate = Db.ExperimentCandidates.Find(id);
-            if (candidate != null)
-            {
-                Db.ExperimentCandidates.Remove(candidate);
-                Db.SaveChanges();
-            }
-        }
+        }        
 
         public IList<ExperimentIteration> GetIterations()
         {

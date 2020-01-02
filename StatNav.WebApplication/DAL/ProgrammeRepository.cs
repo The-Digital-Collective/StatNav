@@ -6,24 +6,10 @@ using StatNav.WebApplication.Models;
 
 namespace StatNav.WebApplication.DAL
 {
-    public class ProgrammeLogic : IProgrammeRepository
-    {
-        protected StatNavContext Db = new StatNavContext();
-       
+    public class ProgrammeRepository : GenericRepository<ExperimentProgramme>, IProgrammeRepository
+    {       
 
-        public virtual void Add(ExperimentProgramme t)
-        {
-            Db.Set<ExperimentProgramme>().Add(t);
-            Db.SaveChanges();
-        }
-
-        public virtual void Edit(ExperimentProgramme t)
-        {
-            Db.Entry(t).State = EntityState.Modified;
-            Db.SaveChanges();
-        }
-
-        public List<ExperimentProgramme> LoadList()
+        public override List<ExperimentProgramme> LoadList()
         {
             List<ExperimentProgramme> programmes = Db.ExperimentProgrammes
                 .OrderBy(x => x.Name)
@@ -33,7 +19,7 @@ namespace StatNav.WebApplication.DAL
 
         }
 
-        public ExperimentProgramme Load(int id)
+        public override ExperimentProgramme Load(int id)
         {
             ExperimentProgramme programme = Db.ExperimentProgrammes
                                               .Where(x=>x.Id==id)
@@ -45,7 +31,7 @@ namespace StatNav.WebApplication.DAL
                 
             return programme;
         }
-        public void Remove(int id)
+        public override void Remove(int id)
         {
             ExperimentProgramme ep = Db.ExperimentProgrammes
                       .Include(x => x.ExperimentIterations.Select(c=>c.ExperimentCandidates))
