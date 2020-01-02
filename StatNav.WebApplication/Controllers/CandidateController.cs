@@ -10,22 +10,22 @@ namespace StatNav.WebApplication.Controllers
     [Authorize]
     public class CandidateController : BaseController
     {
-        private readonly ICandidateRepository _cLogic;
+        private readonly ICandidateRepository _cRepository;
 
         public CandidateController()
-            : this(new CandidateLogic())
+            : this(new CandidateRepository())
         {
 
         }
 
         public CandidateController(ICandidateRepository candidateRepository)
         {
-            _cLogic = candidateRepository;
+            _cRepository = candidateRepository;
         }
 
         public ActionResult Index()
         {
-            List<ExperimentCandidate> candidates = _cLogic.LoadList();
+            List<ExperimentCandidate> candidates = _cRepository.LoadList();
             ViewBag.SelectedType = "Candidate";
             return View(candidates);
             
@@ -33,7 +33,7 @@ namespace StatNav.WebApplication.Controllers
 
         public ActionResult Details(int id)
         {
-            ExperimentCandidate thisIteration = _cLogic.Load(id);
+            ExperimentCandidate thisIteration = _cRepository.Load(id);
             if (thisIteration == null)
             {
                 return HttpNotFound();
@@ -58,7 +58,7 @@ namespace StatNav.WebApplication.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    _cLogic.Add(newCandidate);
+                    _cRepository.Add(newCandidate);
                     return RedirectToAction("Index");
                 }
                 ViewBag.Action = "Create";
@@ -77,7 +77,7 @@ namespace StatNav.WebApplication.Controllers
         public ActionResult Edit(int id)
         {
             ViewBag.Action = "Edit";
-            ExperimentCandidate thisCandidate = _cLogic.Load(id);
+            ExperimentCandidate thisCandidate = _cRepository.Load(id);
             if (thisCandidate == null)
             {
                 return HttpNotFound();
@@ -95,7 +95,7 @@ namespace StatNav.WebApplication.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    _cLogic.Edit(editedCandidate);
+                    _cRepository.Edit(editedCandidate);
                     return RedirectToAction("Index");
                 }
                 ViewBag.Action = "Edit";
@@ -113,7 +113,7 @@ namespace StatNav.WebApplication.Controllers
 
         public ActionResult Delete(int id)
         {
-            ExperimentCandidate delCandidate = _cLogic.Load(id);
+            ExperimentCandidate delCandidate = _cRepository.Load(id);
             if (delCandidate == null)
             {
                 return HttpNotFound();
@@ -127,12 +127,12 @@ namespace StatNav.WebApplication.Controllers
         {
             try
             {
-                _cLogic.Remove(id);
+                _cRepository.Remove(id);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
-                ExperimentCandidate thisCandidate = _cLogic.Load(id);
+                ExperimentCandidate thisCandidate = _cRepository.Load(id);
                 ModelState.AddModelError("", ex.Message);
                 return View(thisCandidate);
             }
@@ -140,8 +140,8 @@ namespace StatNav.WebApplication.Controllers
 
         private void SetDDLs()
         {            
-            ViewBag.MetricModels = _cLogic.GetMetricModels();
-            ViewBag.ExperimentIterations = _cLogic.GetIterations();
+            ViewBag.MetricModels = _cRepository.GetMetricModels();
+            ViewBag.ExperimentIterations = _cRepository.GetIterations();
         }
     }
 }

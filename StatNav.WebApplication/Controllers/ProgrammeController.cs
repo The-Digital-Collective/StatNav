@@ -10,29 +10,29 @@ namespace StatNav.WebApplication.Controllers
     [Authorize]
     public class ProgrammeController : BaseController
     {
-        private readonly IProgrammeRepository _pLogic;
+        private readonly IProgrammeRepository _pRepository;
 
         public ProgrammeController()
-            : this( new ProgrammeLogic())
+            : this( new ProgrammeRepository())
         {
             
         }
 
         public ProgrammeController(IProgrammeRepository programmeRepository)
         {
-            _pLogic = programmeRepository;
+            _pRepository = programmeRepository;
         }
 
         public ActionResult Index()
         {
-            List<ExperimentProgramme> progs = _pLogic.LoadList();
+            List<ExperimentProgramme> progs = _pRepository.LoadList();
             ViewBag.SelectedType = "Programme";
             return View(progs);
         }
 
         public ActionResult Details(int id)
         {
-            ExperimentProgramme thisProg = _pLogic.Load(id);
+            ExperimentProgramme thisProg = _pRepository.Load(id);
 
             if (thisProg == null)
             {
@@ -56,7 +56,7 @@ namespace StatNav.WebApplication.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    _pLogic.Add(newProg);
+                    _pRepository.Add(newProg);
                     return RedirectToAction("Index");
                 }
                 ViewBag.Action = "Create";
@@ -75,7 +75,7 @@ namespace StatNav.WebApplication.Controllers
         public ActionResult Edit(int id)
         {
             ViewBag.Action = "Edit";
-            ExperimentProgramme thisProg = _pLogic.Load(id);
+            ExperimentProgramme thisProg = _pRepository.Load(id);
             if (thisProg == null)
             {
                 return HttpNotFound();
@@ -83,7 +83,7 @@ namespace StatNav.WebApplication.Controllers
 
             SetDDLs();
 
-            return View(thisProg);
+            return View("Edit", thisProg);
         }
 
         [HttpPost]
@@ -93,7 +93,7 @@ namespace StatNav.WebApplication.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    _pLogic.Edit(editedProg);
+                    _pRepository.Edit(editedProg);
                     return RedirectToAction("Index");
                 }
                 ViewBag.Action = "Edit";
@@ -111,7 +111,7 @@ namespace StatNav.WebApplication.Controllers
 
         public ActionResult Delete(int id)
         {
-            ExperimentProgramme delProg = _pLogic.Load(id);
+            ExperimentProgramme delProg = _pRepository.Load(id);
             if (delProg == null)
             {
                 return HttpNotFound();
@@ -125,12 +125,12 @@ namespace StatNav.WebApplication.Controllers
         {
             try
             {
-                _pLogic.Remove(id);
+                _pRepository.Remove(id);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
-                ExperimentProgramme thisProg = _pLogic.Load(id);
+                ExperimentProgramme thisProg = _pRepository.Load(id);
                 ModelState.AddModelError("", ex.Message);
                 return View(thisProg);
             }
@@ -138,8 +138,8 @@ namespace StatNav.WebApplication.Controllers
 
         private void SetDDLs()
         {
-            ViewBag.MetricModels = _pLogic.GetMetricModels(); 
-            ViewBag.ExperimentStatuses = _pLogic.GetStatuses();
+            ViewBag.MetricModels = _pRepository.GetMetricModels(); 
+            ViewBag.ExperimentStatuses = _pRepository.GetStatuses();
         }
     }
 }

@@ -10,22 +10,22 @@ namespace StatNav.WebApplication.Controllers
     [Authorize]
     public class IterationController : BaseController
     {
-        private readonly IIterationRepository _iLogic;
+        private readonly IIterationRepository _iRepository;
 
         public IterationController()
-            : this(new IterationLogic())
+            : this(new IterationRepository())
         {
 
         }
 
         public IterationController(IIterationRepository iterationRepository)
         {
-            _iLogic = iterationRepository;
+            _iRepository = iterationRepository;
         }
 
         public ActionResult Index()
         {
-            List<ExperimentIteration> iterations = _iLogic.LoadList();
+            List<ExperimentIteration> iterations = _iRepository.LoadList();
             ViewBag.SelectedType = "Iteration";
             return View(iterations);
             
@@ -33,7 +33,7 @@ namespace StatNav.WebApplication.Controllers
 
         public ActionResult Details(int id)
         {
-            ExperimentIteration thisIteration = _iLogic.Load(id);
+            ExperimentIteration thisIteration = _iRepository.Load(id);
             if (thisIteration == null)
             {
                 return HttpNotFound();
@@ -62,7 +62,7 @@ namespace StatNav.WebApplication.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    _iLogic.Add(newIteration);
+                    _iRepository.Add(newIteration);
                     return RedirectToAction("Index");
                 }
                 ViewBag.Action = "Create";
@@ -81,7 +81,7 @@ namespace StatNav.WebApplication.Controllers
         public ActionResult Edit(int id)
         {
             ViewBag.Action = "Edit";
-            ExperimentIteration thisIteration = _iLogic.Load(id);
+            ExperimentIteration thisIteration = _iRepository.Load(id);
             if (thisIteration == null)
             {
                 return HttpNotFound();
@@ -99,7 +99,7 @@ namespace StatNav.WebApplication.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    _iLogic.Edit(editedIteration);
+                    _iRepository.Edit(editedIteration);
                     return RedirectToAction("Index");
                 }
                 ViewBag.Action = "Edit";
@@ -117,7 +117,7 @@ namespace StatNav.WebApplication.Controllers
 
         public ActionResult Delete(int id)
         {
-            ExperimentIteration delIteration = _iLogic.Load(id);
+            ExperimentIteration delIteration = _iRepository.Load(id);
             if (delIteration == null)
             {
                 return HttpNotFound();
@@ -131,12 +131,12 @@ namespace StatNav.WebApplication.Controllers
         {
             try
             {
-                _iLogic.Remove(id);
+                _iRepository.Remove(id);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
-                ExperimentIteration thisIteration = _iLogic.Load(id);
+                ExperimentIteration thisIteration = _iRepository.Load(id);
                 ModelState.AddModelError("", ex.Message);
                 return View(thisIteration);
             }
@@ -144,7 +144,7 @@ namespace StatNav.WebApplication.Controllers
 
         private void SetDDLs()
         {
-            ViewBag.ExperimentProgrammes = _iLogic.GetProgrammes();
+            ViewBag.ExperimentProgrammes = _iRepository.GetProgrammes();
         }
     }
 }

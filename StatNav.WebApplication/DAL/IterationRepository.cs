@@ -6,22 +6,9 @@ using StatNav.WebApplication.Models;
 
 namespace StatNav.WebApplication.DAL
 {
-    public class IterationLogic : IIterationRepository
-    {
-        protected StatNavContext Db = new StatNavContext();
-
-        public virtual void Add(ExperimentIteration t)
-        {
-            Db.Set<ExperimentIteration>().Add(t);
-            Db.SaveChanges();
-        }
-
-        public virtual void Edit(ExperimentIteration t)
-        {
-            Db.Entry(t).State = EntityState.Modified;
-            Db.SaveChanges();
-        }
-        public List<ExperimentIteration> LoadList()
+    public class IterationRepository : GenericRepository<ExperimentIteration>, IIterationRepository
+    {       
+        public override List<ExperimentIteration> LoadList()
         {
             List<ExperimentIteration> iterations = Db.ExperimentIterations
                                                      .OrderBy(x => x.Name)
@@ -30,7 +17,7 @@ namespace StatNav.WebApplication.DAL
 
         }
 
-        public ExperimentIteration Load(int id)
+        public override ExperimentIteration Load(int id)
         {
             ExperimentIteration iteration = Db.ExperimentIterations
                 .Where(x => x.Id == id)
@@ -40,7 +27,7 @@ namespace StatNav.WebApplication.DAL
 
             return iteration;
         }
-        public void Remove(int id)
+        public override void Remove(int id)
         {
             ExperimentIteration iteration = Db.ExperimentIterations
                       .Include(x => x.ExperimentCandidates) 

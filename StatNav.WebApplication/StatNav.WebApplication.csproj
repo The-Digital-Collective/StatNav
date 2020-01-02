@@ -233,9 +233,10 @@
     <Compile Include="Controllers\CandidateController.cs" />
     <Compile Include="Controllers\IterationController.cs" />
     <Compile Include="Controllers\ProgrammeController.cs" />
-    <Compile Include="DAL\CandidateLogic.cs" />
-    <Compile Include="DAL\IterationLogic.cs" />
-    <Compile Include="DAL\ProgrammeLogic.cs" />
+    <Compile Include="DAL\CandidateRepository.cs" />
+    <Compile Include="DAL\GenericRepository.cs" />
+    <Compile Include="DAL\IterationRepository.cs" />
+    <Compile Include="DAL\ProgrammeRepository.cs" />
     <Compile Include="DAL\StatNavContext.cs" />
     <Compile Include="ErrorHandler\AiHandleErrorAttribute.cs" />
     <Compile Include="Global.asax.cs">
