@@ -58,8 +58,7 @@ namespace StatNav.UnitTests.Controllers
 
             ExperimentProgramme ep = result.ViewData.Model as ExperimentProgramme;
 
-            // Assert
-            Assert.IsNotNull(ep, "The model used should be an Experient Programme");
+            // Assert           
             Assert.AreEqual(ep, prog2);
         }
 
@@ -119,8 +118,7 @@ namespace StatNav.UnitTests.Controllers
 
             ExperimentProgramme ep = result.ViewData.Model as ExperimentProgramme;
 
-            // Assert
-            Assert.IsNotNull(ep, "The model used should be an Experient Programme");
+            // Assert           
             Assert.AreEqual(ep, prog3);
         }
 
@@ -176,8 +174,7 @@ namespace StatNav.UnitTests.Controllers
 
             ExperimentProgramme ep = result.ViewData.Model as ExperimentProgramme;
 
-            // Assert
-            Assert.IsNotNull(ep, "The model used should be an Experient Programme");
+            // Assert           
             Assert.AreEqual("Programme1", ep.Name);
         }
 
