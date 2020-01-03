@@ -28,7 +28,7 @@ namespace StatNav.WebApplication.Controllers
             List<ExperimentIteration> iterations = _iRepository.LoadList();
             ViewBag.SelectedType = "Iteration";
             return View(iterations);
-            
+
         }
 
         public ActionResult Details(int id)
@@ -41,7 +41,7 @@ namespace StatNav.WebApplication.Controllers
             return View(thisIteration);
         }
 
-        public ActionResult Create(int? programmeId)
+        public ActionResult Create(int? programmeId = 0)
         {
             ViewBag.Action = "Create";
             ExperimentIteration newIteration = new ExperimentIteration
@@ -49,8 +49,8 @@ namespace StatNav.WebApplication.Controllers
                 StartDateTime = DateTime.Today,
                 EndDateTime = DateTime.Today
             };
-            if(programmeId != null) { newIteration.ExperimentProgrammeId = programmeId.GetValueOrDefault(); }
-          
+            if (programmeId != null) { newIteration.ExperimentProgrammeId = programmeId.GetValueOrDefault(); }
+
             SetDDLs();
             return View("Edit", newIteration);
         }
@@ -89,7 +89,7 @@ namespace StatNav.WebApplication.Controllers
 
             SetDDLs();
 
-            return View(thisIteration);
+            return View("Edit", thisIteration);
         }
 
         [HttpPost]

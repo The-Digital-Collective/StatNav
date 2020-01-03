@@ -28,7 +28,7 @@ namespace StatNav.WebApplication.Controllers
             List<ExperimentCandidate> candidates = _cRepository.LoadList();
             ViewBag.SelectedType = "Candidate";
             return View(candidates);
-            
+
         }
 
         public ActionResult Details(int id)
@@ -41,7 +41,7 @@ namespace StatNav.WebApplication.Controllers
             return View(thisIteration);
         }
 
-        public ActionResult Create(int? iterationId)
+        public ActionResult Create(int? iterationId = 0)
         {
             ViewBag.Action = "Create";
             ExperimentCandidate newCandidate = new ExperimentCandidate();
@@ -85,7 +85,7 @@ namespace StatNav.WebApplication.Controllers
 
             SetDDLs();
 
-            return View(thisCandidate);
+            return View("Edit", thisCandidate);
         }
 
         [HttpPost]
@@ -139,7 +139,7 @@ namespace StatNav.WebApplication.Controllers
         }
 
         private void SetDDLs()
-        {            
+        {
             ViewBag.MetricModels = _cRepository.GetMetricModels();
             ViewBag.ExperimentIterations = _cRepository.GetIterations();
         }
