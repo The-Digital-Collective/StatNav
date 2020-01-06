@@ -61,6 +61,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="test.runsettings" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StatNav.WebApplication\StatNav.WebApplication.csproj">
+      <Project>{15756AE6-32A2-4CD5-ABEC-A5C54476F05F}</Project>
+      <Name>StatNav.WebApplication</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
