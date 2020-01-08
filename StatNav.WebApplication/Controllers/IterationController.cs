@@ -7,7 +7,7 @@ using StatNav.WebApplication.Models;
 
 namespace StatNav.WebApplication.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class IterationController : BaseController
     {
         private readonly IIterationRepository _iRepository;
