@@ -29,6 +29,7 @@ namespace StatNav.IntegrationTests
             _webSiteUrl = (string)TestContext.Properties["webAppUrl"];
         }
 
+
         [TestMethod]
         [TestCategory("Selenium")]
         [DataRow("Programme 1", "Number 1 Problem Description", "Number 1 Problem Validation", "1", "1", "Draft")]
@@ -76,8 +77,8 @@ namespace StatNav.IntegrationTests
             submitButton.Click();
 
             Assert.IsTrue(_browserDriver.PageSource.Contains(Name));
-            Assert.IsTrue(_browserDriver.PageSource.Contains(Problem));            
-            Assert.IsTrue(_browserDriver.PageSource.Contains(ExperimentStatusName));           
+            Assert.IsTrue(_browserDriver.PageSource.Contains(Problem));
+            Assert.IsTrue(_browserDriver.PageSource.Contains(ExperimentStatusName));
         }
 
         [TestCleanup()]

@@ -30,7 +30,7 @@ host = pathArray[2];
 if (host.indexOf('localhost') >= 0) {
     url = protocol + '//' + host + '/';
 } else {
-    url = protocol + '//' + host + '/PALHub/';
+    url = protocol + '//' + host + '/';
 }
 
 $(document).ajaxError(function (event, jqXHR, settings, exception) {
