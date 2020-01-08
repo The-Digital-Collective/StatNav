@@ -61,7 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="test.runsettings" />
+    <None Include=".runsettings" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StatNav.WebApplication\StatNav.WebApplication.csproj">
