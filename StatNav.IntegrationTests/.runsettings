@@ -4,5 +4,6 @@
   <!-- Parameters used by tests at runtime -->
   <TestRunParameters>
     <Parameter name="webAppUrl" value="https://wvuk-statnav-webapp.azurewebsites.net/" />
+    <!--<Parameter name="webAppUrl" value="https://localhost:44316/" />-->
   </TestRunParameters>
 </RunSettings>
