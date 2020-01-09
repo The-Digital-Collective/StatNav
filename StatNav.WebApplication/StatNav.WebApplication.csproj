@@ -263,6 +263,14 @@
     <Compile Include="Migrations\201912231026380_RemainingTables.designer.cs">
       <DependentUpon>201912231026380_RemainingTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001091025486_UpdateProgrammeClass.cs" />
+    <Compile Include="Migrations\202001091025486_UpdateProgrammeClass.designer.cs">
+      <DependentUpon>202001091025486_UpdateProgrammeClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001091038351_UpdateIterationAndCandidateClass.cs" />
+    <Compile Include="Migrations\202001091038351_UpdateIterationAndCandidateClass.designer.cs">
+      <DependentUpon>202001091038351_UpdateIterationAndCandidateClass.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ExperimentIterations.cs" />
     <Compile Include="Models\ExperimentCandidate.cs" />
@@ -323,6 +331,7 @@
     <Content Include="Content\bootstrap-datepicker.css.map" />
     <Content Include="ApplicationInsights.config" />
     <Content Include="Connected Services\Application Insights\ConnectedService.json" />
+    <None Include="Properties\PublishProfiles\wvuk-statnav-webapp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1-vsdoc.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -537,6 +546,7 @@
     <Content Include="Views\Candidate\Details.cshtml" />
     <Content Include="Views\Candidate\Edit.cshtml" />
     <Content Include="Views\Candidate\Index.cshtml" />
+    <Content Include="Views\Shared\_SaveButton.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -561,6 +571,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912231026380_RemainingTables.resx">
       <DependentUpon>201912231026380_RemainingTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001091025486_UpdateProgrammeClass.resx">
+      <DependentUpon>202001091025486_UpdateProgrammeClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001091038351_UpdateIterationAndCandidateClass.resx">
+      <DependentUpon>202001091038351_UpdateIterationAndCandidateClass.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

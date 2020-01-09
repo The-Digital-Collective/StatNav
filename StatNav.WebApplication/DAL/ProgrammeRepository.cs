@@ -12,7 +12,7 @@ namespace StatNav.WebApplication.DAL
         public override List<ExperimentProgramme> LoadList()
         {
             List<ExperimentProgramme> programmes = Db.ExperimentProgrammes
-                .OrderBy(x => x.Name)
+                .OrderBy(x => x.ProgrammeName)
                 .Include(x => x.ExperimentStatus)
                 .ToList();
             return programmes;
@@ -24,8 +24,8 @@ namespace StatNav.WebApplication.DAL
             ExperimentProgramme programme = Db.ExperimentProgrammes
                                               .Where(x=>x.Id==id)
                                               .Include(x=>x.ExperimentStatus)
-                                              .Include(x=>x.ImpactMetricModel)
-                                              .Include(x=>x.TargetMetricModel)
+                                              .Include(x=>x.ProgrammeTargetMetricModel)
+                                              .Include(x=>x.ProgrammeImpactMetricModel)
                                               .Include(x => x.ExperimentIterations)
                                               .FirstOrDefault();
                 

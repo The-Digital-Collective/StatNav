@@ -11,8 +11,8 @@
                     {
                         case "ExperimentStatus":
                         case "ExperimentIterations":
-                        case "TargetMetricModel":
-                        case "ImpactMetricModel":
+                        case "ProgrammeTargetMetricModel":
+                        case "ProgrammeImpactMetricModel":
                         case "UserId":
                         case "TeamId":
                             break;
@@ -25,19 +25,19 @@
                 <dd>
                     @switch (prop.PropertyName)
                     {
-                        case "TargetMetricModelId":
-                            @(Model.TargetMetricModel != null ? Model.TargetMetricModel.Title : "");
+                        case "ProgrammeTargetMetricModelId":
+                            @(Model.ProgrammeTargetMetricModel != null ? Model.ProgrammeTargetMetricModel.Title : "");
                             break;
-                        case "ImpactMetricModelId":
-                            @(Model.ImpactMetricModel != null ? Model.ImpactMetricModel.Title : "");
+                        case "ProgrammeImpactMetricModelId":
+                            @(Model.ProgrammeImpactMetricModel != null ? Model.ProgrammeImpactMetricModel.Title : "");
                             break;
                         case "ExperimentStatusId":
                             @(Model.ExperimentStatus != null ? Model.ExperimentStatus.StatusName : "");
                             break;
                         case "ExperimentStatus":
                         case "ExperimentIterations":
-                        case "TargetMetricModel":
-                        case "ImpactMetricModel":
+                        case "ProgrammeTargetMetricModel":
+                        case "ProgrammeImpactMetricModel":
                         case "UserId":
                         case "TeamId":
                             break;

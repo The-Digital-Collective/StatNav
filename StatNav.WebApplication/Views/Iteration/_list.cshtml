@@ -7,7 +7,7 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th scope="col">
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.IterationName)
             </th>
             <th scope="col">
                 @Html.DisplayNameFor(model => model.StartDateTime)
@@ -25,7 +25,7 @@
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
                 <td>
-                    @Html.ActionLink(item.Name, "Details", "Iteration", new { id = item.Id }, null)
+                    @Html.ActionLink(item.IterationName, "Details", "Iteration", new { id = item.Id }, null)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.StartDateTime)

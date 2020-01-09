@@ -24,9 +24,9 @@ namespace StatNav.UnitTests.Controllers
         public void TestInitialize()
         {
             //set up the dummy data for testing
-            prog1 = new ExperimentProgramme() { Name = "Programme0", Id = 0, ExperimentStatusId = 0, ImpactMetricModelId = 0, TargetMetricModelId = 0 };
-            prog2 = new ExperimentProgramme() { Name = "Programme1", Id = 1, ExperimentStatusId = 0, ImpactMetricModelId = 0, TargetMetricModelId = 0 };
-            prog3 = new ExperimentProgramme() { Name = "Programme2", Id = 2, ExperimentStatusId = 0, ImpactMetricModelId = 0, TargetMetricModelId = 0 };
+            prog1 = new ExperimentProgramme() { ProgrammeName = "Programme0", Id = 0, ExperimentStatusId = 0, ProgrammeImpactMetricModelId = 0, ProgrammeTargetMetricModelId = 0 };
+            prog2 = new ExperimentProgramme() { ProgrammeName = "Programme1", Id = 1, ExperimentStatusId = 0, ProgrammeImpactMetricModelId = 0, ProgrammeTargetMetricModelId = 0 };
+            prog3 = new ExperimentProgramme() { ProgrammeName = "Programme2", Id = 2, ExperimentStatusId = 0, ProgrammeImpactMetricModelId = 0, ProgrammeTargetMetricModelId = 0 };
             _programmes = new List<ExperimentProgramme> { prog1, prog2, prog3 };
 
             programmeRepository = new DummyProgrammeRepository(_programmes);
@@ -80,7 +80,7 @@ namespace StatNav.UnitTests.Controllers
         public void CreateValidProgramme()
         {
             //Arrange
-            ExperimentProgramme newProg = new ExperimentProgramme { Name = "ProgrammeNew", Id = 7, ExperimentStatusId = 0, ImpactMetricModelId = 0, TargetMetricModelId = 0 };
+            ExperimentProgramme newProg = new ExperimentProgramme { ProgrammeName = "ProgrammeNew", Id = 7, ExperimentStatusId = 0, ProgrammeImpactMetricModelId = 0, ProgrammeTargetMetricModelId = 0 };
 
             //Act
             var result = (RedirectToRouteResult)_controller.Create(newProg);
@@ -139,7 +139,7 @@ namespace StatNav.UnitTests.Controllers
         public void EditProgrammeEditsModel()
         {
             //Arrange
-            ExperimentProgramme editedProg = new ExperimentProgramme { Name = "ProgrammeEdited", Id = 1, ExperimentStatusId = 0, ImpactMetricModelId = 0, TargetMetricModelId = 0 };
+            ExperimentProgramme editedProg = new ExperimentProgramme { ProgrammeName = "ProgrammeEdited", Id = 1, ExperimentStatusId = 0, ProgrammeImpactMetricModelId = 0, ProgrammeTargetMetricModelId = 0 };
             //Act           
             var result = (RedirectToRouteResult)_controller.Edit(editedProg);
             //get list of all programmes
@@ -175,7 +175,7 @@ namespace StatNav.UnitTests.Controllers
             ExperimentProgramme ep = result.ViewData.Model as ExperimentProgramme;
 
             // Assert           
-            Assert.AreEqual("Programme1", ep.Name);
+            Assert.AreEqual(ep, prog2);
         }
 
 

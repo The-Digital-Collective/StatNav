@@ -12,7 +12,7 @@ namespace StatNav.UnitTests.ModelValidation
         public void CreateProgramme_ValidationOnNameGivesError()
         {
             //Arrange
-            ExperimentProgramme ep = new ExperimentProgramme { Name = "" };
+            ExperimentProgramme ep = new ExperimentProgramme { ProgrammeName = "" };
             var context = new ValidationContext(ep, null, null);
             var results = new List<ValidationResult>();
             //Act

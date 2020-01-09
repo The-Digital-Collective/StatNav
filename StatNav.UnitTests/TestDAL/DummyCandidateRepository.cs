@@ -43,8 +43,8 @@ namespace StatNav.UnitTests.TestData
 
         public IList<ExperimentIteration> GetIterations()
         {
-            ExperimentIteration iteration1 = new ExperimentIteration { Name = "Iteration1", Id = 1};
-            ExperimentIteration iteration2 = new ExperimentIteration() { Name = "Iteration2", Id = 2};
+            ExperimentIteration iteration1 = new ExperimentIteration { IterationName = "Iteration1", Id = 1};
+            ExperimentIteration iteration2 = new ExperimentIteration() { IterationName = "Iteration2", Id = 2};
             return new List<ExperimentIteration> { iteration1, iteration2 };
         }
         public IList<MetricModel> GetMetricModels()

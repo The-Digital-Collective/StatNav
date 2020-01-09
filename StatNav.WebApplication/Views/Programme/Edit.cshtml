@@ -11,11 +11,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <div class="form-group pull-right">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save and Close" class="btn btn-primary" id="btnSubmit" />
-            </div>
-        </div>
+        @Html.Partial("_SaveButton")
         <h4>@ViewBag.Title</h4>
 
         <hr />
@@ -32,10 +28,10 @@
             </div>
         }
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ProgrammeName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.ProgrammeName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProgrammeName, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -72,10 +68,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TargetMetricModelId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ProgrammeTargetMetricModelId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("TargetMetricModelId", new SelectList(ViewBag.MetricModels, "Id", "Title"), "Please Select...", htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.TargetMetricModelId, "", new { @class = "text-danger" })
+                @Html.DropDownList("ProgrammeTargetMetricModelId", new SelectList(ViewBag.MetricModels, "Id", "Title"), "Please Select...", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ProgrammeTargetMetricModelId, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -88,10 +84,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ImpactMetricModelId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ProgrammeImpactMetricModelId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("ImpactMetricModelId", new SelectList(ViewBag.MetricModels, "Id", "Title"), htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ImpactMetricModelId, "", new { @class = "text-danger" })
+                @Html.DropDownList("ProgrammeImpactMetricModelId", new SelectList(ViewBag.MetricModels, "Id", "Title"), htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ProgrammeImpactMetricModelId, "", new { @class = "text-danger" })
             </div>
         </div>
 

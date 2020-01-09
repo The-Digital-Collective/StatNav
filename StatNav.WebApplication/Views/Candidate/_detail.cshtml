@@ -9,8 +9,8 @@
             @switch (prop.PropertyName)
             {
                 case "ExperimentIteration":
-                case "TargetMetricModel":
-                case "ImpactMetricModel":
+                case "CandidateImpactMetricModel":
+                case "CandidateTargetMetricModel":
                     break;
                 default:
                     @(prop.DisplayName ?? prop.PropertyName)
@@ -22,17 +22,17 @@
             @switch (prop.PropertyName)
             {
                 case "ExperimentIterationId":
-                    @(Model.ExperimentIteration != null ? Model.ExperimentIteration.Name : "");
+                    @(Model.ExperimentIteration != null ? Model.ExperimentIteration.IterationName : "");
                     break;
-                case "ImpactMetricModelId":
-                    @(Model.ImpactMetricModel != null ? Model.ImpactMetricModel.Title : "");
+                case "CandidateImpactMetricModelId":
+                    @(Model.CandidateImpactMetricModel != null ? Model.CandidateImpactMetricModel.Title : "");
                     break;
-                case "TargetMetricModelId":
-                    @(Model.TargetMetricModel != null ? Model.TargetMetricModel.Title : "");
+                case "CandidateTargetMetricModelId":
+                    @(Model.CandidateTargetMetricModel != null ? Model.CandidateTargetMetricModel.Title : "");
                     break;
                 case "ExperimentIteration":
-                case "TargetMetricModel":
-                case "ImpactMetricModel":
+                case "CandidateTargetMetricModel":
+                case "CandidateImpactMetricModel":
                     break;
                 default:
                     @prop.Model

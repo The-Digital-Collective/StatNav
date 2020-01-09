@@ -16,7 +16,7 @@
             @Html.DisplayNameFor(model => model.Id)
         </th>
         <th scope="col">
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.ProgrammeName)
         </th>
         <th scope="col">
             @Html.DisplayNameFor(model => model.ExperimentStatusId)
@@ -34,7 +34,7 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.ActionLink(item.Name, "Details", "Programme", new { id = item.Id }, null)
+                @Html.ActionLink(item.ProgrammeName, "Details", "Programme", new { id = item.Id }, null)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ExperimentStatus.StatusName)

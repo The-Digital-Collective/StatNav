@@ -18,8 +18,9 @@ namespace StatNav.WebApplication.Models
 
         public Team Team { get; set; }
 
+        [Display(Name = "Programme Name")]
         [Required]
-        public string Name { get; set; }
+        public string ProgrammeName { get; set; }
 
         [DataType(DataType.MultilineText)]
         public string Problem { get; set; }
@@ -34,20 +35,20 @@ namespace StatNav.WebApplication.Models
         [DataType(DataType.MultilineText)]
         public string Method { get; set; }
 
-        [ForeignKey("TargetMetricModel")]
+        [ForeignKey("ProgrammeTargetMetricModel")]
         [Display(Name = "Target Metric")]
-        public int TargetMetricModelId { get; set; }
+        public int ProgrammeTargetMetricModelId { get; set; }
 
-        public MetricModel TargetMetricModel { get; set; }
+        public MetricModel ProgrammeTargetMetricModel { get; set; }
 
         [Display(Name = "Target Value")]
         public float TargetValue { get; set; }
 
-        [ForeignKey("ImpactMetricModel")]
+        [ForeignKey("ProgrammeImpactMetricModel")]
         [Display(Name = "Impact Metric")]
-        public int ImpactMetricModelId { get; set; }
+        public int ProgrammeImpactMetricModelId { get; set; }
 
-        public MetricModel ImpactMetricModel { get; set; }
+        public MetricModel ProgrammeImpactMetricModel { get; set; }
 
         [Display(Name = "Impact Value")]
         public float ImpactValue { get; set; }
