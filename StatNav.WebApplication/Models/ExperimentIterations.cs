@@ -15,8 +15,9 @@ namespace StatNav.WebApplication.Models
 
         public ExperimentProgramme ExperimentProgramme { get; set; }
 
+        [Display(Name = "Iteration Name")]
         [Required]
-        public string Name { get; set; }
+        public string IterationName { get; set; }
 
         [Display(Name = "Required Duration For Significance")]
         public string RequiredDurationForSignificance { get; set; }

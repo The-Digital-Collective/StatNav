@@ -43,8 +43,8 @@ namespace StatNav.UnitTests.TestData
 
         public IList<ExperimentProgramme> GetProgrammes()
         {
-            ExperimentProgramme prog1 = new ExperimentProgramme { Name = "Programme1", Id = 1};
-            ExperimentProgramme prog2 = new ExperimentProgramme() { Name = "Programme2", Id = 2};
+            ExperimentProgramme prog1 = new ExperimentProgramme { ProgrammeName = "Programme1", Id = 1};
+            ExperimentProgramme prog2 = new ExperimentProgramme() { ProgrammeName = "Programme2", Id = 2};
             return new List<ExperimentProgramme> {prog1,prog2 };
         }       
     }

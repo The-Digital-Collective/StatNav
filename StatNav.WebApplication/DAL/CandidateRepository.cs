@@ -11,7 +11,7 @@ namespace StatNav.WebApplication.DAL
         public override List<ExperimentCandidate> LoadList()
         {
             List<ExperimentCandidate> candidates = Db.ExperimentCandidates
-                                                     .OrderBy(x => x.Name)
+                                                     .OrderBy(x => x.CandidateName)
                                                      .ToList();
             return candidates;
 
@@ -22,8 +22,8 @@ namespace StatNav.WebApplication.DAL
             ExperimentCandidate candidate = Db.ExperimentCandidates
                                               .Where(x => x.Id == id)
                                               .Include(x => x.ExperimentIteration)
-                                              .Include(x=>x.ImpactMetricModel)
-                                              .Include(x=>x.TargetMetricModel)
+                                              .Include(x=>x.CandidateImpactMetricModel)
+                                              .Include(x=>x.CandidateTargetMetricModel)
                                               .FirstOrDefault();
             return candidate;
         }        
@@ -31,7 +31,7 @@ namespace StatNav.WebApplication.DAL
         public IList<ExperimentIteration> GetIterations()
         {
             IList<ExperimentIteration> ei = Db.ExperimentIterations
-                                              .OrderBy(x => x.Name).ToList();
+                                              .OrderBy(x => x.IterationName).ToList();
             return ei;
         }
         public IList<MetricModel> GetMetricModels()

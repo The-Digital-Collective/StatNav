@@ -24,9 +24,9 @@ namespace StatNav.UnitTests.Controllers
         public void TestInitialize()
         {
             //set up the dummy data for testing
-            iteration1 = new ExperimentIteration() { Name = "Iteration1", Id = 1, ExperimentProgrammeId = 0 };
-            iteration2 = new ExperimentIteration() { Name = "Iteration2", Id = 2, ExperimentProgrammeId = 0 };
-            iteration3 = new ExperimentIteration() { Name = "Iteration3", Id = 3, ExperimentProgrammeId = 0 };
+            iteration1 = new ExperimentIteration() { IterationName= "Iteration1", Id = 1, ExperimentProgrammeId = 0 };
+            iteration2 = new ExperimentIteration() { IterationName = "Iteration2", Id = 2, ExperimentProgrammeId = 0 };
+            iteration3 = new ExperimentIteration() { IterationName = "Iteration3", Id = 3, ExperimentProgrammeId = 0 };
             _iterations = new List<ExperimentIteration> { iteration1, iteration2, iteration3};
 
             iterationRepository = new DummyIterationRepository(_iterations);
@@ -91,7 +91,7 @@ namespace StatNav.UnitTests.Controllers
         public void CreateValidIteration()
         {
             //Arrange
-            ExperimentIteration newIteration = new ExperimentIteration { Name = "IterationNew", Id = 7, ExperimentProgrammeId=2 };
+            ExperimentIteration newIteration = new ExperimentIteration { IterationName = "IterationNew", Id = 7, ExperimentProgrammeId=2 };
 
             //Act
             var result = (RedirectToRouteResult)_controller.Create(newIteration);
@@ -150,7 +150,7 @@ namespace StatNav.UnitTests.Controllers
         public void EditIterationEditsModel()
         {
             //Arrange
-            ExperimentIteration editedIteration = new ExperimentIteration { Name = "IterationEdited", Id = 1, ExperimentProgrammeId=2};
+            ExperimentIteration editedIteration = new ExperimentIteration { IterationName= "IterationEdited", Id = 1, ExperimentProgrammeId=2};
             //Act           
             var result = (RedirectToRouteResult)_controller.Edit(editedIteration);
             //get list of all iterations

@@ -11,7 +11,7 @@ namespace StatNav.WebApplication.DAL
         public override List<ExperimentIteration> LoadList()
         {
             List<ExperimentIteration> iterations = Db.ExperimentIterations
-                                                     .OrderBy(x => x.Name)
+                                                     .OrderBy(x => x.IterationName)
                                                      .ToList();
             return iterations;
 
@@ -43,7 +43,7 @@ namespace StatNav.WebApplication.DAL
         public IList<ExperimentProgramme> GetProgrammes()
         {
             IList<ExperimentProgramme> ep = Db.ExperimentProgrammes
-                                              .OrderBy(x => x.Name).ToList();
+                                              .OrderBy(x => x.ProgrammeName).ToList();
             return ep;
         }
         

@@ -10,25 +10,27 @@ namespace StatNav.WebApplication.Models
         public int ExperimentIterationId { get; set; }
 
         public ExperimentIteration ExperimentIteration { get; set; }
+
+        [Display(Name = "Candidate Name")]
         [Required]
-        public string Name { get; set; }
+        public string CandidateName { get; set; }
 
         public bool Control { get; set; }
 
-        [ForeignKey("TargetMetricModel")]
+        [ForeignKey("CandidateTargetMetricModel")]
         [Display(Name = "Target Metric")]
-        public int TargetMetricModelId { get; set; }
+        public int CandidateTargetMetricModelId { get; set; }
 
-        public MetricModel TargetMetricModel { get; set; }
+        public MetricModel CandidateTargetMetricModel { get; set; }
 
         [Display(Name = "Target Met")]
         public bool TargetMet { get; set; }
 
-        [ForeignKey("ImpactMetricModel")]
+        [ForeignKey("CandidateImpactMetricModel")]
         [Display(Name = "Impact Metric")]
-        public int ImpactMetricModelId { get; set; }
+        public int CandidateImpactMetricModelId { get; set; }
 
-        public MetricModel ImpactMetricModel { get; set; }
+        public MetricModel CandidateImpactMetricModel { get; set; }
 
         [Display(Name = "Impact Met")]
         public bool ImpactMet { get; set; }

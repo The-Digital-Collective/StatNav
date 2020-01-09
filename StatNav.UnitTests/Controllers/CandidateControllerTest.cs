@@ -24,9 +24,9 @@ namespace StatNav.UnitTests.Controllers
         public void TestInitialize()
         {
             //set up the dummy data for testing
-            candidate1 = new ExperimentCandidate() { Name = "Candidate1", Id = 1, ExperimentIterationId = 0 };
-            candidate2 = new ExperimentCandidate() { Name = "Candidate2", Id = 2, ExperimentIterationId = 0 };
-            candidate3 = new ExperimentCandidate() { Name = "Candidate3", Id = 3, ExperimentIterationId = 0 };
+            candidate1 = new ExperimentCandidate() { CandidateName = "Candidate1", Id = 1, ExperimentIterationId = 0 };
+            candidate2 = new ExperimentCandidate() { CandidateName = "Candidate2", Id = 2, ExperimentIterationId = 0 };
+            candidate3 = new ExperimentCandidate() { CandidateName = "Candidate3", Id = 3, ExperimentIterationId = 0 };
             _candidates = new List<ExperimentCandidate> { candidate1, candidate2, candidate3};
 
             candidateRepository = new DummyCandidateRepository(_candidates);
@@ -91,7 +91,7 @@ namespace StatNav.UnitTests.Controllers
         public void CreateValidCandidate()
         {
             //Arrange
-            ExperimentCandidate newCandidate = new ExperimentCandidate { Name = "CandidateNew", Id = 7, ExperimentIterationId=2 };
+            ExperimentCandidate newCandidate = new ExperimentCandidate { CandidateName = "CandidateNew", Id = 7, ExperimentIterationId=2 };
 
             //Act
             var result = (RedirectToRouteResult)_controller.Create(newCandidate);
@@ -149,7 +149,7 @@ namespace StatNav.UnitTests.Controllers
         public void EditCandidateEditsModel()
         {
             //Arrange
-            ExperimentCandidate editedCandidate = new ExperimentCandidate { Name = "CandidateEdited", Id = 1, ExperimentIterationId=2};
+            ExperimentCandidate editedCandidate = new ExperimentCandidate { CandidateName = "CandidateEdited", Id = 1, ExperimentIterationId=2};
             //Act           
             var result = (RedirectToRouteResult)_controller.Edit(editedCandidate);
             //get list of all candidates
