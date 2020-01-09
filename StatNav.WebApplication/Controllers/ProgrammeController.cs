@@ -7,7 +7,7 @@ using StatNav.WebApplication.Models;
 
 namespace StatNav.WebApplication.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class ProgrammeController : BaseController
     {
         private readonly IProgrammeRepository _pRepository;
