@@ -24,9 +24,9 @@ namespace StatNav.UnitTests.Controllers
         public void TestInitialize()
         {
             //set up the dummy data for testing
-            candidate1 = new ExperimentCandidate() { CandidateName = "Candidate1", Id = 1, ExperimentIterationId = 0 };
-            candidate2 = new ExperimentCandidate() { CandidateName = "Candidate2", Id = 2, ExperimentIterationId = 0 };
-            candidate3 = new ExperimentCandidate() { CandidateName = "Candidate3", Id = 3, ExperimentIterationId = 0 };
+            candidate1 = new ExperimentCandidate() { CandidateName = "Spider", Id = 1, ExperimentIterationId = 0 };
+            candidate2 = new ExperimentCandidate() { CandidateName = "Armadillo", Id = 2, ExperimentIterationId = 0 };
+            candidate3 = new ExperimentCandidate() { CandidateName = "Crab", Id = 3, ExperimentIterationId = 0 };
             _candidates = new List<ExperimentCandidate> { candidate1, candidate2, candidate3};
 
             candidateRepository = new DummyCandidateRepository(_candidates);
@@ -39,13 +39,65 @@ namespace StatNav.UnitTests.Controllers
             // Arrange
 
             // Act
-            ViewResult result = _controller.Index() as ViewResult;
+            ViewResult result = _controller.Index(string.Empty) as ViewResult;
             var model = (List<ExperimentCandidate>)result.Model;
             // Assert
             Assert.AreEqual("Candidate", result.ViewBag.SelectedType);
             CollectionAssert.Contains(model, candidate1);
             CollectionAssert.Contains(model, candidate2);
             CollectionAssert.Contains(model, candidate3);
+        }
+
+        [TestMethod]
+        public void Index_OrderByName_ReturnsCorrectOrder()
+        {
+            // Arrange
+
+            // Act
+            ViewResult result = _controller.Index(string.Empty) as ViewResult;
+            var model = (List<ExperimentCandidate>)result.Model;
+            // Assert
+            Assert.AreEqual(model[0], candidate2);//is the first one in the ordered the list the correct one?
+            Assert.AreEqual(model[2], candidate1);//is the last one in the ordered the list the correct one?
+        }
+
+        [TestMethod]
+        public void Index_OrderByNameDesc_ReturnsCorrectOrder()
+        {
+            // Arrange
+
+            // Act
+            ViewResult result = _controller.Index("name_desc") as ViewResult;
+            var model = (List<ExperimentCandidate>)result.Model;
+            // Assert
+            Assert.AreEqual(model[0], candidate1);//is the first one in the ordered the list the correct one?
+            Assert.AreEqual(model[2], candidate2);//is the last one in the ordered the list the correct one?
+        }
+
+        [TestMethod]
+        public void Index_OrderById_ReturnsCorrectOrder()
+        {
+            // Arrange
+
+            // Act
+            ViewResult result = _controller.Index("Id") as ViewResult;
+            var model = (List<ExperimentCandidate>)result.Model;
+            // Assert
+            Assert.AreEqual(model[0], candidate1);//is the first one in the ordered the list the correct one?
+            Assert.AreEqual(model[2], candidate3);//is the last one in the ordered the list the correct one?
+        }
+
+        [TestMethod]
+        public void Index_OrderByIdDesc_ReturnsCorrectOrder()
+        {
+            // Arrange
+
+            // Act
+            ViewResult result = _controller.Index("id_desc") as ViewResult;
+            var model = (List<ExperimentCandidate>)result.Model;
+            // Assert
+            Assert.AreEqual(model[0], candidate3);//is the first one in the ordered the list the correct one?
+            Assert.AreEqual(model[2], candidate1);//is the last one in the ordered the list the correct one?
         }
 
         [TestMethod]
@@ -96,7 +148,7 @@ namespace StatNav.UnitTests.Controllers
             //Act
             var result = (RedirectToRouteResult)_controller.Create(newCandidate);
             //get list of all candidates
-            List<ExperimentCandidate> progs = candidateRepository.LoadList();
+            List<ExperimentCandidate> progs = candidateRepository.LoadList(string.Empty);
 
             // Assert
             CollectionAssert.Contains(progs, newCandidate);
@@ -153,7 +205,7 @@ namespace StatNav.UnitTests.Controllers
             //Act           
             var result = (RedirectToRouteResult)_controller.Edit(editedCandidate);
             //get list of all candidates
-            List<ExperimentCandidate> progs = candidateRepository.LoadList();
+            List<ExperimentCandidate> progs = candidateRepository.LoadList(string.Empty);
 
             // Assert
             CollectionAssert.Contains(progs, editedCandidate);
@@ -197,7 +249,7 @@ namespace StatNav.UnitTests.Controllers
             //Act           
             var result = (RedirectToRouteResult)_controller.DeleteConfirmed(3);
             //get list of all candidates
-            List<ExperimentCandidate> candidates = candidateRepository.LoadList();
+            List<ExperimentCandidate> candidates = candidateRepository.LoadList(string.Empty);
 
             // Assert
             CollectionAssert.DoesNotContain(candidates, candidate3);

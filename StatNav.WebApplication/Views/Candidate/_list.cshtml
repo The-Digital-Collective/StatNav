@@ -3,12 +3,15 @@
 <table class="table">
     <caption>List of Experiment Candidates</caption>
     <tr>
-        <th scope="col">
-            @Html.DisplayNameFor(model => model.Id)
-        </th>
-        <th scope="col">
-            @Html.DisplayNameFor(model => model.CandidateName)
-        </th>
+        @if (ViewBag.Sortable != null)
+        {
+            @Html.Partial("../Candidate/_listHeadingsSortable", Model)
+        }
+        else
+        {
+            @Html.Partial("../Candidate/_listHeadingsOrdinary", Model)
+        }
+       
     </tr>
 
     @foreach (var item in Model)

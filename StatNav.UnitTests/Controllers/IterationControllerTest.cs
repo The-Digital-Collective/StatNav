@@ -24,9 +24,9 @@ namespace StatNav.UnitTests.Controllers
         public void TestInitialize()
         {
             //set up the dummy data for testing
-            iteration1 = new ExperimentIteration() { IterationName= "Iteration1", Id = 1, ExperimentProgrammeId = 0 };
-            iteration2 = new ExperimentIteration() { IterationName = "Iteration2", Id = 2, ExperimentProgrammeId = 0 };
-            iteration3 = new ExperimentIteration() { IterationName = "Iteration3", Id = 3, ExperimentProgrammeId = 0 };
+            iteration1 = new ExperimentIteration() { IterationName = "Victoria Sponge", Id = 1, ExperimentProgrammeId = 0, StartDateTime = new System.DateTime(2019, 11, 1),EndDateTime= new System.DateTime(2019, 11, 30) };
+            iteration2 = new ExperimentIteration() { IterationName = "Lemon Drizzle", Id = 2, ExperimentProgrammeId = 0, StartDateTime = new System.DateTime(2019, 08, 1), EndDateTime = new System.DateTime(2020, 07, 31) };
+            iteration3 = new ExperimentIteration() { IterationName = "Chocolate Fudge", Id = 3, ExperimentProgrammeId = 0, StartDateTime = new System.DateTime(2020, 01, 1), EndDateTime = new System.DateTime(2020, 03, 31) };
             _iterations = new List<ExperimentIteration> { iteration1, iteration2, iteration3};
 
             iterationRepository = new DummyIterationRepository(_iterations);
@@ -39,13 +39,117 @@ namespace StatNav.UnitTests.Controllers
             // Arrange
 
             // Act
-            ViewResult result = _controller.Index() as ViewResult;
+            ViewResult result = _controller.Index(string.Empty) as ViewResult;
             var model = (List<ExperimentIteration>)result.Model;
             // Assert
             Assert.AreEqual("Iteration", result.ViewBag.SelectedType);
             CollectionAssert.Contains(model, iteration1);
             CollectionAssert.Contains(model, iteration2);
             CollectionAssert.Contains(model, iteration3);
+        }
+
+        [TestMethod]
+        public void Index_OrderByName_ReturnsCorrectOrder()
+        {
+            // Arrange
+
+            // Act
+            ViewResult result = _controller.Index(string.Empty) as ViewResult;
+            var model = (List<ExperimentIteration>)result.Model;
+            // Assert
+            Assert.AreEqual(model[0], iteration3);//is the first one in the ordered the list the correct one?
+            Assert.AreEqual(model[2], iteration1);//is the last one in the ordered the list the correct one?
+        }
+
+        [TestMethod]
+        public void Index_OrderByNameDesc_ReturnsCorrectOrder()
+        {
+            // Arrange
+
+            // Act
+            ViewResult result = _controller.Index("name_desc") as ViewResult;
+            var model = (List<ExperimentIteration>)result.Model;
+            // Assert
+            Assert.AreEqual(model[0], iteration1);//is the first one in the ordered the list the correct one?
+            Assert.AreEqual(model[2], iteration3);//is the last one in the ordered the list the correct one?
+        }
+
+        [TestMethod]
+        public void Index_OrderById_ReturnsCorrectOrder()
+        {
+            // Arrange
+
+            // Act
+            ViewResult result = _controller.Index("Id") as ViewResult;
+            var model = (List<ExperimentIteration>)result.Model;
+            // Assert
+            Assert.AreEqual(model[0], iteration1);//is the first one in the ordered the list the correct one?
+            Assert.AreEqual(model[2], iteration3);//is the last one in the ordered the list the correct one?
+        }
+
+        [TestMethod]
+        public void Index_OrderByIdDesc_ReturnsCorrectOrder()
+        {
+            // Arrange
+
+            // Act
+            ViewResult result = _controller.Index("id_desc") as ViewResult;
+            var model = (List<ExperimentIteration>)result.Model;
+            // Assert
+            Assert.AreEqual(model[0], iteration3);//is the first one in the ordered the list the correct one?
+            Assert.AreEqual(model[2], iteration1);//is the last one in the ordered the list the correct one?
+        }
+
+        [TestMethod]
+        public void Index_OrderByStartDate_ReturnsCorrectOrder()
+        {
+            // Arrange
+
+            // Act
+            ViewResult result = _controller.Index("StartDate") as ViewResult;
+            var model = (List<ExperimentIteration>)result.Model;
+            // Assert
+            Assert.AreEqual(model[0], iteration2);//is the first one in the ordered the list the correct one?
+            Assert.AreEqual(model[2], iteration3);//is the last one in the ordered the list the correct one?
+        }
+
+        [TestMethod]
+        public void Index_OrderByStartDateDesc_ReturnsCorrectOrder()
+        {
+            // Arrange
+
+            // Act
+            ViewResult result = _controller.Index("startDate_desc") as ViewResult;
+            var model = (List<ExperimentIteration>)result.Model;
+            // Assert
+            Assert.AreEqual(model[0], iteration3);//is the first one in the ordered the list the correct one?
+            Assert.AreEqual(model[2], iteration2);//is the last one in the ordered the list the correct one?
+        }
+
+        [TestMethod]
+        public void Index_OrderByEndDate_ReturnsCorrectOrder()
+        {
+            // Arrange
+
+            // Act
+            ViewResult result = _controller.Index("EndDate") as ViewResult;
+            var model = (List<ExperimentIteration>)result.Model;
+            // Assert
+            Assert.AreEqual(model[0], iteration1);//is the first one in the ordered the list the correct one?
+            Assert.AreEqual(model[2], iteration2);//is the last one in the ordered the list the correct one?
+        }
+
+        [TestMethod]
+        public void Index_OrderByEndDateDesc_ReturnsCorrectOrder()
+        {
+            // Arrange
+
+            // Act
+            ViewResult result = _controller.Index("endDate_desc") as ViewResult;
+            var model = (List<ExperimentIteration>)result.Model;
+            // Assert
+            Assert.AreEqual(model[0], iteration2);//is the first one in the ordered the list the correct one?
+            Assert.AreEqual(model[2], iteration1);//is the last one in the ordered the list the correct one?
         }
 
         [TestMethod]
@@ -96,7 +200,7 @@ namespace StatNav.UnitTests.Controllers
             //Act
             var result = (RedirectToRouteResult)_controller.Create(newIteration);
             //get list of all iterations
-            List<ExperimentIteration> progs = iterationRepository.LoadList();
+            List<ExperimentIteration> progs = iterationRepository.LoadList(string.Empty);
 
             // Assert
             CollectionAssert.Contains(progs, newIteration);
@@ -154,7 +258,7 @@ namespace StatNav.UnitTests.Controllers
             //Act           
             var result = (RedirectToRouteResult)_controller.Edit(editedIteration);
             //get list of all iterations
-            List<ExperimentIteration> progs = iterationRepository.LoadList();
+            List<ExperimentIteration> progs = iterationRepository.LoadList(string.Empty);
 
             // Assert
             CollectionAssert.Contains(progs, editedIteration);
@@ -198,7 +302,7 @@ namespace StatNav.UnitTests.Controllers
             //Act           
             var result = (RedirectToRouteResult)_controller.DeleteConfirmed(3);
             //get list of all iterations
-            List<ExperimentIteration> iterations = iterationRepository.LoadList();
+            List<ExperimentIteration> iterations = iterationRepository.LoadList(string.Empty);
 
             // Assert
             CollectionAssert.DoesNotContain(iterations, iteration3);

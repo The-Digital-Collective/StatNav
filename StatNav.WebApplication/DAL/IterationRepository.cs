@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using StatNav.WebApplication.BLL;
 using StatNav.WebApplication.Interfaces;
 using StatNav.WebApplication.Models;
 
@@ -8,15 +9,16 @@ namespace StatNav.WebApplication.DAL
 {
     public class IterationRepository : GenericRepository<ExperimentIteration>, IIterationRepository
     {       
-        public override List<ExperimentIteration> LoadList()
+        public override List<ExperimentIteration> LoadList(string sortOrder)
         {
-            List<ExperimentIteration> iterations = Db.ExperimentIterations
-                                                     .OrderBy(x => x.IterationName)
-                                                     .ToList();
-            return iterations;
-
+            List<ExperimentIteration> iterations = Db.ExperimentIterations.ToList();
+            return SortList(iterations, sortOrder);
         }
 
+        public List<ExperimentIteration> SortList(List<ExperimentIteration> iterations, string sortOrder)
+        {
+            return iterations = IterationLogic.SortIterations(iterations, sortOrder);
+        }
         public override ExperimentIteration Load(int id)
         {
             ExperimentIteration iteration = Db.ExperimentIterations

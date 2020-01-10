@@ -13,13 +13,13 @@
     <caption>List of Experiment Programmes</caption>
     <tr>
         <th scope="col">
-            @Html.DisplayNameFor(model => model.Id)
+            <a href="@Url.Action("Index",new { sortOrder = ViewBag.IdSortParm })">ID <span class="glyphicon glyphicon-sort"></span></a>
         </th>
         <th scope="col">
-            @Html.DisplayNameFor(model => model.ProgrammeName)
+            <a href="@Url.Action("Index",new { sortOrder = ViewBag.NameSortParm })">Programme Name <span class="glyphicon glyphicon-sort"></span></a>
         </th>
         <th scope="col">
-            @Html.DisplayNameFor(model => model.ExperimentStatusId)
+            <a href="@Url.Action("Index",new { sortOrder = ViewBag.StatusSortParm })">Status <span class="glyphicon glyphicon-sort"></span></a>
         </th>
         <th scope="col">
             @Html.DisplayNameFor(model => model.Problem)

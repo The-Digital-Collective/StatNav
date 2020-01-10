@@ -227,6 +227,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="BLL\CandidateLogic.cs" />
+    <Compile Include="BLL\IterationLogic.cs" />
+    <Compile Include="BLL\ProgrammeLogic.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -547,6 +550,10 @@
     <Content Include="Views\Candidate\Edit.cshtml" />
     <Content Include="Views\Candidate\Index.cshtml" />
     <Content Include="Views\Shared\_SaveButton.cshtml" />
+    <Content Include="Views\Iteration\_listHeadingsSortable.cshtml" />
+    <Content Include="Views\Iteration\_listHeadingsOrdinary.cshtml" />
+    <Content Include="Views\Candidate\_listHeadingsOrdinary.cshtml" />
+    <Content Include="Views\Candidate\_listHeadingsSortable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

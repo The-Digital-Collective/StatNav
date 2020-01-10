@@ -1,10 +1,10 @@
-﻿using StatNav.WebApplication.Interfaces;
+﻿using StatNav.WebApplication.BLL;
+using StatNav.WebApplication.Interfaces;
 using StatNav.WebApplication.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+
 
 namespace StatNav.UnitTests.TestData
 {
@@ -16,9 +16,14 @@ namespace StatNav.UnitTests.TestData
         {
             dummyCandidates = candidates;
         }
-        public List<ExperimentCandidate> LoadList()
+        public List<ExperimentCandidate> LoadList(string sortOrder)
         {
-            return dummyCandidates;
+            
+            return SortList(dummyCandidates, sortOrder);
+        }
+        public List<ExperimentCandidate> SortList(List<ExperimentCandidate> candidates, string sortOrder)
+        {
+            return candidates = CandidateLogic.SortCandidates(candidates, sortOrder);
         }
         public ExperimentCandidate Load(int id)
         {
