@@ -21,7 +21,7 @@ namespace StatNav.WebApplication.DAL
             this.Db = ctx;
         }
 
-        public virtual List<T> LoadList()
+        public virtual List<T> LoadList(string sortOrder)
         {
             // Will load the full table of data, override if only a subset is required
             List<T> modelList = Db.Set<T>().ToList();

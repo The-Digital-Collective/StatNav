@@ -7,7 +7,7 @@ using StatNav.WebApplication.Models;
 
 namespace StatNav.WebApplication.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class CandidateController : BaseController
     {
         private readonly ICandidateRepository _cRepository;
@@ -23,10 +23,13 @@ namespace StatNav.WebApplication.Controllers
             _cRepository = candidateRepository;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
-            List<ExperimentCandidate> candidates = _cRepository.LoadList();
+            ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.IdSortParm = sortOrder == "Id" ? "id_desc" : "Id";
+            List<ExperimentCandidate> candidates = _cRepository.LoadList(sortOrder);
             ViewBag.SelectedType = "Candidate";
+            ViewBag.Sortable = true;
             return View(candidates);
 
         }

@@ -1,4 +1,5 @@
-﻿using StatNav.WebApplication.Interfaces;
+﻿using StatNav.WebApplication.BLL;
+using StatNav.WebApplication.Interfaces;
 using StatNav.WebApplication.Models;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,14 @@ namespace StatNav.UnitTests.TestData
         {
             dummyIterations = iterations;
         }
-        public List<ExperimentIteration> LoadList()
+        public List<ExperimentIteration> LoadList(string sortOrder)
         {
-            return dummyIterations;
+            return SortList(dummyIterations, sortOrder);
+        }
+
+        public List<ExperimentIteration> SortList(List<ExperimentIteration> iterations, string sortOrder)
+        {
+            return iterations = IterationLogic.SortIterations(iterations, sortOrder);
         }
         public ExperimentIteration Load(int id)
         {
@@ -43,9 +49,9 @@ namespace StatNav.UnitTests.TestData
 
         public IList<ExperimentProgramme> GetProgrammes()
         {
-            ExperimentProgramme prog1 = new ExperimentProgramme { ProgrammeName = "Programme1", Id = 1};
-            ExperimentProgramme prog2 = new ExperimentProgramme() { ProgrammeName = "Programme2", Id = 2};
-            return new List<ExperimentProgramme> {prog1,prog2 };
-        }       
+            ExperimentProgramme prog1 = new ExperimentProgramme { ProgrammeName = "Programme1", Id = 1 };
+            ExperimentProgramme prog2 = new ExperimentProgramme() { ProgrammeName = "Programme2", Id = 2 };
+            return new List<ExperimentProgramme> { prog1, prog2 };
+        }
     }
 }

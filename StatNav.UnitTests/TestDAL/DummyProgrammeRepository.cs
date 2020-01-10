@@ -1,4 +1,5 @@
-﻿using StatNav.WebApplication.Interfaces;
+﻿using StatNav.WebApplication.BLL;
+using StatNav.WebApplication.Interfaces;
 using StatNav.WebApplication.Models;
 using System;
 using System.Collections.Generic;
@@ -16,10 +17,15 @@ namespace StatNav.UnitTests.TestData
         {
             dummyProgrammes = programmes;
         }
-        public List<ExperimentProgramme> LoadList()
+        public List<ExperimentProgramme> LoadList(string sortOrder)
         {
-            return dummyProgrammes;
+            return SortList(dummyProgrammes,sortOrder);
         }
+        public List<ExperimentProgramme> SortList(List<ExperimentProgramme> programmes, string sortOrder)
+        {
+            return programmes = ProgrammeLogic.SortProgrammes(programmes, sortOrder);
+        }
+
         public ExperimentProgramme Load(int id)
         {
             return dummyProgrammes.Where(x => x.Id == id).FirstOrDefault();

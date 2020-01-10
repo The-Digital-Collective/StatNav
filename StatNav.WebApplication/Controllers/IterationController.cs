@@ -7,7 +7,7 @@ using StatNav.WebApplication.Models;
 
 namespace StatNav.WebApplication.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class IterationController : BaseController
     {
         private readonly IIterationRepository _iRepository;
@@ -23,10 +23,15 @@ namespace StatNav.WebApplication.Controllers
             _iRepository = iterationRepository;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
-            List<ExperimentIteration> iterations = _iRepository.LoadList();
+            ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.IdSortParm = sortOrder == "Id" ? "id_desc" : "Id";
+            ViewBag.StartDateSortParm = sortOrder == "StartDate" ? "startDate_desc" : "StartDate";
+            ViewBag.EndDateSortParm = sortOrder == "EndDate" ? "endDate_desc" : "EndDate";
+            List<ExperimentIteration> iterations = _iRepository.LoadList(sortOrder);
             ViewBag.SelectedType = "Iteration";
+            ViewBag.Sortable = true;
             return View(iterations);
 
         }
