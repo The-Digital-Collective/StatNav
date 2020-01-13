@@ -23,13 +23,13 @@ namespace StatNav.WebApplication.Controllers
             _iRepository = iterationRepository;
         }
 
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder, string searchString)
         {
             ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.IdSortParm = sortOrder == "Id" ? "id_desc" : "Id";
             ViewBag.StartDateSortParm = sortOrder == "StartDate" ? "startDate_desc" : "StartDate";
             ViewBag.EndDateSortParm = sortOrder == "EndDate" ? "endDate_desc" : "EndDate";
-            List<ExperimentIteration> iterations = _iRepository.LoadList(sortOrder);
+            List<ExperimentIteration> iterations = _iRepository.LoadList(sortOrder, searchString);
             ViewBag.SelectedType = "Iteration";
             ViewBag.Sortable = true;
             return View(iterations);
