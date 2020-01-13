@@ -1,0 +1,26 @@
+﻿@{
+    var selectedType = ViewBag.SelectedType;
+}
+<div class="form-group">
+    <select id="ddlExperimentType" class="form-control pull-right">
+        <option value="Programme" @if (selectedType == "Programme") { <text>
+                selected="selected" </text> ; }>
+            Programmes
+        </option>
+        <option value="Iteration" @if (selectedType == "Iteration") { <text> selected="selected" </text> ; }>
+            Iterations
+        </option>
+        <option value="Candidate" @if (selectedType == "Candidate") { <text> selected="selected" </text> ; }>
+            Candidates
+        </option>
+    </select>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#ddlExperimentType").change(function () {
+            var location = url + $('#ddlExperimentType').val();
+
+            window.location.href = location;
+        });
+    });
+</script>

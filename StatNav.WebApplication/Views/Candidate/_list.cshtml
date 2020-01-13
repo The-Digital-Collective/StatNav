@@ -1,0 +1,29 @@
+﻿@model IEnumerable<StatNav.WebApplication.Models.ExperimentCandidate>
+
+<table class="table">
+    <caption>List of Experiment Candidates</caption>
+    <tr>
+        @if (ViewBag.Sortable != null)
+        {
+            @Html.Partial("../Candidate/_listHeadingsSortable", Model)
+        }
+        else
+        {
+            @Html.Partial("../Candidate/_listHeadingsOrdinary", Model)
+        }
+       
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.ActionLink(item.CandidateName, "Details", "Candidate", new {id = item.Id}, null)
+            </td>
+        </tr>
+    }
+
+</table>
