@@ -17,9 +17,11 @@ namespace StatNav.UnitTests.TestData
         {
             dummyIterations = iterations;
         }
-        public List<ExperimentIteration> LoadList(string sortOrder)
+        public List<ExperimentIteration> LoadList(string sortOrder, string searchString = "")
         {
-            return SortList(dummyIterations, sortOrder);
+            IQueryable<ExperimentIteration> queryIterations = dummyIterations.AsQueryable();
+            queryIterations = IterationLogic.FilterIterations(queryIterations, searchString);
+            return SortList(queryIterations.ToList(), sortOrder);
         }
 
         public List<ExperimentIteration> SortList(List<ExperimentIteration> iterations, string sortOrder)

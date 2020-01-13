@@ -39,7 +39,7 @@ namespace StatNav.UnitTests.Controllers
             // Arrange
 
             // Act
-            ViewResult result = _controller.Index(string.Empty) as ViewResult;
+            ViewResult result = _controller.Index(string.Empty, string.Empty) as ViewResult;
             var model = (List<ExperimentCandidate>)result.Model;
             // Assert
             Assert.AreEqual("Candidate", result.ViewBag.SelectedType);
@@ -54,7 +54,7 @@ namespace StatNav.UnitTests.Controllers
             // Arrange
 
             // Act
-            ViewResult result = _controller.Index(string.Empty) as ViewResult;
+            ViewResult result = _controller.Index(string.Empty, string.Empty) as ViewResult;
             var model = (List<ExperimentCandidate>)result.Model;
             // Assert
             Assert.AreEqual(model[0], candidate2);//is the first one in the ordered the list the correct one?
@@ -67,7 +67,7 @@ namespace StatNav.UnitTests.Controllers
             // Arrange
 
             // Act
-            ViewResult result = _controller.Index("name_desc") as ViewResult;
+            ViewResult result = _controller.Index("name_desc", string.Empty) as ViewResult;
             var model = (List<ExperimentCandidate>)result.Model;
             // Assert
             Assert.AreEqual(model[0], candidate1);//is the first one in the ordered the list the correct one?
@@ -80,7 +80,7 @@ namespace StatNav.UnitTests.Controllers
             // Arrange
 
             // Act
-            ViewResult result = _controller.Index("Id") as ViewResult;
+            ViewResult result = _controller.Index("Id", string.Empty) as ViewResult;
             var model = (List<ExperimentCandidate>)result.Model;
             // Assert
             Assert.AreEqual(model[0], candidate1);//is the first one in the ordered the list the correct one?
@@ -93,13 +93,82 @@ namespace StatNav.UnitTests.Controllers
             // Arrange
 
             // Act
-            ViewResult result = _controller.Index("id_desc") as ViewResult;
+            ViewResult result = _controller.Index("id_desc", string.Empty) as ViewResult;
             var model = (List<ExperimentCandidate>)result.Model;
             // Assert
             Assert.AreEqual(model[0], candidate3);//is the first one in the ordered the list the correct one?
             Assert.AreEqual(model[2], candidate1);//is the last one in the ordered the list the correct one?
         }
+        [TestMethod]
+        public void IndexView_SearchByI_ReturnsExpectedCandidates()
+        {
+            // Arrange
 
+            // Act
+            ViewResult result = _controller.Index(string.Empty, "i") as ViewResult;
+            var model = (List<ExperimentCandidate>)result.Model;
+            // Assert
+            CollectionAssert.Contains(model, candidate1);
+            CollectionAssert.Contains(model, candidate2);
+            CollectionAssert.DoesNotContain(model, candidate3);
+        }
+
+        [TestMethod]
+        public void IndexView_SearchByX_ReturnsExpectedCandidates()
+        {
+            // Arrange
+
+            // Act
+            ViewResult result = _controller.Index(string.Empty, "x") as ViewResult;
+            var model = (List<ExperimentCandidate>)result.Model;
+            // Assert
+            CollectionAssert.DoesNotContain(model, candidate1);
+            CollectionAssert.DoesNotContain(model, candidate2);
+            CollectionAssert.DoesNotContain(model, candidate3);
+        }
+
+        [TestMethod]
+        public void Index_SearchByWord_ReturnsCorrectItems()
+        {
+            // Arrange
+
+            // Act
+            ViewResult result = _controller.Index("", "crab") as ViewResult;
+            var model = (List<ExperimentCandidate>)result.Model;
+            // Assert
+            CollectionAssert.DoesNotContain(model, candidate1);
+            CollectionAssert.DoesNotContain(model, candidate2);
+            CollectionAssert.Contains(model, candidate3);
+        }
+
+        [TestMethod]
+        public void Index_SearchByCaseInsenstive_ReturnsCorrectItems()
+        {
+            // Arrange
+
+            // Act
+            ViewResult result = _controller.Index("", "Pi") as ViewResult;
+            var model = (List<ExperimentCandidate>)result.Model;
+            // Assert
+            CollectionAssert.Contains(model, candidate1);
+            CollectionAssert.DoesNotContain(model, candidate2);
+            CollectionAssert.DoesNotContain(model, candidate3);
+        }
+        [TestMethod]
+        public void Index_SearchByCaseInsenstive_AndOrderBy_ReturnsCorrectItemsInCorrectOrder()
+        {
+            // Arrange
+
+            // Act
+            ViewResult result = _controller.Index("id_desc", "I") as ViewResult;
+            var model = (List<ExperimentCandidate>)result.Model;
+            // Assert
+            CollectionAssert.Contains(model, candidate1);
+            CollectionAssert.Contains(model, candidate2);
+            CollectionAssert.DoesNotContain(model, candidate3);
+            Assert.AreEqual(model[0], candidate2);//is the first one in the ordered the list the correct one?
+            Assert.AreEqual(model[1], candidate1);//is the last one in the ordered the list the correct one?
+        }
         [TestMethod]
         public void CandidateDetailView_Is_Passed_Candidate_Data()
         {

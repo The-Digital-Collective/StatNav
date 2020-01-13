@@ -6,7 +6,7 @@ namespace StatNav.WebApplication.Interfaces
     public interface IRepository<T>
     {
 
-        List<T> LoadList(string sortOrder);
+        List<T> LoadList(string sortOrder, string searchString);
         T Load(int id);
         void Add(T t);
         void Edit(T t);

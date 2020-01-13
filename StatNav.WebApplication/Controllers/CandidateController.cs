@@ -23,11 +23,11 @@ namespace StatNav.WebApplication.Controllers
             _cRepository = candidateRepository;
         }
 
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder, string searchString)
         {
             ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.IdSortParm = sortOrder == "Id" ? "id_desc" : "Id";
-            List<ExperimentCandidate> candidates = _cRepository.LoadList(sortOrder);
+            List<ExperimentCandidate> candidates = _cRepository.LoadList(sortOrder,searchString);
             ViewBag.SelectedType = "Candidate";
             ViewBag.Sortable = true;
             return View(candidates);

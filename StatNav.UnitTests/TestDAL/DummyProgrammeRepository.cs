@@ -17,9 +17,11 @@ namespace StatNav.UnitTests.TestData
         {
             dummyProgrammes = programmes;
         }
-        public List<ExperimentProgramme> LoadList(string sortOrder)
+        public List<ExperimentProgramme> LoadList(string sortOrder, string searchString)
         {
-            return SortList(dummyProgrammes,sortOrder);
+            IQueryable<ExperimentProgramme> queryProgrammes = dummyProgrammes.AsQueryable();
+            queryProgrammes = ProgrammeLogic.FilterProgrammes(queryProgrammes, searchString);
+            return SortList(queryProgrammes.ToList(), sortOrder);
         }
         public List<ExperimentProgramme> SortList(List<ExperimentProgramme> programmes, string sortOrder)
         {

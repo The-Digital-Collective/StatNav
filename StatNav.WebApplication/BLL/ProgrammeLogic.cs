@@ -1,11 +1,20 @@
 ﻿using StatNav.WebApplication.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace StatNav.WebApplication.BLL
 {
-    public  class ProgrammeLogic
+    public static class ProgrammeLogic
     {
+        public static IQueryable<ExperimentProgramme> FilterProgrammes(IQueryable<ExperimentProgramme> programmes, string searchString)
+        {
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                programmes = programmes.Where(x => x.ProgrammeName.ToLower().Contains(searchString.ToLower()) );
+            }
+            return programmes;
+        }
         public static List<ExperimentProgramme> SortProgrammes(List<ExperimentProgramme> programmeList, string sortOrder)
         {
             IOrderedEnumerable<ExperimentProgramme> sortedList;
