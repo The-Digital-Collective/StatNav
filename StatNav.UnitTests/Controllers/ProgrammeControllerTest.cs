@@ -30,13 +30,16 @@ namespace StatNav.UnitTests.Controllers
             status2 = new ExperimentStatus() { Id = 1, DisplayOrder = 2, StatusName = "Scheduled" };
             status3 = new ExperimentStatus() { Id = 2, DisplayOrder = 3, StatusName = "Live" };
             //set up the dummy data for testing
-            prog1 = new ExperimentProgramme() { ProgrammeName = "Northern Lights", Id = 0, ExperimentStatusId = 0};
-            prog2 = new ExperimentProgramme() { ProgrammeName = "Amber Spyglass", Id = 1, ExperimentStatusId = 1};
-            prog3 = new ExperimentProgramme() { ProgrammeName = "Subtle Knife", Id = 2, ExperimentStatusId = 2};
+            prog1 = new ExperimentProgramme() { ProgrammeName = "Northern Lights", Id = 0 };
+            prog1.ExperimentStatus = status1;
+            prog2 = new ExperimentProgramme() { ProgrammeName = "Amber Spyglass", Id = 1 };
+            prog2.ExperimentStatus = status2;
+            prog3 = new ExperimentProgramme() { ProgrammeName = "Subtle Knife", Id = 2 };
+            prog3.ExperimentStatus = status3;
             _programmes = new List<ExperimentProgramme> { prog1, prog2, prog3 };
 
             programmeRepository = new DummyProgrammeRepository(_programmes);
-            _controller = new ProgrammeController(programmeRepository);          
+            _controller = new ProgrammeController(programmeRepository);
         }
 
         [TestMethod]
@@ -45,7 +48,7 @@ namespace StatNav.UnitTests.Controllers
             // Arrange
 
             // Act
-            ViewResult result = _controller.Index(string.Empty) as ViewResult;
+            ViewResult result = _controller.Index(string.Empty, string.Empty) as ViewResult;
             var model = (List<ExperimentProgramme>)result.Model;
             // Assert
             Assert.AreEqual("Programme", result.ViewBag.SelectedType);
@@ -54,13 +57,15 @@ namespace StatNav.UnitTests.Controllers
             CollectionAssert.Contains(model, prog3);
         }
 
+        
+
         [TestMethod]
         public void Index_OrderByName_ReturnsCorrectOrder()
         {
             // Arrange
 
             // Act
-            ViewResult result = _controller.Index(string.Empty) as ViewResult;
+            ViewResult result = _controller.Index(string.Empty, string.Empty) as ViewResult;
             var model = (List<ExperimentProgramme>)result.Model;
             // Assert
             Assert.AreEqual(model[0], prog2);//is the first one in the ordered the list the correct one?
@@ -72,7 +77,7 @@ namespace StatNav.UnitTests.Controllers
             // Arrange
 
             // Act
-            ViewResult result = _controller.Index("name_desc") as ViewResult;
+            ViewResult result = _controller.Index("name_desc", string.Empty) as ViewResult;
             var model = (List<ExperimentProgramme>)result.Model;
             // Assert
             Assert.AreEqual(model[0], prog3);//is the first one in the ordered the list the correct one?
@@ -85,22 +90,23 @@ namespace StatNav.UnitTests.Controllers
             // Arrange
 
             // Act
-            ViewResult result = _controller.Index("Id") as ViewResult;
+            ViewResult result = _controller.Index("Id", string.Empty) as ViewResult;
             var model = (List<ExperimentProgramme>)result.Model;
             // Assert
             Assert.AreEqual(model[0], prog1);//is the first one in the ordered the list the correct one?
             Assert.AreEqual(model[2], prog3);//is the last one in the ordered the list the correct one?
         }
 
+        [TestMethod]
         public void Index_OrderByStatus_ReturnsCorrectOrder()
         {
             // Arrange
 
             // Act
-            ViewResult result = _controller.Index("name_desc") as ViewResult;
+            ViewResult result = _controller.Index("Status", string.Empty) as ViewResult;
             var model = (List<ExperimentProgramme>)result.Model;
             // Assert
-            Assert.AreEqual(model[0], prog3);//is the first one in the ordered the list the correct one?
+            Assert.AreEqual(model[0], prog1);//is the first one in the ordered the list the correct one?
             Assert.AreEqual(model[2], prog2);//is the last one in the ordered the list the correct one?
         }
 
@@ -110,11 +116,11 @@ namespace StatNav.UnitTests.Controllers
             // Arrange
 
             // Act
-            ViewResult result = _controller.Index("Id") as ViewResult;
+            ViewResult result = _controller.Index("status_desc", string.Empty) as ViewResult;
             var model = (List<ExperimentProgramme>)result.Model;
             // Assert
-            Assert.AreEqual(model[0], prog1);//is the first one in the ordered the list the correct one?
-            Assert.AreEqual(model[2], prog3);//is the last one in the ordered the list the correct one?
+            Assert.AreEqual(model[0], prog2);//is the first one in the ordered the list the correct one?
+            Assert.AreEqual(model[2], prog1);//is the last one in the ordered the list the correct one?
         }
 
         [TestMethod]
@@ -123,11 +129,82 @@ namespace StatNav.UnitTests.Controllers
             // Arrange
 
             // Act
-            ViewResult result = _controller.Index("id_desc") as ViewResult;
+            ViewResult result = _controller.Index("id_desc", string.Empty) as ViewResult;
             var model = (List<ExperimentProgramme>)result.Model;
             // Assert
             Assert.AreEqual(model[0], prog3);//is the first one in the ordered the list the correct one?
             Assert.AreEqual(model[2], prog1);//is the last one in the ordered the list the correct one?
+        }
+
+        [TestMethod]
+        public void IndexView_SearchByS_ReturnsExpectedPrograms()
+        {
+            // Arrange
+
+            // Act
+            ViewResult result = _controller.Index(string.Empty, "s") as ViewResult;
+            var model = (List<ExperimentProgramme>)result.Model;
+            // Assert
+            CollectionAssert.Contains(model, prog1);
+            CollectionAssert.Contains(model, prog2);
+            CollectionAssert.Contains(model, prog3);
+        }
+
+        [TestMethod]
+        public void IndexView_SearchByX_ReturnsExpectedPrograms()
+        {
+            // Arrange
+
+            // Act
+            ViewResult result = _controller.Index(string.Empty, "x") as ViewResult;
+            var model = (List<ExperimentProgramme>)result.Model;
+            // Assert
+            CollectionAssert.DoesNotContain(model, prog1);
+            CollectionAssert.DoesNotContain(model, prog2);
+            CollectionAssert.DoesNotContain(model, prog3);
+        }
+
+        [TestMethod]
+        public void Index_SearchByWord_ReturnsCorrectItems()
+        {
+            // Arrange
+
+            // Act
+            ViewResult result = _controller.Index("", "amber") as ViewResult;
+            var model = (List<ExperimentProgramme>)result.Model;
+            // Assert
+            CollectionAssert.DoesNotContain(model, prog1);
+            CollectionAssert.Contains(model, prog2);
+            CollectionAssert.DoesNotContain(model, prog3);
+        }
+
+        [TestMethod]
+        public void Index_SearchByCaseInsenstive_ReturnsCorrectItems()
+        {
+            // Arrange
+
+            // Act
+            ViewResult result = _controller.Index("", "Er") as ViewResult;
+            var model = (List<ExperimentProgramme>)result.Model;
+            // Assert
+            CollectionAssert.Contains(model, prog1);
+            CollectionAssert.Contains(model, prog2);
+            CollectionAssert.DoesNotContain(model, prog3);
+        }
+        [TestMethod]
+        public void Index_SearchByCaseInsenstive_AndOrderBy_ReturnsCorrectItemsInCorrectOrder()
+        {
+            // Arrange
+
+            // Act
+            ViewResult result = _controller.Index("name_desc", "Er") as ViewResult;
+            var model = (List<ExperimentProgramme>)result.Model;
+            // Assert
+            CollectionAssert.Contains(model, prog1);
+            CollectionAssert.Contains(model, prog2);
+            CollectionAssert.DoesNotContain(model, prog3);
+            Assert.AreEqual(model[0], prog1);//is the first one in the ordered the list the correct one?
+            Assert.AreEqual(model[1], prog2);//is the last one in the ordered the list the correct one?
         }
         [TestMethod]
         public void ProgrammeDetailView_Is_Passed_Programme_Data()
@@ -166,7 +243,7 @@ namespace StatNav.UnitTests.Controllers
             //Act
             var result = (RedirectToRouteResult)_controller.Create(newProg);
             //get list of all programmes
-            List<ExperimentProgramme> progs = programmeRepository.LoadList(string.Empty);
+            List<ExperimentProgramme> progs = programmeRepository.LoadList(string.Empty, string.Empty);
 
             // Assert
             CollectionAssert.Contains(progs, newProg);
@@ -224,7 +301,7 @@ namespace StatNav.UnitTests.Controllers
             //Act           
             var result = (RedirectToRouteResult)_controller.Edit(editedProg);
             //get list of all programmes
-            List<ExperimentProgramme> progs = programmeRepository.LoadList(string.Empty);
+            List<ExperimentProgramme> progs = programmeRepository.LoadList(string.Empty, string.Empty);
 
             // Assert
             CollectionAssert.Contains(progs, editedProg);
@@ -264,11 +341,11 @@ namespace StatNav.UnitTests.Controllers
         public void DeleteProgrammeDeletesModel()
         {
             //Arrange
-           
+
             //Act           
             var result = (RedirectToRouteResult)_controller.DeleteConfirmed(1);
             //get list of all programmes
-            List<ExperimentProgramme> progs = programmeRepository.LoadList(string.Empty);
+            List<ExperimentProgramme> progs = programmeRepository.LoadList(string.Empty, string.Empty);
 
             // Assert
             CollectionAssert.DoesNotContain(progs, prog2);

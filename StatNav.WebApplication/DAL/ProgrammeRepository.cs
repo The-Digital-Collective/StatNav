@@ -10,17 +10,18 @@ namespace StatNav.WebApplication.DAL
     public class ProgrammeRepository : GenericRepository<ExperimentProgramme>, IProgrammeRepository
     {
 
-        public override List<ExperimentProgramme> LoadList(string sortOrder)
+        public override List<ExperimentProgramme> LoadList(string sortOrder, string searchString)
         {
-            var programmes = Db.ExperimentProgrammes
-                               .Include(x => x.ExperimentStatus)
-                               .ToList();
-            return SortList(programmes, sortOrder);
+            IQueryable<ExperimentProgramme> programmes = Db.ExperimentProgrammes
+                               .Include(x => x.ExperimentStatus);
+
+            programmes = ProgrammeLogic.FilterProgrammes(programmes, searchString);
+            return SortList(programmes.ToList(), sortOrder);
         }
 
         public List<ExperimentProgramme> SortList(List<ExperimentProgramme> programmes, string sortOrder)
         {
-            return programmes = ProgrammeLogic.SortProgrammes(programmes, sortOrder);
+            return ProgrammeLogic.SortProgrammes(programmes, sortOrder);
         }
 
         public override ExperimentProgramme Load(int id)

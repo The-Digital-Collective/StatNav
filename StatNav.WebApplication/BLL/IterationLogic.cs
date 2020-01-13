@@ -1,11 +1,20 @@
 ﻿using StatNav.WebApplication.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace StatNav.WebApplication.BLL
 {
-    public class IterationLogic
+    public static class IterationLogic
     {
+        public static IQueryable<ExperimentIteration> FilterIterations(IQueryable<ExperimentIteration> iterations, string searchString)
+        {
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                iterations = iterations.Where(x => x.IterationName.ToLower().Contains(searchString.ToLower()));
+            }
+            return iterations;
+        }
         public static List<ExperimentIteration> SortIterations(List<ExperimentIteration> iterationList, string sortOrder)
         {            
             IOrderedEnumerable<ExperimentIteration> sortedList;

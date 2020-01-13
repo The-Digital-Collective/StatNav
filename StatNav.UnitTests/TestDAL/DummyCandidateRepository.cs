@@ -16,10 +16,11 @@ namespace StatNav.UnitTests.TestData
         {
             dummyCandidates = candidates;
         }
-        public List<ExperimentCandidate> LoadList(string sortOrder)
+        public List<ExperimentCandidate> LoadList(string sortOrder, string searchString = "")
         {
-            
-            return SortList(dummyCandidates, sortOrder);
+            IQueryable<ExperimentCandidate> queryCandidates = dummyCandidates.AsQueryable();
+            queryCandidates = CandidateLogic.FilterCandidates(queryCandidates, searchString);
+            return SortList(queryCandidates.ToList(), sortOrder);
         }
         public List<ExperimentCandidate> SortList(List<ExperimentCandidate> candidates, string sortOrder)
         {

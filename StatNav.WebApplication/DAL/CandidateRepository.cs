@@ -9,16 +9,17 @@ namespace StatNav.WebApplication.DAL
 {
     public class CandidateRepository : GenericRepository<ExperimentCandidate>, ICandidateRepository
     {
-        public override List<ExperimentCandidate> LoadList(string sortOrder)
+        public override List<ExperimentCandidate> LoadList(string sortOrder, string searchString)
         {
-            List<ExperimentCandidate> candidates = Db.ExperimentCandidates.ToList();
-            return SortList(candidates, sortOrder);
+            IQueryable<ExperimentCandidate> candidates = Db.ExperimentCandidates;
+            candidates = CandidateLogic.FilterCandidates(candidates, searchString);
+            return SortList(candidates.ToList(), sortOrder);
 
         }
 
         public List<ExperimentCandidate> SortList(List<ExperimentCandidate> candidates, string sortOrder)
         {
-            return candidates = CandidateLogic.SortCandidates(candidates, sortOrder);
+            return CandidateLogic.SortCandidates(candidates, sortOrder);
         }
 
         public override ExperimentCandidate Load(int id)

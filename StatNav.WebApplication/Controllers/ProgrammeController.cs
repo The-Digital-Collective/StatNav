@@ -23,12 +23,12 @@ namespace StatNav.WebApplication.Controllers
             _pRepository = programmeRepository;
         }
 
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder, string searchString)
         {
             ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.StatusSortParm = sortOrder=="Status" ? "status_desc" : "Status";
             ViewBag.IdSortParm = sortOrder == "Id" ? "id_desc" : "Id";
-            List <ExperimentProgramme> progs = _pRepository.LoadList(sortOrder);
+            List <ExperimentProgramme> progs = _pRepository.LoadList(sortOrder, searchString);
             ViewBag.SelectedType = "Programme";
             return View(progs);
         }

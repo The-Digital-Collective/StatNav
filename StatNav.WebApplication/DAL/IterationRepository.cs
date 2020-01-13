@@ -9,15 +9,16 @@ namespace StatNav.WebApplication.DAL
 {
     public class IterationRepository : GenericRepository<ExperimentIteration>, IIterationRepository
     {       
-        public override List<ExperimentIteration> LoadList(string sortOrder)
+        public override List<ExperimentIteration> LoadList(string sortOrder, string searchString)
         {
-            List<ExperimentIteration> iterations = Db.ExperimentIterations.ToList();
-            return SortList(iterations, sortOrder);
+            IQueryable<ExperimentIteration> iterations = Db.ExperimentIterations;
+            iterations = IterationLogic.FilterIterations(iterations, searchString);
+            return SortList(iterations.ToList(), sortOrder);
         }
 
         public List<ExperimentIteration> SortList(List<ExperimentIteration> iterations, string sortOrder)
         {
-            return iterations = IterationLogic.SortIterations(iterations, sortOrder);
+            return IterationLogic.SortIterations(iterations, sortOrder);
         }
         public override ExperimentIteration Load(int id)
         {
