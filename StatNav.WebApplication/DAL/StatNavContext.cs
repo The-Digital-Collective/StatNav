@@ -6,7 +6,7 @@ namespace StatNav.WebApplication.DAL
 {
     public class StatNavContext: DbContext
     {
-        public StatNavContext() : base("StatNavContext")
+        public StatNavContext() : base("WebAppContext")
         {
         }
 
