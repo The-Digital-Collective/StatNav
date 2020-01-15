@@ -15,7 +15,7 @@ namespace StatNav.IntegrationTests
     [TestClass]
     public class IntegrationTest
     {
-        private string _webSiteUrl = "https://www.***REMOVED***/";
+        private string _webSiteUrl = "https://www.worldvision.org.uk/";
         private RemoteWebDriver _browserDriver;
         public TestContext TestContext { get; set; }
 
