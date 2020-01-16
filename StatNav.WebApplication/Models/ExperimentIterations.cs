@@ -28,7 +28,15 @@ namespace StatNav.WebApplication.Models
         public DateTime StartDateTime { get; set; }
 
         [DataType(DataType.Date), UIHint("DatePicker"), Display(Name = "End Date")]
-        public DateTime EndDateTime { get; set; }
+        public DateTime EndDateTime { get; set; }        
+
+        [DataType(DataType.MultilineText)]
+        [Display(Name = "Success Outcome")]
+        public string SuccessOutcome { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        [Display(Name = "Failure Outcome")]
+        public string FailureOutcome { get; set; }
 
         [ForeignKey("ExperimentIterationId")]
         public ICollection<ExperimentCandidate> ExperimentCandidates { get; set; }

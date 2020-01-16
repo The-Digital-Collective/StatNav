@@ -143,6 +143,7 @@ namespace StatNav.WebApplication.Controllers
         {
             ViewBag.MetricModels = _pRepository.GetMetricModels(); 
             ViewBag.ExperimentStatuses = _pRepository.GetStatuses();
+            ViewBag.Methods = _pRepository.GetMethods();
         }
     }
 }

@@ -7,13 +7,13 @@ namespace StatNav.WebApplication.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-    public sealed partial class UpdateProgrammeClass : IMigrationMetadata
+    public sealed partial class MethodId : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UpdateProgrammeClass));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(MethodId));
         
         string IMigrationMetadata.Id
         {
-            get { return "202001091025486_UpdateProgrammeClass"; }
+            get { return "202001161110138_MethodId"; }
         }
         
         string IMigrationMetadata.Source

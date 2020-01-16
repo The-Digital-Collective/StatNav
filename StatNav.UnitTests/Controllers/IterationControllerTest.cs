@@ -249,6 +249,19 @@ namespace StatNav.UnitTests.Controllers
         }
 
         [TestMethod]
+        public void CreateView_CorrectViewModelsReturned()
+        {
+            // Arrange
+
+            // Act
+            ViewResult result = _controller.Create() as ViewResult;
+
+            // Assert           
+            Assert.AreEqual(((IList<ExperimentProgramme>)result.ViewBag.ExperimentProgrammes).Count, iterationRepository.GetProgrammes().Count);
+            Assert.AreEqual(((IList<ExperimentProgramme>)result.ViewBag.ExperimentProgrammes).GetType(), iterationRepository.GetProgrammes().GetType());
+        }
+
+        [TestMethod]
         public void CreateWithProgrammeIdReturns_ModelWithProgrammeId()
         {
             // Arrange
@@ -319,6 +332,20 @@ namespace StatNav.UnitTests.Controllers
             Assert.AreEqual("Edit", result.ViewBag.Action);
             Assert.AreEqual("Edit", result.ViewName);
         }
+
+        [TestMethod]
+        public void EditView_CorrectViewModelsReturned()
+        {
+            // Arrange
+
+            // Act
+            ViewResult result = _controller.Edit(1) as ViewResult;
+
+            // Assert           
+            Assert.AreEqual(((IList<ExperimentProgramme>)result.ViewBag.ExperimentProgrammes).Count, iterationRepository.GetProgrammes().Count);
+            Assert.AreEqual(((IList<ExperimentProgramme>)result.ViewBag.ExperimentProgrammes).GetType(), iterationRepository.GetProgrammes().GetType());
+        }
+
 
         [TestMethod]
         public void EditIterationEditsModel()

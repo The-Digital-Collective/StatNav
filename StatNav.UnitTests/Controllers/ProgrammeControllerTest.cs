@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StatNav.WebApplication.Controllers;
 using System.Web.Mvc;
-using Moq;
-using StatNav.WebApplication.DAL;
 using StatNav.WebApplication.Models;
 using StatNav.UnitTests.TestData;
 
@@ -232,7 +229,22 @@ namespace StatNav.UnitTests.Controllers
             Assert.AreEqual("Edit", result.ViewName);
         }
 
+        [TestMethod]
+        public void CreateView_CorrectViewModelsReturned()
+        {
+            // Arrange
 
+            // Act
+            ViewResult result = _controller.Create() as ViewResult;
+
+            // Assert
+            Assert.AreEqual(((IList<MetricModel>)result.ViewBag.MetricModels).Count, programmeRepository.GetMetricModels().Count);
+            Assert.AreEqual(((IList<MetricModel>)result.ViewBag.MetricModels).GetType(), programmeRepository.GetMetricModels().GetType());
+            Assert.AreEqual(((IList<ExperimentStatus>)result.ViewBag.ExperimentStatuses).Count, programmeRepository.GetStatuses().Count);
+            Assert.AreEqual(((IList<ExperimentStatus>)result.ViewBag.ExperimentStatuses).GetType(), programmeRepository.GetStatuses().GetType());
+            Assert.AreEqual(((IList<Method>)result.ViewBag.Methods).Count, programmeRepository.GetMethods().Count);
+            Assert.AreEqual(((IList<Method>)result.ViewBag.Methods).GetType(), programmeRepository.GetMethods().GetType());
+        }
 
         [TestMethod]
         public void CreateValidProgramme()
@@ -291,6 +303,24 @@ namespace StatNav.UnitTests.Controllers
             // Assert
             Assert.AreEqual("Edit", result.ViewBag.Action);
             Assert.AreEqual("Edit", result.ViewName);
+        }
+
+        [TestMethod]
+        public void EditView_CorrectViewModelsReturned()
+        {
+            // Arrange
+
+            // Act
+            ViewResult result = _controller.Edit(1) as ViewResult;
+
+            // Assert
+            Assert.AreEqual(((IList<MetricModel>)result.ViewBag.MetricModels).Count, programmeRepository.GetMetricModels().Count);
+            Assert.AreEqual(((IList<MetricModel>)result.ViewBag.MetricModels).GetType(), programmeRepository.GetMetricModels().GetType());
+            Assert.AreEqual(((IList<ExperimentStatus>)result.ViewBag.ExperimentStatuses).Count, programmeRepository.GetStatuses().Count);
+            Assert.AreEqual(((IList<ExperimentStatus>)result.ViewBag.ExperimentStatuses).GetType(), programmeRepository.GetStatuses().GetType());
+            Assert.AreEqual(((IList<Method>)result.ViewBag.Methods).Count, programmeRepository.GetMethods().Count);
+            Assert.AreEqual(((IList<Method>)result.ViewBag.Methods).GetType(), programmeRepository.GetMethods().GetType());
+
         }
 
         [TestMethod]

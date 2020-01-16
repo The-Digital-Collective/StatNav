@@ -13,10 +13,11 @@ namespace StatNav.WebApplication.Interfaces
         void Remove(int id);
 
     }
-    public interface IProgrammeRepository : IRepository<ExperimentProgramme> 
+    public interface IProgrammeRepository : IRepository<ExperimentProgramme>
     {
         IList<MetricModel> GetMetricModels();
         IList<ExperimentStatus> GetStatuses();
+        IList<Method> GetMethods();
         List<ExperimentProgramme> SortList(List<ExperimentProgramme> programmes, string sortOrder);
     }
     public interface IIterationRepository : IRepository<ExperimentIteration>

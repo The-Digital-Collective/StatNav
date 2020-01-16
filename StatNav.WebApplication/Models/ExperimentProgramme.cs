@@ -32,8 +32,11 @@ namespace StatNav.WebApplication.Models
         [DataType(DataType.MultilineText)]
         public string Hypothesis { get; set; }
 
-        [DataType(DataType.MultilineText)]
-        public string Method { get; set; }
+        [ForeignKey("ProgrammeMethod")]
+        [Display(Name = "Method")]
+        public int MethodId { get; set; }
+
+        public Method ProgrammeMethod { get; set; }
 
         [ForeignKey("ProgrammeTargetMetricModel")]
         [Display(Name = "Target Metric")]
@@ -51,15 +54,7 @@ namespace StatNav.WebApplication.Models
         public MetricModel ProgrammeImpactMetricModel { get; set; }
 
         [Display(Name = "Impact Value")]
-        public float ImpactValue { get; set; }
-
-        [DataType(DataType.MultilineText)]
-        [Display(Name = "Success Outcome")]
-        public string SuccessOutcome { get; set; }
-
-        [DataType(DataType.MultilineText)]
-        [Display(Name = "Failure Outcome")]
-        public string FailureOutcome { get; set; }
+        public float ImpactValue { get; set; }        
 
         [ForeignKey("ExperimentStatus")]
         [Display(Name = "Status")]

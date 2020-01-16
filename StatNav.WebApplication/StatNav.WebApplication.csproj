@@ -246,39 +246,20 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IRepository.cs" />
-    <Compile Include="Migrations\201912161143163_InitialCreate.cs" />
-    <Compile Include="Migrations\201912161143163_InitialCreate.designer.cs">
-      <DependentUpon>201912161143163_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\202001161039126_RecreateDB.cs" />
+    <Compile Include="Migrations\202001161039126_RecreateDB.designer.cs">
+      <DependentUpon>202001161039126_RecreateDB.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201912161304144_MoreTables.cs" />
-    <Compile Include="Migrations\201912161304144_MoreTables.designer.cs">
-      <DependentUpon>201912161304144_MoreTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912191001479_UpdateIterationTable.cs" />
-    <Compile Include="Migrations\201912191001479_UpdateIterationTable.designer.cs">
-      <DependentUpon>201912191001479_UpdateIterationTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912200830429_CandidateTable.cs" />
-    <Compile Include="Migrations\201912200830429_CandidateTable.designer.cs">
-      <DependentUpon>201912200830429_CandidateTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912231026380_RemainingTables.cs" />
-    <Compile Include="Migrations\201912231026380_RemainingTables.designer.cs">
-      <DependentUpon>201912231026380_RemainingTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001091025486_UpdateProgrammeClass.cs" />
-    <Compile Include="Migrations\202001091025486_UpdateProgrammeClass.designer.cs">
-      <DependentUpon>202001091025486_UpdateProgrammeClass.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001091038351_UpdateIterationAndCandidateClass.cs" />
-    <Compile Include="Migrations\202001091038351_UpdateIterationAndCandidateClass.designer.cs">
-      <DependentUpon>202001091038351_UpdateIterationAndCandidateClass.cs</DependentUpon>
+    <Compile Include="Migrations\202001161110138_MethodId.cs" />
+    <Compile Include="Migrations\202001161110138_MethodId.designer.cs">
+      <DependentUpon>202001161110138_MethodId.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ExperimentIterations.cs" />
     <Compile Include="Models\ExperimentCandidate.cs" />
     <Compile Include="Models\ExperimentProgramme.cs" />
     <Compile Include="Models\ExperimentStatus.cs" />
+    <Compile Include="Models\Method.cs" />
     <Compile Include="Models\MetricCandidateResult.cs" />
     <Compile Include="Models\MetricModel.cs" />
     <Compile Include="Models\MetricModelStage.cs" />
@@ -565,29 +546,6 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201912161143163_InitialCreate.resx">
-      <DependentUpon>201912161143163_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912161304144_MoreTables.resx">
-      <DependentUpon>201912161304144_MoreTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912191001479_UpdateIterationTable.resx">
-      <DependentUpon>201912191001479_UpdateIterationTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912200830429_CandidateTable.resx">
-      <DependentUpon>201912200830429_CandidateTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912231026380_RemainingTables.resx">
-      <DependentUpon>201912231026380_RemainingTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001091025486_UpdateProgrammeClass.resx">
-      <DependentUpon>202001091025486_UpdateProgrammeClass.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001091038351_UpdateIterationAndCandidateClass.resx">
-      <DependentUpon>202001091038351_UpdateIterationAndCandidateClass.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
@@ -595,6 +553,14 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202001161039126_RecreateDB.resx">
+      <DependentUpon>202001161039126_RecreateDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001161110138_MethodId.resx">
+      <DependentUpon>202001161110138_MethodId.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -7,13 +7,13 @@ namespace StatNav.WebApplication.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-    public sealed partial class UpdateIterationAndCandidateClass : IMigrationMetadata
+    public sealed partial class RecreateDB : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UpdateIterationAndCandidateClass));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(RecreateDB));
         
         string IMigrationMetadata.Id
         {
-            get { return "202001091038351_UpdateIterationAndCandidateClass"; }
+            get { return "202001161039126_RecreateDB"; }
         }
         
         string IMigrationMetadata.Source

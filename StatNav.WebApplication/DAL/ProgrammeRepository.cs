@@ -62,5 +62,12 @@ namespace StatNav.WebApplication.DAL
             .OrderBy(x => x.DisplayOrder).ToList();
             return es;
         }
+
+        public IList<Method> GetMethods()
+        {
+            IList<Method> m = Db.Method
+            .OrderBy(x => x.SortOrder).ToList();
+            return m;
+        }
     }
 }

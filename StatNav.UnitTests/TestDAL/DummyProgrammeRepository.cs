@@ -62,5 +62,11 @@ namespace StatNav.UnitTests.TestData
             ExperimentStatus s2 = new ExperimentStatus { Id = 1, StatusName = "Scheduled" };
             return new List<ExperimentStatus> { s1, s2 };
         }
+
+        public IList<Method> GetMethods()
+        {
+            Method m1 = new Method { Id = 0, Title = "Randomised Control Trial",SortOrder=1 };          
+            return new List<Method> { m1};
+        }
     }
 }
