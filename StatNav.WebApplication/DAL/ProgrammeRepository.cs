@@ -19,6 +19,14 @@ namespace StatNav.WebApplication.DAL
             return SortList(programmes.ToList(), sortOrder);
         }
 
+        public List<ExperimentIteration> GetIterations(int Id)
+        {            
+            return Db.ExperimentIterations
+                     .Where(x => x.ExperimentProgrammeId == Id)
+                     .OrderBy(i => i.IterationName)
+                     .ToList();
+        }
+
         public List<ExperimentProgramme> SortList(List<ExperimentProgramme> programmes, string sortOrder)
         {
             return ProgrammeLogic.SortProgrammes(programmes, sortOrder);
@@ -32,6 +40,7 @@ namespace StatNav.WebApplication.DAL
                                               .Include(x => x.ProgrammeTargetMetricModel)
                                               .Include(x => x.ProgrammeImpactMetricModel)
                                               .Include(x => x.ExperimentIterations)
+                                              .Include(x=>x.ProgrammeMethod)
                                               .FirstOrDefault();
 
             return programme;
@@ -68,6 +77,6 @@ namespace StatNav.WebApplication.DAL
             IList<Method> m = Db.Method
             .OrderBy(x => x.SortOrder).ToList();
             return m;
-        }
+        }       
     }
 }

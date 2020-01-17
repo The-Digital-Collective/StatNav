@@ -68,5 +68,10 @@ namespace StatNav.UnitTests.TestData
             Method m1 = new Method { Id = 0, Title = "Randomised Control Trial",SortOrder=1 };          
             return new List<Method> { m1};
         }
+
+        public List<ExperimentIteration> GetIterations(int Id)
+        {
+            return null;
+        }
     }
 }

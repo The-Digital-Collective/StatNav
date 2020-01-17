@@ -2,23 +2,23 @@
     $(".datefield").datepicker({ dateFormat: 'dd/mm/yy', changeYear: true });
 });
 
-$(function () {
-    $.validator.addMethod('date',
-        function (value, element) {
-            if (this.optional(element)) {
-                return true;
-            }
-            var ok = true;
-            try {
-                $.datepicker.parseDate('dd/mm/yy', value);
-            }
-            catch (err) {
-                ok = false;
-            }
-            return ok;
-        });
-    $(".datefield").datepicker({ dateFormat: 'dd/mm/yy', changeYear: true });
-});
+//$(function () {
+//    $.validator.addMethod('date',
+//        function (value, element) {
+//            if (this.optional(element)) {
+//                return true;
+//            }
+//            var ok = true;
+//            try {
+//                $.datepicker.parseDate('dd/mm/yy', value);
+//            }
+//            catch (err) {
+//                ok = false;
+//            }
+//            return ok;
+//        });
+//    $(".datefield").datepicker({ dateFormat: 'dd/mm/yy', changeYear: true });
+//});
 
 // ensure all ajax requests are set with a unique id to prevent browser caching
 $.ajaxSetup({ cache: false });
@@ -38,3 +38,24 @@ $(document).ajaxError(function (event, jqXHR, settings, exception) {
         window.location.replace(url + "Account/Login?timeout");
     }
 });
+
+var isSubmitting = false
+
+$(document).ready(function () {
+    
+    var form = $('form');
+    if (form.length > 0) {
+        $('form').submit(function () {
+            isSubmitting = true
+        })
+
+        $('form').data('initial-state', $('form').serialize());
+
+        $(window).on('beforeunload', function () {
+
+            if (!isSubmitting && $('form').serialize() != $('form').data('initial-state')) {
+                return 'You have unsaved changes which will not be saved.'
+            }
+        });
+    }
+})

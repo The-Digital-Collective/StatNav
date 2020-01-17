@@ -13,9 +13,9 @@ namespace StatNav.WebApplication.Controllers
         private readonly IProgrammeRepository _pRepository;
 
         public ProgrammeController()
-            : this( new ProgrammeRepository())
+            : this(new ProgrammeRepository())
         {
-            
+
         }
 
         public ProgrammeController(IProgrammeRepository programmeRepository)
@@ -26,9 +26,9 @@ namespace StatNav.WebApplication.Controllers
         public ActionResult Index(string sortOrder, string searchString)
         {
             ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.StatusSortParm = sortOrder=="Status" ? "status_desc" : "Status";
+            ViewBag.StatusSortParm = sortOrder == "Status" ? "status_desc" : "Status";
             ViewBag.IdSortParm = sortOrder == "Id" ? "id_desc" : "Id";
-            List <ExperimentProgramme> progs = _pRepository.LoadList(sortOrder, searchString);
+            List<ExperimentProgramme> progs = _pRepository.LoadList(sortOrder, searchString);
             ViewBag.SelectedType = "Programme";
             return View(progs);
         }
@@ -97,10 +97,11 @@ namespace StatNav.WebApplication.Controllers
                 if (ModelState.IsValid)
                 {
                     _pRepository.Edit(editedProg);
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Edit", new { id = editedProg.Id });
                 }
                 ViewBag.Action = "Edit";
                 SetDDLs();
+                editedProg.ExperimentIterations = _pRepository.GetIterations(editedProg.Id);
                 return View("Edit", editedProg);
             }
             catch (Exception ex)
@@ -108,6 +109,7 @@ namespace StatNav.WebApplication.Controllers
                 ModelState.AddModelError("", ex.Message);
                 ViewBag.Action = "Edit";
                 SetDDLs();
+                editedProg.ExperimentIterations = _pRepository.GetIterations(editedProg.Id);
                 return View("Edit", editedProg);
             }
         }
@@ -141,7 +143,7 @@ namespace StatNav.WebApplication.Controllers
 
         private void SetDDLs()
         {
-            ViewBag.MetricModels = _pRepository.GetMetricModels(); 
+            ViewBag.MetricModels = _pRepository.GetMetricModels();
             ViewBag.ExperimentStatuses = _pRepository.GetStatuses();
             ViewBag.Methods = _pRepository.GetMethods();
         }

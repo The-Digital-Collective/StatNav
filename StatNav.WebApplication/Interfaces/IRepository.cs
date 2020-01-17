@@ -19,6 +19,7 @@ namespace StatNav.WebApplication.Interfaces
         IList<ExperimentStatus> GetStatuses();
         IList<Method> GetMethods();
         List<ExperimentProgramme> SortList(List<ExperimentProgramme> programmes, string sortOrder);
+        List<ExperimentIteration> GetIterations(int Id);
     }
     public interface IIterationRepository : IRepository<ExperimentIteration>
     {

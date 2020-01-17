@@ -35,7 +35,7 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.ActionLink(item.ProgrammeName, "Details", "Programme", new { id = item.Id }, null)
+                @Html.ActionLink(item.ProgrammeName, "Edit", "Programme", new { id = item.Id }, null)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ExperimentStatus.StatusName)
