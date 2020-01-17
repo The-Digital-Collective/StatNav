@@ -328,14 +328,15 @@ namespace StatNav.UnitTests.Controllers
         {
             //Arrange
             ExperimentProgramme editedProg = new ExperimentProgramme { ProgrammeName = "ProgrammeEdited", Id = 1, ExperimentStatusId = 0, ProgrammeImpactMetricModelId = 0, ProgrammeTargetMetricModelId = 0 };
-            //Act           
+         
+            //Act
             var result = (RedirectToRouteResult)_controller.Edit(editedProg);
             //get list of all programmes
             List<ExperimentProgramme> progs = programmeRepository.LoadList(string.Empty, string.Empty);
 
             // Assert
             CollectionAssert.Contains(progs, editedProg);
-            Assert.AreEqual("Index", result.RouteValues["action"]);
+            Assert.AreEqual("Edit", result.RouteValues["action"]);
         }
 
         [TestMethod]
