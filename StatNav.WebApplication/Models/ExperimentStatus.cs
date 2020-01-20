@@ -1,5 +1,4 @@
-﻿
-namespace StatNav.WebApplication.Models
+﻿namespace StatNav.WebApplication.Models
 {
     public class ExperimentStatus
     {
