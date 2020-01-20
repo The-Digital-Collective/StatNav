@@ -2,11 +2,35 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-      "servers_statnav_sandbox_sql_server_name": {
-          "value": null
-      },
-      "servers_statnav_sandbox_sql_server_externalid": {
-          "value": null
-      }
+    "hostingPlanName": {
+      "value": "Statnav-Sandbox-webapp"
+    },
+    "administratorLogin": {
+        "reference": {
+            "keyVault": {
+              "id": "/subscriptions/c8efb8b5-6119-46c8-9ed3-e0bf71b66ce7/resourceGroups/Statnav-Sandbox-RG/providers/Microsoft.KeyVault/vaults/Statnav-Sandbox-Vault"
+            },
+            "secretName": "statnav-sand-databaseadministratorLogin"
+      
+          }
+    },
+    "administratorLoginPassword": {
+        "reference": {
+            "keyVault": {
+              "id": "/subscriptions/c8efb8b5-6119-46c8-9ed3-e0bf71b66ce7/resourceGroups/Statnav-Sandbox-RG/providers/Microsoft.KeyVault/vaults/Statnav-Sandbox-Vault"
+            },
+            "secretName": "statnav-sandbox-administratorLoginPassword"
+      
+          }
+    },
+    "databaseName": {
+      "value": "statnavsandboxdb"
+    },
+    "webSiteName": {
+      "value": "Statnav-Sandbox-webapp"
+    },
+    "sqlserverName": {
+      "value": "statnav-sandbox-sql-server"
+    }
   }
-}s
+}
