@@ -57,22 +57,21 @@ namespace StatNav.WebApplication.Controllers
         [HttpPost]
         public ActionResult Create(ExperimentCandidate newCandidate)
         {
+            string pageAction = "Create";
             try
             {
                 if (ModelState.IsValid)
                 {
                     _cRepository.Add(newCandidate);
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Edit", new { id = newCandidate.Id });
                 }
-                ViewBag.Action = "Create";
-                SetDDLs();
+                returnModelToEdit(pageAction);
                 return View("Edit", newCandidate);
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                ViewBag.Action = "Create";
-                SetDDLs();
+                returnModelToEdit(pageAction);
                 return View("Edit", newCandidate);
             }
         }
@@ -94,23 +93,22 @@ namespace StatNav.WebApplication.Controllers
         [HttpPost]
         public ActionResult Edit(ExperimentCandidate editedCandidate)
         {
+            string pageAction = "Edit";
             try
             {
                 if (ModelState.IsValid)
                 {
                     _cRepository.Edit(editedCandidate);
-                    return RedirectToAction("Index");
+                    return RedirectToAction(pageAction, new { id = editedCandidate.Id });
                 }
-                ViewBag.Action = "Edit";
-                SetDDLs();
-                return View("Edit", editedCandidate);
+                returnModelToEdit(pageAction);
+                return View(pageAction, editedCandidate);
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                ViewBag.Action = "Edit";
-                SetDDLs();
-                return View("Edit", editedCandidate);
+                returnModelToEdit(pageAction);
+                return View(pageAction, editedCandidate);
             }
         }
 
@@ -145,6 +143,12 @@ namespace StatNav.WebApplication.Controllers
         {
             ViewBag.MetricModels = _cRepository.GetMetricModels();
             ViewBag.ExperimentIterations = _cRepository.GetIterations();
+        }
+
+        private void returnModelToEdit(string action)
+        {
+            ViewBag.Action = action;
+            SetDDLs();           
         }
     }
 }

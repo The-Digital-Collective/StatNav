@@ -23,7 +23,7 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.ActionLink(item.IterationName, "Details", "Iteration", new { id = item.Id }, null)
+                @Html.ActionLink(item.IterationName, "Edit", "Iteration", new { id = item.Id }, null)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.StartDateTime)

@@ -55,22 +55,21 @@ namespace StatNav.WebApplication.Controllers
         [HttpPost]
         public ActionResult Create(ExperimentProgramme newProg)
         {
+            string pageAction = "Create";
             try
             {
                 if (ModelState.IsValid)
                 {
                     _pRepository.Add(newProg);
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Edit", new { id = newProg.Id });
                 }
-                ViewBag.Action = "Create";
-                SetDDLs();
+                returnModelToEdit(pageAction, ref newProg);
                 return View("Edit", newProg);
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                ViewBag.Action = "Create";
-                SetDDLs();
+                returnModelToEdit(pageAction, ref newProg);
                 return View("Edit", newProg);
             }
         }
@@ -92,25 +91,22 @@ namespace StatNav.WebApplication.Controllers
         [HttpPost]
         public ActionResult Edit(ExperimentProgramme editedProg)
         {
+            string pageAction = "Edit";
             try
             {
                 if (ModelState.IsValid)
                 {
                     _pRepository.Edit(editedProg);
-                    return RedirectToAction("Edit", new { id = editedProg.Id });
+                    return RedirectToAction(pageAction, new { id = editedProg.Id });
                 }
-                ViewBag.Action = "Edit";
-                SetDDLs();
-                editedProg.ExperimentIterations = _pRepository.GetIterations(editedProg.Id);
-                return View("Edit", editedProg);
+                returnModelToEdit(pageAction, ref editedProg);
+                return View(pageAction, editedProg);
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                ViewBag.Action = "Edit";
-                SetDDLs();
-                editedProg.ExperimentIterations = _pRepository.GetIterations(editedProg.Id);
-                return View("Edit", editedProg);
+                returnModelToEdit(pageAction, ref editedProg);
+                return View(pageAction, editedProg);
             }
         }
 
@@ -146,6 +142,16 @@ namespace StatNav.WebApplication.Controllers
             ViewBag.MetricModels = _pRepository.GetMetricModels();
             ViewBag.ExperimentStatuses = _pRepository.GetStatuses();
             ViewBag.Methods = _pRepository.GetMethods();
+        }
+
+        private void returnModelToEdit(string action, ref ExperimentProgramme ep)
+        {
+            ViewBag.Action = action;
+            SetDDLs();
+            if (action == "Edit")
+            {
+                ep.ExperimentIterations = _pRepository.GetIterations(ep.Id);
+            }
         }
     }
 }

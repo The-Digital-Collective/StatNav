@@ -259,7 +259,7 @@ namespace StatNav.UnitTests.Controllers
 
             // Assert
             CollectionAssert.Contains(progs, newProg);
-            Assert.AreEqual("Index", result.RouteValues["action"]);
+            Assert.AreEqual("Edit", result.RouteValues["action"]);
 
         }
 

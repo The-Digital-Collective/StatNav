@@ -30,6 +30,14 @@ namespace StatNav.WebApplication.DAL
 
             return iteration;
         }
+
+        public List<ExperimentCandidate> GetCandidates(int Id)
+        {
+            return Db.ExperimentCandidates
+                     .Where(x => x.ExperimentIterationId == Id)
+                     .OrderBy(i => i.CandidateName)
+                     .ToList();
+        }
         public override void Remove(int id)
         {
             ExperimentIteration iteration = Db.ExperimentIterations

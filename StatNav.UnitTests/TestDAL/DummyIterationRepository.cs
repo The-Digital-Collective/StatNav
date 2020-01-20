@@ -55,5 +55,10 @@ namespace StatNav.UnitTests.TestData
             ExperimentProgramme prog2 = new ExperimentProgramme() { ProgrammeName = "Programme2", Id = 2 };
             return new List<ExperimentProgramme> { prog1, prog2 };
         }
+
+        public List<ExperimentCandidate> GetCandidates(int id)
+        {
+            return null;
+        }
     }
 }

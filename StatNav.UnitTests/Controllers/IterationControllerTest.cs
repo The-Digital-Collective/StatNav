@@ -287,7 +287,7 @@ namespace StatNav.UnitTests.Controllers
 
             // Assert
             CollectionAssert.Contains(progs, newIteration);
-            Assert.AreEqual("Index", result.RouteValues["action"]);
+            Assert.AreEqual("Edit", result.RouteValues["action"]);
 
         }
 
@@ -359,7 +359,7 @@ namespace StatNav.UnitTests.Controllers
 
             // Assert
             CollectionAssert.Contains(progs, editedIteration);
-            Assert.AreEqual("Index", result.RouteValues["action"]);
+            Assert.AreEqual("Edit", result.RouteValues["action"]);
         }
 
         [TestMethod]

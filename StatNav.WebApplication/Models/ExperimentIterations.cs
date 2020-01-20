@@ -22,6 +22,7 @@ namespace StatNav.WebApplication.Models
         [Display(Name = "Required Duration For Significance")]
         public string RequiredDurationForSignificance { get; set; }
 
+        [Display(Name = "Iteration Number")]
         public int IterationNumber { get; set; }
 
         [DataType(DataType.Date), UIHint("DatePicker"), Display(Name = "Start Date")]
