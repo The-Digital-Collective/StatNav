@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\CandidateControllerTest.cs" />
+    <Compile Include="Controllers\DashboardControllerTest.cs" />
     <Compile Include="Controllers\IterationControllerTest.cs" />
     <Compile Include="Controllers\ProgrammeControllerTest.cs" />
     <Compile Include="ModelValidation\ProgrammeValidationTest.cs" />

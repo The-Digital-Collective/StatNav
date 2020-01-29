@@ -232,6 +232,7 @@
     <Compile Include="BLL\ProgrammeLogic.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\CandidateController.cs" />
     <Compile Include="Controllers\IterationController.cs" />
@@ -531,11 +532,10 @@
     <Content Include="Views\Candidate\Edit.cshtml" />
     <Content Include="Views\Candidate\Index.cshtml" />
     <Content Include="Views\Shared\_SaveButton.cshtml" />
-    <Content Include="Views\Iteration\_listHeadingsSortable.cshtml" />
-    <Content Include="Views\Iteration\_listHeadingsOrdinary.cshtml" />
     <Content Include="Views\Candidate\_listHeadingsOrdinary.cshtml" />
     <Content Include="Views\Candidate\_listHeadingsSortable.cshtml" />
     <Content Include="Views\Shared\_searchBox.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

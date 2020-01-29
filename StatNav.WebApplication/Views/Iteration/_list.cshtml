@@ -7,11 +7,33 @@
     <tr>
         @if (ViewBag.Sortable != null)
         {
-            @Html.Partial("../Iteration/_listHeadingsSortable", Model)
+            <th scope="col">
+                <a href="@Url.Action("Index","Iteration",new { sortOrder = ViewBag.IdSortParm })">ID <span class="glyphicon glyphicon-sort"></span></a>
+            </th>
+            <th scope="col">
+                <a href="@Url.Action("Index","Iteration",new { sortOrder = ViewBag.NameSortParm })">Iteration Name <span class="glyphicon glyphicon-sort"></span></a>
+            </th>
+            <th scope="col">
+                <a href="@Url.Action("Index","Iteration",new { sortOrder = ViewBag.StartDateSortParm })">Start Date <span class="glyphicon glyphicon-sort"></span></a>
+            </th>
+            <th scope="col">
+                <a href="@Url.Action("Index","Iteration",new { sortOrder = ViewBag.EndDateSortParm })">End Date <span class="glyphicon glyphicon-sort"></span></a>
+            </th>
         }
         else
         {
-            @Html.Partial("../Iteration/_listHeadingsOrdinary", Model)
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.IterationName)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.StartDateTime)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.EndDateTime)
+            </th>
         }
 
     </tr>

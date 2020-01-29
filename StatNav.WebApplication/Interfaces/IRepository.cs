@@ -25,7 +25,7 @@ namespace StatNav.WebApplication.Interfaces
     {
         IList<ExperimentProgramme> GetProgrammes();
         List<ExperimentIteration> SortList(List<ExperimentIteration> iterations, string sortOrder);
-        List<ExperimentCandidate> GetCandidates(int id);
+        List<ExperimentCandidate> GetCandidates(int Id);
     }
 
     public interface ICandidateRepository : IRepository<ExperimentCandidate>
