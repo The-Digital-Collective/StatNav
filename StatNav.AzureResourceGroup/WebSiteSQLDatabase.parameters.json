@@ -18,7 +18,7 @@
             "keyVault": {
               "id": "/subscriptions/c8efb8b5-6119-46c8-9ed3-e0bf71b66ce7/resourceGroups/Keyvault-RG/providers/Microsoft.KeyVault/vaults/KeyVault-Digital-Collect"
             },
-            "secretName": "PWD-Statnav-Sandbox-Clone-Secret "
+            "secretName": "PWD-Statnav-Sandbox-Clone-Secret"
           }
     },
     "databaseName": {
