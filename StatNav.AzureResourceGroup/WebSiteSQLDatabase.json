@@ -179,20 +179,20 @@
               "type": "SQLAzure"
             }
           }
-        }
+        },
+          {
+            "name": "appsettings",
+            "type": "Microsoft.Web/sites/config",
+             "apiVersion": "2018-11-01",
+             "properties": {
+               "ida:AADInstance": "https://login.microsoftonline.com/",
+               "ida:ClientId": "30175788-62ab-4ec9-be48-50d28d152ca0",
+               "ida:Domain": "martincampbelldigitalcollec.onmicrosoft.com",
+               "ida:PostLogoutRedirectUri":"https://statnav-sandbox-clone-webapp.azurewebsites.net/",
+               "ida:TenantId":"25c60445-d40d-4a37-a8c2-b2fad3ab92b9"
+             }
+         }
       ]
-    },
-    {
-  	 	"name": "appsettings",
-  	 	"type": "Microsoft.Web/sites/config",
-        "apiVersion": "2015-08-01",
-        "properties": {
-          "ida:AADInstance": "https://login.microsoftonline.com/",
-          "ida:ClientId": "30175788-62ab-4ec9-be48-50d28d152ca0",
-          "ida:Domain": "martincampbelldigitalcollec.onmicrosoft.com",
-          "ida:PostLogoutRedirectUri":"https://statnav-sandbox-clone-webapp.azurewebsites.net/",
-          "ida:TenantId":"25c60445-d40d-4a37-a8c2-b2fad3ab92b9"
-        }
     }
   ]
 }
