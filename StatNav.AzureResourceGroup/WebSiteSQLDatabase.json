@@ -181,33 +181,18 @@
           }
         },
           {
-          "apiVersion": "2015-08-01",
-          "name": "web",
+          "name": "appsettings",
           "type": "Microsoft.Web/sites/config",
+          "apiVersion": "2018-11-01",
           "dependsOn": [
             "[resourceId('Microsoft.Web/Sites/', parameters('webSiteName'))]"
           ],
           "properties": {
-            "ida:AADInstance":
-              {
-                "value": "https://login.microsoftonline.com/"
-              },
-              "ida:ClientId":
-              {
-                "value": "30175788-62ab-4ec9-be48-50d28d152ca0"
-              },
-              "ida:Domain":
-              {
-                "value": "martincampbelldigitalcollec.onmicrosoft.com"
-              },
-              "ida:PostLogoutRedirectUri":
-              {
-                "value": "https://statnav-sandbox-clone-webapp.azurewebsites.net/"
-              },
-              "ida:TenantId":
-              {
-                "value": "25c60445-d40d-4a37-a8c2-b2fad3ab92b9"
-              }
+            "ida:AADInstance": "https://login.microsoftonline.com/",
+            "ida:ClientId": "30175788-62ab-4ec9-be48-50d28d152ca0",
+            "ida:Domain": "martincampbelldigitalcollec.onmicrosoft.com",
+            "ida:PostLogoutRedirectUri": "https://statnav-sandbox-clone-webapp.azurewebsites.net/",
+            "ida:TenantId": "25c60445-d40d-4a37-a8c2-b2fad3ab92b9"
           }
         }
       ]
