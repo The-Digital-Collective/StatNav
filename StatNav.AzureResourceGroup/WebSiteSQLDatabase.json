@@ -96,9 +96,6 @@
        },
       "ida:PostLogoutRedirectUri": {
         "type": "string"
-      },
-      "ida:TenantId": {
-        "type": "string"
       }
   },
   "variables": {
