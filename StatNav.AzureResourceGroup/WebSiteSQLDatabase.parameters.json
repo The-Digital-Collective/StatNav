@@ -3,14 +3,14 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "hostingPlanName": {
-      "value": "Statnav-Sandbox-Clone-webapp"
+      "value": "Statnav-Sandbox-webapp"
     },
     "administratorLogin": {
         "reference": {
             "keyVault": {
               "id": "/subscriptions/c8efb8b5-6119-46c8-9ed3-e0bf71b66ce7/resourceGroups/Keyvault-RG/providers/Microsoft.KeyVault/vaults/KeyVault-Digital-Collect"
             },
-            "secretName": "Login-Statnav-Sandbox-Clone-Secret"
+            "secretName": "Login-Statnav-Sandbox-Secret"
                 }
     },
     "administratorLoginPassword": {
@@ -18,7 +18,7 @@
             "keyVault": {
               "id": "/subscriptions/c8efb8b5-6119-46c8-9ed3-e0bf71b66ce7/resourceGroups/Keyvault-RG/providers/Microsoft.KeyVault/vaults/KeyVault-Digital-Collect"
             },
-            "secretName": "PWD-Statnav-Sandbox-Clone-Secret"
+            "secretName": "PWD-Statnav-Sandbox-Secret"
           }
     },
     "ida:AADInstance": {
@@ -26,7 +26,7 @@
               "keyVault": {
                 "id": "/subscriptions/c8efb8b5-6119-46c8-9ed3-e0bf71b66ce7/resourceGroups/Keyvault-RG/providers/Microsoft.KeyVault/vaults/KeyVault-Digital-Collect"
               },
-              "secretName": "AADInstance-Statnav-Sandbox-Clone"
+              "secretName": "Common-AADInstance-Digital-Collective"
             }
 		 },
       "ida:ClientId": {
@@ -34,7 +34,7 @@
             "keyVault": {
               "id": "/subscriptions/c8efb8b5-6119-46c8-9ed3-e0bf71b66ce7/resourceGroups/Keyvault-RG/providers/Microsoft.KeyVault/vaults/KeyVault-Digital-Collect"
             },
-            "secretName": "ClientId-Statnav-Sandbox-Clone"
+            "secretName": "Common-ClientId-Digital-Collective"
           }
     },
     "ida:Domain": {
@@ -42,7 +42,7 @@
             "keyVault": {
               "id": "/subscriptions/c8efb8b5-6119-46c8-9ed3-e0bf71b66ce7/resourceGroups/Keyvault-RG/providers/Microsoft.KeyVault/vaults/KeyVault-Digital-Collect"
             },
-            "secretName": "Domain-Statnav-Sandbox-Clone"
+            "secretName": "Common-Domain-MS"
           }
     },
     "ida:PostLogoutRedirectUri": {
@@ -50,17 +50,17 @@
             "keyVault": {
               "id": "/subscriptions/c8efb8b5-6119-46c8-9ed3-e0bf71b66ce7/resourceGroups/Keyvault-RG/providers/Microsoft.KeyVault/vaults/KeyVault-Digital-Collect"
             },
-            "secretName": "PostLogoutRedirectUri-Statnav-Sandbox-Clone"
+            "secretName": "PostLogoutRedirectUri-Statnav-Sandbox"
           }
     },
     "databaseName": {
-      "value": "Statnavsandboxclonedb"
+      "value": "StatNavDB"
     },
     "webSiteName": {
-      "value": "Statnav-Sandbox-Clone-WebApp"
+      "value": "statnav-sandbox-webapp"
     },
     "sqlserverName": {
-      "value": "statnav-sandbox-clone-sqlserver"
+      "value": "statnav-sandbox-sqlserver"
     }
   }
 }

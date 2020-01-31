@@ -85,11 +85,9 @@
     },
     "ida:AADInstance": {
         "type": "string"
-      },
-      
+      },      
       "ida:ClientId": {
         "type": "string"
-      
       },
       "ida:Domain":{
         "type": "string"
