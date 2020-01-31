@@ -209,7 +209,7 @@
 	          "ida:ClientId": "[parameters('ida:ClientId')]",
 	          "ida:Domain": "[parameters('ida:Domain')]",
 	          "ida:PostLogoutRedirectUri": "[parameters('ida:PostLogoutRedirectUri')]",
-	          "ida:TenantId": "[parameters('ida:TenantId')]"
+	          "ida:TenantId": "[subscription().tenantId]"
             }
           }
       ]
