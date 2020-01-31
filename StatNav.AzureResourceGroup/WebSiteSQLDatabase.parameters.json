@@ -60,7 +60,7 @@
       "value": "statnav-sandbox-webapp"
     },
     "sqlserverName": {
-      "value": "statnav-sandbox-sqlserver"
+      "value": "statnav-sandbox-sql-server"
     }
   }
 }
