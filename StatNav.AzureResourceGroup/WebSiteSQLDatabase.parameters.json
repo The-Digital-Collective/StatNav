@@ -3,22 +3,32 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "hostingPlanName": {
-      "value": "wvuk-statnav-hosting-plan"
+      "value": "Statnav-Sandbox-Clone-webapp"
     },
     "administratorLogin": {
-      "value": "gilbertn"
+        "reference": {
+            "keyVault": {
+              "id": "/subscriptions/c8efb8b5-6119-46c8-9ed3-e0bf71b66ce7/resourceGroups/Keyvault-RG/providers/Microsoft.KeyVault/vaults/KeyVault-Digital-Collect"
+            },
+            "secretName": "Login-Statnav-Sandbox-Clone-Secret"
+                }
     },
     "administratorLoginPassword": {
-      "value": "@statnav990"
+        "reference": {
+            "keyVault": {
+              "id": "/subscriptions/c8efb8b5-6119-46c8-9ed3-e0bf71b66ce7/resourceGroups/Keyvault-RG/providers/Microsoft.KeyVault/vaults/KeyVault-Digital-Collect"
+            },
+            "secretName": "PWD-Statnav-Sandbox-Clone-Secret"
+          }
     },
     "databaseName": {
-      "value": "StatNavDB"
+      "value": "Statnavsandboxclonedb"
     },
     "webSiteName": {
-      "value": "wvuk-statnav-webapp"
+      "value": "Statnav-Sandbox-Clone-WebApp"
     },
     "sqlserverName": {
-      "value": "wvuk-statnav-sql-server"
+      "value": "statnav-sandbox-clone-sqlserver"
     }
   }
 }
