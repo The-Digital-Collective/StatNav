@@ -21,6 +21,46 @@
             "secretName": "PWD-Statnav-Sandbox-Clone-Secret"
           }
     },
+    "ida:AADInstance": {
+          "reference": {
+              "keyVault": {
+                "id": "/subscriptions/c8efb8b5-6119-46c8-9ed3-e0bf71b66ce7/resourceGroups/Keyvault-RG/providers/Microsoft.KeyVault/vaults/KeyVault-Digital-Collect"
+              },
+              "secretName": "AADInstance-Statnav-Sandbox-Clone"
+            }
+		 },
+      "ida:ClientId": {
+        "reference": {
+            "keyVault": {
+              "id": "/subscriptions/c8efb8b5-6119-46c8-9ed3-e0bf71b66ce7/resourceGroups/Keyvault-RG/providers/Microsoft.KeyVault/vaults/KeyVault-Digital-Collect"
+            },
+            "secretName": "ClientId-Statnav-Sandbox-Clone"
+          }
+    },
+    "ida:Domain": {
+        "reference": {
+            "keyVault": {
+              "id": "/subscriptions/c8efb8b5-6119-46c8-9ed3-e0bf71b66ce7/resourceGroups/Keyvault-RG/providers/Microsoft.KeyVault/vaults/KeyVault-Digital-Collect"
+            },
+            "secretName": "Domain-Statnav-Sandbox-Clone"
+          }
+    },
+    "ida:PostLogoutRedirectUri": {
+        "reference": {
+            "keyVault": {
+              "id": "/subscriptions/c8efb8b5-6119-46c8-9ed3-e0bf71b66ce7/resourceGroups/Keyvault-RG/providers/Microsoft.KeyVault/vaults/KeyVault-Digital-Collect"
+            },
+            "secretName": "PostLogoutRedirectUri-Statnav-Sandbox-Clone"
+          }
+    },
+    "ida:TenantId": {
+        "reference": {
+            "keyVault": {
+              "id": "/subscriptions/c8efb8b5-6119-46c8-9ed3-e0bf71b66ce7/resourceGroups/Keyvault-RG/providers/Microsoft.KeyVault/vaults/KeyVault-Digital-Collect"
+            },
+            "secretName": "TenantId-Statnav-Sandbox-Clone"
+          }
+    },
     "databaseName": {
       "value": "Statnavsandboxclonedb"
     },
