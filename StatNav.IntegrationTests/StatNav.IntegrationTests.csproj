@@ -87,7 +87,7 @@
     <Compile Include="GenericClass\SeleniumGetMethods.cs" />
     <Compile Include="GenericClass\SeleniumSetMethods.cs" />
     <Compile Include="IntegrationTest.cs" />
-    <Compile Include="MainScript\Main.cs" />
+    <Compile Include="Main.cs" />
     <Compile Include="PageObjects\Iterations.cs" />
     <Compile Include="PageObjects\Programmes.cs" />
     <Compile Include="PageObjects\StatNav.cs" />
@@ -157,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Release\" />
+    <Folder Include="MainScript\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
