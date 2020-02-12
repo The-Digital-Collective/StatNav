@@ -167,12 +167,7 @@ namespace StatNav.IntegrationTests
 
         public static void DriverSetup()
         {
-            foreach (var process in Process.GetProcessesByName(ConfigurationManager.AppSettings["LoginLevel1"])) 
-            { process.Kill(); }
-            foreach (var process in Process.GetProcessesByName(ConfigurationManager.AppSettings["LoginLevel2"]))
-            { process.Kill(); }
-            foreach (var process in Process.GetProcessesByName(ConfigurationManager.AppSettings["LoginLevel3"]))
-            { process.Kill(); }
+
             foreach (var process in Process.GetProcessesByName("chromedriver"))
             { process.Kill(); }
             foreach (var process in Process.GetProcessesByName("geckodriver"))
@@ -201,7 +196,7 @@ namespace StatNav.IntegrationTests
         {
             //Html Report Initialization
             AppDriver.htmlReporter = new ExtentHtmlReporter(htmlFilepath);
-            AppDriver.htmlReporter.Config.Theme = AventStack.ExtentReports.Reporter.Configuration.Theme.Standard;
+            AppDriver.htmlReporter.Configuration().Theme = AventStack.ExtentReports.Reporter.Configuration.Theme.Standard;
             AppDriver.extent = new ExtentReports();
             AppDriver.extent.AttachReporter(AppDriver.htmlReporter);
             string hostname = Dns.GetHostName();

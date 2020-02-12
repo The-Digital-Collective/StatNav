@@ -36,12 +36,12 @@ namespace StatNav.IntegrationTests
                 AppDriver.test.Log(Status.Pass, "Step 2 : Navigation successfull to the Programme");
                 AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
 
-                AppClass.deleteprogrammethod();
+               
                 AppClass.createprogrammethod();
-                
 
-                //AppDriver.test.Log(Status.Pass, "Step 3 : Programme created Successfully");
-                //AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
+
+                AppDriver.test.Log(Status.Pass, "Step 3 : Programme created Successfully");
+                AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
 
                 //AppDriver.ipage = new Iterations();
 
@@ -50,14 +50,14 @@ namespace StatNav.IntegrationTests
                 //AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(AppDriver.ipage.ddlExperimentProgrammeId));
                 //AppDriver.ipage.ddlExperimentProgrammeId.selectdropdowntext("Email Marketing Programme");
 
-                //AppDriver.driver.Close();   
+                AppDriver.driver.Close();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 AppDriver.test.Log(Status.Fail, "Step End : Execution Failed ");
                 AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
-               // AppDriver.driver.Close();
+                AppDriver.driver.Close();
             }
         }
     }

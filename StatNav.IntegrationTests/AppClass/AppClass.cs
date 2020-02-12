@@ -48,70 +48,81 @@ namespace StatNav.IntegrationTests
         {
 
             AppDriver.ppage = new Programmes();
-   
-            AppDriver.ppage.btnCreateNew.Click();
-            var rand = new Random();
-            int value = rand.Next(999999);
-            //string text = value.ToString("000");
+            try
+            {
+                AppDriver.ppage.btnCreateNew.Click();
+                var rand = new Random();
+                int value = rand.Next(999999);
+                //string text = value.ToString("000");
 
-            AppDriver.ppage.txtProgrammeName.SendKeys("IntegrationTest Programme" + value);
+                AppDriver.ppage.txtProgrammeName.SendKeys("IntegrationTest Programme" + value);
 
-            AppDriver.ppage.txtProblem.SendKeys("IntegrationTest Problem");
+                AppDriver.ppage.txtProblem.SendKeys("IntegrationTest Problem");
 
-            AppDriver.ppage.txtProblemValidation.SendKeys("IntegrationTest validation");
+                AppDriver.ppage.txtProblemValidation.SendKeys("IntegrationTest validation");
 
-            AppDriver.ppage.txtHypothesis.SendKeys("New");
+                AppDriver.ppage.txtHypothesis.SendKeys("New");
 
+                AppDriver.ppage.ddlMethod.selectdropdowntext("Randomised Control Trial");
 
-            AppDriver.ppage.ddlMethod.selectdropdowntext("Randomised Control Trial");
+                AppDriver.ppage.ddlTargetMetric.selectdropdowntext("Basket Adds");
 
-            AppDriver.ppage.ddlTargetMetric.selectdropdowntext("Basket Adds");
+                AppDriver.ppage.txtTargetValue.SendKeys("0");
 
-            AppDriver.ppage.txtTargetValue.SendKeys("0");
+                AppDriver.ppage.ddlImpactMetric.selectdropdowntext("Bounce Rate");
 
-            AppDriver.ppage.ddlImpactMetric.selectdropdowntext("Bounce Rate");
+                AppDriver.ppage.txtImpactValue.SendKeys("0");
 
-            AppDriver.ppage.txtImpactValue.SendKeys("0");
+                AppDriver.ppage.ddlStatus.selectdropdowntext("Draft");
 
+                AppDriver.ppage.txtNotes.SendKeys("Done");
 
-            AppDriver.ppage.ddlStatus.selectdropdowntext("Draft");
+                IJavaScriptExecutor js = (IJavaScriptExecutor)AppDriver.driver;
+                js.ExecuteScript("javascript:window.scrollBy(0,-250)");
 
-            AppDriver.ppage.txtNotes.SendKeys("Done");
-
-            IJavaScriptExecutor js = (IJavaScriptExecutor)AppDriver.driver;
-            js.ExecuteScript("javascript:window.scrollBy(0,-250)");
-
-            AppDriver.ppage.btnSave.Click();
+                AppDriver.ppage.btnSave.Click();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+            }
 
         }
 
         public static void deleteprogrammethod()
         {
-            var R_elemTable = AppDriver.driver.FindElement(By.XPath("/html/body/div[2]/table/tbody"));
-            // Fetch all Row of the table
-            List<IWebElement> R_lstTrElem = new List<IWebElement>(R_elemTable.FindElements(By.TagName("tr")));
-            int cnt = R_lstTrElem.Count;
-            Console.WriteLine(cnt);
-            int i;
-            for (i = 1; i <= cnt; i++)
+            try
             {
-                var R_elemTable1 = AppDriver.driver.FindElement(By.XPath("/html/body/div[2]/table/tbody"));
-                var R_elemTr = R_elemTable1.FindElement(By.TagName("tr"));
-                var pp = R_elemTr.FindElement(By.XPath("/html/body/div[2]/table/tbody/tr[2]/td[2]/a"));
-               
-                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(pp));
-                pp.Click();
+                var R_elemTable = AppDriver.driver.FindElement(By.XPath("/html/body/div[2]/table/tbody"));
+                // Fetch all Row of the table
+                List<IWebElement> R_lstTrElem = new List<IWebElement>(R_elemTable.FindElements(By.TagName("tr")));
+                int cnt = R_lstTrElem.Count;
+                Console.WriteLine(cnt);
+                int i;
+                for (i = 1; i <= cnt-1; i++)
+                {
+                    var R_elemTable1 = AppDriver.driver.FindElement(By.XPath("/html/body/div[2]/table/tbody"));
+                    var R_elemTr = R_elemTable1.FindElement(By.TagName("tr"));
+                    var pp = R_elemTr.FindElement(By.XPath("/html/body/div[2]/table/tbody/tr[2]/td[2]/a"));
 
-                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(AppDriver.driver.FindElement(By.XPath("/html/body/div[2]/div/div[1]/div/a"))));
-                AppDriver.driver.FindElement(By.XPath("/html/body/div[2]/div/div[1]/div/a")).Click();
+                    AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(pp));
+                    pp.Click();
 
-                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(AppDriver.driver.FindElement(By.XPath("/html/body/div[2]/form/input"))));
-                AppDriver.driver.FindElement(By.XPath("/html/body/div[2]/form/input")).Click();
+                    AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(AppDriver.driver.FindElement(By.XPath("/html/body/div[2]/div/div[1]/div/a"))));
+                    AppDriver.driver.FindElement(By.XPath("/html/body/div[2]/div/div[1]/div/a")).Click();
 
-                Thread.Sleep(2000);
-                R_elemTable1 = null;
-                R_elemTr = null;
-                pp = null;
+                    AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(AppDriver.driver.FindElement(By.XPath("/html/body/div[2]/form/input"))));
+                    AppDriver.driver.FindElement(By.XPath("/html/body/div[2]/form/input")).Click();
+
+                    Thread.Sleep(2000);
+                    R_elemTable1 = null;
+                    R_elemTr = null;
+                    pp = null;
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
             }
         }
     }
