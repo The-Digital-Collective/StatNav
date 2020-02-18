@@ -1,9 +1,9 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using TestAutomationFramework;
 using System.Threading;
 using StatNav.IntegrationTests.PageObjects;
 using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
@@ -12,138 +12,180 @@ namespace StatNav.IntegrationTests
 {
     class AppClass
     {
-        public static void StatNavLogin()
+        public static bool StatNavLogin()
         {
-            AppDriver.spage = new StatNav();
+            StatNav spage = new StatNav();
             try
             {
                 AppDriver.wait = new WebDriverWait(AppDriver.driver, TimeSpan.FromSeconds(70));
 
-                AppDriver.spage.Login.Click();
+                spage.Login.Click();
 
-                AppDriver.spage.MSAccount.SendKeys(ConfigurationManager.AppSettings["LoginName"]);
+                Thread.Sleep(3000);
 
-                AppDriver.spage.MSconfirm.Click();
+                try
+                {
 
-                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(AppDriver.spage.MSPwd));
+                    bool signin = spage.MSAccount.Displayed;
 
-                AppDriver.spage.MSPwd.SendKeys(ConfigurationManager.AppSettings["Password"]);
+                    if (signin == true)
+                    {
+                        AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSAccount));
 
-                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(AppDriver.spage.MSconfirm));
+                        spage.MSAccount.SendKeys(ConfigurationManager.AppSettings["LoginName"]);
 
-                AppDriver.spage.MSconfirm.Click();
+                        AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
 
-                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(AppDriver.spage.MSconfirm));
+                        spage.MSconfirm.Click();
 
-                AppDriver.spage.MSconfirm.Click();
+                        AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSPwd));
+
+                        spage.MSPwd.SendKeys(ConfigurationManager.AppSettings["Password"]);
+
+                        AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
+
+                        spage.MSconfirm.Click();
+
+                        AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
+
+                        spage.MSconfirm.Click();
+
+                    }
+                    else
+                    {
+
+                    }
+                }
+                catch
+                {
+
+                }
+                
+
+                return true;
             }
 
             catch (Exception e)
             {
                 Console.WriteLine(e);
+                return false;
             }
         }
 
-        public static void createprogrammethod()
+        public static bool createprogramme()
         {
 
-            AppDriver.ppage = new Programmes();
+           
             try
             {
-                AppDriver.ppage.btnCreateNew.Click();
+                Programmes ppage = new Programmes();
+
+                ppage.btnCreateNew.Click();
                 var rand = new Random();
                 int value = rand.Next(999999);
                 //string text = value.ToString("000");
 
-                AppDriver.ppage.txtProgrammeName.SendKeys("IntegrationTest Programme" + value);
+                ppage.txtProgrammeName.SendKeys("IntegrationTest Programme" + value);
 
-                AppDriver.ppage.txtProblem.SendKeys("IntegrationTest Problem");
+                ppage.txtProblem.SendKeys("IntegrationTest Problem");
 
-                AppDriver.ppage.txtProblemValidation.SendKeys("IntegrationTest validation");
+                ppage.txtProblemValidation.SendKeys("IntegrationTest validation");
 
-                AppDriver.ppage.txtHypothesis.SendKeys("New");
+                ppage.txtHypothesis.SendKeys("New");
 
-                AppDriver.ppage.ddlMethod.selectdropdowntext("Randomised Control Trial");
+                ppage.ddlMethod.selectdropdowntext("Randomised Control Trial");
 
-                AppDriver.ppage.ddlTargetMetric.selectdropdowntext("Basket Adds");
+                ppage.ddlTargetMetric.selectdropdowntext("Basket Adds");
 
-                AppDriver.ppage.txtTargetValue.SendKeys("0");
+                ppage.txtTargetValue.SendKeys("0");
 
-                AppDriver.ppage.ddlImpactMetric.selectdropdowntext("Bounce Rate");
+                ppage.ddlImpactMetric.selectdropdowntext("Bounce Rate");
 
-                AppDriver.ppage.txtImpactValue.SendKeys("0");
+                ppage.txtImpactValue.SendKeys("0");
 
-                AppDriver.ppage.ddlStatus.selectdropdowntext("Draft");
+                ppage.ddlStatus.selectdropdowntext("Draft");
 
-                AppDriver.ppage.txtNotes.SendKeys("Done");
+                ppage.txtNotes.SendKeys("Done");
 
                 IJavaScriptExecutor js = (IJavaScriptExecutor)AppDriver.driver;
                 js.ExecuteScript("javascript:window.scrollBy(0,-250)");
 
-                AppDriver.ppage.btnSave.Click();
+                ppage.btnSave.Click();
+
+                return true;
             }
             catch(Exception e)
             {
                 Console.WriteLine(e);
+                return false;
             }
 
         }
 
-        public static void createiteration()
+        public static bool createiteration()
         {
             try
             {
-                AppDriver.ipage = new Iterations();
+                Iterations ipage = new Iterations();
 
-                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(AppDriver.ipage.Create_Iteration_Link));
-                AppDriver.ipage.Create_Iteration_Link.Click();
+                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(ipage.Create_Iteration_Link));
+                ipage.Create_Iteration_Link.Click();
 
 
-                AppDriver.ipage.IterationName.SendKeys("NewIteration");
-                AppDriver.ipage.RequiredDurationForSignificance.SendKeys("week");
+                ipage.IterationName.SendKeys("NewIteration");
+                ipage.RequiredDurationForSignificance.SendKeys("week");
 
-                AppDriver.ipage.IterationNumber.SendKeys("10");
-                AppDriver.ipage.StartDateTime.SendKeys("13/04/2017");
-                AppDriver.ipage.EndDateTime.SendKeys("16/12/2019");
-                AppDriver.ipage.SuccessOutcome.SendKeys("10");
-                AppDriver.ipage.FailureOutcome.SendKeys("5");
+                ipage.IterationNumber.SendKeys("10");
+                ipage.StartDateTime.Clear();
+                ipage.StartDateTime.SendKeys("13/04/2017");
+                ipage.EndDateTime.Clear();
+                ipage.EndDateTime.SendKeys("16/12/2019");
+                ipage.SuccessOutcome.SendKeys("10");
+                ipage.FailureOutcome.SendKeys("5");
                 IJavaScriptExecutor js = (IJavaScriptExecutor)AppDriver.driver;
                 js.ExecuteScript("javascript:window.scrollBy(0,-250)");
-                AppDriver.ipage.SaveCandidate.Click();
-                AppDriver.ipage.Create_Candidate.Click();
+                ipage.SaveCandidate.Click();
+                ipage.Create_Candidate.Click();
+
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
+                return false;
             }
         }
 
-        //public static void createcandidate()
-        //{
-        //    try
-        //    {
-        //        AppDriver.cpage = new Candidate();
+        public static bool createcandidate()
+        {
+            try
+            {
+                Candidate cpage = new Candidate();
 
-        //        AppDriver.cpage.CandidateName.SendKeys("Newcandidate");
-        //        AppDriver.cpage.Control.Click();
+                cpage.CandidateName.SendKeys("Newcandidate");
+                cpage.Control.Click();
 
-        //        AppDriver.cpage.CandidateTargetMetricModelId.selectdropdowntext("Basket Adds");
-        //        AppDriver.cpage.TargetMet.Click();
+                cpage.CandidateTargetMetricModelId.selectdropdowntext("Basket Adds");
+                cpage.TargetMet.Click();
 
-        //        AppDriver.cpage.CandidateImpactMetricModelId.selectdropdowntext("Basket Adds");
-        //        AppDriver.cpage.ImpactMet.Click();
+                cpage.CandidateImpactMetricModelId.selectdropdowntext("Basket Adds");
+                cpage.ImpactMet.Click();
 
-        //        IJavaScriptExecutor js = (IJavaScriptExecutor)AppDriver.driver;
-        //        js.ExecuteScript("javascript:window.scrollBy(0,-250)");
-        //        AppDriver.cpage.savecandidate.Click();
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e);
-        //    }
-        //}
+                IJavaScriptExecutor js = (IJavaScriptExecutor)AppDriver.driver;
+                js.ExecuteScript("javascript:window.scrollBy(0,-250)");
+                cpage.savecandidate.Click();
 
-        public static void deleteprogrammethod()
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+
+                return false;
+            }
+        }
+
+        public static bool deleteprogrammethod()
         {
             try
             {
@@ -173,11 +215,22 @@ namespace StatNav.IntegrationTests
                     R_elemTr = null;
                     pp = null;
                 }
+                return true;
             }
             catch(Exception e)
             {
                 Console.WriteLine(e);
+                return false;
             }
+        }
+        public static string Browsername(string Browser)
+        {
+            string value = Browser.Remove(0, 16);
+            string input = value;
+            int index = input.IndexOf(".");
+            if (index > 0)
+                input = input.Substring(0, index);
+            return input;
         }
     }
 

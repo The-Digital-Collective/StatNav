@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 using StatNav.IntegrationTests;
+using TestAutomationFramework;
 
 namespace StatNav.IntegrationTests
 {

@@ -1,2 +1,0 @@
-﻿cd C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\TestWindow
-VSTest.Console "C:\Users\ramkumar.r\Source\Repos\The-Digital-Collective\StatNav\StatNav.IntegrationTests\bin\Debug\StatNav.IntegrationTests.dll"  /InIsolation /Logger:trx

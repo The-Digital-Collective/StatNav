@@ -1,55 +1,70 @@
 ﻿using System;
-using NUnit.Framework;
-using OpenQA.Selenium.Chrome;
 using System.Configuration;
 using OpenQA.Selenium.Support.UI;
 using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
-using AventStack.ExtentReports;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
-using StatNav.IntegrationTests.PageObjects;
-using System.Threading;
-using OpenQA.Selenium.Interactions;
+using TestAutomationFramework;
+using AventStack.ExtentReports;
+using NUnit.Framework;
 
 namespace StatNav.IntegrationTests
 {
     public class Create_Program
     {        
-        public static void CreateProgram()
+        public static void CreateProgram(string value)
         {
+            AppDriver.test = AppDriver.extent.CreateTest("Create Program in StatNav App");
+            Utils.CreateFileOrFolder(value);
+            
             try
             {
+
+                
                 //url To launch the application
                 AppDriver.driver.Url = ConfigurationManager.AppSettings["URL"];
                 AppDriver.driver.Manage().Window.Maximize();
-                AppDriver.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(200);
+                AppDriver.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
                 AppDriver.wait = new WebDriverWait(AppDriver.driver, TimeSpan.FromSeconds(70));
 
-                AppClass.StatNavLogin();
 
-                AppDriver.test.Log(Status.Pass, "Step 1 : Login to the application is Successfull");
-                AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
+                if(AppClass.StatNavLogin()==true)
+                { 
+                    AppDriver.test.Log(Status.Pass, "Step 1 : Login to the application is Successfull");
+                    AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
+                    AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] +value+"\\"+"step1.png", ScreenshotImageFormat.Png);
+                    AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] +value+"\\"+"step1.png").Build());
+                }
 
-                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(AppDriver.spage.Programmes));
-                AppDriver.spage.Programmes.Click();
+                StatNav spage = new StatNav();
+                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.Programmes));
+                spage.Programmes.Click();
 
                 AppDriver.test.Log(Status.Pass, "Step 2 : Navigation successfull to the Programme");
                 AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
+                AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] +value+"\\" + "step2.png", ScreenshotImageFormat.Png);
+                AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step2.png").Build());
 
-               
-                AppClass.createprogrammethod();
+                AppClass.createprogramme();
 
-                AppClass.createiteration();
-               // AppClass.createcandidate();
                 AppDriver.test.Log(Status.Pass, "Step 3 : Programme created Successfully");
                 AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
+                AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step3.png", ScreenshotImageFormat.Png);
+                AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step3.png").Build());
 
-                //AppDriver.ipage = new Iterations();
+                AppClass.createiteration();
 
-                //AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(AppDriver.ipage.Create_Iteration_Link));
-                //AppDriver.ipage.Create_Iteration_Link.Click();
-                //AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(AppDriver.ipage.ddlExperimentProgrammeId));
-                //AppDriver.ipage.ddlExperimentProgrammeId.selectdropdowntext("Email Marketing Programme");
+                AppDriver.test.Log(Status.Pass, "Step 4 : Iteration created Successfully");
+                AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
+                AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step4.png", ScreenshotImageFormat.Png);
+                AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step4.png").Build());
+
+                AppClass.createcandidate();
+
+
+                AppDriver.test.Log(Status.Pass, "Step 4 : Candidate created Successfully");
+                AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
+                AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step5.png", ScreenshotImageFormat.Png);
+                AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step5.png").Build());
 
                 AppDriver.driver.Close();
             }
@@ -57,7 +72,6 @@ namespace StatNav.IntegrationTests
             {
                 Console.WriteLine(e);
                 AppDriver.test.Log(Status.Fail, "Step End : Execution Failed ");
-                AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
                 AppDriver.driver.Close();
             }
         }
