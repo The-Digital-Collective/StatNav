@@ -7,6 +7,8 @@ using TestAutomationFramework;
 using System.Threading;
 using StatNav.IntegrationTests.PageObjects;
 using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace StatNav.IntegrationTests
 {
@@ -30,6 +32,9 @@ namespace StatNav.IntegrationTests
 
                     if (signin == true)
                     {
+
+                        string pp = AppClass.Decrypt(ConfigurationManager.AppSettings["Password"]);
+
                         AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSAccount));
 
                         spage.MSAccount.SendKeys(ConfigurationManager.AppSettings["LoginName"]);
@@ -40,7 +45,7 @@ namespace StatNav.IntegrationTests
 
                         AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSPwd));
 
-                        spage.MSPwd.SendKeys(ConfigurationManager.AppSettings["Password"]);
+                        spage.MSPwd.SendKeys(pp);
 
                         AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
 
@@ -195,6 +200,7 @@ namespace StatNav.IntegrationTests
                 int cnt = R_lstTrElem.Count;
                 Console.WriteLine(cnt);
                 int i;
+                //for (i = 1; i <= cnt-1; i++)
                 for (i = 1; i <= cnt-1; i++)
                 {
                     var R_elemTable1 = AppDriver.driver.FindElement(By.XPath("/html/body/div[2]/table/tbody"));
@@ -231,6 +237,31 @@ namespace StatNav.IntegrationTests
             if (index > 0)
                 input = input.Substring(0, index);
             return input;
+        }
+
+        public static string Encrypt(string plainText)
+        {
+            if (plainText == null) throw new ArgumentNullException("plainText");
+            DataProtectionScope scope = new DataProtectionScope();
+            //encrypt data
+            var data = Encoding.Unicode.GetBytes(plainText);
+            byte[] encrypted = ProtectedData.Protect(data, null, scope);
+
+            //return as base64 string
+            return Convert.ToBase64String(encrypted);
+        }
+
+      
+        public static string Decrypt(string cipher)
+        {
+            if (cipher == null) throw new ArgumentNullException("cipher");
+            DataProtectionScope scope = new DataProtectionScope();
+            //parse base64 string
+            byte[] data = Convert.FromBase64String(cipher);
+
+            //decrypt data
+            byte[] decrypted = ProtectedData.Unprotect(data, null, scope);
+            return Encoding.Unicode.GetString(decrypted);
         }
     }
 

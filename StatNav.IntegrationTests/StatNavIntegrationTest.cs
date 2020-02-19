@@ -18,6 +18,7 @@ namespace StatNav.IntegrationTests
         [OneTimeSetUp]
         public void Initialization()
         {
+
             Utils.DriverSetup();
             AppDriver.driver = new TWebDriver();
             string Browser = Convert.ToString(AppDriver.driver);
@@ -37,6 +38,7 @@ namespace StatNav.IntegrationTests
             string Browser = Convert.ToString(AppDriver.driver);
             string value = AppClass.Browsername(Browser);
             Create_Program.CreateProgram(value);
+            Delete_Program.DeleteProgram();
         }
     }
 }

@@ -339,3 +339,6 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 /StatNav.WebApplication/StatNavConnectionStrings.config
+/StatNav.IntegrationTests/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+/StatNav.IntegrationTests/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+/StatNav.IntegrationTests/Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll

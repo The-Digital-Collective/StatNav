@@ -61,12 +61,12 @@ namespace StatNav.IntegrationTests
                 AppClass.createcandidate();
 
 
-                AppDriver.test.Log(Status.Pass, "Step 4 : Candidate created Successfully");
+                AppDriver.test.Log(Status.Pass, "Step 5 : Candidate created Successfully");
                 AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
                 AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step5.png", ScreenshotImageFormat.Png);
                 AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step5.png").Build());
 
-                AppDriver.driver.Close();
+                //AppDriver.driver.Close();
             }
             catch (Exception e)
             {
