@@ -11,7 +11,7 @@ namespace StatNav.IntegrationTests
 {
     public class Delete_Program
     {       
-        public static void DeleteProgram()
+        public static void DeleteProgram(string value)
         {
             AppDriver.test = AppDriver.extent.CreateTest("Delete Program in StatNav App");
             try
@@ -26,8 +26,8 @@ namespace StatNav.IntegrationTests
 
                 //AppDriver.test.Log(Status.Pass, "Step 1 : Login to the application is Successfull");
                 //AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
-                //AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] + "step6.png", ScreenshotImageFormat.Png);
-                //AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] + "step6.png").Build());
+                //AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" +"step6.png", ScreenshotImageFormat.Png);
+                //AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step6.png").Build());
 
                 StatNav spage = new StatNav();
                 AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.Programmes));
@@ -35,16 +35,16 @@ namespace StatNav.IntegrationTests
 
                 AppDriver.test.Log(Status.Pass, "Step 1 : Navigation successfull to the Programme");
                 AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
-                AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] + "step7.png", ScreenshotImageFormat.Png);
-                AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] + "step7.png").Build());
+                AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step7.png", ScreenshotImageFormat.Png);
+                AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step7.png").Build());
 
 
                 AppClass.deleteprogrammethod();
 
                 AppDriver.test.Log(Status.Pass, "Step 2 : All Programmes Deleted Successfully");
                 AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
-                AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] + "step8.png", ScreenshotImageFormat.Png);
-                AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] + "step8.png").Build());
+                AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step8.png", ScreenshotImageFormat.Png);
+                AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step8.png").Build());
 
                 AppDriver.driver.Close();
             }

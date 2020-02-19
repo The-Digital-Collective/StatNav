@@ -38,7 +38,7 @@ namespace StatNav.IntegrationTests
             string Browser = Convert.ToString(AppDriver.driver);
             string value = AppClass.Browsername(Browser);
             Create_Program.CreateProgram(value);
-            Delete_Program.DeleteProgram();
+            Delete_Program.DeleteProgram(value);
         }
     }
 }
