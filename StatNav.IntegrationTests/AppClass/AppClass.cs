@@ -14,67 +14,39 @@ namespace StatNav.IntegrationTests
 {
     class AppClass
     {
-        public static bool StatNavLogin()
-        {
-            StatNav spage = new StatNav();
-            try
-            {
-                AppDriver.wait = new WebDriverWait(AppDriver.driver, TimeSpan.FromSeconds(70));
+        public static void StatNavLogin()
+        { 
+
+                
+                StatNav spage = new StatNav();
+
+                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.Login));
 
                 spage.Login.Click();
 
-                Thread.Sleep(3000);
+               // string pp = AppClass.Decrypt(ConfigurationManager.AppSettings["Password"]);
 
-                try
-                {
+                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSAccount));
 
-                    bool signin = spage.MSAccount.Displayed;
+                spage.MSAccount.SendKeys(ConfigurationManager.AppSettings["LoginName"]);
 
-                    if (signin == true)
-                    {
+                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
 
-                        string pp = AppClass.Decrypt(ConfigurationManager.AppSettings["Password"]);
+                spage.MSconfirm.Click();
 
-                        AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSAccount));
+                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSPwd));
 
-                        spage.MSAccount.SendKeys(ConfigurationManager.AppSettings["LoginName"]);
+                spage.MSPwd.SendKeys(ConfigurationManager.AppSettings["Password"]);
 
-                        AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
+            AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
 
-                        spage.MSconfirm.Click();
+                spage.MSconfirm.Click();
 
-                        AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSPwd));
+                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
 
-                        spage.MSPwd.SendKeys(pp);
-
-                        AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
-
-                        spage.MSconfirm.Click();
-
-                        AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
-
-                        spage.MSconfirm.Click();
-
-                    }
-                    else
-                    {
-
-                    }
-                }
-                catch
-                {
-
-                }
-                
-
-                return true;
-            }
-
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return false;
-            }
+                spage.MSconfirm.Click();
+          
+         
         }
 
         public static bool createprogramme()
@@ -251,17 +223,25 @@ namespace StatNav.IntegrationTests
             return Convert.ToBase64String(encrypted);
         }
 
-      
+
         public static string Decrypt(string cipher)
         {
-            if (cipher == null) throw new ArgumentNullException("cipher");
-            DataProtectionScope scope = new DataProtectionScope();
-            //parse base64 string
-            byte[] data = Convert.FromBase64String(cipher);
+            try
+            {
+                if (cipher == null) throw new ArgumentNullException("cipher");
+                DataProtectionScope scope = new DataProtectionScope();
+                //parse base64 string
+                byte[] data = Convert.FromBase64String(cipher);
 
-            //decrypt data
-            byte[] decrypted = ProtectedData.Unprotect(data, null, scope);
-            return Encoding.Unicode.GetString(decrypted);
+                //decrypt data
+                byte[] decrypted = ProtectedData.Unprotect(data, null, scope);
+                return Encoding.Unicode.GetString(decrypted);
+
+            }
+            catch(Exception e)
+            {
+                return null;
+            }
         }
     }
 

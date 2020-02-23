@@ -18,22 +18,23 @@ namespace StatNav.IntegrationTests
             
             try
             {
+                //string pp1 = AppClass.Encrypt(ConfigurationManager.AppSettings["Password"]);
+                //string pp = AppClass.Decrypt(pp1);
 
-                
                 //url To launch the application
                 AppDriver.driver.Url = ConfigurationManager.AppSettings["URL"];
                 AppDriver.driver.Manage().Window.Maximize();
                 AppDriver.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
                 AppDriver.wait = new WebDriverWait(AppDriver.driver, TimeSpan.FromSeconds(70));
 
+                AppClass.StatNavLogin();
 
-                if(AppClass.StatNavLogin()==true)
-                { 
-                    AppDriver.test.Log(Status.Pass, "Step 1 : Login to the application is Successfull");
-                    AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
-                    AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] +value+"\\"+"step1.png", ScreenshotImageFormat.Png);
-                    AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] +value+"\\"+"step1.png").Build());
-                }
+
+                AppDriver.test.Log(Status.Pass, "Step 1 : Login to the application is Successfull");
+                AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
+                AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] +value+"\\"+"step1.png", ScreenshotImageFormat.Png);
+                AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] +value+"\\"+"step1.png").Build());
+                
 
                 StatNav spage = new StatNav();
                 AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.Programmes));

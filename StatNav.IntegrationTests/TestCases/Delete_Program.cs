@@ -46,7 +46,7 @@ namespace StatNav.IntegrationTests
                 AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step8.png", ScreenshotImageFormat.Png);
                 AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step8.png").Build());
 
-                AppDriver.driver.Close();
+               // AppDriver.driver.Close();
             }
             catch (Exception e)
             {

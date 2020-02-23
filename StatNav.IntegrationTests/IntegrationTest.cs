@@ -30,7 +30,7 @@ namespace StatNav.IntegrationTests
         }
 
 
-        [TestMethod]
+        //[TestMethod]
         [TestCategory("Selenium")]
         [DataRow("Programme 1", "Number 1 Problem Description", "Number 1 Problem Validation", "1", "1", "Draft")]
         [DataRow("Programme 2", "Number 2 Problem Description", "Number 2 Problem Validation", "1", "2", "Scheduled")]
