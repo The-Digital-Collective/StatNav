@@ -119,6 +119,7 @@
     <Compile Include="PageObjects\StatNav.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StatNavIntegrationTest.cs" />
+    <Compile Include="StatNavIntegrationTests.cs" />
     <Compile Include="TestCases\Create_Program.cs" />
     <Compile Include="TestCases\Delete_Program.cs" />
   </ItemGroup>
