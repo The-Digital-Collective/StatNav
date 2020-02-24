@@ -9,9 +9,9 @@ using TestAutomationFramework;
 
 namespace StatNav.IntegrationTests
 {
-    //[TestFixture(typeof(FirefoxDriver))]
+    [TestFixture(typeof(FirefoxDriver))]
     [TestFixture(typeof(ChromeDriver))]
-    [TestFixture(typeof(InternetExplorerDriver))]
+    //[TestFixture(typeof(InternetExplorerDriver))]
     public class StatNavIntegrationTest<TWebDriver> where TWebDriver : IWebDriver, new() 
     {
        
