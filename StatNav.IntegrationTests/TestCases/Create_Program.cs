@@ -14,7 +14,7 @@ namespace StatNav.IntegrationTests
         public static void CreateProgram(string value)
         {
             AppDriver.test = AppDriver.extent.CreateTest("Create Program in StatNav App");
-            Utils.CreateFileOrFolder(value);
+            //Utils.CreateFileOrFolder(value);
             
             try
             {
@@ -30,44 +30,44 @@ namespace StatNav.IntegrationTests
                 AppClass.StatNavLogin();
 
 
-                AppDriver.test.Log(Status.Pass, "Step 1 : Login to the application is Successfull");
-                AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
-                AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] +value+"\\"+"step1.png", ScreenshotImageFormat.Png);
-                AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] +value+"\\"+"step1.png").Build());
+                //AppDriver.test.Log(Status.Pass, "Step 1 : Login to the application is Successfull");
+                //AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
+                //AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] +value+"\\"+"step1.png", ScreenshotImageFormat.Png);
+                //AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] +value+"\\"+"step1.png").Build());
                 
 
-                StatNav spage = new StatNav();
-                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.Programmes));
-                spage.Programmes.Click();
+                //StatNav spage = new StatNav();
+                //AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.Programmes));
+                //spage.Programmes.Click();
 
-                AppDriver.test.Log(Status.Pass, "Step 2 : Navigation successfull to the Programme");
-                AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
-                AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] +value+"\\" + "step2.png", ScreenshotImageFormat.Png);
-                AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step2.png").Build());
+                //AppDriver.test.Log(Status.Pass, "Step 2 : Navigation successfull to the Programme");
+                //AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
+                //AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] +value+"\\" + "step2.png", ScreenshotImageFormat.Png);
+                //AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step2.png").Build());
 
-                AppClass.createprogramme();
+                //AppClass.createprogramme();
 
-                AppDriver.test.Log(Status.Pass, "Step 3 : Programme created Successfully");
-                AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
-                AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step3.png", ScreenshotImageFormat.Png);
-                AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step3.png").Build());
+                //AppDriver.test.Log(Status.Pass, "Step 3 : Programme created Successfully");
+                //AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
+                //AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step3.png", ScreenshotImageFormat.Png);
+                //AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step3.png").Build());
 
-                AppClass.createiteration();
+                //AppClass.createiteration();
 
-                AppDriver.test.Log(Status.Pass, "Step 4 : Iteration created Successfully");
-                AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
-                AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step4.png", ScreenshotImageFormat.Png);
-                AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step4.png").Build());
+                //AppDriver.test.Log(Status.Pass, "Step 4 : Iteration created Successfully");
+                //AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
+                //AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step4.png", ScreenshotImageFormat.Png);
+                //AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step4.png").Build());
 
-                AppClass.createcandidate();
+                //AppClass.createcandidate();
 
 
-                AppDriver.test.Log(Status.Pass, "Step 5 : Candidate created Successfully");
-                AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
-                AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step5.png", ScreenshotImageFormat.Png);
-                AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step5.png").Build());
+                //AppDriver.test.Log(Status.Pass, "Step 5 : Candidate created Successfully");
+                //AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
+                //AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step5.png", ScreenshotImageFormat.Png);
+                //AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step5.png").Build());
 
-                //AppDriver.driver.Close();
+                AppDriver.driver.Close();
             }
             catch (Exception e)
             {

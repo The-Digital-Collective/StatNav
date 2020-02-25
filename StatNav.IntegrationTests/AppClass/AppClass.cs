@@ -38,13 +38,13 @@ namespace StatNav.IntegrationTests
 
                 spage.MSPwd.SendKeys(ConfigurationManager.AppSettings["Password"]);
 
-            AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
+            //AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
 
-                spage.MSconfirm.Click();
+            //    spage.MSconfirm.Click();
 
-                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
+            //    AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
 
-                spage.MSconfirm.Click();
+            //    spage.MSconfirm.Click();
           
          
         }
