@@ -19,7 +19,7 @@ namespace StatNav.IntegrationTests
         public void Initialization()
         {
 
-            Utils.DriverSetup();
+            //Utils.DriverSetup();
             AppDriver.driver = new TWebDriver();
             string Browser = Convert.ToString(AppDriver.driver);
             string value = AppClass.Browsername(Browser);
@@ -44,7 +44,6 @@ namespace StatNav.IntegrationTests
             string Browser = Convert.ToString(AppDriver.driver);
             string value = AppClass.Browsername(Browser);
 
-
             Delete_Program.DeleteProgram(value);
             AppDriver.driver.Close();
         }
@@ -53,7 +52,7 @@ namespace StatNav.IntegrationTests
         public void Browser()
         {
             AppDriver.extent.Flush();
-            Utils.DriverSetup();
+            //Utils.DriverSetup();
             //AppClass.SendMail();
         }
     }
