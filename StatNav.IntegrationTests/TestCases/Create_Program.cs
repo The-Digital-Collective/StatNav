@@ -11,7 +11,7 @@ namespace StatNav.IntegrationTests
 {
     public class Create_Program
     {        
-        public static void CreateProgram(string value)
+        public static void CreateProgram()
         {
             AppDriver.test = AppDriver.extent.CreateTest("Create Program in StatNav App");
             //Utils.CreateFileOrFolder(value);
