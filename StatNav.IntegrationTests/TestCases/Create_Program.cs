@@ -27,7 +27,33 @@ namespace StatNav.IntegrationTests
                 AppDriver.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
                 AppDriver.wait = new WebDriverWait(AppDriver.driver, TimeSpan.FromSeconds(70));
 
-                AppClass.StatNavLogin();
+                StatNav spage = new StatNav();
+
+                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.Login));
+
+                spage.Login.Click();
+
+                // string pp = AppClass.Decrypt(ConfigurationManager.AppSettings["Password"]);
+
+                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSAccount));
+
+                spage.MSAccount.SendKeys(ConfigurationManager.AppSettings["LoginName"]);
+
+                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
+
+                spage.MSconfirm.Click();
+
+                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSPwd));
+
+                spage.MSPwd.SendKeys(ConfigurationManager.AppSettings["Password"]);
+
+                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
+
+                spage.MSconfirm.Click();
+
+                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
+
+                spage.MSconfirm.Click();
 
 
                 AppDriver.test.Log(Status.Pass, "Step 1 : Login to the application is Successfull");
@@ -35,8 +61,6 @@ namespace StatNav.IntegrationTests
                 AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step1.png", ScreenshotImageFormat.Png);
                 AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step1.png").Build());
 
-
-                StatNav spage = new StatNav();
                 AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.Programmes));
                 spage.Programmes.Click();
 

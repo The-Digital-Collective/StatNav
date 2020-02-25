@@ -173,9 +173,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll" />
-    <Content Include="Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll" />
-    <Content Include="Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll" />
     <Content Include="mongocrypt.dll" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

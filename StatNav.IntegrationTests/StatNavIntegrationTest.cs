@@ -31,7 +31,7 @@ namespace StatNav.IntegrationTests
         public void Browser()
         {
             AppDriver.extent.Flush();
-            AppClass.SendMail();
+            //AppClass.SendMail();
         }
 
         [Test]
