@@ -9,11 +9,36 @@ using StatNav.IntegrationTests.PageObjects;
 using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 using System.Text;
 using System.Security.Cryptography;
+using System.Net.Mail;
 
 namespace StatNav.IntegrationTests
 {
-    class AppClass
+    public static class AppClass
     {
+        public static void SendMail()
+        {
+            MailMessage mail = new MailMessage();
+            string[] toAddrs = ConfigurationManager.AppSettings["ToMail"].Split(';');
+            foreach (string addr in toAddrs)
+            {
+                if (!string.IsNullOrEmpty(addr))
+                {
+                    mail.To.Add(addr);
+                }
+            }
+
+            mail.From = new MailAddress(ConfigurationManager.AppSettings["FromMail"]);
+            mail.Subject = ConfigurationManager.AppSettings["MailSubject"];
+            mail.IsBodyHtml = true;
+            mail.Attachments.Add(new Attachment(ConfigurationManager.AppSettings["ReportsPath"] + "Chrome Test Report.html"));
+            mail.Body = ConfigurationManager.AppSettings["MailBody"];
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = ConfigurationManager.AppSettings["SmtpHost"];
+            smtp.Port = Int32.Parse(ConfigurationManager.AppSettings["SmtpPort"]);
+            smtp.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["SmtpUserId"], ConfigurationManager.AppSettings["SmtpPassword"]);
+            smtp.EnableSsl = ConfigurationManager.AppSettings["EnableSSL"] == "Y";
+            smtp.Send(mail);
+        }
         public static void StatNavLogin()
         { 
 
@@ -38,15 +63,15 @@ namespace StatNav.IntegrationTests
 
                 spage.MSPwd.SendKeys(ConfigurationManager.AppSettings["Password"]);
 
-            //AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
+                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
 
-            //    spage.MSconfirm.Click();
+                spage.MSconfirm.Click();
 
-            //    AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
+                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
 
-            //    spage.MSconfirm.Click();
-          
-         
+                spage.MSconfirm.Click();
+
+
         }
 
         public static bool createprogramme()

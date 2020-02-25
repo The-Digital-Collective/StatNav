@@ -19,19 +19,19 @@ namespace StatNav.IntegrationTests
         public void Initialization()
         {
 
-            //Utils.DriverSetup();
+            Utils.DriverSetup();
             AppDriver.driver = new TWebDriver();
             string Browser = Convert.ToString(AppDriver.driver);
             string value = AppClass.Browsername(Browser);
-            //Utils.Extent_Test(ConfigurationManager.AppSettings["ReportsPath"] + value + " Test Report.html");
-            Utils.Extent_Test(ConfigurationManager.AppSettings["ReportsPath"] + "Execution_Report.html");
+            Utils.Extent_Test(ConfigurationManager.AppSettings["ReportsPath"] + value + " Test Report.html");
+            
         }
 
         [OneTimeTearDown]
         public void Browser()
         {
             AppDriver.extent.Flush();
-            Utils.SendMail("please","please");
+            AppClass.SendMail();
         }
 
         [Test]
@@ -39,7 +39,7 @@ namespace StatNav.IntegrationTests
         {
             string Browser = Convert.ToString(AppDriver.driver);
             string value = AppClass.Browsername(Browser);
-            Create_Program.CreateProgram();
+            Create_Program.CreateProgram(value);
             //Delete_Program.DeleteProgram(value);
             //AppDriver.driver.Close();
         }
