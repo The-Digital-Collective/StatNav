@@ -59,7 +59,20 @@ namespace StatNav.IntegrationTests
                 AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.Programmes));
                 spage.Programmes.Click();
 
-                AppDriver.test.Log(Status.Pass, "Step 1 : Navigation successfull to the Programme");
+            try
+            {
+                IAlert aler = AppDriver.driver.SwitchTo().Alert();
+                aler.Accept();
+            }
+            catch (NoAlertPresentException ex)
+            {
+                ex.Message.ToString();
+            }
+
+            AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.Programmes));
+            spage.Programmes.Click();
+
+            AppDriver.test.Log(Status.Pass, "Step 1 : Navigation successfull to the Programme");
                 AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
                 AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step7.png", ScreenshotImageFormat.Png);
                 AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step7.png").Build());
