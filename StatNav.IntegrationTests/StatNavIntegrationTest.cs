@@ -19,7 +19,7 @@ namespace StatNav.IntegrationTests
         public void Initialization()
         {
 
-            //Utils.DriverSetup();
+            Utils.DriverSetup();
             AppDriver.driver = new TWebDriver();
             string Browser = Convert.ToString(AppDriver.driver);
             string value = AppClass.Browsername(Browser);

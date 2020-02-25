@@ -69,10 +69,10 @@ namespace StatNav.IntegrationTests
                 ex.Message.ToString();
             }
 
-            AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.Programmes));
-            spage.Programmes.Click();
+                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.Programmes));
+                spage.Programmes.Click();
 
-            AppDriver.test.Log(Status.Pass, "Step 1 : Navigation successfull to the Programme");
+                AppDriver.test.Log(Status.Pass, "Step 1 : Navigation successfull to the Programme");
                 AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
                 AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step7.png", ScreenshotImageFormat.Png);
                 AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step7.png").Build());
@@ -84,6 +84,8 @@ namespace StatNav.IntegrationTests
                 AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
                 AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step8.png", ScreenshotImageFormat.Png);
                 AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step8.png").Build());
+
+                spage.Logout.Click();
 
                //AppDriver.driver.Close();
 

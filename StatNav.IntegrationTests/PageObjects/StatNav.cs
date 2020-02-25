@@ -15,6 +15,11 @@ namespace StatNav.IntegrationTests
         [FindsBy(How = How.Id, Using = "loginLink")]
         public IWebElement Login { get; set; }
 
+        [FindsBy(How = How.LinkText, Using = "Sign out")]
+        public IWebElement Logout { get; set; }
+
+        
+
         [FindsBy(How = How.XPath, Using = "//*[@id='i0116']")]
         public IWebElement MSAccount { get; set; } //*[@id="i0116"]
 
