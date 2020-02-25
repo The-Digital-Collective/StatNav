@@ -198,7 +198,7 @@ namespace StatNav.IntegrationTests
                 Console.WriteLine(cnt);
                 int i;
                 //for (i = 1; i <= cnt-1; i++)
-                for (i = 1; i <= cnt-1; i++)
+                for (i = 1; i <= 2; i++)
                 {
                     var R_elemTable1 = AppDriver.driver.FindElement(By.XPath("/html/body/div[2]/table/tbody"));
                     var R_elemTr = R_elemTable1.FindElement(By.TagName("tr"));

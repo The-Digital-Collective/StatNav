@@ -24,24 +24,37 @@ namespace StatNav.IntegrationTests
             string Browser = Convert.ToString(AppDriver.driver);
             string value = AppClass.Browsername(Browser);
             Utils.Extent_Test(ConfigurationManager.AppSettings["ReportsPath"] + value + " Test Report.html");
-            
+            Utils.CreateFileOrFolder(value);
+
+        }     
+
+        [Test,Order(1)]
+        public void Program()
+        {
+            string Browser = Convert.ToString(AppDriver.driver);
+            string value = AppClass.Browsername(Browser);
+         
+            Create_Program.CreateProgram(value);
+
+        }
+
+        [Test,Order(2)]
+        public void Delete()
+        {
+            string Browser = Convert.ToString(AppDriver.driver);
+            string value = AppClass.Browsername(Browser);
+
+
+            Delete_Program.DeleteProgram(value);
+            AppDriver.driver.Close();
         }
 
         [OneTimeTearDown]
         public void Browser()
         {
             AppDriver.extent.Flush();
+            Utils.DriverSetup();
             //AppClass.SendMail();
-        }
-
-        [Test]
-        public void Program()
-        {
-            string Browser = Convert.ToString(AppDriver.driver);
-            string value = AppClass.Browsername(Browser);
-            Create_Program.CreateProgram(value);
-            //Delete_Program.DeleteProgram(value);
-            //AppDriver.driver.Close();
         }
     }
 }

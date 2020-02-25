@@ -16,8 +16,7 @@ namespace StatNav.IntegrationTests
             AppDriver.test = AppDriver.extent.CreateTest("Create Program in StatNav App");
             Utils.CreateFileOrFolder(value);
             
-            try
-            {
+            
                 //string pp1 = AppClass.Encrypt(ConfigurationManager.AppSettings["Password"]);
                 //string pp = AppClass.Decrypt(pp1);
 
@@ -91,14 +90,8 @@ namespace StatNav.IntegrationTests
                 AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step5.png", ScreenshotImageFormat.Png);
                 AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step5.png").Build());
 
-                AppDriver.driver.Close();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                AppDriver.test.Log(Status.Fail, "Step End : Execution Failed ");
-                AppDriver.driver.Close();
-            }
+                //AppDriver.driver.Close();
+           
         }
     }
 }
