@@ -67,8 +67,6 @@ namespace StatNav.IntegrationTests
 
                 var filepath = $"{TestContext.CurrentContext.TestDirectory}\\{TestContext.CurrentContext.Test.MethodName + val}.jpg";
 
-                Console.WriteLine(filepath);
-
                 ((ITakesScreenshot)AppDriver.driver).GetScreenshot().SaveAsFile(filepath);
 
                 TestContext.AddTestAttachment(filepath);
@@ -78,13 +76,10 @@ namespace StatNav.IntegrationTests
             {
                     var filepath = $"{TestContext.CurrentContext.TestDirectory}\\{TestContext.CurrentContext.Test.MethodName+val}.jpg";
 
-                    Console.WriteLine(filepath);
-
                     ((ITakesScreenshot)AppDriver.driver).GetScreenshot().SaveAsFile(filepath);
 
                     TestContext.AddTestAttachment(filepath);
 
-                    Assert.That(isdisplayed, Is.True);
             }            
         }
 
@@ -134,9 +129,7 @@ namespace StatNav.IntegrationTests
 
                 isdisplayed = ipage.Create_Iteration_Link.Displayed;
 
-                var filepath = $"{TestContext.CurrentContext.TestDirectory}\\{TestContext.CurrentContext.Test.MethodName + val2}.jpg";
-
-                Console.WriteLine(filepath);
+                var filepath = $"{TestContext.CurrentContext.WorkDirectory}\\{TestContext.CurrentContext.Test.MethodName + val2}.jpg";
 
                 ((ITakesScreenshot)AppDriver.driver).GetScreenshot().SaveAsFile(filepath);
 
@@ -147,11 +140,10 @@ namespace StatNav.IntegrationTests
             {
                 var filepath = $"{TestContext.CurrentContext.TestDirectory}\\{TestContext.CurrentContext.Test.MethodName+val2}.jpg";
 
-                ((ITakesScreenshot) AppDriver.driver).GetScreenshot().SaveAsFile(filepath);
+                ((ITakesScreenshot)AppDriver.driver).GetScreenshot().SaveAsFile(filepath);
 
                 TestContext.AddTestAttachment(filepath);
 
-                Assert.That(isdisplayed, Is.True);
             }
         }
 
