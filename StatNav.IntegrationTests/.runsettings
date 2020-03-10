@@ -3,9 +3,8 @@
 <RunSettings>
   <!-- Parameters used by tests at runtime -->
   <TestRunParameters>
-    <Parameter name="webAppUrl" value="https://wvuk-statnav-webapp.azurewebsites.net/" />
-    <!--<Parameter name="webAppUrl" value="https://localhost:44316/" />-->
-    <Parameter name="now" value="aaaaa" />
-    <Parameter name="next" value="bbb" />
+    <Parameter name="webAppUrl" value="https://rrtrt-sandbox-webapp.azurewebsites.net/" />
+    <Parameter name="now" value="ertrgrthrth@worldvision.org.uk" />
+    <Parameter name="next" value="fgfggfg" />
   </TestRunParameters>
 </RunSettings>

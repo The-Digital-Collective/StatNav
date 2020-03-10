@@ -18,8 +18,20 @@ namespace StatNav.IntegrationTests
     {
         public static void StatNavLogin()
         {
+            var rand = new Random();
+            int val = rand.Next(999999);
+
+            bool isdisplayed = false;
+            try
+            {
                 string _username = TestContext.Parameters.Get("now");
                 string _password = TestContext.Parameters.Get("next");
+                string url = TestContext.Parameters.Get("webAppUrl");
+                
+                AppDriver.driver.Url = url;
+                AppDriver.driver.Manage().Window.Maximize();
+                AppDriver.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
+                AppDriver.wait = new WebDriverWait(AppDriver.driver, TimeSpan.FromSeconds(70));
 
                 StatNav spage = new StatNav();
 
@@ -48,13 +60,42 @@ namespace StatNav.IntegrationTests
                 spage.MSconfirm.Click();
 
                 AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.Programmes));
+
                 spage.Programmes.Click();
+               
+                isdisplayed = spage.Programmes.Displayed;
 
+                var filepath = $"{TestContext.CurrentContext.TestDirectory}\\{TestContext.CurrentContext.Test.MethodName + val}.jpg";
 
+                Console.WriteLine(filepath);
+
+                ((ITakesScreenshot)AppDriver.driver).GetScreenshot().SaveAsFile(filepath);
+
+                TestContext.AddTestAttachment(filepath);
+
+            }
+            catch
+            {
+                    var filepath = $"{TestContext.CurrentContext.TestDirectory}\\{TestContext.CurrentContext.Test.MethodName+val}.jpg";
+
+                    Console.WriteLine(filepath);
+
+                    ((ITakesScreenshot)AppDriver.driver).GetScreenshot().SaveAsFile(filepath);
+
+                    TestContext.AddTestAttachment(filepath);
+
+                    Assert.That(isdisplayed, Is.True);
+            }            
         }
 
         public static void createprogramme()
         {
+            var rand2 = new Random();
+            int val2 = rand2.Next(999999);
+
+            bool isdisplayed = false;
+            try
+            {
 
                 Programmes ppage = new Programmes();
 
@@ -89,6 +130,29 @@ namespace StatNav.IntegrationTests
 
                 ppage.btnSave.Click();
 
+                Iterations ipage = new Iterations();
+
+                isdisplayed = ipage.Create_Iteration_Link.Displayed;
+
+                var filepath = $"{TestContext.CurrentContext.TestDirectory}\\{TestContext.CurrentContext.Test.MethodName + val}.jpg";
+
+                Console.WriteLine(filepath);
+
+                ((ITakesScreenshot)AppDriver.driver).GetScreenshot().SaveAsFile(filepath);
+
+                TestContext.AddTestAttachment(filepath);
+            }
+            
+            catch
+            {
+                var filepath = $"{TestContext.CurrentContext.TestDirectory}\\{TestContext.CurrentContext.Test.MethodName+val2}.jpg";
+
+                ((ITakesScreenshot) AppDriver.driver).GetScreenshot().SaveAsFile(filepath);
+
+                TestContext.AddTestAttachment(filepath);
+
+                Assert.That(isdisplayed, Is.True);
+            }
         }
 
         public static void createiteration()
@@ -145,7 +209,7 @@ namespace StatNav.IntegrationTests
                 Console.WriteLine(cnt);
                 int i;
                 //for (i = 1; i <= cnt-1; i++)
-                for (i = 1; i <= 2; i++)
+                for (i = 1; i <= cnt-1; i++)
                 {
                     var R_elemTable1 = AppDriver.driver.FindElement(By.XPath("/html/body/div[2]/table/tbody"));
                     var R_elemTr = R_elemTable1.FindElement(By.TagName("tr"));

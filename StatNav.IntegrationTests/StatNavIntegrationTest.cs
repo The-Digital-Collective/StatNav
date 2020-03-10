@@ -35,15 +35,13 @@ namespace StatNav.IntegrationTests
         public void DeletePrgrammes()
         {
             Delete_Program.DeleteProgram();
-            AppDriver.driver.Close();
+            
         }
 
         [OneTimeTearDown]
         public void Browser()
         {
-            AppDriver.extent.Flush();
-            //Utils.DriverSetup();
-            //AppClass.SendMail();
+            AppDriver.driver.Close();
         }
     }
 }
