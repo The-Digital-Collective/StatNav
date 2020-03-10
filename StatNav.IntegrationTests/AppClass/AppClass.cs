@@ -10,50 +10,26 @@ using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 using System.Text;
 using System.Security.Cryptography;
 using System.Net.Mail;
+using NUnit.Framework;
 
 namespace StatNav.IntegrationTests
 {
     public static class AppClass
     {
-        public static void SendMail()
-        {
-            MailMessage mail = new MailMessage();
-            string[] toAddrs = ConfigurationManager.AppSettings["ToMail"].Split(';');
-            foreach (string addr in toAddrs)
-            {
-                if (!string.IsNullOrEmpty(addr))
-                {
-                    mail.To.Add(addr);
-                }
-            }
-
-            mail.From = new MailAddress(ConfigurationManager.AppSettings["FromMail"]);
-            mail.Subject = ConfigurationManager.AppSettings["MailSubject"];
-            mail.IsBodyHtml = true;
-            mail.Attachments.Add(new Attachment(ConfigurationManager.AppSettings["ReportsPath"] + "Chrome Test Report.html"));
-            mail.Body = ConfigurationManager.AppSettings["MailBody"];
-            SmtpClient smtp = new SmtpClient();
-            smtp.Host = ConfigurationManager.AppSettings["SmtpHost"];
-            smtp.Port = Int32.Parse(ConfigurationManager.AppSettings["SmtpPort"]);
-            smtp.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["SmtpUserId"], ConfigurationManager.AppSettings["SmtpPassword"]);
-            smtp.EnableSsl = ConfigurationManager.AppSettings["EnableSSL"] == "Y";
-            smtp.Send(mail);
-        }
         public static void StatNavLogin()
-        { 
+        {
+                string _username = TestContext.Parameters.Get("now");
+                string _password = TestContext.Parameters.Get("next");
 
-                
                 StatNav spage = new StatNav();
 
                 AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.Login));
 
                 spage.Login.Click();
 
-               // string pp = AppClass.Decrypt(ConfigurationManager.AppSettings["Password"]);
-
                 AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSAccount));
 
-                spage.MSAccount.SendKeys(ConfigurationManager.AppSettings["LoginName"]);
+                spage.MSAccount.SendKeys(_username);
 
                 AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
 
@@ -61,7 +37,7 @@ namespace StatNav.IntegrationTests
 
                 AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSPwd));
 
-                spage.MSPwd.SendKeys(ConfigurationManager.AppSettings["Password"]);
+                spage.MSPwd.SendKeys(_password);
 
                 AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
 
@@ -70,22 +46,21 @@ namespace StatNav.IntegrationTests
                 AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
 
                 spage.MSconfirm.Click();
+
+                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.Programmes));
+                spage.Programmes.Click();
 
 
         }
 
-        public static bool createprogramme()
+        public static void createprogramme()
         {
 
-           
-            try
-            {
                 Programmes ppage = new Programmes();
 
                 ppage.btnCreateNew.Click();
                 var rand = new Random();
                 int value = rand.Next(999999);
-                //string text = value.ToString("000");
 
                 ppage.txtProgrammeName.SendKeys("IntegrationTest Programme" + value);
 
@@ -114,20 +89,11 @@ namespace StatNav.IntegrationTests
 
                 ppage.btnSave.Click();
 
-                return true;
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine(e);
-                return false;
-            }
-
         }
 
-        public static bool createiteration()
+        public static void createiteration()
         {
-            try
-            {
+ 
                 Iterations ipage = new Iterations();
 
                 AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(ipage.Create_Iteration_Link));
@@ -148,20 +114,11 @@ namespace StatNav.IntegrationTests
                 js.ExecuteScript("javascript:window.scrollBy(0,-250)");
                 ipage.SaveCandidate.Click();
                 ipage.Create_Candidate.Click();
-
-                return true;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return false;
-            }
         }
 
-        public static bool createcandidate()
+        public static void createcandidate()
         {
-            try
-            {
+
                 Candidate cpage = new Candidate();
 
                 cpage.CandidateName.SendKeys("Newcandidate");
@@ -176,21 +133,11 @@ namespace StatNav.IntegrationTests
                 IJavaScriptExecutor js = (IJavaScriptExecutor)AppDriver.driver;
                 js.ExecuteScript("javascript:window.scrollBy(0,-250)");
                 cpage.savecandidate.Click();
-
-                return true;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-
-                return false;
-            }
         }
 
-        public static bool deleteprogrammethod()
+        public static void deleteprogrammethod()
         {
-            try
-            {
+
                 var R_elemTable = AppDriver.driver.FindElement(By.XPath("/html/body/div[2]/table/tbody"));
                 // Fetch all Row of the table
                 List<IWebElement> R_lstTrElem = new List<IWebElement>(R_elemTable.FindElements(By.TagName("tr")));
@@ -218,13 +165,7 @@ namespace StatNav.IntegrationTests
                     R_elemTr = null;
                     pp = null;
                 }
-                return true;
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine(e);
-                return false;
-            }
+
         }
         public static string Browsername(string Browser)
         {
@@ -235,39 +176,5 @@ namespace StatNav.IntegrationTests
                 input = input.Substring(0, index);
             return input;
         }
-
-        public static string Encrypt(string plainText)
-        {
-            if (plainText == null) throw new ArgumentNullException("plainText");
-            DataProtectionScope scope = new DataProtectionScope();
-            //encrypt data
-            var data = Encoding.Unicode.GetBytes(plainText);
-            byte[] encrypted = ProtectedData.Protect(data, null, scope);
-
-            //return as base64 string
-            return Convert.ToBase64String(encrypted);
-        }
-
-
-        public static string Decrypt(string cipher)
-        {
-            try
-            {
-                if (cipher == null) throw new ArgumentNullException("cipher");
-                DataProtectionScope scope = new DataProtectionScope();
-                //parse base64 string
-                byte[] data = Convert.FromBase64String(cipher);
-
-                //decrypt data
-                byte[] decrypted = ProtectedData.Unprotect(data, null, scope);
-                return Encoding.Unicode.GetString(decrypted);
-
-            }
-            catch(Exception e)
-            {
-                return null;
-            }
-        }
     }
-
 }
