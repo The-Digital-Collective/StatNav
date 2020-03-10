@@ -5,5 +5,7 @@
   <TestRunParameters>
     <Parameter name="webAppUrl" value="https://wvuk-statnav-webapp.azurewebsites.net/" />
     <!--<Parameter name="webAppUrl" value="https://localhost:44316/" />-->
+    <Parameter name="now" value="aaaaa" />
+    <Parameter name="next" value="bbb" />
   </TestRunParameters>
 </RunSettings>

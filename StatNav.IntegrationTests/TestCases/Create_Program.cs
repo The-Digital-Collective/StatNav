@@ -10,15 +10,16 @@ using NUnit.Framework;
 namespace StatNav.IntegrationTests
 {
     public class Create_Program
-    {        
+    {
+        
+
         public static void CreateProgram(string value)
         {
+           
+            string _username = TestContext.Parameters.Get("now");
+            string _password = TestContext.Parameters["next"];
+
             AppDriver.test = AppDriver.extent.CreateTest("Create Program in StatNav App");
-            Utils.CreateFileOrFolder(value);
-            
-            
-                //string pp1 = AppClass.Encrypt(ConfigurationManager.AppSettings["Password"]);
-                //string pp = AppClass.Decrypt(pp1);
 
                 //url To launch the application
                 AppDriver.driver.Url = ConfigurationManager.AppSettings["URL"];
@@ -36,7 +37,7 @@ namespace StatNav.IntegrationTests
 
                 AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSAccount));
 
-                spage.MSAccount.SendKeys(ConfigurationManager.AppSettings["LoginName"]);
+                spage.MSAccount.SendKeys(_username);
 
                 AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
 
@@ -44,7 +45,7 @@ namespace StatNav.IntegrationTests
 
                 AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSPwd));
 
-                spage.MSPwd.SendKeys(ConfigurationManager.AppSettings["Password"]);
+                spage.MSPwd.SendKeys(_password);
 
                 AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
 
@@ -54,11 +55,22 @@ namespace StatNav.IntegrationTests
 
                 spage.MSconfirm.Click();
 
+                bool isdisplayed = false;
 
-                AppDriver.test.Log(Status.Pass, "Step 1 : Login to the application is Successfull");
-                AppDriver.file = ((ITakesScreenshot)AppDriver.driver).GetScreenshot();
-                AppDriver.file.SaveAsFile(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step1.png", ScreenshotImageFormat.Png);
-                AppDriver.test.Pass("Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(ConfigurationManager.AppSettings["ReportsPath"] + value + "\\" + "step1.png").Build());
+                //try
+                //{
+                //    isdisplayed = spage.Programmes.Displayed;
+                //}
+                //catch
+                //{
+                    var filepath = $"{TestContext.CurrentContext.TestDirectory}\\{TestContext.CurrentContext.Test.MethodName}.jpg";
+
+                    ((ITakesScreenshot)AppDriver.driver).GetScreenshot().SaveAsFile(filepath);
+
+                    TestContext.AddTestAttachment(filepath);
+
+                    Assert.That(isdisplayed, Is.True);
+                //}
 
                 AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.Programmes));
                 spage.Programmes.Click();
