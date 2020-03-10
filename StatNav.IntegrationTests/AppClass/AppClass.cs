@@ -134,7 +134,7 @@ namespace StatNav.IntegrationTests
 
                 isdisplayed = ipage.Create_Iteration_Link.Displayed;
 
-                var filepath = $"{TestContext.CurrentContext.TestDirectory}\\{TestContext.CurrentContext.Test.MethodName + val}.jpg";
+                var filepath = $"{TestContext.CurrentContext.TestDirectory}\\{TestContext.CurrentContext.Test.MethodName + val2}.jpg";
 
                 Console.WriteLine(filepath);
 
