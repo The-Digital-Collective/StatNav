@@ -71,6 +71,8 @@ namespace StatNav.IntegrationTests
 
                 TestContext.AddTestAttachment(filepath);
 
+                Console.WriteLine("Login Passed1");
+
             }
             catch
             {
@@ -79,6 +81,8 @@ namespace StatNav.IntegrationTests
                     ((ITakesScreenshot)AppDriver.driver).GetScreenshot().SaveAsFile(filepath);
 
                     TestContext.AddTestAttachment(filepath);
+
+                Console.WriteLine("Login failed1");
 
             }            
         }
@@ -134,6 +138,7 @@ namespace StatNav.IntegrationTests
                 ((ITakesScreenshot)AppDriver.driver).GetScreenshot().SaveAsFile(filepath);
 
                 TestContext.AddTestAttachment(filepath);
+                Console.WriteLine("Login passed 2");
             }
             
             catch
@@ -143,6 +148,8 @@ namespace StatNav.IntegrationTests
                 ((ITakesScreenshot)AppDriver.driver).GetScreenshot().SaveAsFile(filepath);
 
                 TestContext.AddTestAttachment(filepath);
+
+                Console.WriteLine("Login failed 2");
 
             }
         }
