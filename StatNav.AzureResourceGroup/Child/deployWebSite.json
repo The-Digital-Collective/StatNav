@@ -34,7 +34,7 @@
 		},
 		"outputHostingPlanReference": {
 			"type": "string"
-		},
+		}
 		
 	},
 	"resources": [
