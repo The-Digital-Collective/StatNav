@@ -27,9 +27,9 @@
 	},
 	"variables": {
 		"baseTemplateUrl": "https://raw.githubusercontent.com/The-Digital-Collective/StatNav/Stanav-Test/StatNav.AzureResourceGroup/child",
-		"nestedSQLServerTemplateFile": "[concat(variables('baseTemplateUrl'), '/', 'deploySqlServer.json?token=AOHXSXDYDP3XWYIRJ37OLNC6OMDVU')]",
-		"nestedHostingPlanTemplateFile": "[concat(variables('baseTemplateUrl'), '/', 'deployHostingPlan.json?token=AOHXSXEJEXNMMJBKYATFXUC6OMDXO')]",
-		"nestedWebSiteTemplateFile": "[concat(variables('baseTemplateUrl'), '/', 'deployWebSite.json?token=AOHXSXHLHESNGN4A6AJ3KAK6OMD2E')]",
+		"nestedSQLServerTemplateFile": "[concat(variables('baseTemplateUrl'), '/', 'deploySqlServer.json')]",
+		"nestedHostingPlanTemplateFile": "[concat(variables('baseTemplateUrl'), '/', 'deployHostingPlan.json')]",
+		"nestedWebSiteTemplateFile": "[concat(variables('baseTemplateUrl'), '/', 'deployWebSite.json')]",
 		"apiVersion": "2017-05-10",
 		"contentVersion": "1.0.0.0",
 		"mode": "Incremental",
