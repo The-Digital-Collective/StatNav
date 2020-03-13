@@ -35,7 +35,6 @@
 		"outputHostingPlanReference": {
 			"type": "string"
 		}
-		
 	},
 	"resources": [
 		{
@@ -80,7 +79,6 @@
 						"ida:Domain": "[parameters('ida:Domain')]",
 						"ida:PostLogoutRedirectUri": "[parameters('ida:PostLogoutRedirectUri')]",
 						"ida:TenantId": "[subscription().tenantId]"
-					
 					}
 				}
 			]

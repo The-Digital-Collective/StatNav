@@ -42,7 +42,6 @@
 				"secretName": "Common-Domain-MS"
 			}
 		},
-		
 		"environmentName": {
 			"value": "statnav-sandbox-test"
 		},
