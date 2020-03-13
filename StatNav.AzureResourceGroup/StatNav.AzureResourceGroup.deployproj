@@ -28,9 +28,9 @@
     </None>
     <Content Include="Deploy-AzureResourceGroup.ps1" />
    <Content Include="WebSiteMasterTemplate.json" />
-  <Content Include="child/deploySqlServer.json" />
-	<Content Include="child/deployHostingPlan.json" />
-	<Content Include="child/deployWebSite.json" />
+  <Content Include="Child/deploySqlServer.json" />
+	<Content Include="Child/deployHostingPlan.json" />
+	<Content Include="Child/deployWebSite.json" />
 	 <Content Include="WebSiteMaster.parameters.json" />
   </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />
