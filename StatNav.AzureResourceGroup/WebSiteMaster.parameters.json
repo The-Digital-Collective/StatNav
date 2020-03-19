@@ -7,7 +7,7 @@
 				"keyVault": {
 					"id": "/subscriptions/c8efb8b5-6119-46c8-9ed3-e0bf71b66ce7/resourceGroups/Keyvault-RG/providers/Microsoft.KeyVault/vaults/KeyVault-Digital-Collect"
 				},
-				"secretName": "Login-Statnav-Sandbox-Secret"
+				"secretName": "Login-Statnav-Staging-Secret"
 			}
 		},
 		"administratorLoginPassword": {
@@ -15,7 +15,7 @@
 				"keyVault": {
 					"id": "/subscriptions/c8efb8b5-6119-46c8-9ed3-e0bf71b66ce7/resourceGroups/Keyvault-RG/providers/Microsoft.KeyVault/vaults/KeyVault-Digital-Collect"
 				},
-				"secretName": "PWD-Statnav-Sandbox-Secret"
+				"secretName": "PWD-Statnav-Staging-Secret"
 			}
 		},
 		"ida:AADInstance": {
@@ -43,10 +43,10 @@
 			}
 		},
 		"environmentName": {
-			"value": "statnav-sandbox-test"
+			"value": "statnav-staging"
 		},
 		"databaseName": {
-			"value": "statnavsandboxtestdb"
+			"value": "statnavstagingdb"
 		}
 	}
 }
