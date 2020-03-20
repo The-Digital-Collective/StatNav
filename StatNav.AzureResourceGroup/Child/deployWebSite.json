@@ -32,7 +32,17 @@
 		"ida:PostLogoutRedirectUri": {
 			"type": "string"
 		},
+		
 		"outputHostingPlanReference": {
+			"type": "string"
+		},
+		"outputStorageAccountNameReference": {
+			"type": "string"
+		},
+		"outputStorageContainerNameReference": {
+			"type": "string"
+		},
+		"outputStorageAccountKeyReference": {
 			"type": "string"
 		}
 	},
@@ -78,7 +88,10 @@
 						"ida:ClientId": "[parameters('ida:ClientId')]",
 						"ida:Domain": "[parameters('ida:Domain')]",
 						"ida:PostLogoutRedirectUri": "[parameters('ida:PostLogoutRedirectUri')]",
-						"ida:TenantId": "[subscription().tenantId]"
+						"ida:TenantId": "[subscription().tenantId]",
+					    "StorageAccountName": "[parameters('outputStorageAccountNameReference')]",
+						"StorageContainer": "[parameters('outputStorageContainerNameReference')]",
+						"StorageAccountKey": "[parameters('outputStorageAccountKeyReference')]"
 					}
 				}
 			]
