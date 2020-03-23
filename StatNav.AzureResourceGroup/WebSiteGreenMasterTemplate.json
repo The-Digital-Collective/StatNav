@@ -26,12 +26,12 @@
 		}
 	},
 	"variables": {
-		"baseTemplateUrl": "https://raw.githubusercontent.com/The-Digital-Collective/StatNav/Statnav-Live/StatNav.AzureResourceGroup/child",
-		"nestedSQLServerTemplateFile": "[concat(variables('baseTemplateUrl'), '/', 'deploySqlServer.json?token=AOHXSXDYDP3XWYIRJ37OLNC6OMDVU')]",
-		"nestedHostingPlanTemplateFile": "[concat(variables('baseTemplateUrl'), '/', 'deployHostingPlan.json?token=AOHXSXEJEXNMMJBKYATFXUC6OMDXO')]",
-		"nestedStorageAccountTemplateFile": "[concat(variables('baseTemplateUrl'), '/', 'deployStorageAccount.json?token=AOHXSXGHBZHSVBH7KYBXPQ26OMDY2')]",
-		"nestedWebSiteTemplateFile": "[concat(variables('baseTemplateUrl'), '/', 'deployWebSite.json?token=AOHXSXHLHESNGN4A6AJ3KAK6OMD2E')]",
-		"nestedTrafficManagerTemplateFile": "[concat(variables('baseTemplateUrl'), '/', 'deployTrafficManager.json?token=AOHXSXAHH3WVKRWFASTNSDC6OMD5O')]",			
+		"baseTemplateUrl": "https://raw.githubusercontent.com/The-Digital-Collective/StatNav/Statnav-Live/StatNav.AzureResourceGroup/Child",
+		"nestedSQLServerTemplateFile": "[concat(variables('baseTemplateUrl'), '/', 'deploySqlServer.json')]",
+		"nestedHostingPlanTemplateFile": "[concat(variables('baseTemplateUrl'), '/', 'deployHostingPlan.json')]",
+		"nestedStorageAccountTemplateFile": "[concat(variables('baseTemplateUrl'), '/', 'deployStorageAccount.json')]",
+		"nestedWebSiteTemplateFile": "[concat(variables('baseTemplateUrl'), '/', 'deployWebSite.json')]",
+		"nestedTrafficManagerTemplateFile": "[concat(variables('baseTemplateUrl'), '/', 'deployTrafficManager.json')]",			
 		"apiVersion": "2017-05-10",
 		"contentVersion": "1.0.0.0",
 		"mode": "Incremental",
