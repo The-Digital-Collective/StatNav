@@ -26,9 +26,17 @@
     <None Include="Deployment.targets">
       <Visible>False</Visible>
     </None>
-    <Content Include="Deploy-AzureResourceGroup.ps1" />
-    <Content Include="WebSiteSQLDatabase.json" />
-    <Content Include="WebSiteSQLDatabase.parameters.json" />
+   <Content Include="Deploy-AzureResourceGroup.ps1" />
+   <Content Include="Deploy-AzureResourceGroup-Creation.ps1" />
+    <Content Include="WebSiteBlueMasterTemplate.json" />
+     <Content Include="WebSiteGreenMasterTemplate.json" />
+     <Content Include="child/deploySqlServer.json" />
+	<Content Include="child/deployHostingPlan.json" />
+	<Content Include="child/deployWebSite.json" />
+	<Content Include="child/deployTrafficManager.json" />
+	<Content Include="child/deployStorageAccount.json" />
+    <Content Include="WebSiteBlueMaster.parameters.json" />
+    <Content Include="WebSiteGreenMaster.parameters.json" />
   </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />
 </Project>
