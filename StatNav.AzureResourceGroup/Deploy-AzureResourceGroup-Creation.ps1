@@ -13,8 +13,8 @@ $rgNameList = @($sharedRGName, $blueRGName, $greenRGName)
 
 # If resource group is already exist, then it won't create new resource group
 foreach ($rgName in $rgNameList) {
-	Get-AzResourceGroup -Name $rgName -ErrorVariable notPresent -ErrorAction SilentlyContinue
-	if ($notPresent){
+	$rsg = Get-AzResourceGroup -Name $rgName -ErrorVariable notPresent -ErrorAction SilentlyContinue
+	if (!$rsg){
 	   New-AzResourceGroup -Location $location -Name $rgName
 	}
  }
