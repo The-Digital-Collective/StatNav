@@ -1,0 +1,53 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"administratorLogin": {
+			"reference": {
+				"keyVault": {
+					"id": "/subscriptions/c8efb8b5-6119-46c8-9ed3-e0bf71b66ce7/resourceGroups/Keyvault-RG/providers/Microsoft.KeyVault/vaults/KeyVault-Digital-Collect"
+				},
+				"secretName": "Login-Statnav-Live-Secret"
+			}
+		},
+		"administratorLoginPassword": {
+			"reference": {
+				"keyVault": {
+					"id": "/subscriptions/c8efb8b5-6119-46c8-9ed3-e0bf71b66ce7/resourceGroups/Keyvault-RG/providers/Microsoft.KeyVault/vaults/KeyVault-Digital-Collect"
+				},
+				"secretName": "PWD-Statnav-Live-Secret"
+			}
+		},
+		"ida:AADInstance": {
+			"reference": {
+				"keyVault": {
+					"id": "/subscriptions/c8efb8b5-6119-46c8-9ed3-e0bf71b66ce7/resourceGroups/Keyvault-RG/providers/Microsoft.KeyVault/vaults/KeyVault-Digital-Collect"
+				},
+				"secretName": "Common-AADInstance-Digital-Collective"
+			}
+		},
+		"ida:ClientId": {
+			"reference": {
+				"keyVault": {
+					"id": "/subscriptions/c8efb8b5-6119-46c8-9ed3-e0bf71b66ce7/resourceGroups/Keyvault-RG/providers/Microsoft.KeyVault/vaults/KeyVault-Digital-Collect"
+				},
+				"secretName": "Common-ClientId-Digital-Collective"
+			}
+		},
+		"ida:Domain": {
+			"reference": {
+				"keyVault": {
+					"id": "/subscriptions/c8efb8b5-6119-46c8-9ed3-e0bf71b66ce7/resourceGroups/Keyvault-RG/providers/Microsoft.KeyVault/vaults/KeyVault-Digital-Collect"
+				},
+				"secretName": "Common-Domain-MS"
+			}
+		},
+		
+		"environmentName": {
+			"value": "statnav-sandbox"
+		},
+		"databaseName": {
+			"value": "statnavsandboxdb"
+		}
+	}
+}
