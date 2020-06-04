@@ -25,7 +25,7 @@
 		}
 	},
 	"variables": {
-		"baseTemplateUrl": "https://raw.githubusercontent.com/The-Digital-Collective/StatNav/master/StatNav.AzureResourceGroup/Child",
+		"baseTemplateUrl": "https://raw.githubusercontent.com/The-Digital-Collective/StatNav/develop/StatNav.AzureResourceGroup/Child",
 		"nestedSQLServerTemplateFile": "[concat(variables('baseTemplateUrl'), '/', 'deploySqlServer.json')]",
 		"nestedHostingPlanTemplateFile": "[concat(variables('baseTemplateUrl'), '/', 'deployHostingPlan.json')]",
 		"nestedStorageAccountTemplateFile": "[concat(variables('baseTemplateUrl'), '/', 'deployStorageAccount.json')]",
