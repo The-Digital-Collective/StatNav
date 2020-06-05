@@ -42,7 +42,7 @@
 		"resourceGroupWebapp": "[concat(parameters('environmentName'), '-Green-RG')]",
 		"resourceGroupShared": "[concat(parameters('environmentName'), '-Shared-RG')]",
 		"storageenv": "[replace(parameters('environmentName'), '-', '')]",
-		"storageAccountName": "[toLower([concat(variables('storageenv'), 'storage'))]",
+		"storageAccountName": "[toLower(concat(variables('storageenv'), 'storage'))]",
 		"containerName": "[toLower(concat(parameters('environmentName'), '-photo-container'))]",
 		"ida:PostLogoutRedirectUri": "[concat('https://', variables('webSiteName'),'.azurewebsites.net')]",
 		"sqlServerTemplate": "sqlServerTemplate",
