@@ -21,7 +21,7 @@ namespace StatNav.UnitTests.ModelValidation
             // Assert
             Assert.IsFalse(isModelStateValid);
             Assert.AreEqual(1, results.Count);
-            Assert.AreEqual("The Programme Name field is required.", results[0].ErrorMessage);
+            Assert.AreEqual("The Package Name field is required.", results[0].ErrorMessage);
         }
     }
 }

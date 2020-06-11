@@ -1,23 +1,23 @@
 ﻿@model IEnumerable<StatNav.WebApplication.Models.ExperimentProgramme>
 
 @{
-    ViewBag.Title = "Programmes";
+    ViewBag.Title = "Marketing Asset Package";
 }
 
-<h4>Programmes</h4>
+<h4>Marketing Asset Packages</h4>
 @Html.Partial("_ExperimentTypeSelect", Model)
 <p>
     @Html.ActionLink("Create New", "Create", "Programme")
 </p>
 @Html.Partial("_searchBox")
 <table class="table">
-    <caption>List of Experiment Programmes</caption>
+    <caption>List of Marketing Asset Packages</caption>
     <tr>
         <th scope="col">
             <a href="@Url.Action("Index",new { sortOrder = ViewBag.IdSortParm })">ID <span class="glyphicon glyphicon-sort"></span></a>
         </th>
         <th scope="col">
-            <a href="@Url.Action("Index",new { sortOrder = ViewBag.NameSortParm })">Programme Name <span class="glyphicon glyphicon-sort"></span></a>
+            <a href="@Url.Action("Index",new { sortOrder = ViewBag.NameSortParm })">Package Name <span class="glyphicon glyphicon-sort"></span></a>
         </th>
         <th scope="col">
             <a href="@Url.Action("Index",new { sortOrder = ViewBag.StatusSortParm })">Status <span class="glyphicon glyphicon-sort"></span></a>

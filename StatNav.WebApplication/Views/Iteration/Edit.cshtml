@@ -91,11 +91,13 @@
                 </div>
             </div>
         }
-
-        <div>
-            @Html.ActionLink("Delete", "Delete", new { Id = Model.Id }, new { @class = "btn btn-danger" })
+        @if (action == "Edit")
+        {
+            <div>
+                @Html.ActionLink("Delete", "Delete", new { Id = Model.Id }, new { @class = "btn btn-danger" })
+            </div>
+        }
         </div>
-    </div>
     <div class="col-md-6">
         <p>&nbsp;</p>
         @if (action == "Edit")

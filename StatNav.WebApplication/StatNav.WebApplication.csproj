@@ -255,6 +255,10 @@
     <Compile Include="Migrations\202001161110138_MethodId.designer.cs">
       <DependentUpon>202001161110138_MethodId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006111300406_2067StagesTableEdit.cs" />
+    <Compile Include="Migrations\202006111300406_2067StagesTableEdit.designer.cs">
+      <DependentUpon>202006111300406_2067StagesTableEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ExperimentIterations.cs" />
     <Compile Include="Models\ExperimentCandidate.cs" />
@@ -561,6 +565,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001161110138_MethodId.resx">
       <DependentUpon>202001161110138_MethodId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006111300406_2067StagesTableEdit.resx">
+      <DependentUpon>202006111300406_2067StagesTableEdit.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

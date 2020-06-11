@@ -12,7 +12,7 @@
 
             <div class="form-horizontal">
 
-                <h4>@action Experiment Programme</h4>
+                <h4>@action Marketing Asset Package</h4>
                 @Html.Partial("_SaveButton")
                 <hr />
                 <p>&nbsp;</p>
@@ -24,7 +24,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => Model.Id, new { htmlAttributes = new { @class = "form-control", disabled="disabled" } })
+                            @Html.EditorFor(model => Model.Id, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
                         </div>
                     </div>
                 }
@@ -119,12 +119,13 @@
 
             </div>
         }
+        @if (action == "Edit")
+        {
+            <div>
+                @Html.ActionLink("Delete", "Delete", new { Id = Model.Id }, new { @class = "btn btn-danger" })
 
-        <div>
-            @Html.ActionLink("Delete", "Delete", new { Id = Model.Id }, new { @class = "btn btn-danger" })
-
-        </div>
-
+            </div>
+        }
         @section Scripts {
             @Scripts.Render("~/bundles/jqueryval")
         }

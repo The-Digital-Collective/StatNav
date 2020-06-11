@@ -10,7 +10,7 @@ namespace StatNav.WebApplication.Models
         public int Id { get; set; }
 
         [ForeignKey("ExperimentProgramme")]
-        [Display(Name = "Experiment Programme")]
+        [Display(Name = "Marketing Asset Package")]
         public int ExperimentProgrammeId { get; set; }
 
         public ExperimentProgramme ExperimentProgramme { get; set; }

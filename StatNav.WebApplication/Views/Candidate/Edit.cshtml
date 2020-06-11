@@ -81,7 +81,9 @@
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Delete", "Delete", new { Id = Model.Id }, new { @class = "btn btn-danger" })
-</div>
+@if (action == "Edit")
+{
+    <div>
+        @Html.ActionLink("Delete", "Delete", new { Id = Model.Id }, new { @class = "btn btn-danger" })
+    </div>
+}

@@ -18,7 +18,7 @@ namespace StatNav.WebApplication.Models
 
         public Team Team { get; set; }
 
-        [Display(Name = "Programme Name")]
+        [Display(Name = "Package Name")]
         [Required]
         public string ProgrammeName { get; set; }
 
