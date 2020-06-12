@@ -1,4 +1,4 @@
-﻿@model IEnumerable<StatNav.WebApplication.Models.ExperimentProgramme>
+﻿@model IEnumerable<StatNav.WebApplication.Models.MarketingAssetPackage>
 @{
 
 }
@@ -26,7 +26,7 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th scope="col">
-                @Html.DisplayNameFor(model => model.ProgrammeName)
+                @Html.DisplayNameFor(model => model.MAPName)
             </th>
             <th scope="col">
                 @Html.DisplayNameFor(model => model.ExperimentStatusId)
@@ -45,7 +45,7 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.ActionLink(item.ProgrammeName, "Edit", "Iteration", new { id = item.Id }, null)
+                @Html.ActionLink(item.MAPName, "Edit", "Iteration", new { id = item.Id }, null)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ExperimentStatus.StatusName)

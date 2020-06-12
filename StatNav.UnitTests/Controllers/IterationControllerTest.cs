@@ -21,9 +21,9 @@ namespace StatNav.UnitTests.Controllers
         public void TestInitialize()
         {
             //set up the dummy data for testing
-            iteration1 = new ExperimentIteration() { IterationName = "Victoria Sponge", Id = 1, ExperimentProgrammeId = 0, StartDateTime = new System.DateTime(2019, 11, 1),EndDateTime= new System.DateTime(2019, 11, 30) };
-            iteration2 = new ExperimentIteration() { IterationName = "Lemon Drizzle", Id = 2, ExperimentProgrammeId = 0, StartDateTime = new System.DateTime(2019, 08, 1), EndDateTime = new System.DateTime(2020, 07, 31) };
-            iteration3 = new ExperimentIteration() { IterationName = "Chocolate Fudge", Id = 3, ExperimentProgrammeId = 0, StartDateTime = new System.DateTime(2020, 01, 1), EndDateTime = new System.DateTime(2020, 03, 31) };
+            iteration1 = new ExperimentIteration() { IterationName = "Victoria Sponge", Id = 1, MarketingAssetPackageId = 0, StartDateTime = new System.DateTime(2019, 11, 1),EndDateTime= new System.DateTime(2019, 11, 30) };
+            iteration2 = new ExperimentIteration() { IterationName = "Lemon Drizzle", Id = 2, MarketingAssetPackageId = 0, StartDateTime = new System.DateTime(2019, 08, 1), EndDateTime = new System.DateTime(2020, 07, 31) };
+            iteration3 = new ExperimentIteration() { IterationName = "Chocolate Fudge", Id = 3, MarketingAssetPackageId = 0, StartDateTime = new System.DateTime(2020, 01, 1), EndDateTime = new System.DateTime(2020, 03, 31) };
             _iterations = new List<ExperimentIteration> { iteration1, iteration2, iteration3};
 
             iterationRepository = new DummyIterationRepository(_iterations);
@@ -254,8 +254,8 @@ namespace StatNav.UnitTests.Controllers
             ViewResult result = _controller.Create() as ViewResult;
 
             // Assert           
-            Assert.AreEqual(((IList<ExperimentProgramme>)result.ViewBag.ExperimentProgrammes).Count, iterationRepository.GetProgrammes().Count);
-            Assert.AreEqual(((IList<ExperimentProgramme>)result.ViewBag.ExperimentProgrammes).GetType(), iterationRepository.GetProgrammes().GetType());
+            Assert.AreEqual(((IList<MarketingAssetPackage>)result.ViewBag.MarketingAssetPackages).Count, iterationRepository.GetMAPs().Count);
+            Assert.AreEqual(((IList<MarketingAssetPackage>)result.ViewBag.MarketingAssetPackages).GetType(), iterationRepository.GetMAPs().GetType());
         }
 
         [TestMethod]
@@ -267,7 +267,7 @@ namespace StatNav.UnitTests.Controllers
             ViewResult result = _controller.Create(chosenProgrammeId) as ViewResult;
             ExperimentIteration ei = result.ViewData.Model as ExperimentIteration;
             // Assert
-            Assert.AreEqual(ei.ExperimentProgrammeId, chosenProgrammeId);
+            Assert.AreEqual(ei.MarketingAssetPackageId, chosenProgrammeId);
         }
 
 
@@ -275,7 +275,7 @@ namespace StatNav.UnitTests.Controllers
         public void CreateValidIteration()
         {
             //Arrange
-            ExperimentIteration newIteration = new ExperimentIteration { IterationName = "IterationNew", Id = 7, ExperimentProgrammeId=2 };
+            ExperimentIteration newIteration = new ExperimentIteration { IterationName = "IterationNew", Id = 7, MarketingAssetPackageId=2 };
 
             //Act
             var result = (RedirectToRouteResult)_controller.Create(newIteration);
@@ -339,8 +339,8 @@ namespace StatNav.UnitTests.Controllers
             ViewResult result = _controller.Edit(1) as ViewResult;
 
             // Assert           
-            Assert.AreEqual(((IList<ExperimentProgramme>)result.ViewBag.ExperimentProgrammes).Count, iterationRepository.GetProgrammes().Count);
-            Assert.AreEqual(((IList<ExperimentProgramme>)result.ViewBag.ExperimentProgrammes).GetType(), iterationRepository.GetProgrammes().GetType());
+            Assert.AreEqual(((IList<MarketingAssetPackage>)result.ViewBag.MarketingAssetPackages).Count, iterationRepository.GetMAPs().Count);
+            Assert.AreEqual(((IList<MarketingAssetPackage>)result.ViewBag.MarketingAssetPackages).GetType(), iterationRepository.GetMAPs().GetType());
         }
 
 
@@ -348,7 +348,7 @@ namespace StatNav.UnitTests.Controllers
         public void EditIterationEditsModel()
         {
             //Arrange
-            ExperimentIteration editedIteration = new ExperimentIteration { IterationName= "IterationEdited", Id = 1, ExperimentProgrammeId=2};
+            ExperimentIteration editedIteration = new ExperimentIteration { IterationName= "IterationEdited", Id = 1, MarketingAssetPackageId=2};
             //Act           
             var result = (RedirectToRouteResult)_controller.Edit(editedIteration);
             //get list of all iterations

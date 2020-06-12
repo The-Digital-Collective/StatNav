@@ -1,4 +1,4 @@
-﻿@model IEnumerable<StatNav.WebApplication.Models.ExperimentProgramme>
+﻿@model IEnumerable<StatNav.WebApplication.Models.MarketingAssetPackage>
 
 @{
     ViewBag.Title = "Marketing Asset Package";
@@ -7,7 +7,7 @@
 <h4>Marketing Asset Packages</h4>
 @Html.Partial("_ExperimentTypeSelect", Model)
 <p>
-    @Html.ActionLink("Create New", "Create", "Programme")
+    @Html.ActionLink("Create New", "Create", "MarketingAssetPackage")
 </p>
 @Html.Partial("_searchBox")
 <table class="table">
@@ -35,7 +35,7 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.ActionLink(item.ProgrammeName, "Edit", "Programme", new { id = item.Id }, null)
+                @Html.ActionLink(item.MAPName, "Edit", "MarketingAssetPackage", new { id = item.Id }, null)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ExperimentStatus.StatusName)

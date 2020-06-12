@@ -7,16 +7,16 @@
     {
         public override void Up()
         {
-            AddColumn("dbo.ExperimentProgramme", "PackageContainerId", c => c.Int());
-            CreateIndex("dbo.ExperimentProgramme", "PackageContainerId");
-            AddForeignKey("dbo.ExperimentProgramme", "PackageContainerId", "dbo.PackageContainer", "Id");
+            AddColumn("dbo.MarketingAssetPackage", "PackageContainerId", c => c.Int());
+            CreateIndex("dbo.MarketingAssetPackage", "PackageContainerId");
+            AddForeignKey("dbo.MarketingAssetPackage", "PackageContainerId", "dbo.PackageContainer", "Id");
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.ExperimentProgramme", "PackageContainerId", "dbo.PackageContainer");
-            DropIndex("dbo.ExperimentProgramme", new[] { "PackageContainerId" });
-            DropColumn("dbo.ExperimentProgramme", "PackageContainerId");
+            DropForeignKey("dbo.MarketingAssetPackage", "PackageContainerId", "dbo.PackageContainer");
+            DropIndex("dbo.MarketingAssetPackage", new[] { "PackageContainerId" });
+            DropColumn("dbo.MarketingAssetPackage", "PackageContainerId");
         }
     }
 }

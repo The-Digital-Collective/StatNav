@@ -229,7 +229,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="BLL\CandidateLogic.cs" />
     <Compile Include="BLL\IterationLogic.cs" />
-    <Compile Include="BLL\ProgrammeLogic.cs" />
+    <Compile Include="BLL\MAPLogic.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
@@ -237,12 +237,12 @@
     <Compile Include="Controllers\CandidateController.cs" />
     <Compile Include="Controllers\IterationController.cs" />
     <Compile Include="Controllers\PackageContainerController.cs" />
-    <Compile Include="Controllers\ProgrammeController.cs" />
+    <Compile Include="Controllers\MarketingAssetPackageController.cs" />
     <Compile Include="DAL\CandidateRepository.cs" />
     <Compile Include="DAL\GenericRepository.cs" />
     <Compile Include="DAL\IterationRepository.cs" />
     <Compile Include="DAL\PackageContainerRepository.cs" />
-    <Compile Include="DAL\ProgrammeRepository.cs" />
+    <Compile Include="DAL\MAPRepository.cs" />
     <Compile Include="DAL\StatNavContext.cs" />
     <Compile Include="ErrorHandler\AiHandleErrorAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -269,10 +269,14 @@
     <Compile Include="Migrations\202006120925385_AB#2085.designer.cs">
       <DependentUpon>202006120925385_AB#2085.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006121622137_AB#2069.cs" />
+    <Compile Include="Migrations\202006121622137_AB#2069.designer.cs">
+      <DependentUpon>202006121622137_AB#2069.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ExperimentIterations.cs" />
     <Compile Include="Models\ExperimentCandidate.cs" />
-    <Compile Include="Models\ExperimentProgramme.cs" />
+    <Compile Include="Models\MarketingAssetPackage.cs" />
     <Compile Include="Models\ExperimentStatus.cs" />
     <Compile Include="Models\Method.cs" />
     <Compile Include="Models\MetricCandidateResult.cs" />
@@ -528,11 +532,11 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Programme\Edit.cshtml" />
-    <Content Include="Views\Programme\_detail.cshtml" />
-    <Content Include="Views\Programme\Details.cshtml" />
-    <Content Include="Views\Programme\Delete.cshtml" />
-    <Content Include="Views\Programme\Index.cshtml" />
+    <Content Include="Views\MarketingAssetPackage\Edit.cshtml" />
+    <Content Include="Views\MarketingAssetPackage\_detail.cshtml" />
+    <Content Include="Views\MarketingAssetPackage\Details.cshtml" />
+    <Content Include="Views\MarketingAssetPackage\Delete.cshtml" />
+    <Content Include="Views\MarketingAssetPackage\Index.cshtml" />
     <Content Include="Views\Shared\_ExperimentTypeSelect.cshtml" />
     <Content Include="Views\Iteration\Index.cshtml" />
     <Content Include="Views\Iteration\Edit.cshtml" />
@@ -557,7 +561,7 @@
     <Content Include="Views\PackageContainer\Details.cshtml" />
     <Content Include="Views\PackageContainer\Edit.cshtml" />
     <Content Include="Views\PackageContainer\Index.cshtml" />
-    <Content Include="Views\Programme\_list.cshtml" />
+    <Content Include="Views\MarketingAssetPackage\_list.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -591,6 +595,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006120925385_AB#2085.resx">
       <DependentUpon>202006120925385_AB#2085.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006121622137_AB#2069.resx">
+      <DependentUpon>202006121622137_AB#2069.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

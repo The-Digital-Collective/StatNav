@@ -56,7 +56,7 @@
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        ExperimentProgrammeId = c.Int(nullable: false),
+                        MarketingAssetPackageId = c.Int(nullable: false),
                         IterationName = c.String(nullable: false),
                         RequiredDurationForSignificance = c.String(),
                         IterationNumber = c.Int(nullable: false),
@@ -66,11 +66,11 @@
                         FailureOutcome = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.ExperimentProgramme", t => t.ExperimentProgrammeId)
-                .Index(t => t.ExperimentProgrammeId);
+                .ForeignKey("dbo.MarketingAssetPackage", t => t.MarketingAssetPackageId)
+                .Index(t => t.MarketingAssetPackageId);
             
             CreateTable(
-                "dbo.ExperimentProgramme",
+                "dbo.MarketingAssetPackage",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -197,16 +197,16 @@
         {
             DropForeignKey("dbo.MetricCandidateResult", "MetricId", "dbo.MetricModel");
             DropForeignKey("dbo.MetricCandidateResult", "ExperimentCandidateId", "dbo.ExperimentCandidate");
-            DropForeignKey("dbo.ExperimentIteration", "ExperimentProgrammeId", "dbo.ExperimentProgramme");
-            DropForeignKey("dbo.ExperimentProgramme", "UserId", "dbo.User");
+            DropForeignKey("dbo.ExperimentIteration", "MarketingAssetPackageId", "dbo.MarketingAssetPackage");
+            DropForeignKey("dbo.MarketingAssetPackage", "UserId", "dbo.User");
             DropForeignKey("dbo.User", "RoleId", "dbo.UserRole");
             DropForeignKey("dbo.User", "TeamId", "dbo.Team");
-            DropForeignKey("dbo.ExperimentProgramme", "TeamId", "dbo.Team");
+            DropForeignKey("dbo.MarketingAssetPackage", "TeamId", "dbo.Team");
             DropForeignKey("dbo.Team", "OrganisationId", "dbo.Organisation");
-            DropForeignKey("dbo.ExperimentProgramme", "ProgrammeTargetMetricModelId", "dbo.MetricModel");
-            DropForeignKey("dbo.ExperimentProgramme", "Method", "dbo.Method");
-            DropForeignKey("dbo.ExperimentProgramme", "ProgrammeImpactMetricModelId", "dbo.MetricModel");
-            DropForeignKey("dbo.ExperimentProgramme", "ExperimentStatusId", "dbo.ExperimentStatus");
+            DropForeignKey("dbo.MarketingAssetPackage", "ProgrammeTargetMetricModelId", "dbo.MetricModel");
+            DropForeignKey("dbo.MarketingAssetPackage", "Method", "dbo.Method");
+            DropForeignKey("dbo.MarketingAssetPackage", "ProgrammeImpactMetricModelId", "dbo.MetricModel");
+            DropForeignKey("dbo.MarketingAssetPackage", "ExperimentStatusId", "dbo.ExperimentStatus");
             DropForeignKey("dbo.ExperimentCandidate", "ExperimentIterationId", "dbo.ExperimentIteration");
             DropForeignKey("dbo.ExperimentCandidate", "CandidateTargetMetricModelId", "dbo.MetricModel");
             DropForeignKey("dbo.ExperimentCandidate", "CandidateImpactMetricModelId", "dbo.MetricModel");
@@ -216,13 +216,13 @@
             DropIndex("dbo.User", new[] { "RoleId" });
             DropIndex("dbo.User", new[] { "TeamId" });
             DropIndex("dbo.Team", new[] { "OrganisationId" });
-            DropIndex("dbo.ExperimentProgramme", new[] { "ExperimentStatusId" });
-            DropIndex("dbo.ExperimentProgramme", new[] { "ProgrammeImpactMetricModelId" });
-            DropIndex("dbo.ExperimentProgramme", new[] { "ProgrammeTargetMetricModelId" });
-            DropIndex("dbo.ExperimentProgramme", new[] { "Method" });
-            DropIndex("dbo.ExperimentProgramme", new[] { "TeamId" });
-            DropIndex("dbo.ExperimentProgramme", new[] { "UserId" });
-            DropIndex("dbo.ExperimentIteration", new[] { "ExperimentProgrammeId" });
+            DropIndex("dbo.MarketingAssetPackage", new[] { "ExperimentStatusId" });
+            DropIndex("dbo.MarketingAssetPackage", new[] { "ProgrammeImpactMetricModelId" });
+            DropIndex("dbo.MarketingAssetPackage", new[] { "ProgrammeTargetMetricModelId" });
+            DropIndex("dbo.MarketingAssetPackage", new[] { "Method" });
+            DropIndex("dbo.MarketingAssetPackage", new[] { "TeamId" });
+            DropIndex("dbo.MarketingAssetPackage", new[] { "UserId" });
+            DropIndex("dbo.ExperimentIteration", new[] { "MarketingAssetPackageId" });
             DropIndex("dbo.MetricModel", new[] { "MetricModelStageId" });
             DropIndex("dbo.ExperimentCandidate", new[] { "CandidateImpactMetricModelId" });
             DropIndex("dbo.ExperimentCandidate", new[] { "CandidateTargetMetricModelId" });
@@ -234,7 +234,7 @@
             DropTable("dbo.Team");
             DropTable("dbo.Method");
             DropTable("dbo.ExperimentStatus");
-            DropTable("dbo.ExperimentProgramme");
+            DropTable("dbo.MarketingAssetPackage");
             DropTable("dbo.ExperimentIteration");
             DropTable("dbo.MetricModelStage");
             DropTable("dbo.MetricModel");

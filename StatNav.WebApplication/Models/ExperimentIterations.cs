@@ -9,11 +9,11 @@ namespace StatNav.WebApplication.Models
     {
         public int Id { get; set; }
 
-        [ForeignKey("ExperimentProgramme")]
+        [ForeignKey("MarketingAssetPackage")]
         [Display(Name = "Marketing Asset Package")]
-        public int ExperimentProgrammeId { get; set; }
+        public int MarketingAssetPackageId { get; set; }
 
-        public ExperimentProgramme ExperimentProgramme { get; set; }
+        public MarketingAssetPackage MarketingAssetPackage { get; set; }
 
         [Display(Name = "Iteration Name")]
         [Required]

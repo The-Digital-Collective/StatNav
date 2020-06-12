@@ -1,4 +1,4 @@
-﻿@model StatNav.WebApplication.Models.ExperimentProgramme
+﻿@model StatNav.WebApplication.Models.MarketingAssetPackage
 
 @{
     String action = ViewBag.Action;
@@ -29,10 +29,10 @@
                     </div>
                 }
                 <div class="form-group">
-                    @Html.LabelFor(model => model.ProgrammeName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.MAPName, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.ProgrammeName, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.ProgrammeName, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.MAPName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MAPName, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
@@ -69,10 +69,10 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.ProgrammeTargetMetricModelId, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.MAPTargetMetricModelId, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownList("ProgrammeTargetMetricModelId", new SelectList(ViewBag.MetricModels, "Id", "Title"), "Please Select...", htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.ProgrammeTargetMetricModelId, "", new { @class = "text-danger" })
+                        @Html.DropDownList("MAPTargetMetricModelId", new SelectList(ViewBag.MetricModels, "Id", "Title"), "Please Select...", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MAPTargetMetricModelId, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
@@ -85,10 +85,10 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.ProgrammeImpactMetricModelId, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.MAPImpactMetricModelId, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownList("ProgrammeImpactMetricModelId", new SelectList(ViewBag.MetricModels, "Id", "Title"), htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.ProgrammeImpactMetricModelId, "", new { @class = "text-danger" })
+                        @Html.DropDownList("MAPImpactMetricModelId", new SelectList(ViewBag.MetricModels, "Id", "Title"), htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MAPImpactMetricModelId, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
@@ -135,7 +135,7 @@
         @if (action == "Edit")
         {
             <h4>Iterations</h4>
-            @Html.ActionLink("Create  Iteration for this Programme", "Create", "Iteration", new { programmeId = Model.Id }, null)
+            @Html.ActionLink("Create  Iteration for this Marketing Asset Package", "Create", "Iteration", new { mapId = Model.Id }, null)
 
             @Html.Partial("../Iteration/_list", Model.ExperimentIterations)
         }

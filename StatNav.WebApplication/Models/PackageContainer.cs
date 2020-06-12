@@ -27,6 +27,6 @@ namespace StatNav.WebApplication.Models
         public string Notes { get; set; }
 
         [ForeignKey("PackageContainerId")]
-        public ICollection<ExperimentProgramme> ExperimentProgrammes { get; set; }
+        public ICollection<MarketingAssetPackage> MarketingAssetPackages { get; set; }
     }
 }

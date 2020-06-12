@@ -1,4 +1,4 @@
-﻿@model StatNav.WebApplication.Models.ExperimentProgramme
+﻿@model StatNav.WebApplication.Models.MarketingAssetPackage
 <div class="row">
     <div class="col-md-6">
         <dl class="dl-horizontal">
@@ -11,11 +11,11 @@
                     {
                         case "ExperimentStatus":
                         case "ExperimentIterations":
-                        case "ProgrammeTargetMetricModel":
-                        case "ProgrammeImpactMetricModel":
+                        case "MAPTargetMetricModel":
+                        case "MAPImpactMetricModel":
                         case "UserId":
                         case "TeamId":
-                        case "ProgrammeMethod":
+                        case "MAPMethod":
                             break;
                         default:
                             @(prop.DisplayName ?? prop.PropertyName)
@@ -26,25 +26,25 @@
                 <dd>
                     @switch (prop.PropertyName)
                     {
-                        case "ProgrammeTargetMetricModelId":
-                            @(Model.ProgrammeTargetMetricModel != null ? Model.ProgrammeTargetMetricModel.Title : "");
+                        case "MAPTargetMetricModelId":
+                            @(Model.MAPTargetMetricModel != null ? Model.MAPTargetMetricModel.Title : "");
                             break;
-                        case "ProgrammeImpactMetricModelId":
-                            @(Model.ProgrammeImpactMetricModel != null ? Model.ProgrammeImpactMetricModel.Title : "");
+                        case "MAPImpactMetricModelId":
+                            @(Model.MAPImpactMetricModel != null ? Model.MAPImpactMetricModel.Title : "");
                             break;
                         case "ExperimentStatusId":
                             @(Model.ExperimentStatus != null ? Model.ExperimentStatus.StatusName : "");
                             break;
                         case "MethodId":
-                            @(Model.ProgrammeMethod != null ? Model.ProgrammeMethod.Title : "");
+                            @(Model.MAPMethod != null ? Model.MAPMethod.Title : "");
                             break;
                         case "ExperimentStatus":
                         case "ExperimentIterations":
-                        case "ProgrammeTargetMetricModel":
-                        case "ProgrammeImpactMetricModel":
+                        case "MAPTargetMetricModel":
+                        case "MAPImpactMetricModel":
                         case "UserId":
                         case "TeamId":
-                        case "ProgrammeMethod":
+                        case "MAPMethod":
                             break;
                         default:
                             @prop.Model

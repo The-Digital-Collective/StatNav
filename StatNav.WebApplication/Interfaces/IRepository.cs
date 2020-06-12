@@ -17,19 +17,19 @@ namespace StatNav.WebApplication.Interfaces
     public interface IPackageContainerRepository : IRepository<PackageContainer>
     {
         IList<MetricModelStage> GetStages();
-        List<ExperimentProgramme> GetProgrammes(int Id);
+        List<MarketingAssetPackage> GetMAPs(int Id);
     }
-    public interface IProgrammeRepository : IRepository<ExperimentProgramme>
+    public interface IMAPRepository : IRepository<MarketingAssetPackage>
     {
         IList<MetricModel> GetMetricModels();
         IList<ExperimentStatus> GetStatuses();
         IList<Method> GetMethods();
-        List<ExperimentProgramme> SortList(List<ExperimentProgramme> programmes, string sortOrder);
+        List<MarketingAssetPackage> SortList(List<MarketingAssetPackage> maps, string sortOrder);
         List<ExperimentIteration> GetIterations(int Id);
     }
     public interface IIterationRepository : IRepository<ExperimentIteration>
     {
-        IList<ExperimentProgramme> GetProgrammes();
+        IList<MarketingAssetPackage> GetMAPs();
         List<ExperimentIteration> SortList(List<ExperimentIteration> iterations, string sortOrder);
         List<ExperimentCandidate> GetCandidates(int Id);
     }

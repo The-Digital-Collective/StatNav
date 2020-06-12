@@ -49,11 +49,11 @@ namespace StatNav.UnitTests.TestData
             dummyIterations.Remove(iterationToDel);
         }
 
-        public IList<ExperimentProgramme> GetProgrammes()
+        public IList<MarketingAssetPackage> GetMAPs()
         {
-            ExperimentProgramme prog1 = new ExperimentProgramme { ProgrammeName = "Programme1", Id = 1 };
-            ExperimentProgramme prog2 = new ExperimentProgramme() { ProgrammeName = "Programme2", Id = 2 };
-            return new List<ExperimentProgramme> { prog1, prog2 };
+            MarketingAssetPackage map1 = new MarketingAssetPackage { MAPName = "MAP1", Id = 1 };
+            MarketingAssetPackage map2 = new MarketingAssetPackage() { MAPName = "MAP2", Id = 2 };
+            return new List<MarketingAssetPackage> { map1, map2 };
         }
 
         public List<ExperimentCandidate> GetCandidates(int id)

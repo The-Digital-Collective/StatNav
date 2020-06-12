@@ -9,7 +9,7 @@
                 <dt>
                     @switch (prop.PropertyName)
                     {
-                        case "ExperimentProgramme":
+                        case "MarketingAssetPackage":
                         case "ExperimentCandidates":
                             break;
                         default:
@@ -21,11 +21,11 @@
                 <dd>
                     @switch (prop.PropertyName)
                     {
-                        case "ExperimentProgrammeId":
-                            @(Model.ExperimentProgramme != null ? Model.ExperimentProgramme.ProgrammeName : "");
+                        case "MarketingAssetPackageId":
+                            @(Model.MarketingAssetPackage != null ? Model.MarketingAssetPackage.MAPName : "");
                             break;
 
-                        case "ExperimentProgramme":
+                        case "MarketingAssetPackage":
                         case "ExperimentCandidates":
                             break;
                         default:

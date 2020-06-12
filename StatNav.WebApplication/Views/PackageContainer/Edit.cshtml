@@ -81,9 +81,9 @@
         @if (action == "Edit")
         {
             <h4>Iterations</h4>
-            @Html.ActionLink("Create Marketing Asset Package for this Package Container", "Create", "PackageContainer", new { programmeId = Model.Id }, null)
+            @Html.ActionLink("Create Marketing Asset Package for this Package Container", "Create", "PackageContainer", new { mapId = Model.Id }, null)
 
-            @Html.Partial("../Programme/_list", Model.ExperimentProgrammes)
+            @Html.Partial("../MarketingAssetPackage/_list", Model.MarketingAssetPackages)
         }
     </div>
 </div>

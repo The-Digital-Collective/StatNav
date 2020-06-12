@@ -46,7 +46,7 @@ namespace StatNav.WebApplication.Controllers
             return View(thisIteration);
         }
 
-        public ActionResult Create(int? programmeId = 0)
+        public ActionResult Create(int? mapId = 0)
         {
             ViewBag.Action = "Create";
             ExperimentIteration newIteration = new ExperimentIteration
@@ -54,7 +54,7 @@ namespace StatNav.WebApplication.Controllers
                 StartDateTime = DateTime.Today,
                 EndDateTime = DateTime.Today
             };
-            if (programmeId != null) { newIteration.ExperimentProgrammeId = programmeId.GetValueOrDefault(); }
+            if (mapId != null) { newIteration.MarketingAssetPackageId = mapId.GetValueOrDefault(); }
 
             SetDDLs();
             return View("Edit", newIteration);
@@ -147,7 +147,7 @@ namespace StatNav.WebApplication.Controllers
 
         private void SetDDLs()
         {
-            ViewBag.ExperimentProgrammes = _iRepository.GetProgrammes();
+            ViewBag.MarketingAssetPackages = _iRepository.GetMAPs();
         }
 
         private void returnModelToEdit(string action, ref ExperimentIteration ei)

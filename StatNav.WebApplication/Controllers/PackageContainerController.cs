@@ -149,7 +149,7 @@ namespace StatNav.WebApplication.Controllers
             SetDDLs();
             if (action == "Edit")
             {
-                pc.ExperimentProgrammes = _pcRepository.GetProgrammes(pc.Id);
+                pc.MarketingAssetPackages = _pcRepository.GetMAPs(pc.Id);
             }
         }
     }

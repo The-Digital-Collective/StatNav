@@ -9,44 +9,44 @@ using System.Threading.Tasks;
 
 namespace StatNav.UnitTests.TestData
 {
-    class DummyProgrammeRepository : IProgrammeRepository
+    class DummyMAPRepository : IMAPRepository
     {
-        List<ExperimentProgramme> dummyProgrammes = null;
+        List<MarketingAssetPackage> dummyMaps = null;
 
-        public DummyProgrammeRepository(List<ExperimentProgramme> programmes)
+        public DummyMAPRepository(List<MarketingAssetPackage> maps)
         {
-            dummyProgrammes = programmes;
+            dummyMaps = maps;
         }
-        public List<ExperimentProgramme> LoadList(string sortOrder, string searchString)
+        public List<MarketingAssetPackage> LoadList(string sortOrder, string searchString)
         {
-            IQueryable<ExperimentProgramme> queryProgrammes = dummyProgrammes.AsQueryable();
-            queryProgrammes = ProgrammeLogic.FilterProgrammes(queryProgrammes, searchString);
-            return SortList(queryProgrammes.ToList(), sortOrder);
+            IQueryable<MarketingAssetPackage> queryMaps = dummyMaps.AsQueryable();
+            queryMaps = MAPLogic.FilterMAPs(queryMaps, searchString);
+            return SortList(queryMaps.ToList(), sortOrder);
         }
-        public List<ExperimentProgramme> SortList(List<ExperimentProgramme> programmes, string sortOrder)
+        public List<MarketingAssetPackage> SortList(List<MarketingAssetPackage> maps, string sortOrder)
         {
-            return programmes = ProgrammeLogic.SortProgrammes(programmes, sortOrder);
+            return maps = MAPLogic.SortMAPs(maps, sortOrder);
         }
 
-        public ExperimentProgramme Load(int id)
+        public MarketingAssetPackage Load(int id)
         {
-            return dummyProgrammes.Where(x => x.Id == id).FirstOrDefault();
+            return dummyMaps.Where(x => x.Id == id).FirstOrDefault();
         }
-        public void Add(ExperimentProgramme ep)
+        public void Add(MarketingAssetPackage ep)
         {
-            dummyProgrammes.Add(ep);
+            dummyMaps.Add(ep);
         }
-        public void Edit(ExperimentProgramme ep)
+        public void Edit(MarketingAssetPackage ep)
         {
             int id = ep.Id;
             Remove(id);
-            dummyProgrammes.Add(ep);
+            dummyMaps.Add(ep);
 
         }
         public void Remove(int id)
         {
-            ExperimentProgramme progToDel = dummyProgrammes.Where(x => x.Id == id).FirstOrDefault();
-            dummyProgrammes.Remove(progToDel);
+            MarketingAssetPackage mapToDel = dummyMaps.Where(x => x.Id == id).FirstOrDefault();
+            dummyMaps.Remove(mapToDel);
         }
 
         public IList<MetricModel> GetMetricModels()

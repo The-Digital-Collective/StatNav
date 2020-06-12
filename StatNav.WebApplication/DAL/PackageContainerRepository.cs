@@ -23,7 +23,7 @@ namespace StatNav.WebApplication.DAL
         public List<ExperimentIteration> GetIterations(int Id)
         {
             return Db.ExperimentIterations
-                     .Where(x => x.ExperimentProgrammeId == Id)
+                     .Where(x => x.MarketingAssetPackageId == Id)
                      .OrderBy(i => i.IterationName)
                      .ToList();
         }
@@ -38,7 +38,7 @@ namespace StatNav.WebApplication.DAL
         public override PackageContainer Load(int id)
         {
             PackageContainer container = Db.PackageContainer
-                                              .Include(x => x.ExperimentProgrammes)
+                                              .Include(x => x.MarketingAssetPackages)
                                               .Where(x => x.Id == id)
                                               .FirstOrDefault();
 
@@ -47,16 +47,16 @@ namespace StatNav.WebApplication.DAL
         public override void Remove(int id)
         {
             PackageContainer pc = Db.PackageContainer
-                      .Include(p => p.ExperimentProgrammes.Select(i => i.ExperimentIterations.Select(c => c.ExperimentCandidates)))
+                      .Include(p => p.MarketingAssetPackages.Select(i => i.ExperimentIterations.Select(c => c.ExperimentCandidates)))
                       .FirstOrDefault(x => x.Id == id);
             if (pc != null)
             {
                 //remove candidates
-                pc?.ExperimentProgrammes.ToList().ForEach(i => i.ExperimentIterations.ToList().ForEach(c => c.ExperimentCandidates.ToList().ForEach(n => Db.ExperimentCandidates.Remove(n))));
+                pc?.MarketingAssetPackages.ToList().ForEach(i => i.ExperimentIterations.ToList().ForEach(c => c.ExperimentCandidates.ToList().ForEach(n => Db.ExperimentCandidates.Remove(n))));
                 //remove iterations
-                pc?.ExperimentProgrammes.ToList().ForEach(i => i.ExperimentIterations.ToList().ForEach(n => Db.ExperimentIterations.Remove(n)));
+                pc?.MarketingAssetPackages.ToList().ForEach(i => i.ExperimentIterations.ToList().ForEach(n => Db.ExperimentIterations.Remove(n)));
                 //remove marketing asset packages
-                pc?.ExperimentProgrammes.ToList().ForEach(n => Db.ExperimentProgrammes.Remove(n));
+                pc?.MarketingAssetPackages.ToList().ForEach(n => Db.MarketingAssetPackages.Remove(n));
                 Db.PackageContainer.Remove(pc);
                 Db.SaveChanges();
             }
@@ -69,11 +69,11 @@ namespace StatNav.WebApplication.DAL
             return mms;
         }
 
-        public List<ExperimentProgramme> GetProgrammes(int Id)
+        public List<MarketingAssetPackage> GetMAPs(int Id)
         {
-            return Db.ExperimentProgrammes
+            return Db.MarketingAssetPackages
                     .Where(x => x.PackageContainerId == Id)
-                    .OrderBy(i => i.ProgrammeName)
+                    .OrderBy(i => i.MAPName)
                     .ToList();
         }
     }

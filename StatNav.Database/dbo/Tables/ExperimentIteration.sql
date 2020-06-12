@@ -1,6 +1,5 @@
 ﻿CREATE TABLE [dbo].[ExperimentIteration] (
     [Id]                              INT            IDENTITY (1, 1) NOT NULL,
-    [ExperimentProgrammeId]           INT            NOT NULL,
     [IterationName]                   NVARCHAR (MAX) NOT NULL,
     [RequiredDurationForSignificance] NVARCHAR (MAX) NULL,
     [IterationNumber]                 INT            NOT NULL,
@@ -8,12 +7,13 @@
     [EndDateTime]                     DATETIME       NOT NULL,
     [SuccessOutcome]                  NVARCHAR (MAX) NULL,
     [FailureOutcome]                  NVARCHAR (MAX) NULL,
+    [MarketingAssetPackageId]         INT            DEFAULT ((0)) NOT NULL,
     CONSTRAINT [PK_dbo.ExperimentIteration] PRIMARY KEY CLUSTERED ([Id] ASC),
-    CONSTRAINT [FK_dbo.ExperimentIteration_dbo.ExperimentProgramme_ExperimentProgrammeId] FOREIGN KEY ([ExperimentProgrammeId]) REFERENCES [dbo].[ExperimentProgramme] ([Id])
+    CONSTRAINT [FK_dbo.ExperimentIteration_dbo.MarketingAssetPackage_MarketingAssetPackageId] FOREIGN KEY ([MarketingAssetPackageId]) REFERENCES [dbo].[MarketingAssetPackage] ([Id])
 );
 
 
 GO
-CREATE NONCLUSTERED INDEX [IX_ExperimentProgrammeId]
-    ON [dbo].[ExperimentIteration]([ExperimentProgrammeId] ASC);
+CREATE NONCLUSTERED INDEX [IX_MarketingAssetPackageId]
+    ON [dbo].[ExperimentIteration]([MarketingAssetPackageId] ASC);
 

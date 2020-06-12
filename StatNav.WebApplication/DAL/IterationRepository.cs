@@ -24,7 +24,7 @@ namespace StatNav.WebApplication.DAL
         {
             ExperimentIteration iteration = Db.ExperimentIterations
                 .Where(x => x.Id == id)
-                .Include(x => x.ExperimentProgramme)
+                .Include(x => x.MarketingAssetPackage)
                 .Include(x=>x.ExperimentCandidates)
                 .FirstOrDefault();
 
@@ -51,10 +51,10 @@ namespace StatNav.WebApplication.DAL
             }
         }
 
-        public IList<ExperimentProgramme> GetProgrammes()
+        public IList<MarketingAssetPackage> GetMAPs()
         {
-            IList<ExperimentProgramme> ep = Db.ExperimentProgrammes
-                                              .OrderBy(x => x.ProgrammeName).ToList();
+            IList<MarketingAssetPackage> ep = Db.MarketingAssetPackages
+                                              .OrderBy(x => x.MAPName).ToList();
             return ep;
         }
         

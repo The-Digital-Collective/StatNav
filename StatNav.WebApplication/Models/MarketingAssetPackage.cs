@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StatNav.WebApplication.Models
 {
-    public class ExperimentProgramme
+    public class MarketingAssetPackage
     {
         public int Id { get; set; }
 
@@ -20,7 +20,7 @@ namespace StatNav.WebApplication.Models
 
         [Display(Name = "Package Name")]
         [Required]
-        public string ProgrammeName { get; set; }
+        public string MAPName { get; set; }
 
         [DataType(DataType.MultilineText)]
         public string Problem { get; set; }
@@ -32,26 +32,26 @@ namespace StatNav.WebApplication.Models
         [DataType(DataType.MultilineText)]
         public string Hypothesis { get; set; }
 
-        [ForeignKey("ProgrammeMethod")]
+        [ForeignKey("MAPMethod")]
         [Display(Name = "Method")]
         public int MethodId { get; set; }
 
-        public Method ProgrammeMethod { get; set; }
+        public Method MAPMethod { get; set; }
 
-        [ForeignKey("ProgrammeTargetMetricModel")]
+        [ForeignKey("MAPTargetMetricModel")]
         [Display(Name = "Target Metric")]
-        public int ProgrammeTargetMetricModelId { get; set; }
+        public int MAPTargetMetricModelId { get; set; }
 
-        public MetricModel ProgrammeTargetMetricModel { get; set; }
+        public MetricModel MAPTargetMetricModel { get; set; }
 
         [Display(Name = "Target Value")]
         public float TargetValue { get; set; }
 
-        [ForeignKey("ProgrammeImpactMetricModel")]
+        [ForeignKey("MAPImpactMetricModel")]
         [Display(Name = "Impact Metric")]
-        public int ProgrammeImpactMetricModelId { get; set; }
+        public int MAPImpactMetricModelId { get; set; }
 
-        public MetricModel ProgrammeImpactMetricModel { get; set; }
+        public MetricModel MAPImpactMetricModel { get; set; }
 
         [Display(Name = "Impact Value")]
         public float ImpactValue { get; set; }        
@@ -65,7 +65,7 @@ namespace StatNav.WebApplication.Models
         [DataType(DataType.MultilineText)]
         public string Notes { get; set; }
 
-        [ForeignKey("ExperimentProgrammeId")]
+        [ForeignKey("MarketingAssetPackageId")]
         public ICollection<ExperimentIteration> ExperimentIterations { get; set; }
 
         [ForeignKey("PackageContainer")]

@@ -6,17 +6,17 @@ using StatNav.WebApplication.Models;
 namespace StatNav.UnitTests.ModelValidation
 {
     [TestClass]
-    public class ProgrammeValidationTest
+    public class MAPValidationTest
     {
         [TestMethod]
         public void CreateProgramme_ValidationOnNameGivesError()
         {
             //Arrange
-            ExperimentProgramme ep = new ExperimentProgramme { ProgrammeName = "" };
-            var context = new ValidationContext(ep, null, null);
+            MarketingAssetPackage map = new MarketingAssetPackage { MAPName = "" };
+            var context = new ValidationContext(map, null, null);
             var results = new List<ValidationResult>();
             //Act
-            var isModelStateValid = Validator.TryValidateObject(ep, context, results, true);
+            var isModelStateValid = Validator.TryValidateObject(map, context, results, true);
 
             // Assert
             Assert.IsFalse(isModelStateValid);
