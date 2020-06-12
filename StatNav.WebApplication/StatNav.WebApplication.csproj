@@ -236,10 +236,12 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\CandidateController.cs" />
     <Compile Include="Controllers\IterationController.cs" />
+    <Compile Include="Controllers\PackageContainerController.cs" />
     <Compile Include="Controllers\ProgrammeController.cs" />
     <Compile Include="DAL\CandidateRepository.cs" />
     <Compile Include="DAL\GenericRepository.cs" />
     <Compile Include="DAL\IterationRepository.cs" />
+    <Compile Include="DAL\PackageContainerRepository.cs" />
     <Compile Include="DAL\ProgrammeRepository.cs" />
     <Compile Include="DAL\StatNavContext.cs" />
     <Compile Include="ErrorHandler\AiHandleErrorAttribute.cs" />
@@ -259,6 +261,14 @@
     <Compile Include="Migrations\202006111300406_2067StagesTableEdit.designer.cs">
       <DependentUpon>202006111300406_2067StagesTableEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006111346279_2085NewTablePackageContainer.cs" />
+    <Compile Include="Migrations\202006111346279_2085NewTablePackageContainer.designer.cs">
+      <DependentUpon>202006111346279_2085NewTablePackageContainer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006120925385_AB#2085.cs" />
+    <Compile Include="Migrations\202006120925385_AB#2085.designer.cs">
+      <DependentUpon>202006120925385_AB#2085.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ExperimentIterations.cs" />
     <Compile Include="Models\ExperimentCandidate.cs" />
@@ -269,6 +279,7 @@
     <Compile Include="Models\MetricModel.cs" />
     <Compile Include="Models\MetricModelStage.cs" />
     <Compile Include="Models\Organisation.cs" />
+    <Compile Include="Models\PackageContainer.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserRole.cs" />
@@ -541,6 +552,12 @@
     <Content Include="Views\Candidate\_listHeadingsSortable.cshtml" />
     <Content Include="Views\Shared\_searchBox.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\PackageContainer\_detail.cshtml" />
+    <Content Include="Views\PackageContainer\Delete.cshtml" />
+    <Content Include="Views\PackageContainer\Details.cshtml" />
+    <Content Include="Views\PackageContainer\Edit.cshtml" />
+    <Content Include="Views\PackageContainer\Index.cshtml" />
+    <Content Include="Views\Programme\_list.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -568,6 +585,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006111300406_2067StagesTableEdit.resx">
       <DependentUpon>202006111300406_2067StagesTableEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006111346279_2085NewTablePackageContainer.resx">
+      <DependentUpon>202006111346279_2085NewTablePackageContainer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006120925385_AB#2085.resx">
+      <DependentUpon>202006120925385_AB#2085.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

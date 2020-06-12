@@ -1,0 +1,60 @@
+﻿@model StatNav.WebApplication.Models.ExperimentProgramme
+<div class="row">
+    <div class="col-md-6">
+        <dl class="dl-horizontal">
+
+            @foreach (var prop in ViewData.ModelMetadata.Properties)
+            {
+                //exceptions in the case statements are for the complex object types
+                <dt>
+                    @switch (prop.PropertyName)
+                    {
+                        case "ExperimentStatus":
+                        case "ExperimentIterations":
+                        case "ProgrammeTargetMetricModel":
+                        case "ProgrammeImpactMetricModel":
+                        case "UserId":
+                        case "TeamId":
+                        case "ProgrammeMethod":
+                            break;
+                        default:
+                            @(prop.DisplayName ?? prop.PropertyName)
+                            break;
+
+                    }
+                </dt>
+                <dd>
+                    @switch (prop.PropertyName)
+                    {
+                        case "ProgrammeTargetMetricModelId":
+                            @(Model.ProgrammeTargetMetricModel != null ? Model.ProgrammeTargetMetricModel.Title : "");
+                            break;
+                        case "ProgrammeImpactMetricModelId":
+                            @(Model.ProgrammeImpactMetricModel != null ? Model.ProgrammeImpactMetricModel.Title : "");
+                            break;
+                        case "ExperimentStatusId":
+                            @(Model.ExperimentStatus != null ? Model.ExperimentStatus.StatusName : "");
+                            break;
+                        case "MethodId":
+                            @(Model.ProgrammeMethod != null ? Model.ProgrammeMethod.Title : "");
+                            break;
+                        case "ExperimentStatus":
+                        case "ExperimentIterations":
+                        case "ProgrammeTargetMetricModel":
+                        case "ProgrammeImpactMetricModel":
+                        case "UserId":
+                        case "TeamId":
+                        case "ProgrammeMethod":
+                            break;
+                        default:
+                            @prop.Model
+                            break;
+                    }
+                </dd>
+
+
+
+            }
+        </dl>
+    </div>
+</div>

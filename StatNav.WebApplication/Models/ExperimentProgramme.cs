@@ -67,5 +67,11 @@ namespace StatNav.WebApplication.Models
 
         [ForeignKey("ExperimentProgrammeId")]
         public ICollection<ExperimentIteration> ExperimentIterations { get; set; }
+
+        [ForeignKey("PackageContainer")]
+        [Display(Name = "Package Container")]
+        public int? PackageContainerId { get; set; }
+        // TODO
+        public PackageContainer PackageContainer { get; set; }
     }
 }

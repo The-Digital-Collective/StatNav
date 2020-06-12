@@ -1,0 +1,16 @@
+﻿@model StatNav.WebApplication.Models.ExperimentProgramme
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h4>Delete Marketing Asset Package</h4>
+<div class="alert alert-danger">Are you sure you want to remove this Marketing Asset Package? Removing this package will also remove all its iteration and candidates</div>
+@Html.Partial("_detail", Model)
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <input type="submit" value="Delete" class="btn btn-danger" />
+    @Html.ActionLink("Back to List", "Index")
+}
+

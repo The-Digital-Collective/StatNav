@@ -13,6 +13,12 @@ namespace StatNav.WebApplication.Interfaces
         void Remove(int id);
 
     }
+
+    public interface IPackageContainerRepository : IRepository<PackageContainer>
+    {
+        IList<MetricModelStage> GetStages();
+        List<ExperimentProgramme> GetProgrammes(int Id);
+    }
     public interface IProgrammeRepository : IRepository<ExperimentProgramme>
     {
         IList<MetricModel> GetMetricModels();

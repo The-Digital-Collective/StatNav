@@ -22,6 +22,7 @@ namespace StatNav.WebApplication.DAL
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<MetricCandidateResult> MetricCandidateResults { get; set; }
         public DbSet<Method> Method { get; set; }
+        public DbSet<PackageContainer> PackageContainer { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

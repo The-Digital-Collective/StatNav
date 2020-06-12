@@ -1,0 +1,60 @@
+﻿@model IEnumerable<StatNav.WebApplication.Models.ExperimentProgramme>
+@{
+
+}
+<table class="table">
+    <caption>List of Marketing Asset Packages</caption>
+    <tr>
+        @if (ViewBag.Sortable != null)
+        {
+            <th scope="col">
+                <a href="@Url.Action("Index","Iteration",new { sortOrder = ViewBag.IdSortParm })">ID <span class="glyphicon glyphicon-sort"></span></a>
+            </th>
+            <th scope="col">
+                <a href="@Url.Action("Index","Iteration",new { sortOrder = ViewBag.NameSortParm })">Iteration Name <span class="glyphicon glyphicon-sort"></span></a>
+            </th>
+            <th scope="col">
+                <a href="@Url.Action("Index","Iteration",new { sortOrder = ViewBag.StartDateSortParm })">Start Date <span class="glyphicon glyphicon-sort"></span></a>
+            </th>
+            <th scope="col">
+                <a href="@Url.Action("Index","Iteration",new { sortOrder = ViewBag.EndDateSortParm })">End Date <span class="glyphicon glyphicon-sort"></span></a>
+            </th>
+        }
+        else
+        {
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.ProgrammeName)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.ExperimentStatusId)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Problem)
+            </th>
+        }
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.ActionLink(item.ProgrammeName, "Edit", "Iteration", new { id = item.Id }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExperimentStatus.StatusName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Problem)
+            </td>
+
+        </tr>
+    }
+
+</table>
