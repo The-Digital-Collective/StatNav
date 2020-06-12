@@ -11,6 +11,8 @@ Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "StatNav.AzureResourceGroup"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatNav.WebApplication", "StatNav.WebApplication\StatNav.WebApplication.csproj", "{15756AE6-32A2-4CD5-ABEC-A5C54476F05F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatNav.IntegrationTests", "StatNav.IntegrationTests\StatNav.IntegrationTests.csproj", "{E20FBC24-CC65-44C3-8F3E-0278B0262C02}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{15756AE6-32A2-4CD5-ABEC-A5C54476F05F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15756AE6-32A2-4CD5-ABEC-A5C54476F05F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15756AE6-32A2-4CD5-ABEC-A5C54476F05F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E20FBC24-CC65-44C3-8F3E-0278B0262C02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E20FBC24-CC65-44C3-8F3E-0278B0262C02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E20FBC24-CC65-44C3-8F3E-0278B0262C02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E20FBC24-CC65-44C3-8F3E-0278B0262C02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
