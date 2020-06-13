@@ -284,7 +284,7 @@ namespace StatNav.UnitTests.Controllers
             // Arrange            
 
             // Act
-            ViewResult result = (ViewResult)_controller.Edit(2);
+            ViewResult result = (ViewResult)_controller.Edit(2, "");
 
             MarketingAssetPackage ep = result.ViewData.Model as MarketingAssetPackage;
 
@@ -298,7 +298,7 @@ namespace StatNav.UnitTests.Controllers
             //Arrange
 
             //Act
-            ViewResult result = _controller.Edit(2) as ViewResult;
+            ViewResult result = _controller.Edit(2, "") as ViewResult;
 
             // Assert
             Assert.AreEqual("Edit", result.ViewBag.Action);
@@ -311,7 +311,7 @@ namespace StatNav.UnitTests.Controllers
             // Arrange
 
             // Act
-            ViewResult result = _controller.Edit(1) as ViewResult;
+            ViewResult result = _controller.Edit(1, "") as ViewResult;
 
             // Assert
             Assert.AreEqual(((IList<MetricModel>)result.ViewBag.MetricModels).Count, mapRepository.GetMetricModels().Count);

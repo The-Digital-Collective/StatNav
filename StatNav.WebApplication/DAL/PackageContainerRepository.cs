@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Microsoft.Ajax.Utilities;
 using StatNav.WebApplication.BLL;
 using StatNav.WebApplication.Interfaces;
 using StatNav.WebApplication.Models;
@@ -15,8 +16,8 @@ namespace StatNav.WebApplication.DAL
             IQueryable<PackageContainer> containers = Db.PackageContainer
                                .Include(x => x.MetricModelStage);
 
-            // TODO
-            // containers = ProgrammeLogic.FilterProgrammes(programmes, searchString); 
+            
+            containers = PCLogic.FilterPCs(containers, searchString); 
             return SortList(containers.ToList(), sortOrder);
         }
 
@@ -30,9 +31,7 @@ namespace StatNav.WebApplication.DAL
 
         public List<PackageContainer> SortList(List<PackageContainer> containers, string sortOrder)
         {
-            // TODO
-            // return ProgrammeLogic.SortProgrammes(programmes, sortOrder);
-            return containers;
+            return PCLogic.SortPCs(containers, sortOrder);
         }
 
         public override PackageContainer Load(int id)

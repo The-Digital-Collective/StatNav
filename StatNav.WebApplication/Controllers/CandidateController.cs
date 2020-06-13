@@ -63,7 +63,7 @@ namespace StatNav.WebApplication.Controllers
                 if (ModelState.IsValid)
                 {
                     _cRepository.Add(newCandidate);
-                    return RedirectToAction("Edit", new { id = newCandidate.Id });
+                    return RedirectToAction("Edit", new { id = newCandidate.Id, fromSave = "Saved" });
                 }
                 returnModelToEdit(pageAction);
                 return View("Edit", newCandidate);
@@ -76,7 +76,7 @@ namespace StatNav.WebApplication.Controllers
             }
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id, string fromSave)
         {
             ViewBag.Action = "Edit";
             ExperimentCandidate thisCandidate = _cRepository.Load(id);
@@ -86,7 +86,8 @@ namespace StatNav.WebApplication.Controllers
             }
 
             SetDDLs();
-
+            if (fromSave == "Saved")
+            { ViewBag.Notification = "Save Successful"; }
             return View("Edit", thisCandidate);
         }
 
@@ -99,7 +100,7 @@ namespace StatNav.WebApplication.Controllers
                 if (ModelState.IsValid)
                 {
                     _cRepository.Edit(editedCandidate);
-                    return RedirectToAction(pageAction, new { id = editedCandidate.Id });
+                    return RedirectToAction(pageAction, new { id = editedCandidate.Id, fromSave = "Saved" });
                 }
                 returnModelToEdit(pageAction);
                 return View(pageAction, editedCandidate);

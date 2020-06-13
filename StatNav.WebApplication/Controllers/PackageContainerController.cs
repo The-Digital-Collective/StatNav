@@ -7,8 +7,7 @@ using StatNav.WebApplication.Models;
 
 namespace StatNav.WebApplication.Controllers
 {
-    // TODO
-    //[Authorize]
+    [Authorize]
     public class PackageContainerController : BaseController
     {
         private readonly IPackageContainerRepository _pcRepository;
@@ -27,8 +26,9 @@ namespace StatNav.WebApplication.Controllers
         public ActionResult Index(string sortOrder, string searchString)
         {
             ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            //ViewBag.StatusSortParm = sortOrder == "Status" ? "status_desc" : "Status";
+            ViewBag.TypeSortParm = sortOrder == "type" ? "type_desc" : "type";
             ViewBag.IdSortParm = sortOrder == "Id" ? "id_desc" : "Id";
+            ViewBag.StageSortParm = sortOrder == "stage" ? "stage_desc" : "stage";
             List<PackageContainer> containers = _pcRepository.LoadList(sortOrder, searchString);
             ViewBag.SelectedType = "PackageContainer";
             return View(containers);
@@ -62,7 +62,7 @@ namespace StatNav.WebApplication.Controllers
                 if (ModelState.IsValid)
                 {
                     _pcRepository.Add(newContainer);
-                    return RedirectToAction("Edit", new { id = newContainer.Id });
+                    return RedirectToAction("Edit", new { id = newContainer.Id, fromSave = "Saved" });
                 }
                 returnModelToEdit(pageAction, ref newContainer);
                 return View("Edit", newContainer);
@@ -75,7 +75,7 @@ namespace StatNav.WebApplication.Controllers
             }
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id, string fromSave)
         {
             ViewBag.Action = "Edit";
             PackageContainer thisContainer = _pcRepository.Load(id);
@@ -85,7 +85,8 @@ namespace StatNav.WebApplication.Controllers
             }
 
             SetDDLs();
-
+            if (fromSave == "Saved")
+            { ViewBag.Notification = "Save Successful"; }
             return View("Edit", thisContainer);
         }
 
@@ -98,7 +99,7 @@ namespace StatNav.WebApplication.Controllers
                 if (ModelState.IsValid)
                 {
                     _pcRepository.Edit(editedContainer);
-                    return RedirectToAction(pageAction, new { id = editedContainer.Id });
+                    return RedirectToAction(pageAction, new { id = editedContainer.Id, fromSave = "Saved" });
                 }
                 returnModelToEdit(pageAction, ref editedContainer);
                 return View(pageAction, editedContainer);
@@ -140,7 +141,7 @@ namespace StatNav.WebApplication.Controllers
 
         private void SetDDLs()
         {
-            ViewBag.Stages = _pcRepository.GetStages();          
+            ViewBag.Stages = _pcRepository.GetStages();
         }
 
         private void returnModelToEdit(string action, ref PackageContainer pc)

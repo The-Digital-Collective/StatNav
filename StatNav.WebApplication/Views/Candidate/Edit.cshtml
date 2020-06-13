@@ -13,6 +13,8 @@
         @Html.Partial("_SaveButton")
         <h4>@action Experiment Candidate</h4>
         <hr />
+        @Html.Partial("_Confirmation")
+        <p>&nbsp;</p>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 

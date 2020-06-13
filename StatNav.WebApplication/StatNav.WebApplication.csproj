@@ -229,6 +229,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="BLL\CandidateLogic.cs" />
     <Compile Include="BLL\IterationLogic.cs" />
+    <Compile Include="BLL\PCLogic.cs" />
     <Compile Include="BLL\MAPLogic.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -562,6 +563,7 @@
     <Content Include="Views\PackageContainer\Edit.cshtml" />
     <Content Include="Views\PackageContainer\Index.cshtml" />
     <Content Include="Views\MarketingAssetPackage\_list.cshtml" />
+    <Content Include="Views\Shared\_Confirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

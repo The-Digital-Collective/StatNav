@@ -20,11 +20,10 @@
             <a href="@Url.Action("Index",new { sortOrder = ViewBag.NameSortParm })">Container Name <span class="glyphicon glyphicon-sort"></span></a>
         </th>
         <th scope="col">
-            @*<a href="@Url.Action("Index",new { sortOrder = ViewBag.StatusSortParm })">Status <span class="glyphicon glyphicon-sort"></span></a>*@
-            @Html.DisplayNameFor(model => model.Type)
+            <a href="@Url.Action("Index",new { sortOrder = ViewBag.TypeSortParm })">Type <span class="glyphicon glyphicon-sort"></span></a>           
         </th>
         <th scope="col">
-            @Html.DisplayNameFor(model => model.MetricModelStageId)
+            <a href="@Url.Action("Index",new { sortOrder = ViewBag.StageSortParm })">Stage <span class="glyphicon glyphicon-sort"></span></a>
         </th>
 
     </tr>

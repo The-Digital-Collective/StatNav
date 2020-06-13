@@ -10,60 +10,62 @@
         {
             @Html.AntiForgeryToken()
 
-            <div class="form-horizontal">
+        <div class="form-horizontal">
 
-                <h4>@action Package Container</h4>
-                @Html.Partial("_SaveButton")
-                <hr />
-                <p>&nbsp;</p>
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                @Html.HiddenFor(model => model.Id)
+            <h4>@action Package Container</h4>
 
-                @if (action == "Edit")
-                {
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => Model.Id, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
-                        </div>
-                    </div>
-                }
+            @Html.Partial("_SaveButton")
+            <hr />
+            @Html.Partial("_Confirmation")
+            <p>&nbsp;</p>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+
+            @if (action == "Edit")
+            {
                 <div class="form-group">
-                    @Html.LabelFor(model => model.PackageContainerName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.PackageContainerName, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.PackageContainerName, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => Model.Id, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
                     </div>
                 </div>
+            }
+            <div class="form-group">
+                @Html.LabelFor(model => model.PackageContainerName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PackageContainerName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PackageContainerName, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.RadioButtonFor(model => model.Type, "Persistent", new { htmlAttributes = new { @class = "form-control" } })
-                        Persistent<br />
-                        @Html.RadioButtonFor(model => model.Type, "Dynamic", new { htmlAttributes = new { @class = "form-control" } })
-                        Dynamic<br />
-                        @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
-                    </div>
-                    
+            <div class="form-group">
+                @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.RadioButtonFor(model => model.Type, "Persistent", new { htmlAttributes = new { @class = "form-control" } })
+                    Persistent<br />
+                    @Html.RadioButtonFor(model => model.Type, "Dynamic", new { htmlAttributes = new { @class = "form-control" } })
+                    Dynamic<br />
+                    @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.MetricModelStageId, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("MetricModelStageId", new SelectList(ViewBag.Stages, "Id", "Title"), "Please Select...", htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.MetricModelStageId, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
 
             </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.MetricModelStageId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("MetricModelStageId", new SelectList(ViewBag.Stages, "Id", "Title"), "Please Select...", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.MetricModelStageId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+        </div>
         }
         @if (action == "Edit")
         {

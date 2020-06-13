@@ -69,7 +69,7 @@ namespace StatNav.WebApplication.Controllers
                 if (ModelState.IsValid)
                 {
                     _iRepository.Add(newIteration);
-                    return RedirectToAction("Edit", new { id = newIteration.Id });
+                    return RedirectToAction("Edit", new { id = newIteration.Id, fromSave = "Saved" });
                 }
                 returnModelToEdit(pageAction, ref newIteration);
                 return View("Edit", newIteration);                
@@ -82,7 +82,7 @@ namespace StatNav.WebApplication.Controllers
             }
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id, string fromSave)
         {
             ViewBag.Action = "Edit";
             ExperimentIteration thisIteration = _iRepository.Load(id);
@@ -92,7 +92,8 @@ namespace StatNav.WebApplication.Controllers
             }
 
             SetDDLs();
-
+            if (fromSave == "Saved")
+            { ViewBag.Notification = "Save Successful"; }
             return View("Edit", thisIteration);
         }
 
@@ -105,7 +106,7 @@ namespace StatNav.WebApplication.Controllers
                 if (ModelState.IsValid)
                 {
                     _iRepository.Edit(editedIteration);
-                    return RedirectToAction(pageAction, new { id = editedIteration.Id });
+                    return RedirectToAction(pageAction, new { id = editedIteration.Id, fromSave = "Saved" });
                 }
                 returnModelToEdit(pageAction, ref editedIteration);
                 return View(pageAction, editedIteration);

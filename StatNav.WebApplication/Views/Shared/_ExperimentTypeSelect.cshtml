@@ -3,6 +3,10 @@
 }
 <div class="form-group">
     <select id="ddlExperimentType" class="form-control pull-right">
+        <option value="PackageContainer" @if (selectedType == "PackageContainer") { <text>
+                selected="selected" </text> ; }>
+            Package Containers
+        </option>
         <option value="MarketingAssetPackage" @if (selectedType == "MarketingAssetPackage") { <text>
                 selected="selected" </text> ; }>
             Marketing Asset Packages

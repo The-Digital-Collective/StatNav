@@ -309,7 +309,7 @@ namespace StatNav.UnitTests.Controllers
             // Arrange            
 
             // Act
-            ViewResult result = (ViewResult)_controller.Edit(2);
+            ViewResult result = (ViewResult)_controller.Edit(2,"");
 
             ExperimentIteration ei = result.ViewData.Model as ExperimentIteration;
 
@@ -323,7 +323,7 @@ namespace StatNav.UnitTests.Controllers
             //Arrange
 
             //Act
-            ViewResult result = _controller.Edit(2) as ViewResult;
+            ViewResult result = _controller.Edit(2, "") as ViewResult;
 
             // Assert
             Assert.AreEqual("Edit", result.ViewBag.Action);
@@ -336,7 +336,7 @@ namespace StatNav.UnitTests.Controllers
             // Arrange
 
             // Act
-            ViewResult result = _controller.Edit(1) as ViewResult;
+            ViewResult result = _controller.Edit(1, "") as ViewResult;
 
             // Assert           
             Assert.AreEqual(((IList<MarketingAssetPackage>)result.ViewBag.MarketingAssetPackages).Count, iterationRepository.GetMAPs().Count);

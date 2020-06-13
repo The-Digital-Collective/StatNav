@@ -61,7 +61,7 @@ namespace StatNav.WebApplication.Controllers
                 if (ModelState.IsValid)
                 {
                     _mapRepository.Add(newMAP);
-                    return RedirectToAction("Edit", new { id = newMAP.Id });
+                    return RedirectToAction("Edit", new { id = newMAP.Id, fromSave = "Saved" });
                 }
                 returnModelToEdit(pageAction, ref newMAP);
                 return View("Edit", newMAP);
@@ -74,7 +74,7 @@ namespace StatNav.WebApplication.Controllers
             }
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id, string fromSave)
         {
             ViewBag.Action = "Edit";
             MarketingAssetPackage thisMAP = _mapRepository.Load(id);
@@ -84,7 +84,8 @@ namespace StatNav.WebApplication.Controllers
             }
 
             SetDDLs();
-
+            if (fromSave == "Saved")
+            { ViewBag.Notification = "Save Successful"; }
             return View("Edit", thisMAP);
         }
 
@@ -97,7 +98,7 @@ namespace StatNav.WebApplication.Controllers
                 if (ModelState.IsValid)
                 {
                     _mapRepository.Edit(editedMAP);
-                    return RedirectToAction(pageAction, new { id = editedMAP.Id });
+                    return RedirectToAction(pageAction, new { id = editedMAP.Id, fromSave = "Saved" });
                 }
                 returnModelToEdit(pageAction, ref editedMAP);
                 return View(pageAction, editedMAP);
