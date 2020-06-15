@@ -40,7 +40,7 @@ namespace StatNav.UnitTests.Controllers
         }
 
         [TestMethod]
-        public void IndexViewBag_CorrectTypeReturned_And_ModelsReturned()
+        public void Index_WhenCalled_ViewBagCorrectTypeReturned()
         {
             // Arrange
 
@@ -48,16 +48,26 @@ namespace StatNav.UnitTests.Controllers
             ViewResult result = _controller.Index(string.Empty, string.Empty) as ViewResult;
             var model = (List<MarketingAssetPackage>)result.Model;
             // Assert
-            Assert.AreEqual("MarketingAssetPackage", result.ViewBag.SelectedType);
+            Assert.AreEqual("MarketingAssetPackage", result.ViewBag.SelectedType);           
+        }
+
+        [TestMethod]
+        public void Index_WhenCalled_CorrectModelsReturned()
+        {
+            // Arrange
+
+            // Act
+            ViewResult result = _controller.Index(string.Empty, string.Empty) as ViewResult;
+            var model = (List<MarketingAssetPackage>)result.Model;
+            // Assert        
             CollectionAssert.Contains(model, map1);
             CollectionAssert.Contains(model, map2);
             CollectionAssert.Contains(model, map3);
         }
 
-        
 
         [TestMethod]
-        public void Index_OrderByName_ReturnsCorrectOrder()
+        public void Index_WhenCalled_OrderByNameReturnsCorrectOrder()
         {
             // Arrange
 
@@ -69,7 +79,7 @@ namespace StatNav.UnitTests.Controllers
             Assert.AreEqual(model[2], map3);//is the last one in the ordered the list the correct one?
         }
         [TestMethod]
-        public void Index_OrderByNameDesc_ReturnsCorrectOrder()
+        public void Index_WhenCalled_OrderByNameDescReturnsCorrectOrder()
         {
             // Arrange
 
@@ -82,7 +92,7 @@ namespace StatNav.UnitTests.Controllers
         }
 
         [TestMethod]
-        public void Index_OrderById_ReturnsCorrectOrder()
+        public void Index_WhenCalled_OrderByIdReturnsCorrectOrder()
         {
             // Arrange
 
@@ -95,7 +105,7 @@ namespace StatNav.UnitTests.Controllers
         }
 
         [TestMethod]
-        public void Index_OrderByStatus_ReturnsCorrectOrder()
+        public void Index_WhenCalled_OrderByStatusReturnsCorrectOrder()
         {
             // Arrange
 
@@ -108,7 +118,7 @@ namespace StatNav.UnitTests.Controllers
         }
 
         [TestMethod]
-        public void Index_OrderByStatusDesc_ReturnsCorrectOrder()
+        public void Index_WhenCalled_OrderByStatusDescReturnsCorrectOrder()
         {
             // Arrange
 
@@ -121,7 +131,7 @@ namespace StatNav.UnitTests.Controllers
         }
 
         [TestMethod]
-        public void Index_OrderByIdDesc_ReturnsCorrectOrder()
+        public void Index_WhenCalled_OrderByIdDescReturnsCorrectOrder()
         {
             // Arrange
 
@@ -134,7 +144,7 @@ namespace StatNav.UnitTests.Controllers
         }
 
         [TestMethod]
-        public void IndexView_SearchByS_ReturnsExpectedPrograms()
+        public void Index_WhenCalled_SearchBySReturnsExpectedMAPS()
         {
             // Arrange
 
@@ -148,7 +158,7 @@ namespace StatNav.UnitTests.Controllers
         }
 
         [TestMethod]
-        public void IndexView_SearchByX_ReturnsExpectedPrograms()
+        public void Index_WhenCalled_SearchByXReturnsExpectedMAP()
         {
             // Arrange
 
@@ -162,7 +172,7 @@ namespace StatNav.UnitTests.Controllers
         }
 
         [TestMethod]
-        public void Index_SearchByWord_ReturnsCorrectItems()
+        public void Index_WhenCalled_SearchByWordReturnsCorrectItems()
         {
             // Arrange
 
@@ -176,7 +186,7 @@ namespace StatNav.UnitTests.Controllers
         }
 
         [TestMethod]
-        public void Index_SearchByCaseInsenstive_ReturnsCorrectItems()
+        public void Index_WhenCalled_SearchByCaseInsenstiveReturnsCorrectItems()
         {
             // Arrange
 
@@ -189,7 +199,7 @@ namespace StatNav.UnitTests.Controllers
             CollectionAssert.DoesNotContain(model, map3);
         }
         [TestMethod]
-        public void Index_SearchByCaseInsenstive_AndOrderBy_ReturnsCorrectItemsInCorrectOrder()
+        public void Index_WhenCalled_SearchByCaseInsenstiveAndOrderByReturnsCorrectItemsInCorrectOrder()
         {
             // Arrange
 
@@ -204,7 +214,7 @@ namespace StatNav.UnitTests.Controllers
             Assert.AreEqual(model[1], map2);//is the last one in the ordered the list the correct one?
         }
         [TestMethod]
-        public void MAPDetailView_Is_Passed_MAP_Data()
+        public void Detail_WhenCalled_IsPassedMAPData()
         {
             // Arrange
 
@@ -218,7 +228,7 @@ namespace StatNav.UnitTests.Controllers
         }
 
         [TestMethod]
-        public void CreateReturns_CorrectActionAndView()
+        public void Create_WhenCalled_ReturnsCorrectActionAndView()
         {
             // Arrange
 
@@ -230,7 +240,7 @@ namespace StatNav.UnitTests.Controllers
         }
 
         [TestMethod]
-        public void CreateView_CorrectViewModelsReturned()
+        public void Create_WhenCalled_CorrectViewModelsReturned()
         {
             // Arrange
 
@@ -247,31 +257,30 @@ namespace StatNav.UnitTests.Controllers
         }
 
         [TestMethod]
-        public void CreateValidMAP()
+        public void Create_WhenSubmittedWithValidModel_CreatesValidMAP()
         {
             //Arrange
-            MarketingAssetPackage newProg = new MarketingAssetPackage { MAPName = "MAPNew", Id = 7, ExperimentStatusId = 0, MAPImpactMetricModelId = 0, MAPTargetMetricModelId = 0 };
+            MarketingAssetPackage newMAP = new MarketingAssetPackage { MAPName = "MAPNew", Id = 7, ExperimentStatusId = 0, MAPImpactMetricModelId = 0, MAPTargetMetricModelId = 0 };
 
             //Act
-            var result = (RedirectToRouteResult)_controller.Create(newProg);
+            var result = (RedirectToRouteResult)_controller.Create(newMAP);
             //get list of all maprammes
             List<MarketingAssetPackage> maps = mapRepository.LoadList(string.Empty, string.Empty);
 
             // Assert
-            CollectionAssert.Contains(maps, newProg);
+            CollectionAssert.Contains(maps, newMAP);
             Assert.AreEqual("Edit", result.RouteValues["action"]);
-
         }
 
 
         [TestMethod]
-        public void CreateMAP_ValidationErrorReturnsCorrectActionAndView()
+        public void Create_WhenSubmittedWithInvalidModel_ValidationErrorReturnsCorrectActionAndView()
         {
             //Arrange
             _controller.ModelState.AddModelError("test", "test");
-            MarketingAssetPackage thisProg = new MarketingAssetPackage();
+            MarketingAssetPackage thisMAP = new MarketingAssetPackage();
             //Act
-            ViewResult result = _controller.Create(thisProg) as ViewResult;
+            ViewResult result = _controller.Create(thisMAP) as ViewResult;
 
             // Assert
             Assert.AreEqual("Create", result.ViewBag.Action);
@@ -279,7 +288,7 @@ namespace StatNav.UnitTests.Controllers
         }
 
         [TestMethod]
-        public void EditReturns_Is_Passed_MAP_Data()
+        public void Edit_WhenCalled_ReturnsCorrectModel()
         {
             // Arrange            
 
@@ -293,7 +302,7 @@ namespace StatNav.UnitTests.Controllers
         }
 
         [TestMethod]
-        public void EditReturnsCorrectAction()
+        public void Edit_WhenCalled_ReturnsCorrectAction()
         {
             //Arrange
 
@@ -306,7 +315,7 @@ namespace StatNav.UnitTests.Controllers
         }
 
         [TestMethod]
-        public void EditView_CorrectViewModelsReturned()
+        public void Edit_WhenCalled_CorrectViewModelsReturned()
         {
             // Arrange
 
@@ -324,29 +333,29 @@ namespace StatNav.UnitTests.Controllers
         }
 
         [TestMethod]
-        public void EditMAPEditsModel()
+        public void Edit_WhenSubmitted_EditsModel()
         {
             //Arrange
-            MarketingAssetPackage editedProg = new MarketingAssetPackage { MAPName = "MAPEdited", Id = 1, ExperimentStatusId = 0, MAPImpactMetricModelId = 0, MAPTargetMetricModelId = 0 };
+            MarketingAssetPackage editedMAP = new MarketingAssetPackage { MAPName = "MAPEdited", Id = 1, ExperimentStatusId = 0, MAPImpactMetricModelId = 0, MAPTargetMetricModelId = 0 };
          
             //Act
-            var result = (RedirectToRouteResult)_controller.Edit(editedProg);
-            //get list of all maprammes
+            var result = (RedirectToRouteResult)_controller.Edit(editedMAP);
+            //get list of all MAPs
             List<MarketingAssetPackage> maps = mapRepository.LoadList(string.Empty, string.Empty);
 
             // Assert
-            CollectionAssert.Contains(maps, editedProg);
+            CollectionAssert.Contains(maps, editedMAP);
             Assert.AreEqual("Edit", result.RouteValues["action"]);
         }
 
         [TestMethod]
-        public void EditMAP_ValidationErrorReturnsCorrectActionAndView()
+        public void Edit_WhenSubmittedInvalid_ErrorReturnsCorrectActionAndView()
         {
             //Arrange
             _controller.ModelState.AddModelError("fakeError", "fakeError");
-            MarketingAssetPackage thisProg = new MarketingAssetPackage();
+            MarketingAssetPackage thisMAP = new MarketingAssetPackage();
             //Act
-            ViewResult result = _controller.Edit(thisProg) as ViewResult;
+            ViewResult result = _controller.Edit(thisMAP) as ViewResult;
 
             // Assert
             Assert.AreEqual("Edit", result.ViewBag.Action);
@@ -354,7 +363,7 @@ namespace StatNav.UnitTests.Controllers
         }
 
         [TestMethod]
-        public void Delete_Is_Passed_MAP_Data()
+        public void Delete_WhenCalled_IsPassedMAPData()
         {
             // Arrange            
 
@@ -369,7 +378,7 @@ namespace StatNav.UnitTests.Controllers
 
 
         [TestMethod]
-        public void DeleteMAPDeletesModel()
+        public void DeleteConfirm_WhenCalled_DeletesModel()
         {
             //Arrange
 
