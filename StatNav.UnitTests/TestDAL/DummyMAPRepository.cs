@@ -73,5 +73,12 @@ namespace StatNav.UnitTests.TestData
         {
             return null;
         }
+
+        public IList<PackageContainer> GetPCs()
+        {
+            PackageContainer pc1 = new PackageContainer { PackageContainerName = "PC1", Id = 1 };
+            PackageContainer pc2 = new PackageContainer { PackageContainerName = "PC2", Id = 2 };
+            return new List<PackageContainer> { pc1, pc2 };
+        }
     }
 }

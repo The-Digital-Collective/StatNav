@@ -77,6 +77,13 @@ namespace StatNav.WebApplication.DAL
             IList<Method> m = Db.Method
             .OrderBy(x => x.SortOrder).ToList();
             return m;
-        }       
+        }
+
+        public IList<PackageContainer> GetPCs()
+        {
+            IList<PackageContainer> pcs = Db.PackageContainer
+                                               .OrderBy(x => x.PackageContainerName).ToList();
+            return pcs;
+        }
     }
 }

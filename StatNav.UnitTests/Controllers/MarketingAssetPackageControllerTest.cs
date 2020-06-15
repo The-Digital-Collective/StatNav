@@ -254,6 +254,8 @@ namespace StatNav.UnitTests.Controllers
             Assert.AreEqual(((IList<ExperimentStatus>)result.ViewBag.ExperimentStatuses).GetType(), mapRepository.GetStatuses().GetType());
             Assert.AreEqual(((IList<Method>)result.ViewBag.Methods).Count, mapRepository.GetMethods().Count);
             Assert.AreEqual(((IList<Method>)result.ViewBag.Methods).GetType(), mapRepository.GetMethods().GetType());
+            Assert.AreEqual(((IList<PackageContainer>)result.ViewBag.PackageContainers).Count, mapRepository.GetPCs().Count);
+            Assert.AreEqual(((IList<PackageContainer>)result.ViewBag.PackageContainers).GetType(), mapRepository.GetPCs().GetType());
         }
 
         [TestMethod]

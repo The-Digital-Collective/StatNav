@@ -26,6 +26,7 @@ namespace StatNav.WebApplication.Interfaces
         IList<Method> GetMethods();
         List<MarketingAssetPackage> SortList(List<MarketingAssetPackage> maps, string sortOrder);
         List<ExperimentIteration> GetIterations(int Id);
+        IList<PackageContainer> GetPCs();
     }
     public interface IIterationRepository : IRepository<ExperimentIteration>
     {

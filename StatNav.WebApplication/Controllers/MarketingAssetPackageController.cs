@@ -44,11 +44,13 @@ namespace StatNav.WebApplication.Controllers
             return View(thisMap);
         }
 
-        public ActionResult Create()
+        public ActionResult Create(int? packageContainerId = 0)
         {
             ViewBag.Action = "Create";
             SetDDLs();
             MarketingAssetPackage newMAP = new MarketingAssetPackage();
+            if (packageContainerId != 0)
+            { newMAP.PackageContainerId = packageContainerId.GetValueOrDefault(); }
             return View("Edit", newMAP);
         }
 
@@ -143,6 +145,7 @@ namespace StatNav.WebApplication.Controllers
             ViewBag.MetricModels = _mapRepository.GetMetricModels();
             ViewBag.ExperimentStatuses = _mapRepository.GetStatuses();
             ViewBag.Methods = _mapRepository.GetMethods();
+            ViewBag.PackageContainers = _mapRepository.GetPCs();
         }
 
         private void returnModelToEdit(string action, ref MarketingAssetPackage ep)

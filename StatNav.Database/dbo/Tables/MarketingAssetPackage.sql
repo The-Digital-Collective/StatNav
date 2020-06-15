@@ -13,7 +13,7 @@
     [ImpactValue]            REAL           NOT NULL,
     [ExperimentStatusId]     INT            NOT NULL,
     [Notes]                  NVARCHAR (MAX) NULL,
-    [PackageContainerId]     INT            NULL,
+    [PackageContainerId]     INT            NOT NULL,
     CONSTRAINT [PK_dbo.MarketingAssetPackage] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_dbo.MarketingAssetPackage_dbo.ExperimentStatus_ExperimentStatusId] FOREIGN KEY ([ExperimentStatusId]) REFERENCES [dbo].[ExperimentStatus] ([Id]),
     CONSTRAINT [FK_dbo.MarketingAssetPackage_dbo.Method_MethodId] FOREIGN KEY ([MethodId]) REFERENCES [dbo].[Method] ([Id]),
