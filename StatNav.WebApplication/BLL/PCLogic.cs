@@ -28,13 +28,7 @@ namespace StatNav.WebApplication.BLL
                     break;
                 case "type_desc":
                     sortedList = pcList.OrderByDescending(x => x.Type);
-                    break;
-                case "Id":
-                    sortedList = pcList.OrderBy(x => x.Id);
-                    break;
-                case "id_desc":
-                    sortedList = pcList.OrderByDescending(x => x.Id);
-                    break;
+                    break;               
                 case "stage":
                     sortedList = pcList.OrderBy(x => x.MetricModelStage.Title);
                     break;

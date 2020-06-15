@@ -1,11 +1,11 @@
-﻿@model StatNav.WebApplication.Models.MarketingAssetPackage
+﻿@model StatNav.WebApplication.Models.PackageContainer
 
 @{
     ViewBag.Title = "Delete";
 }
 
-<h4>Delete Marketing Asset Package</h4>
-<div class="alert alert-danger">Are you sure you want to remove this Marketing Asset Package? Removing this package will also remove all its iteration and candidates</div>
+<h4>Delete Package Container</h4>
+<div class="alert alert-danger">Are you sure you want to remove this Package Container? Removing this package will also remove all its marketing asset packages, iterations and candidates</div>
 @Html.Partial("_detail", Model)
 @using (Html.BeginForm())
 {

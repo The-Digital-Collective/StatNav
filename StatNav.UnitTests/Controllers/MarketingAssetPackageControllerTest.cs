@@ -27,12 +27,9 @@ namespace StatNav.UnitTests.Controllers
             status2 = new ExperimentStatus() { Id = 1, DisplayOrder = 2, StatusName = "Scheduled" };
             status3 = new ExperimentStatus() { Id = 2, DisplayOrder = 3, StatusName = "Live" };
             //set up the dummy data for testing
-            map1 = new MarketingAssetPackage() { MAPName = "Northern Lights", Id = 0 };
-            map1.ExperimentStatus = status1;
-            map2 = new MarketingAssetPackage() { MAPName = "Amber Spyglass", Id = 1 };
-            map2.ExperimentStatus = status2;
-            map3 = new MarketingAssetPackage() { MAPName = "Subtle Knife", Id = 2 };
-            map3.ExperimentStatus = status3;
+            map1 = new MarketingAssetPackage() { MAPName = "Northern Lights", Id = 0 };            
+            map2 = new MarketingAssetPackage() { MAPName = "Amber Spyglass", Id = 1 };            
+            map3 = new MarketingAssetPackage() { MAPName = "Subtle Knife", Id = 2 };            
             _maps = new List<MarketingAssetPackage> { map1, map2, map3 };
 
             mapRepository = new DummyMAPRepository(_maps);
@@ -90,59 +87,7 @@ namespace StatNav.UnitTests.Controllers
             Assert.AreEqual(model[0], map3);//is the first one in the ordered the list the correct one?
             Assert.AreEqual(model[2], map2);//is the last one in the ordered the list the correct one?
         }
-
-        [TestMethod]
-        public void Index_WhenCalled_OrderByIdReturnsCorrectOrder()
-        {
-            // Arrange
-
-            // Act
-            ViewResult result = _controller.Index("Id", string.Empty) as ViewResult;
-            var model = (List<MarketingAssetPackage>)result.Model;
-            // Assert
-            Assert.AreEqual(model[0], map1);//is the first one in the ordered the list the correct one?
-            Assert.AreEqual(model[2], map3);//is the last one in the ordered the list the correct one?
-        }
-
-        [TestMethod]
-        public void Index_WhenCalled_OrderByStatusReturnsCorrectOrder()
-        {
-            // Arrange
-
-            // Act
-            ViewResult result = _controller.Index("Status", string.Empty) as ViewResult;
-            var model = (List<MarketingAssetPackage>)result.Model;
-            // Assert
-            Assert.AreEqual(model[0], map1);//is the first one in the ordered the list the correct one?
-            Assert.AreEqual(model[2], map2);//is the last one in the ordered the list the correct one?
-        }
-
-        [TestMethod]
-        public void Index_WhenCalled_OrderByStatusDescReturnsCorrectOrder()
-        {
-            // Arrange
-
-            // Act
-            ViewResult result = _controller.Index("status_desc", string.Empty) as ViewResult;
-            var model = (List<MarketingAssetPackage>)result.Model;
-            // Assert
-            Assert.AreEqual(model[0], map2);//is the first one in the ordered the list the correct one?
-            Assert.AreEqual(model[2], map1);//is the last one in the ordered the list the correct one?
-        }
-
-        [TestMethod]
-        public void Index_WhenCalled_OrderByIdDescReturnsCorrectOrder()
-        {
-            // Arrange
-
-            // Act
-            ViewResult result = _controller.Index("id_desc", string.Empty) as ViewResult;
-            var model = (List<MarketingAssetPackage>)result.Model;
-            // Assert
-            Assert.AreEqual(model[0], map3);//is the first one in the ordered the list the correct one?
-            Assert.AreEqual(model[2], map1);//is the last one in the ordered the list the correct one?
-        }
-
+        
         [TestMethod]
         public void Index_WhenCalled_SearchBySReturnsExpectedMAPS()
         {
@@ -262,7 +207,7 @@ namespace StatNav.UnitTests.Controllers
         public void Create_WhenSubmittedWithValidModel_CreatesValidMAP()
         {
             //Arrange
-            MarketingAssetPackage newMAP = new MarketingAssetPackage { MAPName = "MAPNew", Id = 7, ExperimentStatusId = 0, MAPImpactMetricModelId = 0, MAPTargetMetricModelId = 0 };
+            MarketingAssetPackage newMAP = new MarketingAssetPackage { MAPName = "MAPNew", Id = 7};
 
             //Act
             var result = (RedirectToRouteResult)_controller.Create(newMAP);
@@ -338,7 +283,7 @@ namespace StatNav.UnitTests.Controllers
         public void Edit_WhenSubmitted_EditsModel()
         {
             //Arrange
-            MarketingAssetPackage editedMAP = new MarketingAssetPackage { MAPName = "MAPEdited", Id = 1, ExperimentStatusId = 0, MAPImpactMetricModelId = 0, MAPTargetMetricModelId = 0 };
+            MarketingAssetPackage editedMAP = new MarketingAssetPackage { MAPName = "MAPEdited", Id = 1};
          
             //Act
             var result = (RedirectToRouteResult)_controller.Edit(editedMAP);

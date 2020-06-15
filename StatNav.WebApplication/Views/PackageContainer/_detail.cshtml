@@ -1,4 +1,4 @@
-﻿@model StatNav.WebApplication.Models.MarketingAssetPackage
+﻿@model StatNav.WebApplication.Models.PackageContainer
 <div class="row">
     <div class="col-md-6">
         <dl class="dl-horizontal">
@@ -9,13 +9,9 @@
                 <dt>
                     @switch (prop.PropertyName)
                     {
-                        case "ExperimentStatus":
-                        case "ExperimentIterations":
-                        case "MAPTargetMetricModel":
-                        case "MAPImpactMetricModel":
-                        case "UserId":
-                        case "TeamId":
-                        case "MAPMethod":
+                        case "Id":
+                        case "MetricModelStage":
+                        case "MarketingAssetPackages":
                             break;
                         default:
                             @(prop.DisplayName ?? prop.PropertyName)
@@ -26,34 +22,18 @@
                 <dd>
                     @switch (prop.PropertyName)
                     {
-                        case "MAPTargetMetricModelId":
-                            @(Model.MAPTargetMetricModel != null ? Model.MAPTargetMetricModel.Title : "");
+                        case "Id":
+                        case "MetricModelStage":
+                        case "MarketingAssetPackages":
                             break;
-                        case "MAPImpactMetricModelId":
-                            @(Model.MAPImpactMetricModel != null ? Model.MAPImpactMetricModel.Title : "");
-                            break;
-                        case "ExperimentStatusId":
-                            @(Model.ExperimentStatus != null ? Model.ExperimentStatus.StatusName : "");
-                            break;
-                        case "MethodId":
-                            @(Model.MAPMethod != null ? Model.MAPMethod.Title : "");
-                            break;
-                        case "ExperimentStatus":
-                        case "ExperimentIterations":
-                        case "MAPTargetMetricModel":
-                        case "MAPImpactMetricModel":
-                        case "UserId":
-                        case "TeamId":
-                        case "MAPMethod":
+                        case "MetricModelStageId":
+                            @(Model.MetricModelStage != null ? Model.MetricModelStage.Title : "");
                             break;
                         default:
                             @prop.Model
                             break;
                     }
                 </dd>
-
-
-
             }
         </dl>
     </div>

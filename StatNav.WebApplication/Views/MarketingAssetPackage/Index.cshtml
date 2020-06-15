@@ -13,17 +13,17 @@
 <table class="table">
     <caption>List of Marketing Asset Packages</caption>
     <tr>
-        <th scope="col">
+        @*<th scope="col">
             <a href="@Url.Action("Index",new { sortOrder = ViewBag.IdSortParm })">ID <span class="glyphicon glyphicon-sort"></span></a>
-        </th>
+        </th>*@
         <th scope="col">
             <a href="@Url.Action("Index",new { sortOrder = ViewBag.NameSortParm })">Package Name <span class="glyphicon glyphicon-sort"></span></a>
         </th>
-        <th scope="col">
+        @*<th scope="col">
             <a href="@Url.Action("Index",new { sortOrder = ViewBag.StatusSortParm })">Status <span class="glyphicon glyphicon-sort"></span></a>
-        </th>
+        </th>*@
         <th scope="col">
-            @Html.DisplayNameFor(model => model.Problem)
+            @Html.DisplayNameFor(model => model.Hypothesis)
         </th>
 
     </tr>
@@ -31,17 +31,17 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Id)
-            </td>
+            </td>*@
             <td>
                 @Html.ActionLink(item.MAPName, "Edit", "MarketingAssetPackage", new { id = item.Id }, null)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.ExperimentStatus.StatusName)
-            </td>
+            </td>*@
             <td>
-                @Html.DisplayFor(modelItem => item.Problem)
+                @Html.DisplayFor(modelItem => item.Hypothesis)
             </td>
 
         </tr>

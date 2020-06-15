@@ -32,35 +32,36 @@ namespace StatNav.WebApplication.Models
         [DataType(DataType.MultilineText)]
         public string Hypothesis { get; set; }
 
-        [ForeignKey("MAPMethod")]
-        [Display(Name = "Method")]
-        public int MethodId { get; set; }
+        //STORY 2069 these attributes removed from UI
+        //[ForeignKey("MAPMethod")]
+        //[Display(Name = "Method")]
+        //public int MethodId { get; set; }
 
-        public Method MAPMethod { get; set; }
+        //public Method MAPMethod { get; set; }
 
-        [ForeignKey("MAPTargetMetricModel")]
-        [Display(Name = "Target Metric")]
-        public int MAPTargetMetricModelId { get; set; }
+        //[ForeignKey("MAPTargetMetricModel")]
+        //[Display(Name = "Target Metric")]
+        //public int MAPTargetMetricModelId { get; set; }
 
-        public MetricModel MAPTargetMetricModel { get; set; }
+        //public MetricModel MAPTargetMetricModel { get; set; }
 
-        [Display(Name = "Target Value")]
-        public float TargetValue { get; set; }
+        //[Display(Name = "Target Value")]
+        //public float TargetValue { get; set; }
 
-        [ForeignKey("MAPImpactMetricModel")]
-        [Display(Name = "Impact Metric")]
-        public int MAPImpactMetricModelId { get; set; }
+        //[ForeignKey("MAPImpactMetricModel")]
+        //[Display(Name = "Impact Metric")]
+        //public int MAPImpactMetricModelId { get; set; }
 
-        public MetricModel MAPImpactMetricModel { get; set; }
+        //public MetricModel MAPImpactMetricModel { get; set; }
 
-        [Display(Name = "Impact Value")]
-        public float ImpactValue { get; set; }        
+        //[Display(Name = "Impact Value")]
+        //public float ImpactValue { get; set; }        
 
-        [ForeignKey("ExperimentStatus")]
-        [Display(Name = "Status")]
-        public int ExperimentStatusId { get; set; }
+        //[ForeignKey("ExperimentStatus")]
+        //[Display(Name = "Status")]
+        //public int ExperimentStatusId { get; set; }
 
-        public ExperimentStatus ExperimentStatus { get; set; }
+        //public ExperimentStatus ExperimentStatus { get; set; }
 
         [DataType(DataType.MultilineText)]
         public string Notes { get; set; }

@@ -12,8 +12,8 @@ namespace StatNav.WebApplication.DAL
 
         public override List<MarketingAssetPackage> LoadList(string sortOrder, string searchString)
         {
-            IQueryable<MarketingAssetPackage> maps = Db.MarketingAssetPackages
-                               .Include(x => x.ExperimentStatus);
+            IQueryable<MarketingAssetPackage> maps = Db.MarketingAssetPackages;
+                               //.Include(x => x.ExperimentStatus); //story 2069
 
             maps = MAPLogic.FilterMAPs(maps, searchString);
             return SortList(maps.ToList(), sortOrder);
@@ -36,11 +36,12 @@ namespace StatNav.WebApplication.DAL
         {
             MarketingAssetPackage map = Db.MarketingAssetPackages
                                               .Where(x => x.Id == id)
-                                              .Include(x => x.ExperimentStatus)
-                                              .Include(x => x.MAPTargetMetricModel)
-                                              .Include(x => x.MAPImpactMetricModel)
+                                              //.Include(x => x.ExperimentStatus) story 2069
+                                              //.Include(x => x.MAPTargetMetricModel)
+                                              //.Include(x => x.MAPImpactMetricModel)
                                               .Include(x => x.ExperimentIterations)
-                                              .Include(x=>x.MAPMethod)
+                                              //.Include(x=>x.MAPMethod)
+                                              .Include(x=>x.PackageContainer)
                                               .FirstOrDefault();
 
             return map;

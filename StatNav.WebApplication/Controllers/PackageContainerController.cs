@@ -26,8 +26,7 @@ namespace StatNav.WebApplication.Controllers
         public ActionResult Index(string sortOrder, string searchString)
         {
             ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.TypeSortParm = sortOrder == "type" ? "type_desc" : "type";
-            ViewBag.IdSortParm = sortOrder == "Id" ? "id_desc" : "Id";
+            ViewBag.TypeSortParm = sortOrder == "type" ? "type_desc" : "type";          
             ViewBag.StageSortParm = sortOrder == "stage" ? "stage_desc" : "stage";
             List<PackageContainer> containers = _pcRepository.LoadList(sortOrder, searchString);
             ViewBag.SelectedType = "PackageContainer";

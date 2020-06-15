@@ -26,8 +26,8 @@ namespace StatNav.WebApplication.Controllers
         public ActionResult Index(string sortOrder, string searchString)
         {
             ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.StatusSortParm = sortOrder == "Status" ? "status_desc" : "Status";
-            ViewBag.IdSortParm = sortOrder == "Id" ? "id_desc" : "Id";
+            //ViewBag.StatusSortParm = sortOrder == "Status" ? "status_desc" : "Status"; //2069 - Status field removed from UI
+            //ViewBag.IdSortParm = sortOrder == "Id" ? "id_desc" : "Id"; //2069 - ID field removed from UI
             List<MarketingAssetPackage> maps = _mapRepository.LoadList(sortOrder, searchString);
             ViewBag.SelectedType = "MarketingAssetPackage";
             return View(maps);

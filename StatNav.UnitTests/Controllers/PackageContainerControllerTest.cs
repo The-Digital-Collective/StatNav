@@ -108,19 +108,6 @@ namespace StatNav.UnitTests.Controllers
         }
 
         [TestMethod]
-        public void Index_WhenCalled_OrderByIdReturnsCorrectOrder()
-        {
-            // Arrange
-
-            // Act
-            ViewResult result = _controller.Index("Id", string.Empty) as ViewResult;
-            var model = (List<PackageContainer>)result.Model;
-            // Assert
-            Assert.AreEqual(model[0], pc1);//is the first one in the ordered the list the correct one?
-            Assert.AreEqual(model[2], pc3);//is the last one in the ordered the list the correct one?
-        }
-
-        [TestMethod]
         public void Index_WhenCalled_OrderByStageReturnsCorrectOrder()
         {
             // Arrange
@@ -144,20 +131,7 @@ namespace StatNav.UnitTests.Controllers
             // Assert
             Assert.AreEqual(model[0], pc1);//is the first one in the ordered the list the correct one?
             Assert.AreEqual(model[2], pc2);//is the last one in the ordered the list the correct one?
-        }
-
-        [TestMethod]
-        public void Index_WhenCalled_OrderByIdDescReturnsCorrectOrder()
-        {
-            // Arrange
-
-            // Act
-            ViewResult result = _controller.Index("id_desc", string.Empty) as ViewResult;
-            var model = (List<PackageContainer>)result.Model;
-            // Assert
-            Assert.AreEqual(model[0], pc3);//is the first one in the ordered the list the correct one?
-            Assert.AreEqual(model[2], pc1);//is the last one in the ordered the list the correct one?
-        }
+        }      
 
         [TestMethod]
         public void Index_WhenCalled_SearchByIReturnsExpectedPCS()

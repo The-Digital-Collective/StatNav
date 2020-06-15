@@ -254,6 +254,10 @@
     <Compile Include="Migrations\202006151225497_Reinitialise.designer.cs">
       <DependentUpon>202006151225497_Reinitialise.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006151341323_2069RemoveAttributesFromMAPEntity.cs" />
+    <Compile Include="Migrations\202006151341323_2069RemoveAttributesFromMAPEntity.designer.cs">
+      <DependentUpon>202006151341323_2069RemoveAttributesFromMAPEntity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ExperimentIterations.cs" />
     <Compile Include="Models\ExperimentCandidate.cs" />
@@ -565,6 +569,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202006151225497_Reinitialise.resx">
       <DependentUpon>202006151225497_Reinitialise.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006151341323_2069RemoveAttributesFromMAPEntity.resx">
+      <DependentUpon>202006151341323_2069RemoveAttributesFromMAPEntity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

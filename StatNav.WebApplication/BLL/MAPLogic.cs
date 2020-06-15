@@ -23,18 +23,19 @@ namespace StatNav.WebApplication.BLL
                 case "name_desc":
                     sortedList = mapList.OrderByDescending(x => x.MAPName);
                     break;
-                case "Status":
-                    sortedList = mapList.OrderBy(x => x.ExperimentStatus.StatusName);
-                    break;
-                case "status_desc":
-                    sortedList = mapList.OrderByDescending(x => x.ExperimentStatus.StatusName);
-                    break;
-                case "Id":
-                    sortedList = mapList.OrderBy(x => x.Id);
-                    break;
-                case "id_desc":
-                    sortedList = mapList.OrderByDescending(x => x.Id);
-                    break;
+                //story 2069 status and ID removed from UI
+                //case "Status":
+                //    sortedList = mapList.OrderBy(x => x.ExperimentStatus.StatusName);
+                //    break;
+                //case "status_desc":
+                //    sortedList = mapList.OrderByDescending(x => x.ExperimentStatus.StatusName);
+                //    break;
+                //case "Id":
+                //    sortedList = mapList.OrderBy(x => x.Id);
+                //    break;
+                //case "id_desc":
+                //    sortedList = mapList.OrderByDescending(x => x.Id);
+                //    break;
                 default:
                     sortedList = mapList.OrderBy(x => x.MAPName);
                     break;

@@ -16,8 +16,8 @@ namespace StatNav.WebApplication.DAL
             IQueryable<PackageContainer> containers = Db.PackageContainer
                                .Include(x => x.MetricModelStage);
 
-            
-            containers = PCLogic.FilterPCs(containers, searchString); 
+
+            containers = PCLogic.FilterPCs(containers, searchString);
             return SortList(containers.ToList(), sortOrder);
         }
 
@@ -38,6 +38,7 @@ namespace StatNav.WebApplication.DAL
         {
             PackageContainer container = Db.PackageContainer
                                               .Include(x => x.MarketingAssetPackages)
+                                              .Include(x => x.MetricModelStage)
                                               .Where(x => x.Id == id)
                                               .FirstOrDefault();
 
