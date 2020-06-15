@@ -1,8 +1,9 @@
 ﻿namespace StatNav.WebApplication.Migrations
 {
+    using System;
     using System.Data.Entity.Migrations;
     
-    public partial class RecreateDB : DbMigration
+    public partial class Reinitialise : DbMigration
     {
         public override void Up()
         {
@@ -48,6 +49,7 @@
                         SortOrder = c.Int(nullable: false),
                         Title = c.String(),
                         DataType = c.Int(nullable: false),
+                        MarketingModelId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -76,31 +78,34 @@
                         Id = c.Int(nullable: false, identity: true),
                         UserId = c.Int(),
                         TeamId = c.Int(),
-                        ProgrammeName = c.String(nullable: false),
+                        MAPName = c.String(nullable: false),
                         Problem = c.String(),
                         ProblemValidation = c.String(),
                         Hypothesis = c.String(),
-                        Method = c.Int(nullable: false),
-                        ProgrammeTargetMetricModelId = c.Int(nullable: false),
+                        MethodId = c.Int(nullable: false),
+                        MAPTargetMetricModelId = c.Int(nullable: false),
                         TargetValue = c.Single(nullable: false),
-                        ProgrammeImpactMetricModelId = c.Int(nullable: false),
+                        MAPImpactMetricModelId = c.Int(nullable: false),
                         ImpactValue = c.Single(nullable: false),
                         ExperimentStatusId = c.Int(nullable: false),
                         Notes = c.String(),
+                        PackageContainerId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.ExperimentStatus", t => t.ExperimentStatusId)
-                .ForeignKey("dbo.MetricModel", t => t.ProgrammeImpactMetricModelId)
-                .ForeignKey("dbo.Method", t => t.Method)
-                .ForeignKey("dbo.MetricModel", t => t.ProgrammeTargetMetricModelId)
+                .ForeignKey("dbo.MetricModel", t => t.MAPImpactMetricModelId)
+                .ForeignKey("dbo.Method", t => t.MethodId)
+                .ForeignKey("dbo.MetricModel", t => t.MAPTargetMetricModelId)
+                .ForeignKey("dbo.PackageContainer", t => t.PackageContainerId)
                 .ForeignKey("dbo.Team", t => t.TeamId)
                 .ForeignKey("dbo.User", t => t.UserId)
                 .Index(t => t.UserId)
                 .Index(t => t.TeamId)
-                .Index(t => t.Method)
-                .Index(t => t.ProgrammeTargetMetricModelId)
-                .Index(t => t.ProgrammeImpactMetricModelId)
-                .Index(t => t.ExperimentStatusId);
+                .Index(t => t.MethodId)
+                .Index(t => t.MAPTargetMetricModelId)
+                .Index(t => t.MAPImpactMetricModelId)
+                .Index(t => t.ExperimentStatusId)
+                .Index(t => t.PackageContainerId);
             
             CreateTable(
                 "dbo.ExperimentStatus",
@@ -121,6 +126,20 @@
                         Title = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.PackageContainer",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        PackageContainerName = c.String(nullable: false),
+                        Type = c.String(nullable: false),
+                        MetricModelStageId = c.Int(nullable: false),
+                        Notes = c.String(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.MetricModelStage", t => t.MetricModelStageId)
+                .Index(t => t.MetricModelStageId);
             
             CreateTable(
                 "dbo.Team",
@@ -203,9 +222,11 @@
             DropForeignKey("dbo.User", "TeamId", "dbo.Team");
             DropForeignKey("dbo.MarketingAssetPackage", "TeamId", "dbo.Team");
             DropForeignKey("dbo.Team", "OrganisationId", "dbo.Organisation");
-            DropForeignKey("dbo.MarketingAssetPackage", "ProgrammeTargetMetricModelId", "dbo.MetricModel");
-            DropForeignKey("dbo.MarketingAssetPackage", "Method", "dbo.Method");
-            DropForeignKey("dbo.MarketingAssetPackage", "ProgrammeImpactMetricModelId", "dbo.MetricModel");
+            DropForeignKey("dbo.MarketingAssetPackage", "PackageContainerId", "dbo.PackageContainer");
+            DropForeignKey("dbo.PackageContainer", "MetricModelStageId", "dbo.MetricModelStage");
+            DropForeignKey("dbo.MarketingAssetPackage", "MAPTargetMetricModelId", "dbo.MetricModel");
+            DropForeignKey("dbo.MarketingAssetPackage", "MethodId", "dbo.Method");
+            DropForeignKey("dbo.MarketingAssetPackage", "MAPImpactMetricModelId", "dbo.MetricModel");
             DropForeignKey("dbo.MarketingAssetPackage", "ExperimentStatusId", "dbo.ExperimentStatus");
             DropForeignKey("dbo.ExperimentCandidate", "ExperimentIterationId", "dbo.ExperimentIteration");
             DropForeignKey("dbo.ExperimentCandidate", "CandidateTargetMetricModelId", "dbo.MetricModel");
@@ -216,10 +237,12 @@
             DropIndex("dbo.User", new[] { "RoleId" });
             DropIndex("dbo.User", new[] { "TeamId" });
             DropIndex("dbo.Team", new[] { "OrganisationId" });
+            DropIndex("dbo.PackageContainer", new[] { "MetricModelStageId" });
+            DropIndex("dbo.MarketingAssetPackage", new[] { "PackageContainerId" });
             DropIndex("dbo.MarketingAssetPackage", new[] { "ExperimentStatusId" });
-            DropIndex("dbo.MarketingAssetPackage", new[] { "ProgrammeImpactMetricModelId" });
-            DropIndex("dbo.MarketingAssetPackage", new[] { "ProgrammeTargetMetricModelId" });
-            DropIndex("dbo.MarketingAssetPackage", new[] { "Method" });
+            DropIndex("dbo.MarketingAssetPackage", new[] { "MAPImpactMetricModelId" });
+            DropIndex("dbo.MarketingAssetPackage", new[] { "MAPTargetMetricModelId" });
+            DropIndex("dbo.MarketingAssetPackage", new[] { "MethodId" });
             DropIndex("dbo.MarketingAssetPackage", new[] { "TeamId" });
             DropIndex("dbo.MarketingAssetPackage", new[] { "UserId" });
             DropIndex("dbo.ExperimentIteration", new[] { "MarketingAssetPackageId" });
@@ -232,6 +255,7 @@
             DropTable("dbo.User");
             DropTable("dbo.Organisation");
             DropTable("dbo.Team");
+            DropTable("dbo.PackageContainer");
             DropTable("dbo.Method");
             DropTable("dbo.ExperimentStatus");
             DropTable("dbo.MarketingAssetPackage");

@@ -82,7 +82,7 @@
         <p>&nbsp;</p>
         @if (action == "Edit")
         {
-            <h4>Iterations</h4>
+            <h4>Marketing Asset Packages</h4>
             @Html.ActionLink("Create Marketing Asset Package for this Package Container", "Create", "MarketingAssetPackage", new { packageContainerId = Model.Id }, null)
 
             @Html.Partial("../MarketingAssetPackage/_list", Model.MarketingAssetPackages)

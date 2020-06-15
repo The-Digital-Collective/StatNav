@@ -250,33 +250,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IRepository.cs" />
-    <Compile Include="Migrations\202001161039126_RecreateDB.cs" />
-    <Compile Include="Migrations\202001161039126_RecreateDB.designer.cs">
-      <DependentUpon>202001161039126_RecreateDB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001161110138_MethodId.cs" />
-    <Compile Include="Migrations\202001161110138_MethodId.designer.cs">
-      <DependentUpon>202001161110138_MethodId.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006111300406_2067StagesTableEdit.cs" />
-    <Compile Include="Migrations\202006111300406_2067StagesTableEdit.designer.cs">
-      <DependentUpon>202006111300406_2067StagesTableEdit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006111346279_2085NewTablePackageContainer.cs" />
-    <Compile Include="Migrations\202006111346279_2085NewTablePackageContainer.designer.cs">
-      <DependentUpon>202006111346279_2085NewTablePackageContainer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006120925385_AB#2085.cs" />
-    <Compile Include="Migrations\202006120925385_AB#2085.designer.cs">
-      <DependentUpon>202006120925385_AB#2085.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006121622137_AB#2069.cs" />
-    <Compile Include="Migrations\202006121622137_AB#2069.designer.cs">
-      <DependentUpon>202006121622137_AB#2069.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006151047209_MAPmustContainPC.cs" />
-    <Compile Include="Migrations\202006151047209_MAPmustContainPC.designer.cs">
-      <DependentUpon>202006151047209_MAPmustContainPC.cs</DependentUpon>
+    <Compile Include="Migrations\202006151225497_Reinitialise.cs" />
+    <Compile Include="Migrations\202006151225497_Reinitialise.designer.cs">
+      <DependentUpon>202006151225497_Reinitialise.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ExperimentIterations.cs" />
@@ -587,26 +563,8 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202001161039126_RecreateDB.resx">
-      <DependentUpon>202001161039126_RecreateDB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001161110138_MethodId.resx">
-      <DependentUpon>202001161110138_MethodId.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006111300406_2067StagesTableEdit.resx">
-      <DependentUpon>202006111300406_2067StagesTableEdit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006111346279_2085NewTablePackageContainer.resx">
-      <DependentUpon>202006111346279_2085NewTablePackageContainer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006120925385_AB#2085.resx">
-      <DependentUpon>202006120925385_AB#2085.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006121622137_AB#2069.resx">
-      <DependentUpon>202006121622137_AB#2069.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006151047209_MAPmustContainPC.resx">
-      <DependentUpon>202006151047209_MAPmustContainPC.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202006151225497_Reinitialise.resx">
+      <DependentUpon>202006151225497_Reinitialise.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

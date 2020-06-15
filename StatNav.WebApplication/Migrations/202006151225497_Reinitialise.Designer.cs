@@ -7,13 +7,13 @@ namespace StatNav.WebApplication.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-    public sealed partial class AB2085 : IMigrationMetadata
+    public sealed partial class Reinitialise : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AB2085));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Reinitialise));
         
         string IMigrationMetadata.Id
         {
-            get { return "202006120925385_AB#2085"; }
+            get { return "202006151225497_Reinitialise"; }
         }
         
         string IMigrationMetadata.Source
