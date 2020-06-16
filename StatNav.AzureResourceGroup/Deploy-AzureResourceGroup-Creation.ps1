@@ -8,7 +8,7 @@ param(
 $ErrorActionPreference = 'Stop'
 
 # Store all the resource group in the array list
-$rgNameList = @($sharedRGName, $blueRGName, $greenRGName)
+$rgNameList = @($sharedRGName, $RGName)
 
 # If resource group is already exist, then it won't create new resource group
 foreach ($rgName in $rgNameList) {
