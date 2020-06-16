@@ -31,14 +31,12 @@
 		"nestedStorageAccountTemplateFile": "[concat(variables('baseTemplateUrl'), '/', 'deployStorageAccount.json')]",
 		"nestedWebSiteTemplateFile": "[concat(variables('baseTemplateUrl'), '/', 'deployWebSite.json')]",
 		"nestedAppSettingTemplateFile": "[concat(variables('baseTemplateUrl'), '/', 'deployAppSetting.json')]",
-		"nestedTrafficManagerTemplateFile": "[concat(variables('baseTemplateUrl'), '/', 'deployTrafficManager.json')]",
 		"apiVersion": "2017-05-10",
 		"contentVersion": "1.0.0.0",
 		"mode": "Incremental",
 		"sqlserverName": "[toLower(concat(parameters('environmentName'), '-sql-server'))]",
 		"hostingPlanName": "[toLower(concat(parameters('environmentName'), '-hosting-plan'))]",
 		"webSiteName": "[toLower(concat(parameters('environmentName'), '-webapp'))]",
-		"trafficManagerName": "[concat(parameters('environmentName'), '-TM')]",
 		"resourceGroupWebapp": "[concat(parameters('environmentName'), '-RG')]",
 		"resourceGroupShared": "[concat(parameters('environmentName'), '-Shared-RG')]",
 		"storageenv": "[replace(parameters('environmentName'), '-', '')]",
@@ -49,9 +47,8 @@
 		"hostingPlanTemplate": "hostingPlanTemplate",
 		"storageAccountTemplate": "storageAccountTemplate",
 		"webSiteTemplate": "webSiteTemplate",
-		"appSettingTemplate": "appSettingTemplate",
-		"trafficManagerTemplate": "trafficManagerTemplate",
-		"webappEndpoint": "GreenWebappEndpoint"
+		"appSettingTemplate": "appSettingTemplate"
+		
 	},
 	"resources": [
 		{
@@ -202,42 +199,6 @@
 					},
 					"outputStorageAccountKeyReference": {
 						"value": "[reference(variables('storageAccountTemplate')).outputs.outputStorageAccountKeyReference.value]"
-					}
-				}
-			}
-		},
-		{
-			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "[variables('apiVersion')]",
-			"resourceGroup": "[variables('resourceGroupShared')]",
-			"name": "[variables('trafficManagerTemplate')]",
-			"dependsOn": [
-				"[variables('sqlServerTemplate')]",
-				"[variables('hostingPlanTemplate')]",
-				"[variables('storageAccountTemplate')]",
-				"[variables('webSiteTemplate')]"
-			],
-			"properties": {
-				"mode": "[variables('mode')]",
-				"templateLink": {
-					"uri": "[variables('nestedTrafficManagerTemplateFile')]",
-					"contentVersion": "[variables('contentVersion')]"
-				},
-				"parameters": {
-					"trafficManagerName": {
-						"value": "[variables('trafficManagerName')]"
-					},
-					"webSiteName": {
-						"Value": "[variables('webSiteName')]"
-					},
-					"trafficeManagerEndPointPriority": {
-						"value": 1
-					},
-					"resourceGroupWebapp": {
-						"value": "[variables('resourceGroupWebapp')]"
-					},
-					"webappEndpoint": {
-						"value": "[variables('webappEndpoint')]"
 					}
 				}
 			}
