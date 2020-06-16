@@ -1,8 +1,7 @@
 # Added resource group automation and passing param
 param(
 	[string] [Parameter(Mandatory = $true)] $sharedRGName,
-	[string] [Parameter(Mandatory = $true)] $blueRGName,
-	[string] [Parameter(Mandatory = $true)] $greenRGName,
+	[string] [Parameter(Mandatory = $true)] $RGName,
 	[string] [Parameter(Mandatory = $true)] $location
 )
 
