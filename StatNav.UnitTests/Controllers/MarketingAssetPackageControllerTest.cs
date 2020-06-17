@@ -39,6 +39,10 @@ namespace StatNav.UnitTests.Controllers
             {
                 MAPName = "Northern Lights",
                 Id = 0,
+                Hypothesis = "Test Hypothesis",
+                Problem = "Test Problem",
+                ProblemValidation="Test Problem Validation",  
+                Notes="Test Notes",
                 ExperimentIterations = new List<ExperimentIteration>()
             { childItem1,childItem2,childItem3}
             };
@@ -180,10 +184,10 @@ namespace StatNav.UnitTests.Controllers
             // Act
             ViewResult result = (ViewResult)_controller.Details(1);
 
-            MarketingAssetPackage ep = result.ViewData.Model as MarketingAssetPackage;
+            MarketingAssetPackage map = result.ViewData.Model as MarketingAssetPackage;
 
             // Assert           
-            Assert.AreEqual(ep, map2);
+            Assert.AreEqual(map, map2);
         }
 
         [TestMethod]
@@ -254,12 +258,18 @@ namespace StatNav.UnitTests.Controllers
             // Arrange            
 
             // Act
-            ViewResult result = (ViewResult)_controller.Edit(2, "");
+            ViewResult result = (ViewResult)_controller.Edit(0, "");
 
-            MarketingAssetPackage ep = result.ViewData.Model as MarketingAssetPackage;
+            MarketingAssetPackage map = result.ViewData.Model as MarketingAssetPackage;
 
             // Assert           
-            Assert.AreEqual(ep, map3);
+            Assert.AreEqual(map, map1);
+            //check properties of model - story 2069
+            Assert.AreEqual(map.ProblemValidation.GetType(), map1.ProblemValidation.GetType());
+            Assert.AreEqual(map.Problem.GetType(), map1.Problem.GetType());
+            Assert.AreEqual(map.Hypothesis.GetType(), map1.Hypothesis.GetType());
+            Assert.AreEqual(map.MAPName.GetType(), map1.MAPName.GetType());
+            Assert.AreEqual(map.Notes.GetType(), map1.Notes.GetType());
         }
 
         [TestMethod]
@@ -362,10 +372,10 @@ namespace StatNav.UnitTests.Controllers
             // Act
             ViewResult result = (ViewResult)_controller.Delete(1);
 
-            MarketingAssetPackage ep = result.ViewData.Model as MarketingAssetPackage;
+            MarketingAssetPackage map = result.ViewData.Model as MarketingAssetPackage;
 
             // Assert           
-            Assert.AreEqual(ep, map2);
+            Assert.AreEqual(map, map2);
         }
 
 
