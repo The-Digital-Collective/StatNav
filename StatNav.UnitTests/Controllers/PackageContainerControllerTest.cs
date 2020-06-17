@@ -288,6 +288,19 @@ namespace StatNav.UnitTests.Controllers
         }
 
         [TestMethod]
+        public void Edit_WhenCalledFromSave_ReturnsCorrectConfirmation()
+        {
+            // Arrange            
+
+            // Act
+            ViewResult result = (ViewResult)_controller.Edit(3, "Saved");
+          
+
+            // Assert           
+            Assert.AreEqual(result.ViewBag.Notification, "Save Successful");
+        }
+
+        [TestMethod]
         public void Edit_WhenCalled_ReturnsCorrectChildEntities()
         {
             // Arrange            

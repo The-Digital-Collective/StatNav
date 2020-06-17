@@ -17,6 +17,9 @@ namespace StatNav.UnitTests.Controllers
         MarketingAssetPackage map1 = null;
         MarketingAssetPackage map2 = null;
         MarketingAssetPackage map3 = null;
+        ExperimentIteration childItem1 = null;
+        ExperimentIteration childItem2 = null;
+        ExperimentIteration childItem3 = null;
         List<MarketingAssetPackage> _maps = null;
         DummyMAPRepository mapRepository = null;
 
@@ -26,10 +29,21 @@ namespace StatNav.UnitTests.Controllers
             status1 = new ExperimentStatus() { Id = 0, DisplayOrder = 1, StatusName = "Draft" };
             status2 = new ExperimentStatus() { Id = 1, DisplayOrder = 2, StatusName = "Scheduled" };
             status3 = new ExperimentStatus() { Id = 2, DisplayOrder = 3, StatusName = "Live" };
+
+            childItem1 = new ExperimentIteration() { Id = 1, MarketingAssetPackageId = 1, IterationName = "ChildItem1" };
+            childItem2 = new ExperimentIteration() { Id = 2, MarketingAssetPackageId = 1, IterationName = "ChildItem2" };
+            childItem3 = new ExperimentIteration() { Id = 3, MarketingAssetPackageId = 1, IterationName = "ChildItem3" };
+
             //set up the dummy data for testing
-            map1 = new MarketingAssetPackage() { MAPName = "Northern Lights", Id = 0 };            
-            map2 = new MarketingAssetPackage() { MAPName = "Amber Spyglass", Id = 1 };            
-            map3 = new MarketingAssetPackage() { MAPName = "Subtle Knife", Id = 2 };            
+            map1 = new MarketingAssetPackage()
+            {
+                MAPName = "Northern Lights",
+                Id = 0,
+                ExperimentIterations = new List<ExperimentIteration>()
+            { childItem1,childItem2,childItem3}
+            };
+            map2 = new MarketingAssetPackage() { MAPName = "Amber Spyglass", Id = 1 };
+            map3 = new MarketingAssetPackage() { MAPName = "Subtle Knife", Id = 2 };
             _maps = new List<MarketingAssetPackage> { map1, map2, map3 };
 
             mapRepository = new DummyMAPRepository(_maps);
@@ -45,7 +59,7 @@ namespace StatNav.UnitTests.Controllers
             ViewResult result = _controller.Index(string.Empty, string.Empty) as ViewResult;
             var model = (List<MarketingAssetPackage>)result.Model;
             // Assert
-            Assert.AreEqual("MarketingAssetPackage", result.ViewBag.SelectedType);           
+            Assert.AreEqual("MarketingAssetPackage", result.ViewBag.SelectedType);
         }
 
         [TestMethod]
@@ -87,7 +101,7 @@ namespace StatNav.UnitTests.Controllers
             Assert.AreEqual(model[0], map3);//is the first one in the ordered the list the correct one?
             Assert.AreEqual(model[2], map2);//is the last one in the ordered the list the correct one?
         }
-        
+
         [TestMethod]
         public void Index_WhenCalled_SearchBySReturnsExpectedMAPS()
         {
@@ -207,7 +221,7 @@ namespace StatNav.UnitTests.Controllers
         public void Create_WhenSubmittedWithValidModel_CreatesValidMAP()
         {
             //Arrange
-            MarketingAssetPackage newMAP = new MarketingAssetPackage { MAPName = "MAPNew", Id = 7};
+            MarketingAssetPackage newMAP = new MarketingAssetPackage { MAPName = "MAPNew", Id = 7 };
 
             //Act
             var result = (RedirectToRouteResult)_controller.Create(newMAP);
@@ -283,8 +297,8 @@ namespace StatNav.UnitTests.Controllers
         public void Edit_WhenSubmitted_EditsModel()
         {
             //Arrange
-            MarketingAssetPackage editedMAP = new MarketingAssetPackage { MAPName = "MAPEdited", Id = 1};
-         
+            MarketingAssetPackage editedMAP = new MarketingAssetPackage { MAPName = "MAPEdited", Id = 1 };
+
             //Act
             var result = (RedirectToRouteResult)_controller.Edit(editedMAP);
             //get list of all MAPs
@@ -307,6 +321,37 @@ namespace StatNav.UnitTests.Controllers
             // Assert
             Assert.AreEqual("Edit", result.ViewBag.Action);
             Assert.AreEqual("Edit", result.ViewName);
+        }
+
+        [TestMethod]
+        public void Edit_WhenCalled_ReturnsCorrectChildEntities()
+        {
+            // Arrange            
+
+            // Act
+            ViewResult result = (ViewResult)_controller.Edit(0, "");
+
+            MarketingAssetPackage map = result.ViewData.Model as MarketingAssetPackage;
+            List<ExperimentIteration> childItems = (List<ExperimentIteration>)map.ExperimentIterations;
+
+            // Assert           
+            Assert.AreEqual(map.ExperimentIterations.Count, 3);
+            CollectionAssert.Contains(childItems, childItem1);
+            CollectionAssert.Contains(childItems, childItem2);
+            CollectionAssert.Contains(childItems, childItem3);
+        }
+
+        [TestMethod]
+        public void Edit_WhenCalledFromSave_ReturnsCorrectConfirmation()
+        {
+            // Arrange            
+
+            // Act
+            ViewResult result = (ViewResult)_controller.Edit(1, "Saved");
+
+
+            // Assert           
+            Assert.AreEqual(result.ViewBag.Notification, "Save Successful");
         }
 
         [TestMethod]
