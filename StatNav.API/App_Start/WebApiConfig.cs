@@ -19,14 +19,6 @@ namespace StatNav.API
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-
-            //set json as default to return (otherwise is xml)
-            GlobalConfiguration.Configuration.Formatters.JsonFormatter.MediaTypeMappings.Add(
-                new System.Net.Http.Formatting.RequestHeaderMapping("Accept",
-                                                                    "text/html",
-                                                                    StringComparison.InvariantCultureIgnoreCase,
-                                                                    true,
-                                                                    "application/json"));
         }
     }
 }

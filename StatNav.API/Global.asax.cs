@@ -7,7 +7,6 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Microsoft.Ajax.Utilities;
 using StatNav.DAL;
 
 namespace StatNav.API
@@ -21,8 +20,7 @@ namespace StatNav.API
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            //set connection string
-            DAL.Repositories.StatNavDBConfig.StatNavDBConnectionString = ConfigurationManager.ConnectionStrings["StatNavDBEntities"].ToString();          
+            DAL.Repositories.StatNavDBConfig.StatNavDBConnectionString = ConfigurationManager.ConnectionStrings["StatNavDBEntities"].ToString();
         }
     }
 }
