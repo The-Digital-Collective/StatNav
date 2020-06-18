@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatNav.IntegrationTests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatNav.API", "StatNav.API\StatNav.API.csproj", "{569AD367-D4DC-4780-9B53-DBBD09A9F4FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatNav.DAL", "StatNav.DAL\StatNav.DAL.csproj", "{A84E72BE-919B-46D5-BEEA-400732DDAA9D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{569AD367-D4DC-4780-9B53-DBBD09A9F4FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{569AD367-D4DC-4780-9B53-DBBD09A9F4FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{569AD367-D4DC-4780-9B53-DBBD09A9F4FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A84E72BE-919B-46D5-BEEA-400732DDAA9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A84E72BE-919B-46D5-BEEA-400732DDAA9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A84E72BE-919B-46D5-BEEA-400732DDAA9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A84E72BE-919B-46D5-BEEA-400732DDAA9D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="StatNavDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="MarketingAssetPackage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="TeamId" Type="int" />
+          <Property Name="MAPName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Problem" Type="nvarchar(max)" />
+          <Property Name="ProblemValidation" Type="nvarchar(max)" />
+          <Property Name="Hypothesis" Type="nvarchar(max)" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="PackageContainerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PackageContainer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PackageContainerName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MetricModelStageId" Type="int" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_dbo_MarketingAssetPackage_dbo_PackageContainer_PackageContainerId">
+          <End Role="PackageContainer" Type="Self.PackageContainer" Multiplicity="1" />
+          <End Role="MarketingAssetPackage" Type="Self.MarketingAssetPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PackageContainer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MarketingAssetPackage">
+              <PropertyRef Name="PackageContainerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StatNavDBModelStoreContainer">
+          <EntitySet Name="MarketingAssetPackage" EntityType="Self.MarketingAssetPackage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PackageContainer" EntityType="Self.PackageContainer" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_MarketingAssetPackage_dbo_PackageContainer_PackageContainerId" Association="Self.FK_dbo_MarketingAssetPackage_dbo_PackageContainer_PackageContainerId">
+            <End Role="PackageContainer" EntitySet="PackageContainer" />
+            <End Role="MarketingAssetPackage" EntitySet="MarketingAssetPackage" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StatNavDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="MarketingAssetPackage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="TeamId" Type="Int32" />
+          <Property Name="MAPName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Problem" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProblemValidation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Hypothesis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PackageContainerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PackageContainer" Relationship="Self.FK_dbo_MarketingAssetPackage_dbo_PackageContainer_PackageContainerId" FromRole="MarketingAssetPackage" ToRole="PackageContainer" />
+        </EntityType>
+        <EntityType Name="PackageContainer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PackageContainerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MetricModelStageId" Type="Int32" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MarketingAssetPackages" Relationship="Self.FK_dbo_MarketingAssetPackage_dbo_PackageContainer_PackageContainerId" FromRole="PackageContainer" ToRole="MarketingAssetPackage" />
+        </EntityType>
+        <Association Name="FK_dbo_MarketingAssetPackage_dbo_PackageContainer_PackageContainerId">
+          <End Role="PackageContainer" Type="Self.PackageContainer" Multiplicity="1" />
+          <End Role="MarketingAssetPackage" Type="Self.MarketingAssetPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PackageContainer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MarketingAssetPackage">
+              <PropertyRef Name="PackageContainerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StatNavDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MarketingAssetPackages" EntityType="Self.MarketingAssetPackage" />
+          <EntitySet Name="PackageContainers" EntityType="Self.PackageContainer" />
+          <AssociationSet Name="FK_dbo_MarketingAssetPackage_dbo_PackageContainer_PackageContainerId" Association="Self.FK_dbo_MarketingAssetPackage_dbo_PackageContainer_PackageContainerId">
+            <End Role="PackageContainer" EntitySet="PackageContainers" />
+            <End Role="MarketingAssetPackage" EntitySet="MarketingAssetPackages" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StatNavDBModelStoreContainer" CdmEntityContainer="StatNavDBEntities">
+          <EntitySetMapping Name="MarketingAssetPackages">
+            <EntityTypeMapping TypeName="StatNavDBModel.MarketingAssetPackage">
+              <MappingFragment StoreEntitySet="MarketingAssetPackage">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+                <ScalarProperty Name="MAPName" ColumnName="MAPName" />
+                <ScalarProperty Name="Problem" ColumnName="Problem" />
+                <ScalarProperty Name="ProblemValidation" ColumnName="ProblemValidation" />
+                <ScalarProperty Name="Hypothesis" ColumnName="Hypothesis" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="PackageContainerId" ColumnName="PackageContainerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PackageContainers">
+            <EntityTypeMapping TypeName="StatNavDBModel.PackageContainer">
+              <MappingFragment StoreEntitySet="PackageContainer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PackageContainerName" ColumnName="PackageContainerName" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="MetricModelStageId" ColumnName="MetricModelStageId" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

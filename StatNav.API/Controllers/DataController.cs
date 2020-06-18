@@ -4,8 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-//using StatNav.WebApplication.DAL;
-//using StatNav.WebApplication.Models;
+using StatNav.DAL;
 
 namespace StatNav.API.Controllers
 {
@@ -14,16 +13,16 @@ namespace StatNav.API.Controllers
         // GET api/values
         public IEnumerable<string> Get()
         {
-            //PackageContainerRepository packageContainerRepository = new PackageContainerRepository();
-            //List<PackageContainer> packageContainers = packageContainerRepository.LoadList("","");
-            //string[] packages = new string[packageContainers.Count];
-            //for (int x = 0; x<= packageContainers.Count;x++)
-            //{
-            //    packages[x] = packageContainers[x].PackageContainerName;
-            //}
+            StatNavDBEntities context = new StatNavDBEntities();
+            List<PackageContainer> packageContainers = context.PackageContainers.OrderBy(x => x.PackageContainerName).ToList();
+            string[] packages = new string[packageContainers.Count];
+            for (int x = 0; x < packageContainers.Count; x++)
+            {
+                packages[x] = packageContainers[x].PackageContainerName;
+            }
 
-            //return packages;
-            return new string[] { "value1", "value2" };
+            return packages;
+
         }
 
         // GET api/values/5
