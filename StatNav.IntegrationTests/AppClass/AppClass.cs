@@ -22,8 +22,7 @@ namespace StatNav.IntegrationTests
             int val = rand.Next(999999);
 
             bool isdisplayed = false;
-            try
-            {
+
                 string _username = TestContext.Parameters.Get("now");
                 string _password = TestContext.Parameters.Get("next");
                 string url = TestContext.Parameters.Get("webAppUrl");
@@ -59,11 +58,6 @@ namespace StatNav.IntegrationTests
 
                 spage.MSconfirm.Click();
 
-                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.Programmes));
-
-                spage.Programmes.Click();
-               
-                isdisplayed = spage.Programmes.Displayed;
 
                 var filepath = $"{TestContext.CurrentContext.TestDirectory}\\{TestContext.CurrentContext.Test.MethodName + val}.jpg";
 
@@ -71,20 +65,7 @@ namespace StatNav.IntegrationTests
 
                 TestContext.AddTestAttachment(filepath);
 
-                Console.WriteLine("Login Passed1");
-
-            }
-            catch
-            {
-                    var filepath = $"{TestContext.CurrentContext.TestDirectory}\\{TestContext.CurrentContext.Test.MethodName+val}.jpg";
-
-                    ((ITakesScreenshot)AppDriver.driver).GetScreenshot().SaveAsFile(filepath);
-
-                    TestContext.AddTestAttachment(filepath);
-
-                Console.WriteLine("Login failed1");
-
-            }            
+                Console.WriteLine("Login Passed1");          
         }
 
         public static void createprogramme()
@@ -101,6 +82,12 @@ namespace StatNav.IntegrationTests
                 ppage.btnCreateNew.Click();
                 var rand = new Random();
                 int value = rand.Next(999999);
+                StatNav spage = new StatNav();
+                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.Programmes));
+
+                spage.Programmes.Click();
+
+                isdisplayed = spage.Programmes.Displayed;
 
                 ppage.txtProgrammeName.SendKeys("IntegrationTest Programme" + value);
 

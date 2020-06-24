@@ -343,3 +343,4 @@ healthchecksdb
 /StatNav.IntegrationTests/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
 /StatNav.IntegrationTests/Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
 /StatNav.API/StatNavConnectionStrings.config
+/StatNav.IntegrationTests/mongocrypt.dll

@@ -3,9 +3,9 @@
 <RunSettings>
   <!-- Parameters used by tests at runtime -->
   <TestRunParameters>
-    <Parameter name="webAppUrl" value="https://rrrr-sandbox-webapp.azurewebsites.net/" />
-    <Parameter name="now" value="ertrgrthrth@worldvision.org.uk" />
-    <Parameter name="next" value="fgfggfg" />
+    <Parameter name="webAppUrl" value="https://statnav-sandbox-webapp.azurewebsites.net/" />
+    <Parameter name="now" value="ramkumar.rajendran@worldvision.org.uk" />
+    <Parameter name="next" value="Password71" />
   </TestRunParameters>
 <!-- Configurations for data collectors -->  
   <DataCollectionRunSettings>  
