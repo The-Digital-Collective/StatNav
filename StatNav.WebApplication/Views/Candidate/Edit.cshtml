@@ -28,10 +28,10 @@
             </div>
         }
         <div class="form-group">
-            @Html.LabelFor(model => model.ExperimentIterationId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ExperimentId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("ExperimentIterationId", new SelectList(ViewBag.ExperimentIterations, "Id", "IterationName"), "Please Select...", htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ExperimentIterationId, "", new { @class = "text-danger" })
+                @Html.DropDownList("ExperimentId", new SelectList(ViewBag.Experiments, "Id", "ExperimentName"), "Please Select...", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ExperimentId, "", new { @class = "text-danger" })
             </div>
         </div>
 

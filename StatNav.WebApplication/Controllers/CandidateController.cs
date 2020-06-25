@@ -44,11 +44,11 @@ namespace StatNav.WebApplication.Controllers
             return View(thisIteration);
         }
 
-        public ActionResult Create(int? iterationId = 0)
+        public ActionResult Create(int? experimentId = 0)
         {
             ViewBag.Action = "Create";
             ExperimentCandidate newCandidate = new ExperimentCandidate();
-            if (iterationId != null) { newCandidate.ExperimentIterationId = iterationId.GetValueOrDefault(); }
+            if (experimentId != null) { newCandidate.ExperimentId = experimentId.GetValueOrDefault(); }
 
             SetDDLs();
             return View("Edit", newCandidate);
@@ -143,7 +143,7 @@ namespace StatNav.WebApplication.Controllers
         private void SetDDLs()
         {
             ViewBag.MetricModels = _cRepository.GetMetricModels();
-            ViewBag.ExperimentIterations = _cRepository.GetIterations();
+            ViewBag.Experiments = _cRepository.GetExperiments();
         }
 
         private void returnModelToEdit(string action)

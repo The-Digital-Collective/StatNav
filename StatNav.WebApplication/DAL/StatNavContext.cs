@@ -12,7 +12,7 @@ namespace StatNav.WebApplication.DAL
 
         public DbSet<MarketingAssetPackage> MarketingAssetPackages { get; set; }
         public DbSet<ExperimentStatus> ExperimentStatuses { get; set; }
-        public DbSet<ExperimentIteration> ExperimentIterations { get; set; }
+        public DbSet<Experiment> Experiments { get; set; }
         public DbSet<ExperimentCandidate> ExperimentCandidates { get; set; }
         public DbSet<Organisation> Organisations { get; set; }
         public DbSet<Team> Teams { get; set; }

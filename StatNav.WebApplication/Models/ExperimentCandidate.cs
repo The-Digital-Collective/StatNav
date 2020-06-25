@@ -6,10 +6,10 @@ namespace StatNav.WebApplication.Models
     public class ExperimentCandidate
     {
         public int Id { get; set; }
-        [Display(Name = "Experiment Iteration")]
-        public int ExperimentIterationId { get; set; }
+        [Display(Name = "Experiment")]
+        public int ExperimentId { get; set; }
 
-        public ExperimentIteration ExperimentIteration { get; set; }
+        public Experiment Experiment{ get; set; }
 
         [Display(Name = "Candidate Name")]
         [Required]

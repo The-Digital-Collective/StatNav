@@ -47,11 +47,11 @@ namespace StatNav.UnitTests.TestData
             dummyCandidates.Remove(candidateToDel);
         }
 
-        public IList<ExperimentIteration> GetIterations()
+        public IList<Experiment> GetExperiments()
         {
-            ExperimentIteration iteration1 = new ExperimentIteration { IterationName = "Iteration1", Id = 1};
-            ExperimentIteration iteration2 = new ExperimentIteration() { IterationName = "Iteration2", Id = 2};
-            return new List<ExperimentIteration> { iteration1, iteration2 };
+            Experiment experiment1 = new Experiment { ExperimentName = "experiment1", Id = 1};
+            Experiment experiment2 = new Experiment() { ExperimentName = "experiment2", Id = 2};
+            return new List<Experiment> { experiment1, experiment2 };
         }
         public IList<MetricModel> GetMetricModels()
         {

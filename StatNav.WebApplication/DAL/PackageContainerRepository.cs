@@ -19,15 +19,7 @@ namespace StatNav.WebApplication.DAL
 
             containers = PCLogic.FilterPCs(containers, searchString);
             return SortList(containers.ToList(), sortOrder);
-        }
-
-        public List<ExperimentIteration> GetIterations(int Id)
-        {
-            return Db.ExperimentIterations
-                     .Where(x => x.MarketingAssetPackageId == Id)
-                     .OrderBy(i => i.IterationName)
-                     .ToList();
-        }
+        }       
 
         public List<PackageContainer> SortList(List<PackageContainer> containers, string sortOrder)
         {
@@ -47,14 +39,14 @@ namespace StatNav.WebApplication.DAL
         public override void Remove(int id)
         {
             PackageContainer pc = Db.PackageContainer
-                      .Include(p => p.MarketingAssetPackages.Select(i => i.ExperimentIterations.Select(c => c.ExperimentCandidates)))
+                      .Include(p => p.MarketingAssetPackages.Select(i => i.Experiments.Select(c => c.ExperimentCandidates)))
                       .FirstOrDefault(x => x.Id == id);
             if (pc != null)
             {
                 //remove candidates
-                pc?.MarketingAssetPackages.ToList().ForEach(i => i.ExperimentIterations.ToList().ForEach(c => c.ExperimentCandidates.ToList().ForEach(n => Db.ExperimentCandidates.Remove(n))));
+                pc?.MarketingAssetPackages.ToList().ForEach(i => i.Experiments.ToList().ForEach(c => c.ExperimentCandidates.ToList().ForEach(n => Db.ExperimentCandidates.Remove(n))));
                 //remove iterations
-                pc?.MarketingAssetPackages.ToList().ForEach(i => i.ExperimentIterations.ToList().ForEach(n => Db.ExperimentIterations.Remove(n)));
+                pc?.MarketingAssetPackages.ToList().ForEach(i => i.Experiments.ToList().ForEach(n => Db.Experiments.Remove(n)));
                 //remove marketing asset packages
                 pc?.MarketingAssetPackages.ToList().ForEach(n => Db.MarketingAssetPackages.Remove(n));
                 Db.PackageContainer.Remove(pc);

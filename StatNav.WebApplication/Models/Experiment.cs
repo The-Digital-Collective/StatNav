@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StatNav.WebApplication.Models
 {
-    public class ExperimentIteration
+    public class Experiment
     {
         public int Id { get; set; }
 
@@ -15,21 +15,21 @@ namespace StatNav.WebApplication.Models
 
         public MarketingAssetPackage MarketingAssetPackage { get; set; }
 
-        [Display(Name = "Iteration Name")]
+        [Display(Name = "Experiment Name")]
         [Required]
-        public string IterationName { get; set; }
+        public string ExperimentName { get; set; }
 
         [Display(Name = "Required Duration For Significance")]
         public string RequiredDurationForSignificance { get; set; }
 
-        [Display(Name = "Iteration Number")]
-        public int IterationNumber { get; set; }
+        [Display(Name = "Experiment Number")]
+        public int? ExperimentNumber { get; set; }
 
         [DataType(DataType.Date), UIHint("DatePicker"), Display(Name = "Start Date")]
-        public DateTime StartDateTime { get; set; }
+        public DateTime? StartDateTime { get; set; }
 
         [DataType(DataType.Date), UIHint("DatePicker"), Display(Name = "End Date")]
-        public DateTime EndDateTime { get; set; }        
+        public DateTime? EndDateTime { get; set; }        
 
         [DataType(DataType.MultilineText)]
         [Display(Name = "Success Outcome")]
@@ -39,7 +39,7 @@ namespace StatNav.WebApplication.Models
         [Display(Name = "Failure Outcome")]
         public string FailureOutcome { get; set; }
 
-        [ForeignKey("ExperimentIterationId")]
+        [ForeignKey("ExperimentId")]
         public ICollection<ExperimentCandidate> ExperimentCandidates { get; set; }
     }
 }

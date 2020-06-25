@@ -154,7 +154,7 @@ namespace StatNav.WebApplication.Controllers
             SetDDLs();
             if (action == "Edit")
             {
-                ep.ExperimentIterations = _mapRepository.GetIterations(ep.Id);
+                ep.Experiments = _mapRepository.GetExperiments(ep.Id);
             }
         }
     }

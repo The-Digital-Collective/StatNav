@@ -1,10 +1,10 @@
 ﻿
-@model StatNav.WebApplication.Models.ExperimentIteration
+@model StatNav.WebApplication.Models.Experiment
 @{
     ViewBag.Title = "Details";
 }
 
-<h4>Iteration Details</h4>
+<h4>Experiment Details</h4>
 @Html.Partial("_detail", Model)
 
 @Html.ActionLink("Edit", "Edit", new { Id = Model.Id }, new { @class = "btn btn-primary" })

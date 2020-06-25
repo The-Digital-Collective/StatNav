@@ -8,19 +8,19 @@ using StatNav.WebApplication.Models;
 namespace StatNav.WebApplication.Controllers
 {
     [Authorize]
-    public class IterationController : BaseController
+    public class ExperimentController : BaseController
     {
-        private readonly IIterationRepository _iRepository;
+        private readonly IExperimentRepository _eRepository;
 
-        public IterationController()
-            : this(new IterationRepository())
+        public ExperimentController()
+            : this(new ExperimentRepository())
         {
 
         }
 
-        public IterationController(IIterationRepository iterationRepository)
+        public ExperimentController(IExperimentRepository experimentRepository)
         {
-            _iRepository = iterationRepository;
+            _eRepository = experimentRepository;
         }
 
         public ActionResult Index(string sortOrder, string searchString)
@@ -29,64 +29,64 @@ namespace StatNav.WebApplication.Controllers
             ViewBag.IdSortParm = sortOrder == "Id" ? "id_desc" : "Id";
             ViewBag.StartDateSortParm = sortOrder == "StartDate" ? "startDate_desc" : "StartDate";
             ViewBag.EndDateSortParm = sortOrder == "EndDate" ? "endDate_desc" : "EndDate";
-            List<ExperimentIteration> iterations = _iRepository.LoadList(sortOrder, searchString);
-            ViewBag.SelectedType = "Iteration";
+            List<Experiment> experiments = _eRepository.LoadList(sortOrder, searchString);
+            ViewBag.SelectedType = "Experiment";
             ViewBag.Sortable = true;
-            return View(iterations);
+            return View(experiments);
 
         }
 
         public ActionResult Details(int id)
         {
-            ExperimentIteration thisIteration = _iRepository.Load(id);
-            if (thisIteration == null)
+            Experiment thisExperiment = _eRepository.Load(id);
+            if (thisExperiment == null)
             {
                 return HttpNotFound();
             }
-            return View(thisIteration);
+            return View(thisExperiment);
         }
 
         public ActionResult Create(int? mapId = 0)
         {
             ViewBag.Action = "Create";
-            ExperimentIteration newIteration = new ExperimentIteration
+            Experiment newExperiment = new Experiment
             {
                 StartDateTime = DateTime.Today,
                 EndDateTime = DateTime.Today
             };
-            if (mapId != null) { newIteration.MarketingAssetPackageId = mapId.GetValueOrDefault(); }
+            if (mapId != null) { newExperiment.MarketingAssetPackageId = mapId.GetValueOrDefault(); }
 
             SetDDLs();
-            return View("Edit", newIteration);
+            return View("Edit", newExperiment);
         }
 
         [HttpPost]
-        public ActionResult Create(ExperimentIteration newIteration)
+        public ActionResult Create(Experiment newExperiment)
         {
             string pageAction = "Create";
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _iRepository.Add(newIteration);
-                    return RedirectToAction("Edit", new { id = newIteration.Id, fromSave = "Saved" });
+                    _eRepository.Add(newExperiment);
+                    return RedirectToAction("Edit", new { id = newExperiment.Id, fromSave = "Saved" });
                 }
-                returnModelToEdit(pageAction, ref newIteration);
-                return View("Edit", newIteration);                
+                returnModelToEdit(pageAction, ref newExperiment);
+                return View("Edit", newExperiment);                
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                returnModelToEdit(pageAction, ref newIteration);
-                return View("Edit", newIteration);
+                returnModelToEdit(pageAction, ref newExperiment);
+                return View("Edit", newExperiment);
             }
         }
 
         public ActionResult Edit(int id, string fromSave)
         {
             ViewBag.Action = "Edit";
-            ExperimentIteration thisIteration = _iRepository.Load(id);
-            if (thisIteration == null)
+            Experiment thisExperiment = _eRepository.Load(id);
+            if (thisExperiment == null)
             {
                 return HttpNotFound();
             }
@@ -94,40 +94,40 @@ namespace StatNav.WebApplication.Controllers
             SetDDLs();
             if (fromSave == "Saved")
             { ViewBag.Notification = "Save Successful"; }
-            return View("Edit", thisIteration);
+            return View("Edit", thisExperiment);
         }
 
         [HttpPost]
-        public ActionResult Edit(ExperimentIteration editedIteration)
+        public ActionResult Edit(Experiment editedExperiment)
         {
             string pageAction = "Edit";
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _iRepository.Edit(editedIteration);
-                    return RedirectToAction(pageAction, new { id = editedIteration.Id, fromSave = "Saved" });
+                    _eRepository.Edit(editedExperiment);
+                    return RedirectToAction(pageAction, new { id = editedExperiment.Id, fromSave = "Saved" });
                 }
-                returnModelToEdit(pageAction, ref editedIteration);
-                return View(pageAction, editedIteration);
+                returnModelToEdit(pageAction, ref editedExperiment);
+                return View(pageAction, editedExperiment);
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                returnModelToEdit(pageAction, ref editedIteration);
-                return View(pageAction, editedIteration);
+                returnModelToEdit(pageAction, ref editedExperiment);
+                return View(pageAction, editedExperiment);
             }
         }
 
         public ActionResult Delete(int id)
         {
-            ExperimentIteration delIteration = _iRepository.Load(id);
-            if (delIteration == null)
+            Experiment delExperiment = _eRepository.Load(id);
+            if (delExperiment == null)
             {
                 return HttpNotFound();
             }
 
-            return View(delIteration);
+            return View(delExperiment);
         }
 
         [HttpPost, ActionName("Delete")]
@@ -135,29 +135,29 @@ namespace StatNav.WebApplication.Controllers
         {
             try
             {
-                _iRepository.Remove(id);
+                _eRepository.Remove(id);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
-                ExperimentIteration thisIteration = _iRepository.Load(id);
+                Experiment thisExperiment = _eRepository.Load(id);
                 ModelState.AddModelError("", ex.Message);
-                return View(thisIteration);
+                return View(thisExperiment);
             }
         }
 
         private void SetDDLs()
         {
-            ViewBag.MarketingAssetPackages = _iRepository.GetMAPs();
+            ViewBag.MarketingAssetPackages = _eRepository.GetMAPs();
         }
 
-        private void returnModelToEdit(string action, ref ExperimentIteration ei)
+        private void returnModelToEdit(string action, ref Experiment e)
         {
             ViewBag.Action = action;
             SetDDLs();
             if (action == "Edit")
             {
-                ei.ExperimentCandidates = _iRepository.GetCandidates(ei.Id);
+                e.ExperimentCandidates = _eRepository.GetCandidates(e.Id);
             }
         }
     }

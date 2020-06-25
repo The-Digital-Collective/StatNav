@@ -8,7 +8,7 @@
         <dt>
             @switch (prop.PropertyName)
             {
-                case "ExperimentIteration":
+                case "Experiment":
                 case "CandidateImpactMetricModel":
                 case "CandidateTargetMetricModel":
                     break;
@@ -21,8 +21,8 @@
         <dd>
             @switch (prop.PropertyName)
             {
-                case "ExperimentIterationId":
-                    @(Model.ExperimentIteration != null ? Model.ExperimentIteration.IterationName : "");
+                case "ExperimentId":
+                    @(Model.Experiment != null ? Model.Experiment.ExperimentName : "");
                     break;
                 case "CandidateImpactMetricModelId":
                     @(Model.CandidateImpactMetricModel != null ? Model.CandidateImpactMetricModel.Title : "");
@@ -30,7 +30,7 @@
                 case "CandidateTargetMetricModelId":
                     @(Model.CandidateTargetMetricModel != null ? Model.CandidateTargetMetricModel.Title : "");
                     break;
-                case "ExperimentIteration":
+                case "Experiment":
                 case "CandidateTargetMetricModel":
                 case "CandidateImpactMetricModel":
                     break;

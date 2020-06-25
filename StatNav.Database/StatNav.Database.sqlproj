@@ -58,23 +58,5 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
-    <Folder Include="dbo\" />
-    <Folder Include="dbo\Tables\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Build Include="dbo\Tables\ExperimentCandidate.sql" />
-    <Build Include="dbo\Tables\MetricModel.sql" />
-    <Build Include="dbo\Tables\MetricModelStage.sql" />
-    <Build Include="dbo\Tables\ExperimentIteration.sql" />
-    <Build Include="dbo\Tables\MarketingAssetPackage.sql" />
-    <Build Include="dbo\Tables\ExperimentStatus.sql" />
-    <Build Include="dbo\Tables\Method.sql" />
-    <Build Include="dbo\Tables\PackageContainer.sql" />
-    <Build Include="dbo\Tables\Team.sql" />
-    <Build Include="dbo\Tables\Organisation.sql" />
-    <Build Include="dbo\Tables\User.sql" />
-    <Build Include="dbo\Tables\UserRole.sql" />
-    <Build Include="dbo\Tables\MetricCandidateResult.sql" />
-    <Build Include="dbo\Tables\__MigrationHistory.sql" />
   </ItemGroup>
 </Project>

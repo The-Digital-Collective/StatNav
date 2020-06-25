@@ -7,46 +7,46 @@ using StatNav.WebApplication.Models;
 
 namespace StatNav.WebApplication.DAL
 {
-    public class IterationRepository : GenericRepository<ExperimentIteration>, IIterationRepository
+    public class ExperimentRepository : GenericRepository<Experiment>, IExperimentRepository
     {       
-        public override List<ExperimentIteration> LoadList(string sortOrder, string searchString)
+        public override List<Experiment> LoadList(string sortOrder, string searchString)
         {
-            IQueryable<ExperimentIteration> iterations = Db.ExperimentIterations;
-            iterations = IterationLogic.FilterIterations(iterations, searchString);
-            return SortList(iterations.ToList(), sortOrder);
+            IQueryable<Experiment> experiments = Db.Experiments;
+            experiments = ExperimentLogic.FilterExperiments(experiments, searchString);
+            return SortList(experiments.ToList(), sortOrder);
         }
 
-        public List<ExperimentIteration> SortList(List<ExperimentIteration> iterations, string sortOrder)
+        public List<Experiment> SortList(List<Experiment> experiments, string sortOrder)
         {
-            return IterationLogic.SortIterations(iterations, sortOrder);
+            return ExperimentLogic.SortExperiments(experiments, sortOrder);
         }
-        public override ExperimentIteration Load(int id)
+        public override Experiment Load(int id)
         {
-            ExperimentIteration iteration = Db.ExperimentIterations
+            Experiment experiment = Db.Experiments
                 .Where(x => x.Id == id)
                 .Include(x => x.MarketingAssetPackage)
                 .Include(x=>x.ExperimentCandidates)
                 .FirstOrDefault();
 
-            return iteration;
+            return experiment;
         }
 
         public List<ExperimentCandidate> GetCandidates(int Id)
         {
             return Db.ExperimentCandidates
-                     .Where(x => x.ExperimentIterationId == Id)
+                     .Where(x => x.ExperimentId == Id)
                      .OrderBy(i => i.CandidateName)
                      .ToList();
         }
         public override void Remove(int id)
         {
-            ExperimentIteration iteration = Db.ExperimentIterations
+            Experiment experiment = Db.Experiments
                       .Include(x => x.ExperimentCandidates) 
                       .FirstOrDefault(x => x.Id == id);
-            if (iteration != null)
+            if (experiment != null)
             {
-                iteration?.ExperimentCandidates.ToList().ForEach(n => Db.ExperimentCandidates.Remove(n)); 
-                Db.ExperimentIterations.Remove(iteration);
+                experiment?.ExperimentCandidates.ToList().ForEach(n => Db.ExperimentCandidates.Remove(n)); 
+                Db.Experiments.Remove(experiment);
                 Db.SaveChanges();
             }
         }

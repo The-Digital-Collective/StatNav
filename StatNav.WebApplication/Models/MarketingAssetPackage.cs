@@ -67,7 +67,7 @@ namespace StatNav.WebApplication.Models
         public string Notes { get; set; }
 
         [ForeignKey("MarketingAssetPackageId")]
-        public ICollection<ExperimentIteration> ExperimentIterations { get; set; }
+        public ICollection<Experiment> Experiments { get; set; }
 
         [ForeignKey("PackageContainer")]
         [Display(Name = "Container")]

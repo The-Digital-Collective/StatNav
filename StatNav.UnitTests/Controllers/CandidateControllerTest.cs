@@ -21,9 +21,9 @@ namespace StatNav.UnitTests.Controllers
         public void TestInitialize()
         {
             //set up the dummy data for testing
-            candidate1 = new ExperimentCandidate() { CandidateName = "Spider", Id = 1, ExperimentIterationId = 0 };
-            candidate2 = new ExperimentCandidate() { CandidateName = "Armadillo", Id = 2, ExperimentIterationId = 0 };
-            candidate3 = new ExperimentCandidate() { CandidateName = "Crab", Id = 3, ExperimentIterationId = 0 };
+            candidate1 = new ExperimentCandidate() { CandidateName = "Spider", Id = 1, ExperimentId = 0 };
+            candidate2 = new ExperimentCandidate() { CandidateName = "Armadillo", Id = 2, ExperimentId = 0 };
+            candidate3 = new ExperimentCandidate() { CandidateName = "Crab", Id = 3, ExperimentId = 0 };
             _candidates = new List<ExperimentCandidate> { candidate1, candidate2, candidate3};
 
             candidateRepository = new DummyCandidateRepository(_candidates);
@@ -203,21 +203,21 @@ namespace StatNav.UnitTests.Controllers
             // Assert
             Assert.AreEqual(((IList<MetricModel>)result.ViewBag.MetricModels).Count, candidateRepository.GetMetricModels().Count);
             Assert.AreEqual(((IList<MetricModel>)result.ViewBag.MetricModels).GetType(), candidateRepository.GetMetricModels().GetType());
-            Assert.AreEqual(((IList<ExperimentIteration>)result.ViewBag.ExperimentIterations).Count, candidateRepository.GetIterations().Count);
-            Assert.AreEqual(((IList<ExperimentIteration>)result.ViewBag.ExperimentIterations).GetType(), candidateRepository.GetIterations().GetType());
+            Assert.AreEqual(((IList<Experiment>)result.ViewBag.Experiments).Count, candidateRepository.GetExperiments().Count);
+            Assert.AreEqual(((IList<Experiment>)result.ViewBag.Experiments).GetType(), candidateRepository.GetExperiments().GetType());
 
         }
 
         [TestMethod]
-        public void CreateWithIterationIdReturns_ModelWithIterationId()
+        public void CreateWithExperimentIdReturns_ModelWithExperimentId()
         {
             // Arrange
-            int chosenIterationId = 2;
+            int chosenExperimentId = 2;
             // Act
-            ViewResult result = _controller.Create(chosenIterationId) as ViewResult;
+            ViewResult result = _controller.Create(chosenExperimentId) as ViewResult;
             ExperimentCandidate ec = result.ViewData.Model as ExperimentCandidate;
             // Assert
-            Assert.AreEqual(ec.ExperimentIterationId, chosenIterationId);
+            Assert.AreEqual(ec.ExperimentId, chosenExperimentId);
         }
 
 
@@ -225,15 +225,15 @@ namespace StatNav.UnitTests.Controllers
         public void CreateValidCandidate()
         {
             //Arrange
-            ExperimentCandidate newCandidate = new ExperimentCandidate { CandidateName = "CandidateNew", Id = 7, ExperimentIterationId=2 };
+            ExperimentCandidate newCandidate = new ExperimentCandidate { CandidateName = "CandidateNew", Id = 7, ExperimentId=2 };
 
             //Act
             var result = (RedirectToRouteResult)_controller.Create(newCandidate);
             //get list of all candidates
-            List<ExperimentCandidate> progs = candidateRepository.LoadList(string.Empty);
+            List<ExperimentCandidate> candidates = candidateRepository.LoadList(string.Empty);
 
             // Assert
-            CollectionAssert.Contains(progs, newCandidate);
+            CollectionAssert.Contains(candidates, newCandidate);
             Assert.AreEqual("Edit", result.RouteValues["action"]);
         }
 
@@ -290,8 +290,8 @@ namespace StatNav.UnitTests.Controllers
             // Assert
             Assert.AreEqual(((IList<MetricModel>)result.ViewBag.MetricModels).Count, candidateRepository.GetMetricModels().Count);
             Assert.AreEqual(((IList<MetricModel>)result.ViewBag.MetricModels).GetType(), candidateRepository.GetMetricModels().GetType());           
-            Assert.AreEqual(((IList<ExperimentIteration>)result.ViewBag.ExperimentIterations).Count, candidateRepository.GetIterations().Count);
-            Assert.AreEqual(((IList<ExperimentIteration>)result.ViewBag.ExperimentIterations).GetType(), candidateRepository.GetIterations().GetType());
+            Assert.AreEqual(((IList<Experiment>)result.ViewBag.Experiments).Count, candidateRepository.GetExperiments().Count);
+            Assert.AreEqual(((IList<Experiment>)result.ViewBag.Experiments).GetType(), candidateRepository.GetExperiments().GetType());
 
         }
 
@@ -300,14 +300,14 @@ namespace StatNav.UnitTests.Controllers
         public void EditCandidateEditsModel()
         {
             //Arrange
-            ExperimentCandidate editedCandidate = new ExperimentCandidate { CandidateName = "CandidateEdited", Id = 1, ExperimentIterationId=2};
+            ExperimentCandidate editedCandidate = new ExperimentCandidate { CandidateName = "CandidateEdited", Id = 1, ExperimentId=2};
             //Act           
             var result = (RedirectToRouteResult)_controller.Edit(editedCandidate);
             //get list of all candidates
-            List<ExperimentCandidate> progs = candidateRepository.LoadList(string.Empty);
+            List<ExperimentCandidate> candidates = candidateRepository.LoadList(string.Empty);
 
             // Assert
-            CollectionAssert.Contains(progs, editedCandidate);
+            CollectionAssert.Contains(candidates, editedCandidate);
             Assert.AreEqual("Edit", result.RouteValues["action"]);
         }
 
@@ -316,9 +316,9 @@ namespace StatNav.UnitTests.Controllers
         {
             //Arrange
             _controller.ModelState.AddModelError("fakeError", "fakeError");
-            ExperimentCandidate thisProg = new ExperimentCandidate();
+            ExperimentCandidate candidate = new ExperimentCandidate();
             //Act
-            ViewResult result = _controller.Edit(thisProg) as ViewResult;
+            ViewResult result = _controller.Edit(candidate) as ViewResult;
 
             // Assert
             Assert.AreEqual("Edit", result.ViewBag.Action);

@@ -26,18 +26,18 @@ namespace StatNav.WebApplication.DAL
         {
             ExperimentCandidate candidate = Db.ExperimentCandidates
                                               .Where(x => x.Id == id)
-                                              .Include(x => x.ExperimentIteration)
+                                              .Include(x => x.Experiment)
                                               .Include(x=>x.CandidateImpactMetricModel)
                                               .Include(x=>x.CandidateTargetMetricModel)
                                               .FirstOrDefault();
             return candidate;
         }        
 
-        public IList<ExperimentIteration> GetIterations()
+        public IList<Experiment> GetExperiments()
         {
-            IList<ExperimentIteration> ei = Db.ExperimentIterations
-                                              .OrderBy(x => x.IterationName).ToList();
-            return ei;
+            IList<Experiment> ex = Db.Experiments
+                                              .OrderBy(x => x.ExperimentName).ToList();
+            return ex;
         }
         public IList<MetricModel> GetMetricModels()
         {

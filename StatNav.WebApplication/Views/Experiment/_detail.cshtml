@@ -1,4 +1,4 @@
-﻿@model StatNav.WebApplication.Models.ExperimentIteration
+﻿@model StatNav.WebApplication.Models.Experiment
 <div class="row">
     <div class="col-md-6">
         <dl class="dl-horizontal">
@@ -41,7 +41,7 @@
     </div>
     <div class="col-md-6">
         <h4>Candidates</h4>
-        @Html.ActionLink("Create Candidate for this Iteration", "Create", "Candidate", new { iterationId = Model.Id }, null)
+        @Html.ActionLink("Create Candidate for this Experiment", "Create", "Candidate", new { experimentId = Model.Id }, null)
         @Html.Partial("../Candidate/_list", Model.ExperimentCandidates)
     </div>
 </div>
