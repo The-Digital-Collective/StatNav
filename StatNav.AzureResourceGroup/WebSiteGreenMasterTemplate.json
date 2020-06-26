@@ -1,0 +1,221 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"administratorLogin": {
+			"type": "string"
+		},
+		"administratorLoginPassword": {
+			"type": "securestring"
+		},
+		"ida:AADInstance": {
+			"type": "string"
+		},
+		"ida:ClientId": {
+			"type": "string"
+		},
+		"ida:Domain": {
+			"type": "string"
+		},
+       
+		"environmentName": {
+			"type": "string"
+		},
+		"databaseName": {
+			"type": "string"
+		}
+	},
+	"variables": {
+		"baseTemplateUrl": "https://raw.githubusercontent.com/The-Digital-Collective/StatNav/master/StatNav.AzureResourceGroup/Child",
+		"nestedSQLServerTemplateFile": "[concat(variables('baseTemplateUrl'), '/', 'deploySqlServer.json')]",
+		"nestedHostingPlanTemplateFile": "[concat(variables('baseTemplateUrl'), '/', 'deployHostingPlan.json')]",
+		"nestedStorageAccountTemplateFile": "[concat(variables('baseTemplateUrl'), '/', 'deployStorageAccount.json')]",
+		"nestedWebSiteTemplateFile": "[concat(variables('baseTemplateUrl'), '/', 'deployWebSite.json')]",
+		"nestedTrafficManagerTemplateFile": "[concat(variables('baseTemplateUrl'), '/', 'deployTrafficManager.json')]",			
+		"apiVersion": "2017-05-10",
+		"contentVersion": "1.0.0.0",
+		"mode": "Incremental",
+		"sqlserverName": "[concat(parameters('environmentName'), '-sql-server')]",
+		"hostingPlanName": "[concat(parameters('environmentName'), '-hosting-plan-green')]",
+		"webSiteName": "[concat(parameters('environmentName'), '-webapp-green')]",
+		"trafficManagerName": "[concat(parameters('environmentName'), '-TM')]",
+		"resourceGroupWebapp": "[concat(parameters('environmentName'), '-Green-RG')]",
+		"resourceGroupShared": "[concat(parameters('environmentName'), '-Shared-RG')]",
+		"storageenv":"[replace(parameters('environmentName'), '-', '')]",
+		"storageAccountName": "[concat(variables('storageenv'), 'storage')]",
+		"containerName": "[concat(parameters('environmentName'), '-photo-container')]",
+		"ida:PostLogoutRedirectUri": "[concat('https://', variables('webSiteName'),'.azurewebsites.net')]",
+		"sqlServerTemplate": "sqlServerTemplate",
+		"hostingPlanTemplate": "hostingPlanTemplate",
+		"storageAccountTemplate": "storageAccountTemplate",
+		"webSiteTemplate": "webSiteTemplate",
+		"trafficManagerTemplate": "trafficManagerTemplate",
+		"webappEndpoint": "GreenWebappEndpoint"
+	},
+	"resources": [
+		{
+			"apiVersion": "[variables('apiVersion')]",
+			"resourceGroup": "[variables('resourceGroupShared')]",
+			"name": "[variables('sqlServerTemplate')]",
+			"type": "Microsoft.Resources/deployments",
+			"properties": {
+				"mode": "[variables('mode')]",
+				"templateLink": {
+					"uri": "[variables('nestedSQLServerTemplateFile')]",
+					"contentVersion": "[variables('contentVersion')]"
+				},
+				"parameters": {
+					"administratorLogin": {
+						"value": "[parameters('administratorLogin')]"
+					},
+					"administratorLoginPassword": {
+						"value": "[parameters('administratorLoginPassword')]"
+					},
+					"sqlserverName": {
+						"value": "[variables('sqlserverName')]"
+					},
+					"databaseName": {
+						"value": "[parameters('databaseName')]"
+					}
+				}
+			}
+		},
+		{
+			"apiVersion": "[variables('apiVersion')]",
+			"resourceGroup": "[variables('resourceGroupWebapp')]",
+			"name": "[variables('hostingPlanTemplate')]",
+			"type": "Microsoft.Resources/deployments",
+			"properties": {
+				"mode": "[variables('mode')]",
+				"templateLink": {
+					"uri": "[variables('nestedHostingPlanTemplateFile')]",
+					"contentVersion": "[variables('contentVersion')]"
+				},
+				"parameters": {
+					"hostingPlanName": {
+						"value": "[variables('hostingPlanName')]"
+					}
+				}
+			}
+		},
+		{
+			"apiVersion": "[variables('apiVersion')]",
+			"resourceGroup": "[variables('resourceGroupShared')]",
+			"name": "[variables('storageAccountTemplate')]",
+			"type": "Microsoft.Resources/deployments",
+			"properties": {
+				"mode": "[variables('mode')]",
+				"templateLink": {
+					"uri": "[variables('nestedStorageAccountTemplateFile')]",
+					"contentVersion": "[variables('contentVersion')]"
+				},
+				"parameters": {
+					"storageAccountName": {
+						"value": "[variables('storageAccountName')]"
+					},
+					"containerName": {
+						"value": "[variables('containerName')]"
+					}
+				}
+			}
+		},
+		{
+			"apiVersion": "[variables('apiVersion')]",
+			"resourceGroup": "[variables('resourceGroupWebapp')]",
+			"name": "[variables('webSiteTemplate')]",
+			"type": "Microsoft.Resources/deployments",
+			"dependsOn": [
+				"[variables('hostingPlanTemplate')]",
+				"[variables('sqlServerTemplate')]",
+				"[variables('storageAccountTemplate')]"
+			],
+			"properties": {
+				"mode": "[variables('mode')]",
+				"templateLink": {
+					"uri": "[variables('nestedWebSiteTemplateFile')]",
+					"contentVersion": "[variables('contentVersion')]"
+				},
+				"parameters": {
+					"administratorLogin": {
+						"value": "[parameters('administratorLogin')]"
+					},
+					"administratorLoginPassword": {
+						"value": "[parameters('administratorLoginPassword')]"
+					},
+					"ida:AADInstance": {
+						"value": "[parameters('ida:AADInstance')]"
+					},
+					"ida:ClientId": {
+						"value": "[parameters('ida:ClientId')]"
+					},
+					"ida:Domain": {
+						"value": "[parameters('ida:Domain')]"
+					},
+					"ida:PostLogoutRedirectUri": {
+						"value": "[variables('ida:PostLogoutRedirectUri')]"
+					},
+					"sqlserverName": {
+						"value": "[variables('sqlserverName')]"
+					},
+					"databaseName": {
+						"value": "[parameters('databaseName')]"
+					},
+					"hostingPlanName": {
+						"value": "[variables('hostingPlanName')]"
+					},
+					"webSiteName": {
+						"value": "[variables('webSiteName')]"
+					},
+					"outputHostingPlanReference": {
+						"value": "[reference(variables('hostingPlanTemplate')).outputs.outputHostingPlanReference.value]"
+					},
+					"outputStorageAccountNameReference": {
+						"value": "[reference(variables('storageAccountTemplate')).outputs.outputStorageAccountNameReference.value]"
+					},
+					"outputStorageContainerNameReference": {
+						"value": "[reference(variables('storageAccountTemplate')).outputs.outputStorageContainerNameReference.value]"
+					},
+					"outputStorageAccountKeyReference": {
+						"value": "[reference(variables('storageAccountTemplate')).outputs.outputStorageAccountKeyReference.value]"
+					}
+				}
+			}
+		},
+		{
+            "type": "Microsoft.Resources/deployments",
+          	"apiVersion": "[variables('apiVersion')]",
+            "resourceGroup": "[variables('resourceGroupShared')]",
+            "name": "[variables('trafficManagerTemplate')]",
+            "dependsOn":[
+            	"[variables('sqlServerTemplate')]",
+            	"[variables('hostingPlanTemplate')]",
+            	"[variables('storageAccountTemplate')]",
+            	"[variables('webSiteTemplate')]"
+            ],             
+            "properties": {
+                "mode": "[variables('mode')]",
+                "templateLink": {
+                   "uri": "[variables('nestedTrafficManagerTemplateFile')]",
+                    "contentVersion": "[variables('contentVersion')]"
+                },
+                "parameters": {
+                    "trafficManagerName": {
+                       "value":"[variables('trafficManagerName')]"
+                    },
+                    "webSiteName":{
+                        "Value":"[variables('webSiteName')]"
+                    },
+                    "trafficeManagerEndPointPriority":{
+                        "value":1
+                    },
+                    "resourceGroupWebapp":{
+                        "value":"[variables('resourceGroupWebapp')]"
+                    },
+                    "webappEndpoint":{
+                        "value":"[variables('webappEndpoint')]"
+                    }
+               	}
+            }
+        }
+	]
+}
