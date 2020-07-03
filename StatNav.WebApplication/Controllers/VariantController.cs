@@ -8,79 +8,80 @@ using StatNav.WebApplication.Models;
 namespace StatNav.WebApplication.Controllers
 {
     [Authorize]
-    public class CandidateController : BaseController
+    public class VariantController : BaseController
     {
-        private readonly ICandidateRepository _cRepository;
+        private readonly IVariantRepository _vRepository;
 
-        public CandidateController()
-            : this(new CandidateRepository())
+        public VariantController()
+            : this(new VariantRepository())
         {
 
         }
 
-        public CandidateController(ICandidateRepository candidateRepository)
+        public VariantController(IVariantRepository variantRepository)
         {
-            _cRepository = candidateRepository;
+            _vRepository = variantRepository;
         }
 
         public ActionResult Index(string sortOrder, string searchString)
         {
             ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.IdSortParm = sortOrder == "Id" ? "id_desc" : "Id";
-            List<ExperimentCandidate> candidates = _cRepository.LoadList(sortOrder,searchString);
-            ViewBag.SelectedType = "Candidate";
+            List<Variant> variants = _vRepository.LoadList(sortOrder,searchString);
+            ViewBag.SelectedType = "Variant";
             ViewBag.Sortable = true;
-            return View(candidates);
+            ViewBag.SearchString = searchString;
+            return View(variants);
 
         }
 
         public ActionResult Details(int id)
         {
-            ExperimentCandidate thisIteration = _cRepository.Load(id);
-            if (thisIteration == null)
+            Variant thisVariant= _vRepository.Load(id);
+            if (thisVariant == null)
             {
                 return HttpNotFound();
             }
-            return View(thisIteration);
+            return View(thisVariant);
         }
 
         public ActionResult Create(int? experimentId = 0)
         {
             ViewBag.Action = "Create";
-            ExperimentCandidate newCandidate = new ExperimentCandidate();
-            if (experimentId != null) { newCandidate.ExperimentId = experimentId.GetValueOrDefault(); }
+            Variant newVariant = new Variant();
+            if (experimentId != null) { newVariant.ExperimentId = experimentId.GetValueOrDefault(); }
 
             SetDDLs();
-            return View("Edit", newCandidate);
+            return View("Edit", newVariant);
         }
 
         [HttpPost]
-        public ActionResult Create(ExperimentCandidate newCandidate)
+        public ActionResult Create(Variant newVariant)
         {
             string pageAction = "Create";
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _cRepository.Add(newCandidate);
-                    return RedirectToAction("Edit", new { id = newCandidate.Id, fromSave = "Saved" });
+                    _vRepository.Add(newVariant);
+                    return RedirectToAction("Edit", new { id = newVariant.Id, fromSave = "Saved" });
                 }
                 returnModelToEdit(pageAction);
-                return View("Edit", newCandidate);
+                return View("Edit", newVariant);
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 returnModelToEdit(pageAction);
-                return View("Edit", newCandidate);
+                return View("Edit", newVariant);
             }
         }
 
         public ActionResult Edit(int id, string fromSave)
         {
             ViewBag.Action = "Edit";
-            ExperimentCandidate thisCandidate = _cRepository.Load(id);
-            if (thisCandidate == null)
+            Variant thisVariant = _vRepository.Load(id);
+            if (thisVariant == null)
             {
                 return HttpNotFound();
             }
@@ -88,40 +89,40 @@ namespace StatNav.WebApplication.Controllers
             SetDDLs();
             if (fromSave == "Saved")
             { ViewBag.Notification = "Save Successful"; }
-            return View("Edit", thisCandidate);
+            return View("Edit", thisVariant);
         }
 
         [HttpPost]
-        public ActionResult Edit(ExperimentCandidate editedCandidate)
+        public ActionResult Edit(Variant editedVariant)
         {
             string pageAction = "Edit";
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _cRepository.Edit(editedCandidate);
-                    return RedirectToAction(pageAction, new { id = editedCandidate.Id, fromSave = "Saved" });
+                    _vRepository.Edit(editedVariant);
+                    return RedirectToAction(pageAction, new { id = editedVariant.Id, fromSave = "Saved" });
                 }
                 returnModelToEdit(pageAction);
-                return View(pageAction, editedCandidate);
+                return View(pageAction, editedVariant);
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 returnModelToEdit(pageAction);
-                return View(pageAction, editedCandidate);
+                return View(pageAction, editedVariant);
             }
         }
 
         public ActionResult Delete(int id)
         {
-            ExperimentCandidate delCandidate = _cRepository.Load(id);
-            if (delCandidate == null)
+            Variant delVariant = _vRepository.Load(id);
+            if (delVariant == null)
             {
                 return HttpNotFound();
             }
 
-            return View(delCandidate);
+            return View(delVariant);
         }
 
         [HttpPost, ActionName("Delete")]
@@ -129,21 +130,21 @@ namespace StatNav.WebApplication.Controllers
         {
             try
             {
-                _cRepository.Remove(id);
+                _vRepository.Remove(id);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
-                ExperimentCandidate thisCandidate = _cRepository.Load(id);
+                Variant thisVariant = _vRepository.Load(id);
                 ModelState.AddModelError("", ex.Message);
-                return View(thisCandidate);
+                return View(thisVariant);
             }
         }
 
         private void SetDDLs()
         {
-            ViewBag.MetricModels = _cRepository.GetMetricModels();
-            ViewBag.Experiments = _cRepository.GetExperiments();
+            ViewBag.MetricModels = _vRepository.GetMetricModels();
+            ViewBag.Experiments = _vRepository.GetExperiments();
         }
 
         private void returnModelToEdit(string action)

@@ -25,27 +25,27 @@ namespace StatNav.WebApplication.DAL
             Experiment experiment = Db.Experiments
                 .Where(x => x.Id == id)
                 .Include(x => x.MarketingAssetPackage)
-                .Include(x=>x.ExperimentCandidates)
+                .Include(x=>x.Variants)
                 .FirstOrDefault();
 
             return experiment;
         }
 
-        public List<ExperimentCandidate> GetCandidates(int Id)
+        public List<Variant> GetVariants(int Id)
         {
-            return Db.ExperimentCandidates
+            return Db.Variants
                      .Where(x => x.ExperimentId == Id)
-                     .OrderBy(i => i.CandidateName)
+                     .OrderBy(i => i.VariantName)
                      .ToList();
         }
         public override void Remove(int id)
         {
             Experiment experiment = Db.Experiments
-                      .Include(x => x.ExperimentCandidates) 
+                      .Include(x => x.Variants) 
                       .FirstOrDefault(x => x.Id == id);
             if (experiment != null)
             {
-                experiment?.ExperimentCandidates.ToList().ForEach(n => Db.ExperimentCandidates.Remove(n)); 
+                experiment?.Variants.ToList().ForEach(n => Db.Variants.Remove(n)); 
                 Db.Experiments.Remove(experiment);
                 Db.SaveChanges();
             }

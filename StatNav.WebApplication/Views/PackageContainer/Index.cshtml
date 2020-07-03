@@ -14,13 +14,13 @@
     <caption>List of Package Containers</caption>
     <tr>      
         <th scope="col">
-            <a href="@Url.Action("Index",new { sortOrder = ViewBag.NameSortParm })">Container Name <span class="glyphicon glyphicon-sort"></span></a>
+            <a href="@Url.Action("Index",new { sortOrder = ViewBag.NameSortParm, searchString=ViewBag.SearchString  })">Container Name <span class="glyphicon glyphicon-sort"></span></a>
         </th>
         <th scope="col">
-            <a href="@Url.Action("Index",new { sortOrder = ViewBag.TypeSortParm })">Type <span class="glyphicon glyphicon-sort"></span></a>           
+            <a href="@Url.Action("Index",new { sortOrder = ViewBag.TypeSortParm, searchString=ViewBag.SearchString  })">Type <span class="glyphicon glyphicon-sort"></span></a>           
         </th>
         <th scope="col">
-            <a href="@Url.Action("Index",new { sortOrder = ViewBag.StageSortParm })">Stage <span class="glyphicon glyphicon-sort"></span></a>
+            <a href="@Url.Action("Index",new { sortOrder = ViewBag.StageSortParm, searchString=ViewBag.SearchString  })">Stage <span class="glyphicon glyphicon-sort"></span></a>
         </th>
 
     </tr>

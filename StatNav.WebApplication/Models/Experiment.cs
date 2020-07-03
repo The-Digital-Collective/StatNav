@@ -40,6 +40,6 @@ namespace StatNav.WebApplication.Models
         public string FailureOutcome { get; set; }
 
         [ForeignKey("ExperimentId")]
-        public ICollection<ExperimentCandidate> ExperimentCandidates { get; set; }
+        public ICollection<Variant> Variants { get; set; }
     }
 }

@@ -48,14 +48,14 @@ namespace StatNav.WebApplication.DAL
         }
         public override void Remove(int id)
         {
-            MarketingAssetPackage ep = Db.MarketingAssetPackages
-                      .Include(x => x.Experiments.Select(c => c.ExperimentCandidates))
+            MarketingAssetPackage map = Db.MarketingAssetPackages
+                      .Include(x => x.Experiments.Select(v => v.Variants))
                       .FirstOrDefault(x => x.Id == id);
-            if (ep != null)
+            if (map != null)
             {
-                ep?.Experiments.ToList().ForEach(c => c.ExperimentCandidates.ToList().ForEach(n => Db.ExperimentCandidates.Remove(n)));
-                ep?.Experiments.ToList().ForEach(n => Db.Experiments.Remove(n));
-                Db.MarketingAssetPackages.Remove(ep);
+                map?.Experiments.ToList().ForEach(v => v.Variants.ToList().ForEach(n => Db.Variants.Remove(n)));
+                map?.Experiments.ToList().ForEach(n => Db.Experiments.Remove(n));
+                Db.MarketingAssetPackages.Remove(map);
                 Db.SaveChanges();
             }
         }

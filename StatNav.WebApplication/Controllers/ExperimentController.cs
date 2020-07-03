@@ -32,6 +32,7 @@ namespace StatNav.WebApplication.Controllers
             List<Experiment> experiments = _eRepository.LoadList(sortOrder, searchString);
             ViewBag.SelectedType = "Experiment";
             ViewBag.Sortable = true;
+            ViewBag.SearchString = searchString;
             return View(experiments);
 
         }
@@ -157,7 +158,7 @@ namespace StatNav.WebApplication.Controllers
             SetDDLs();
             if (action == "Edit")
             {
-                e.ExperimentCandidates = _eRepository.GetCandidates(e.Id);
+                e.Variants = _eRepository.GetVariants(e.Id);
             }
         }
     }

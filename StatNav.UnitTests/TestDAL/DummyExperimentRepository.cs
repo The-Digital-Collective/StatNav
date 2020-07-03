@@ -56,7 +56,7 @@ namespace StatNav.UnitTests.TestData
             return new List<MarketingAssetPackage> { map1, map2 };
         }
 
-        public List<ExperimentCandidate> GetCandidates(int id)
+        public List<Variant> GetVariants(int id)
         {
             return null;
         }

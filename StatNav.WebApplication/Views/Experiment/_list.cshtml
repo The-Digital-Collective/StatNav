@@ -8,16 +8,16 @@
         @if (ViewBag.Sortable != null)
         {
             <th scope="col">
-                <a href="@Url.Action("Index","Experiment",new { sortOrder = ViewBag.IdSortParm })">ID <span class="glyphicon glyphicon-sort"></span></a>
+                <a href="@Url.Action("Index","Experiment",new { sortOrder = ViewBag.IdSortParm, searchString=ViewBag.SearchString  })">ID <span class="glyphicon glyphicon-sort"></span></a>
             </th>
             <th scope="col">
-                <a href="@Url.Action("Index","Experiment",new { sortOrder = ViewBag.NameSortParm })">Experiment Name <span class="glyphicon glyphicon-sort"></span></a>
+                <a href="@Url.Action("Index","Experiment",new { sortOrder = ViewBag.NameSortParm, searchString=ViewBag.SearchString  })">Experiment Name <span class="glyphicon glyphicon-sort"></span></a>
             </th>
             <th scope="col">
-                <a href="@Url.Action("Index","Experiment",new { sortOrder = ViewBag.StartDateSortParm })">Start Date <span class="glyphicon glyphicon-sort"></span></a>
+                <a href="@Url.Action("Index","Experiment",new { sortOrder = ViewBag.StartDateSortParm, searchString=ViewBag.SearchString  })">Start Date <span class="glyphicon glyphicon-sort"></span></a>
             </th>
             <th scope="col">
-                <a href="@Url.Action("Index","Experiment",new { sortOrder = ViewBag.EndDateSortParm })">End Date <span class="glyphicon glyphicon-sort"></span></a>
+                <a href="@Url.Action("Index","Experiment",new { sortOrder = ViewBag.EndDateSortParm, searchString=ViewBag.SearchString  })">End Date <span class="glyphicon glyphicon-sort"></span></a>
             </th>
         }
         else

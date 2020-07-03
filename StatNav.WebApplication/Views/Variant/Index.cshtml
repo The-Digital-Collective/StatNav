@@ -1,10 +1,10 @@
-﻿@model IEnumerable<StatNav.WebApplication.Models.ExperimentCandidate>
+﻿@model IEnumerable<StatNav.WebApplication.Models.Variant>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h4>Candidates</h4>
+<h4>Variants</h4>
 @Html.Partial("_ExperimentTypeSelect", Model)
 <p>
     @Html.ActionLink("Create New", "Create")

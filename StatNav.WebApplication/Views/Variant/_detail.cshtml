@@ -1,4 +1,4 @@
-﻿@model StatNav.WebApplication.Models.ExperimentCandidate
+﻿@model StatNav.WebApplication.Models.Variant
 
 <dl class="dl-horizontal">
 
@@ -9,8 +9,8 @@
             @switch (prop.PropertyName)
             {
                 case "Experiment":
-                case "CandidateImpactMetricModel":
-                case "CandidateTargetMetricModel":
+                case "VariantImpactMetricModel":
+                case "VariantTargetMetricModel":
                     break;
                 default:
                     @(prop.DisplayName ?? prop.PropertyName)
@@ -24,15 +24,15 @@
                 case "ExperimentId":
                     @(Model.Experiment != null ? Model.Experiment.ExperimentName : "");
                     break;
-                case "CandidateImpactMetricModelId":
-                    @(Model.CandidateImpactMetricModel != null ? Model.CandidateImpactMetricModel.Title : "");
+                case "VariantImpactMetricModelId":
+                    @(Model.VariantImpactMetricModel != null ? Model.VariantImpactMetricModel.Title : "");
                     break;
-                case "CandidateTargetMetricModelId":
-                    @(Model.CandidateTargetMetricModel != null ? Model.CandidateTargetMetricModel.Title : "");
+                case "VariantTargetMetricModelId":
+                    @(Model.VariantTargetMetricModel != null ? Model.VariantTargetMetricModel.Title : "");
                     break;
                 case "Experiment":
-                case "CandidateTargetMetricModel":
-                case "CandidateImpactMetricModel":
+                case "VariantTargetMetricModel":
+                case "VariantImpactMetricModel":
                     break;
                 default:
                     @prop.Model

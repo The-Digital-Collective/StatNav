@@ -32,13 +32,13 @@ namespace StatNav.WebApplication.Interfaces
     {
         IList<MarketingAssetPackage> GetMAPs();
         List<Experiment> SortList(List<Experiment> experiments, string sortOrder);
-        List<ExperimentCandidate> GetCandidates(int Id);
+        List<Variant> GetVariants(int Id);
     }
 
-    public interface ICandidateRepository : IRepository<ExperimentCandidate>
+    public interface IVariantRepository : IRepository<Variant>
     {
         IList<Experiment> GetExperiments();
         IList<MetricModel> GetMetricModels();
-        List<ExperimentCandidate> SortList(List<ExperimentCandidate> candidates, string sortOrder);
+        List<Variant> SortList(List<Variant> variants, string sortOrder);
     }
 }

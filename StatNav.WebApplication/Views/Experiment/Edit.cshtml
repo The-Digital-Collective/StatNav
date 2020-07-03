@@ -104,9 +104,9 @@
         <p>&nbsp;</p>
         @if (action == "Edit")
         {
-            <h4>Candidates</h4>
-            @Html.ActionLink("Create Candidate for this Experiment", "Create", "Candidate", new { experimentId = Model.Id }, null)
-            @Html.Partial("../Candidate/_list", Model.ExperimentCandidates)
+            <h4>Variants</h4>
+            @Html.ActionLink("Create Variant for this Experiment", "Create", "Variant", new { experimentId = Model.Id }, null)
+            @Html.Partial("../Variant/_list", Model.Variants)
         }
     </div>
 </div>

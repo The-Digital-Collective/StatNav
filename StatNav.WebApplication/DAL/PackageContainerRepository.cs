@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using Microsoft.Ajax.Utilities;
 using StatNav.WebApplication.BLL;
 using StatNav.WebApplication.Interfaces;
 using StatNav.WebApplication.Models;
@@ -39,13 +38,13 @@ namespace StatNav.WebApplication.DAL
         public override void Remove(int id)
         {
             PackageContainer pc = Db.PackageContainer
-                      .Include(p => p.MarketingAssetPackages.Select(i => i.Experiments.Select(c => c.ExperimentCandidates)))
+                      .Include(p => p.MarketingAssetPackages.Select(i => i.Experiments.Select(v => v.Variants)))
                       .FirstOrDefault(x => x.Id == id);
             if (pc != null)
             {
-                //remove candidates
-                pc?.MarketingAssetPackages.ToList().ForEach(i => i.Experiments.ToList().ForEach(c => c.ExperimentCandidates.ToList().ForEach(n => Db.ExperimentCandidates.Remove(n))));
-                //remove iterations
+                //remove variants
+                pc?.MarketingAssetPackages.ToList().ForEach(i => i.Experiments.ToList().ForEach(v => v.Variants.ToList().ForEach(n => Db.Variants.Remove(n))));
+                //remove experiments
                 pc?.MarketingAssetPackages.ToList().ForEach(i => i.Experiments.ToList().ForEach(n => Db.Experiments.Remove(n)));
                 //remove marketing asset packages
                 pc?.MarketingAssetPackages.ToList().ForEach(n => Db.MarketingAssetPackages.Remove(n));

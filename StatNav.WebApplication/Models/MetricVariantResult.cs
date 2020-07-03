@@ -2,7 +2,7 @@
 
 namespace StatNav.WebApplication.Models
 {
-    public class MetricCandidateResult
+    public class MetricVariantResult
     {
         public int Id { get; set; }
 
@@ -11,10 +11,10 @@ namespace StatNav.WebApplication.Models
 
         public MetricModel MetricModel { get; set; }
 
-        [ForeignKey("ExperimentCandidate")]
-        public int  ExperimentCandidateId { get; set; }
+        [ForeignKey("Variant")]
+        public int  VariantId { get; set; }
 
-        public ExperimentCandidate ExperimentCandidate { get; set; }
+        public Variant Variant { get; set; }
 
         public float Value { get; set; }
 
