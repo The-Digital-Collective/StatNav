@@ -1,0 +1,60 @@
+﻿@model IEnumerable<StatNav.WebApplication.Models.Experiment>
+@{
+   
+}
+<table class="table">
+    <caption>List of Experiments</caption>
+    <tr>
+        @if (ViewBag.Sortable != null)
+        {
+            <th scope="col">
+                <a href="@Url.Action("Index","Experiment",new { sortOrder = ViewBag.IdSortParm, searchString=ViewBag.SearchString  })">ID <span class="glyphicon glyphicon-sort"></span></a>
+            </th>
+            <th scope="col">
+                <a href="@Url.Action("Index","Experiment",new { sortOrder = ViewBag.NameSortParm, searchString=ViewBag.SearchString  })">Experiment Name <span class="glyphicon glyphicon-sort"></span></a>
+            </th>
+            <th scope="col">
+                <a href="@Url.Action("Index","Experiment",new { sortOrder = ViewBag.StartDateSortParm, searchString=ViewBag.SearchString  })">Start Date <span class="glyphicon glyphicon-sort"></span></a>
+            </th>
+            <th scope="col">
+                <a href="@Url.Action("Index","Experiment",new { sortOrder = ViewBag.EndDateSortParm, searchString=ViewBag.SearchString  })">End Date <span class="glyphicon glyphicon-sort"></span></a>
+            </th>
+        }
+        else
+        {
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.ExperimentName)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.StartDateTime)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.EndDateTime)
+            </th>
+        }
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.ActionLink(item.ExperimentName, "Edit", "Experiment", new { id = item.Id }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDateTime)
+            </td>
+
+        </tr>
+    }
+
+</table>

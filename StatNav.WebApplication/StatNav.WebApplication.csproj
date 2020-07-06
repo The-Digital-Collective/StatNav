@@ -227,21 +227,21 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="BLL\CandidateLogic.cs" />
-    <Compile Include="BLL\IterationLogic.cs" />
+    <Compile Include="BLL\VariantLogic.cs" />
+    <Compile Include="BLL\ExperimentLogic.cs" />
     <Compile Include="BLL\PCLogic.cs" />
     <Compile Include="BLL\MAPLogic.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\CandidateController.cs" />
-    <Compile Include="Controllers\IterationController.cs" />
+    <Compile Include="Controllers\VariantController.cs" />
+    <Compile Include="Controllers\ExperimentController.cs" />
     <Compile Include="Controllers\PackageContainerController.cs" />
     <Compile Include="Controllers\MarketingAssetPackageController.cs" />
-    <Compile Include="DAL\CandidateRepository.cs" />
+    <Compile Include="DAL\VariantRepository.cs" />
     <Compile Include="DAL\GenericRepository.cs" />
-    <Compile Include="DAL\IterationRepository.cs" />
+    <Compile Include="DAL\ExperimentRepository.cs" />
     <Compile Include="DAL\PackageContainerRepository.cs" />
     <Compile Include="DAL\MAPRepository.cs" />
     <Compile Include="DAL\StatNavContext.cs" />
@@ -258,13 +258,21 @@
     <Compile Include="Migrations\202006151341323_2069RemoveAttributesFromMAPEntity.designer.cs">
       <DependentUpon>202006151341323_2069RemoveAttributesFromMAPEntity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006251236312_Story2070.cs" />
+    <Compile Include="Migrations\202006251236312_Story2070.designer.cs">
+      <DependentUpon>202006251236312_Story2070.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007021317592_Story2071CandidateToVariant.cs" />
+    <Compile Include="Migrations\202007021317592_Story2071CandidateToVariant.designer.cs">
+      <DependentUpon>202007021317592_Story2071CandidateToVariant.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\ExperimentIterations.cs" />
-    <Compile Include="Models\ExperimentCandidate.cs" />
+    <Compile Include="Models\Experiment.cs" />
+    <Compile Include="Models\Variant.cs" />
     <Compile Include="Models\MarketingAssetPackage.cs" />
     <Compile Include="Models\ExperimentStatus.cs" />
     <Compile Include="Models\Method.cs" />
-    <Compile Include="Models\MetricCandidateResult.cs" />
+    <Compile Include="Models\MetricVariantResult.cs" />
     <Compile Include="Models\MetricModel.cs" />
     <Compile Include="Models\MetricModelStage.cs" />
     <Compile Include="Models\Organisation.cs" />
@@ -523,22 +531,22 @@
     <Content Include="Views\MarketingAssetPackage\Delete.cshtml" />
     <Content Include="Views\MarketingAssetPackage\Index.cshtml" />
     <Content Include="Views\Shared\_ExperimentTypeSelect.cshtml" />
-    <Content Include="Views\Iteration\Index.cshtml" />
-    <Content Include="Views\Iteration\Edit.cshtml" />
+    <Content Include="Views\Experiment\Index.cshtml" />
+    <Content Include="Views\Experiment\Edit.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DatePicker.cshtml" />
-    <Content Include="Views\Iteration\Details.cshtml" />
-    <Content Include="Views\Iteration\_detail.cshtml" />
-    <Content Include="Views\Iteration\Delete.cshtml" />
-    <Content Include="Views\Iteration\_list.cshtml" />
-    <Content Include="Views\Candidate\_detail.cshtml" />
-    <Content Include="Views\Candidate\_list.cshtml" />
-    <Content Include="Views\Candidate\Delete.cshtml" />
-    <Content Include="Views\Candidate\Details.cshtml" />
-    <Content Include="Views\Candidate\Edit.cshtml" />
-    <Content Include="Views\Candidate\Index.cshtml" />
+    <Content Include="Views\Experiment\Details.cshtml" />
+    <Content Include="Views\Experiment\_detail.cshtml" />
+    <Content Include="Views\Experiment\Delete.cshtml" />
+    <Content Include="Views\Experiment\_list.cshtml" />
+    <Content Include="Views\Variant\_detail.cshtml" />
+    <Content Include="Views\Variant\_list.cshtml" />
+    <Content Include="Views\Variant\Delete.cshtml" />
+    <Content Include="Views\Variant\Details.cshtml" />
+    <Content Include="Views\Variant\Edit.cshtml" />
+    <Content Include="Views\Variant\Index.cshtml" />
     <Content Include="Views\Shared\_SaveButton.cshtml" />
-    <Content Include="Views\Candidate\_listHeadingsOrdinary.cshtml" />
-    <Content Include="Views\Candidate\_listHeadingsSortable.cshtml" />
+    <Content Include="Views\Variant\_listHeadingsOrdinary.cshtml" />
+    <Content Include="Views\Variant\_listHeadingsSortable.cshtml" />
     <Content Include="Views\Shared\_searchBox.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\PackageContainer\_detail.cshtml" />
@@ -572,6 +580,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006151341323_2069RemoveAttributesFromMAPEntity.resx">
       <DependentUpon>202006151341323_2069RemoveAttributesFromMAPEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006251236312_Story2070.resx">
+      <DependentUpon>202006251236312_Story2070.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007021317592_Story2071CandidateToVariant.resx">
+      <DependentUpon>202007021317592_Story2071CandidateToVariant.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

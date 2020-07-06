@@ -17,9 +17,9 @@ namespace StatNav.UnitTests.Controllers
         MarketingAssetPackage map1 = null;
         MarketingAssetPackage map2 = null;
         MarketingAssetPackage map3 = null;
-        ExperimentIteration childItem1 = null;
-        ExperimentIteration childItem2 = null;
-        ExperimentIteration childItem3 = null;
+        Experiment childItem1 = null;
+        Experiment childItem2 = null;
+        Experiment childItem3 = null;
         List<MarketingAssetPackage> _maps = null;
         DummyMAPRepository mapRepository = null;
 
@@ -30,9 +30,9 @@ namespace StatNav.UnitTests.Controllers
             status2 = new ExperimentStatus() { Id = 1, DisplayOrder = 2, StatusName = "Scheduled" };
             status3 = new ExperimentStatus() { Id = 2, DisplayOrder = 3, StatusName = "Live" };
 
-            childItem1 = new ExperimentIteration() { Id = 1, MarketingAssetPackageId = 1, IterationName = "ChildItem1" };
-            childItem2 = new ExperimentIteration() { Id = 2, MarketingAssetPackageId = 1, IterationName = "ChildItem2" };
-            childItem3 = new ExperimentIteration() { Id = 3, MarketingAssetPackageId = 1, IterationName = "ChildItem3" };
+            childItem1 = new Experiment() { Id = 1, MarketingAssetPackageId = 1, ExperimentName = "ChildItem1" };
+            childItem2 = new Experiment() { Id = 2, MarketingAssetPackageId = 1, ExperimentName = "ChildItem2" };
+            childItem3 = new Experiment() { Id = 3, MarketingAssetPackageId = 1, ExperimentName = "ChildItem3" };
 
             //set up the dummy data for testing
             map1 = new MarketingAssetPackage()
@@ -43,7 +43,7 @@ namespace StatNav.UnitTests.Controllers
                 Problem = "Test Problem",
                 ProblemValidation="Test Problem Validation",  
                 Notes="Test Notes",
-                ExperimentIterations = new List<ExperimentIteration>()
+                Experiments = new List<Experiment>()
             { childItem1,childItem2,childItem3}
             };
             map2 = new MarketingAssetPackage() { MAPName = "Amber Spyglass", Id = 1 };
@@ -342,10 +342,10 @@ namespace StatNav.UnitTests.Controllers
             ViewResult result = (ViewResult)_controller.Edit(0, "");
 
             MarketingAssetPackage map = result.ViewData.Model as MarketingAssetPackage;
-            List<ExperimentIteration> childItems = (List<ExperimentIteration>)map.ExperimentIterations;
+            List<Experiment> childItems = (List<Experiment>)map.Experiments;
 
             // Assert           
-            Assert.AreEqual(map.ExperimentIterations.Count, 3);
+            Assert.AreEqual(map.Experiments.Count, 3);
             CollectionAssert.Contains(childItems, childItem1);
             CollectionAssert.Contains(childItems, childItem2);
             CollectionAssert.Contains(childItems, childItem3);

@@ -30,6 +30,7 @@ namespace StatNav.WebApplication.Controllers
             ViewBag.StageSortParm = sortOrder == "stage" ? "stage_desc" : "stage";
             List<PackageContainer> containers = _pcRepository.LoadList(sortOrder, searchString);
             ViewBag.SelectedType = "PackageContainer";
+            ViewBag.SearchString = searchString;
             return View(containers);
         }
 

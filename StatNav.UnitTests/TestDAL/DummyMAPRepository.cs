@@ -69,7 +69,7 @@ namespace StatNav.UnitTests.TestData
             return new List<Method> { m1};
         }
 
-        public List<ExperimentIteration> GetIterations(int Id)
+        public List<Experiment> GetExperiments(int Id)
         {
             return null;
         }

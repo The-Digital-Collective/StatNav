@@ -1,0 +1,47 @@
+﻿@model StatNav.WebApplication.Models.Experiment
+<div class="row">
+    <div class="col-md-6">
+        <dl class="dl-horizontal">
+
+            @foreach (var prop in ViewData.ModelMetadata.Properties)
+            {
+                //exceptions in the case statements are for the complex object types
+                <dt>
+                    @switch (prop.PropertyName)
+                    {
+                        case "MarketingAssetPackage":
+                        case "Varaints":
+                            break;
+                        default:
+                            @(prop.DisplayName ?? prop.PropertyName)
+                            break;
+
+                    }
+                </dt>
+                <dd>
+                    @switch (prop.PropertyName)
+                    {
+                        case "MarketingAssetPackageId":
+                            @(Model.MarketingAssetPackage != null ? Model.MarketingAssetPackage.MAPName : "");
+                            break;
+
+                        case "MarketingAssetPackage":
+                        case "Variants":
+                            break;
+                        default:
+                            @prop.Model
+                            break;
+                    }
+                </dd>
+
+
+
+            }
+        </dl>
+    </div>
+    <div class="col-md-6">
+        <h4>Variants</h4>
+        @Html.ActionLink("Create Variant for this Experiment", "Create", "Variant", new { experimentId = Model.Id }, null)
+        @Html.Partial("../Variant/_list", Model.Variants)
+    </div>
+</div>

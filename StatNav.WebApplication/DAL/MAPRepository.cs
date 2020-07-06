@@ -19,11 +19,11 @@ namespace StatNav.WebApplication.DAL
             return SortList(maps.ToList(), sortOrder);
         }
 
-        public List<ExperimentIteration> GetIterations(int Id)
+        public List<Experiment> GetExperiments(int Id)
         {            
-            return Db.ExperimentIterations
+            return Db.Experiments
                      .Where(x => x.MarketingAssetPackageId == Id)
-                     .OrderBy(i => i.IterationName)
+                     .OrderBy(i => i.ExperimentName)
                      .ToList();
         }
 
@@ -39,7 +39,7 @@ namespace StatNav.WebApplication.DAL
                                               //.Include(x => x.ExperimentStatus) story 2069
                                               //.Include(x => x.MAPTargetMetricModel)
                                               //.Include(x => x.MAPImpactMetricModel)
-                                              .Include(x => x.ExperimentIterations)
+                                              .Include(x => x.Experiments)
                                               //.Include(x=>x.MAPMethod)
                                               .Include(x=>x.PackageContainer)
                                               .FirstOrDefault();
@@ -48,14 +48,14 @@ namespace StatNav.WebApplication.DAL
         }
         public override void Remove(int id)
         {
-            MarketingAssetPackage ep = Db.MarketingAssetPackages
-                      .Include(x => x.ExperimentIterations.Select(c => c.ExperimentCandidates))
+            MarketingAssetPackage map = Db.MarketingAssetPackages
+                      .Include(x => x.Experiments.Select(v => v.Variants))
                       .FirstOrDefault(x => x.Id == id);
-            if (ep != null)
+            if (map != null)
             {
-                ep?.ExperimentIterations.ToList().ForEach(c => c.ExperimentCandidates.ToList().ForEach(n => Db.ExperimentCandidates.Remove(n)));
-                ep?.ExperimentIterations.ToList().ForEach(n => Db.ExperimentIterations.Remove(n));
-                Db.MarketingAssetPackages.Remove(ep);
+                map?.Experiments.ToList().ForEach(v => v.Variants.ToList().ForEach(n => Db.Variants.Remove(n)));
+                map?.Experiments.ToList().ForEach(n => Db.Experiments.Remove(n));
+                Db.MarketingAssetPackages.Remove(map);
                 Db.SaveChanges();
             }
         }

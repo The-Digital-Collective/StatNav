@@ -1,6 +1,5 @@
 ﻿namespace StatNav.WebApplication.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
     
     public partial class _2069RemoveAttributesFromMAPEntity : DbMigration
