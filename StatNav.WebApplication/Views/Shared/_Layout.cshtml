@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en-gb">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StatNav - @ViewBag.Title</title>
+ 
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/common.js")
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="containeriner">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>               
+                <a href="@Url.Action( "Index", "Home")"><img src="~/Content/Images/statnav logo.jpg" alt="StatNav Logo"/></a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Dashboard", "Index", "Dashboard")</li>
+                    <li>@Html.ActionLink("Package Containers", "Index", "PackageContainer")</li>
+                    <li>@Html.ActionLink("Marketing Asset Packages", "Index", "MarketingAssetPackage")</li>
+                    <li>@Html.ActionLink("Iterations", "Index", "Iteration")</li>
+                    <li>@Html.ActionLink("Candidates", "Index", "Candidate")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        @*<hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>*@
+    </div>
+
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

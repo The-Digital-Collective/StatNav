@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|AnyCPU">
@@ -26,17 +26,16 @@
     <None Include="Deployment.targets">
       <Visible>False</Visible>
     </None>
-   <Content Include="Deploy-AzureResourceGroup.ps1" />
+    <Content Include="Deploy-AzureResourceGroup.ps1" />
+    <Content Include="WebSiteSQLDatabase.json" />
+    <Content Include="WebSiteSQLDatabase.parameters.json" />
    <Content Include="Deploy-AzureResourceGroup-Creation.ps1" />
-    <Content Include="WebSiteBlueMasterTemplate.json" />
-     <Content Include="WebSiteGreenMasterTemplate.json" />
-     <Content Include="child/deploySqlServer.json" />
-	<Content Include="child/deployHostingPlan.json" />
-	<Content Include="child/deployWebSite.json" />
-	<Content Include="child/deployTrafficManager.json" />
-	<Content Include="child/deployStorageAccount.json" />
-    <Content Include="WebSiteBlueMaster.parameters.json" />
-    <Content Include="WebSiteGreenMaster.parameters.json" />
+   <Content Include="WebSiteMasterTemplate.json" />
+  <Content Include="Child/deploySqlServer.json" />
+	<Content Include="Child/deployHostingPlan.json" />
+	<Content Include="Child/deployWebSite.json" />
+	<Content Include="Child/deployStorageAccount.json" />
+  <Content Include="WebSiteMaster.parameters.json" />
   </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />
 </Project>

@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.161
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatNav", "StatNav.csproj", "{6F43B698-89C4-4A63-9BBE-8146BCB92F72}"
-EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "StatNav.Database", "StatNav.Database\StatNav.Database.sqlproj", "{147EF911-BC6C-461B-AA46-1DB25E068068}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatNav.UnitTests", "StatNav.UnitTests\StatNav.UnitTests.csproj", "{223C702C-9FC6-42D8-A486-557CDFA4ABB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatNav.IntegrationTests", "StatNav.IntegrationTests\StatNav.IntegrationTests.csproj", "{E20FBC24-CC65-44C3-8F3E-0278B0262C02}"
-EndProject
 Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "StatNav.AzureResourceGroup", "StatNav.AzureResourceGroup\StatNav.AzureResourceGroup.deployproj", "{ECD11ACF-FD4F-4B06-A1F5-9C727C0E97F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatNav.WebApplication", "StatNav.WebApplication\StatNav.WebApplication.csproj", "{15756AE6-32A2-4CD5-ABEC-A5C54476F05F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatNav.IntegrationTests", "StatNav.IntegrationTests\StatNav.IntegrationTests.csproj", "{E20FBC24-CC65-44C3-8F3E-0278B0262C02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6F43B698-89C4-4A63-9BBE-8146BCB92F72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6F43B698-89C4-4A63-9BBE-8146BCB92F72}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6F43B698-89C4-4A63-9BBE-8146BCB92F72}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6F43B698-89C4-4A63-9BBE-8146BCB92F72}.Release|Any CPU.Build.0 = Release|Any CPU
 		{147EF911-BC6C-461B-AA46-1DB25E068068}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{147EF911-BC6C-461B-AA46-1DB25E068068}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{147EF911-BC6C-461B-AA46-1DB25E068068}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
@@ -33,14 +29,18 @@ Global
 		{223C702C-9FC6-42D8-A486-557CDFA4ABB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{223C702C-9FC6-42D8-A486-557CDFA4ABB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{223C702C-9FC6-42D8-A486-557CDFA4ABB4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E20FBC24-CC65-44C3-8F3E-0278B0262C02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E20FBC24-CC65-44C3-8F3E-0278B0262C02}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E20FBC24-CC65-44C3-8F3E-0278B0262C02}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E20FBC24-CC65-44C3-8F3E-0278B0262C02}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ECD11ACF-FD4F-4B06-A1F5-9C727C0E97F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ECD11ACF-FD4F-4B06-A1F5-9C727C0E97F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECD11ACF-FD4F-4B06-A1F5-9C727C0E97F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECD11ACF-FD4F-4B06-A1F5-9C727C0E97F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15756AE6-32A2-4CD5-ABEC-A5C54476F05F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15756AE6-32A2-4CD5-ABEC-A5C54476F05F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15756AE6-32A2-4CD5-ABEC-A5C54476F05F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15756AE6-32A2-4CD5-ABEC-A5C54476F05F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E20FBC24-CC65-44C3-8F3E-0278B0262C02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E20FBC24-CC65-44C3-8F3E-0278B0262C02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E20FBC24-CC65-44C3-8F3E-0278B0262C02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E20FBC24-CC65-44C3-8F3E-0278B0262C02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

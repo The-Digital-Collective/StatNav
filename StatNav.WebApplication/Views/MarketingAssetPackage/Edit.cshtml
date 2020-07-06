@@ -1,0 +1,152 @@
+﻿@model StatNav.WebApplication.Models.MarketingAssetPackage
+
+@{
+    String action = ViewBag.Action;
+}
+<div class="row">
+    <div class="col-md-6">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            <h4>@action Marketing Asset Package</h4>
+            @Html.Partial("_SaveButton")
+            <hr />
+            @Html.Partial("_Confirmation")
+            <p>&nbsp;</p>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+
+            @*@if (action == "Edit") //story 2069
+            {
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => Model.Id, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                    </div>
+                </div>
+            }*@
+            <div class="form-group">
+                @Html.LabelFor(model => model.MAPName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MAPName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MAPName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PackageContainerId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("PackageContainerId", new SelectList(ViewBag.PackageContainers, "Id", "PackageContainerName"), "Please Select...", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PackageContainerId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Hypothesis, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Hypothesis, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Hypothesis, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Problem, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Problem, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Problem, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProblemValidation, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ProblemValidation, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ProblemValidation, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.MethodId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("MethodId", new SelectList(ViewBag.Methods, "Id", "Title"), "Please Select...", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.MethodId, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+            @*REMOVED 2069*@
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.MAPTargetMetricModelId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("MAPTargetMetricModelId", new SelectList(ViewBag.MetricModels, "Id", "Title"), "Please Select...", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.MAPTargetMetricModelId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TargetValue, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TargetValue, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TargetValue, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MAPImpactMetricModelId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("MAPImpactMetricModelId", new SelectList(ViewBag.MetricModels, "Id", "Title"), htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.MAPImpactMetricModelId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ImpactValue, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ImpactValue, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ImpactValue, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.ExperimentStatusId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("ExperimentStatusId", new SelectList(ViewBag.ExperimentStatuses, "Id", "StatusName"), htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ExperimentStatusId, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+        </div>
+        }
+        @if (action == "Edit")
+        {
+            <div>
+                @Html.ActionLink("Delete", "Delete", new { Id = Model.Id }, new { @class = "btn btn-danger" })
+
+            </div>
+        }
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+    </div>
+    <div class="col-md-6">
+        <p>&nbsp;</p>
+        @if (action == "Edit")
+        {
+            <h4>Iterations</h4>
+            @Html.ActionLink("Create  Iteration for this Marketing Asset Package", "Create", "Iteration", new { mapId = Model.Id }, null)
+
+            @Html.Partial("../Iteration/_list", Model.ExperimentIterations)
+        }
+    </div>
+</div>

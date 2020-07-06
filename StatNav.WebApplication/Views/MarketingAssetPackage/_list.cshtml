@@ -1,0 +1,39 @@
+﻿@model IEnumerable<StatNav.WebApplication.Models.MarketingAssetPackage>
+@{
+
+}
+<table class="table">
+    <caption>List of Marketing Asset Packages</caption>
+    <tr>
+        @if (ViewBag.Sortable != null)
+        {           
+            <th scope="col">
+                <a href="@Url.Action("Index","MarketingAssetPackage",new { sortOrder = ViewBag.NameSortParm })">Asset Package Name <span class="glyphicon glyphicon-sort"></span></a>
+            </th>                   
+        }
+        else
+        {            
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.MAPName)
+            </th>           
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Hypothesis)
+            </th>
+        }
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>           
+            <td>
+                @Html.ActionLink(item.MAPName, "Edit", "MarketingAssetPackage", new { id = item.Id }, null)
+            </td>           
+            <td>
+                @Html.DisplayFor(modelItem => item.Hypothesis)
+            </td>
+
+        </tr>
+    }
+
+</table>

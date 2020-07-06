@@ -1,0 +1,40 @@
+﻿@model StatNav.WebApplication.Models.PackageContainer
+<div class="row">
+    <div class="col-md-6">
+        <dl class="dl-horizontal">
+
+            @foreach (var prop in ViewData.ModelMetadata.Properties)
+            {
+                //exceptions in the case statements are for the complex object types
+                <dt>
+                    @switch (prop.PropertyName)
+                    {
+                        case "Id":
+                        case "MetricModelStage":
+                        case "MarketingAssetPackages":
+                            break;
+                        default:
+                            @(prop.DisplayName ?? prop.PropertyName)
+                            break;
+
+                    }
+                </dt>
+                <dd>
+                    @switch (prop.PropertyName)
+                    {
+                        case "Id":
+                        case "MetricModelStage":
+                        case "MarketingAssetPackages":
+                            break;
+                        case "MetricModelStageId":
+                            @(Model.MetricModelStage != null ? Model.MetricModelStage.Title : "");
+                            break;
+                        default:
+                            @prop.Model
+                            break;
+                    }
+                </dd>
+            }
+        </dl>
+    </div>
+</div>

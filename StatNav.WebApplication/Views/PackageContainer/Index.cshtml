@@ -1,0 +1,44 @@
+﻿@model IEnumerable<StatNav.WebApplication.Models.PackageContainer>
+
+@{
+    ViewBag.Title = "Package Container";
+}
+
+<h4>Package Containers</h4>
+@Html.Partial("_ExperimentTypeSelect", Model)
+<p>
+    @Html.ActionLink("Create New", "Create", "PackageContainer")
+</p>
+@Html.Partial("_searchBox")
+<table class="table">
+    <caption>List of Package Containers</caption>
+    <tr>      
+        <th scope="col">
+            <a href="@Url.Action("Index",new { sortOrder = ViewBag.NameSortParm })">Container Name <span class="glyphicon glyphicon-sort"></span></a>
+        </th>
+        <th scope="col">
+            <a href="@Url.Action("Index",new { sortOrder = ViewBag.TypeSortParm })">Type <span class="glyphicon glyphicon-sort"></span></a>           
+        </th>
+        <th scope="col">
+            <a href="@Url.Action("Index",new { sortOrder = ViewBag.StageSortParm })">Stage <span class="glyphicon glyphicon-sort"></span></a>
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>            
+            <td>
+                @Html.ActionLink(item.PackageContainerName, "Edit", "PackageContainer", new { id = item.Id }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MetricModelStage.Title)
+            </td>
+
+        </tr>
+    }
+
+</table>

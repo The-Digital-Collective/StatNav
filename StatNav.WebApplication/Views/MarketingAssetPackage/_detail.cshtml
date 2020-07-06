@@ -1,0 +1,67 @@
+﻿@model StatNav.WebApplication.Models.MarketingAssetPackage
+<div class="row">
+    <div class="col-md-6">
+        <dl class="dl-horizontal">
+
+            @foreach (var prop in ViewData.ModelMetadata.Properties)
+            {
+                //exceptions in the case statements are for the complex object types
+                <dt>
+                    @switch (prop.PropertyName)
+                    {
+                        case "ExperimentStatus":
+                        case "ExperimentIterations":
+                        case "MAPTargetMetricModel":
+                        case "MAPImpactMetricModel":
+                        case "UserId":
+                        case "TeamId":
+                        case "MAPMethod":
+                        case "Id":
+                        case "PackageContainer":
+                            break;
+                        default:
+                            @(prop.DisplayName ?? prop.PropertyName)
+                            break;
+
+                    }
+                </dt>
+                <dd>
+                    @switch (prop.PropertyName)
+                    {
+                        @*case "MAPTargetMetricModelId":
+                @(Model.MAPTargetMetricModel != null ? Model.MAPTargetMetricModel.Title : "");
+                break;
+            case "MAPImpactMetricModelId":
+                @(Model.MAPImpactMetricModel != null ? Model.MAPImpactMetricModel.Title : "");
+                break;
+            case "ExperimentStatusId":
+                @(Model.ExperimentStatus != null ? Model.ExperimentStatus.StatusName : "");
+                break;
+            case "MethodId":
+                @(Model.MAPMethod != null ? Model.MAPMethod.Title : "");
+                break;*@
+                        case "PackageContainerId":
+                            @(Model.PackageContainer != null ? Model.PackageContainer.PackageContainerName : "");
+                        break;
+                    case "ExperimentStatus":
+                    case "ExperimentIterations":
+                    case "MAPTargetMetricModel":
+                    case "MAPImpactMetricModel":
+                    case "UserId":
+                    case "TeamId":
+                    case "MAPMethod":
+                    case "Id":
+                    case "PackageContainer":
+                        break;
+                    default:
+                            @prop.Model
+                            break;
+                    }
+                </dd>
+
+
+
+            }
+        </dl>
+    </div>
+</div>
