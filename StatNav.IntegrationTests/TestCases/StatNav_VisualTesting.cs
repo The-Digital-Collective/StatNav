@@ -16,7 +16,7 @@ namespace StatNav.IntegrationTests
     {
         private EyesRunner runner;
         private Eyes eyes;
-        public void StatNavVisualTesting()
+        public  void StatNavVisualTesting()
         {
          
             try
@@ -30,7 +30,7 @@ namespace StatNav.IntegrationTests
                 eyes.ApiKey = "975LpId103DAQlvQO4qrOra9deeNnZysqfEH4i4EZ48JMA110";
 
                 // Start the test by setting AUT's name, window or the page name that's being tested, viewport width and height
-                eyes.Open(AppDriver.driver, "StatNav", "Visual Test", new Size(800, 600));
+                eyes.Open(AppDriver.driver, "StatNav", "Visual_Testing", new Size(800, 600));
 
                 AppDriver.driver.Url = url;
                 AppDriver.driver.Manage().Window.Maximize();

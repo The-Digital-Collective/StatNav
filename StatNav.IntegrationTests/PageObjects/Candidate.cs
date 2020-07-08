@@ -16,26 +16,26 @@ namespace StatNav.IntegrationTests.PageObjects
             PageFactory.InitElements(AppDriver.driver, this);
         }
 
-        [FindsBy(How = How.Id, Using = "CandidateName")]
-        public IWebElement CandidateName { get; set; }
+        [FindsBy(How = How.Id, Using = "VariantName")]
+        public IWebElement VariantName { get; set; }
 
         [FindsBy(How = How.Id, Using = "Control")]
         public IWebElement Control { get; set; }
 
-        [FindsBy(How = How.Id, Using = "CandidateTargetMetricModelId")]
-        public IWebElement CandidateTargetMetricModelId { get; set; }
+        [FindsBy(How = How.Id, Using = "VariantTargetMetricModelId")]
+        public IWebElement VariantTargetMetricModelId { get; set; }
 
         [FindsBy(How = How.Id, Using = "TargetMet")]
         public IWebElement TargetMet { get; set; }
 
-        [FindsBy(How = How.Id, Using = "CandidateImpactMetricModelId")]
-        public IWebElement CandidateImpactMetricModelId { get; set; }
+        [FindsBy(How = How.Id, Using = "VariantImpactMetricModelId")]
+        public IWebElement VariantImpactMetricModelId { get; set; }
 
         [FindsBy(How = How.Id, Using = "ImpactMet")]
         public IWebElement ImpactMet { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//input[@value='Save']")]
-        public IWebElement savecandidate { get; set; }
+        public IWebElement saveVariant { get; set; }
 
     }
 }
