@@ -20,7 +20,7 @@ namespace StatNav.IntegrationTests
             AppClass.CreateAssetPackage(Assetname, Containarname, "Hypothesis", "Problem", "ProblemValidation", "notes");
             AppClass.createiteration(Assetname, Iterationname);
             AppClass.createcandidate(Iterationname, Candidatename);
-            AppClass.CreatePackageContainer(Containarname, "Dynamic", "Act", "notes");
+            AppClass.CreatePackageContainer("DynamicCont"+val, "Dynamic", "Act", "notes");
         }
     }
 }
