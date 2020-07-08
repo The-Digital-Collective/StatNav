@@ -14,14 +14,14 @@
     <caption>List of Marketing Asset Packages</caption>
     <tr>
         @*<th scope="col">
-            <a href="@Url.Action("Index",new { sortOrder = ViewBag.IdSortParm })">ID <span class="glyphicon glyphicon-sort"></span></a>
-        </th>*@
+                <a href="@Url.Action("Index",new { sortOrder = ViewBag.IdSortParm })">ID <span class="glyphicon glyphicon-sort"></span></a>
+            </th>*@
         <th scope="col">
-            <a href="@Url.Action("Index",new { sortOrder = ViewBag.NameSortParm })">Package Name <span class="glyphicon glyphicon-sort"></span></a>
+            <a href="@Url.Action("Index",new { sortOrder = ViewBag.NameSortParm, searchString=ViewBag.SearchString })">Package Name <span class="glyphicon glyphicon-sort"></span></a>
         </th>
         @*<th scope="col">
-            <a href="@Url.Action("Index",new { sortOrder = ViewBag.StatusSortParm })">Status <span class="glyphicon glyphicon-sort"></span></a>
-        </th>*@
+                <a href="@Url.Action("Index",new { sortOrder = ViewBag.StatusSortParm })">Status <span class="glyphicon glyphicon-sort"></span></a>
+            </th>*@
         <th scope="col">
             @Html.DisplayNameFor(model => model.Hypothesis)
         </th>
@@ -32,14 +32,14 @@
     {
         <tr>
             @*<td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>*@
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>*@
             <td>
                 @Html.ActionLink(item.MAPName, "Edit", "MarketingAssetPackage", new { id = item.Id }, null)
             </td>
             @*<td>
-                @Html.DisplayFor(modelItem => item.ExperimentStatus.StatusName)
-            </td>*@
+                    @Html.DisplayFor(modelItem => item.ExperimentStatus.StatusName)
+                </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Hypothesis)
             </td>

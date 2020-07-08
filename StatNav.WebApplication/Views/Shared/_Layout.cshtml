@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StatNav - @ViewBag.Title</title>
- 
+
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
@@ -19,17 +19,25 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                </button>               
-                <a href="@Url.Action( "Index", "Home")"><img src="~/Content/Images/statnav logo.jpg" alt="StatNav Logo"/></a>
+                </button>
+                <a href="@Url.Action( "Index", "Home")"><img src="~/Content/Images/statnav logo.jpg" alt="StatNav Logo" /></a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Dashboard", "Index", "Dashboard")</li>
-                    <li>@Html.ActionLink("Package Containers", "Index", "PackageContainer")</li>
-                    <li>@Html.ActionLink("Marketing Asset Packages", "Index", "MarketingAssetPackage")</li>
-                    <li>@Html.ActionLink("Iterations", "Index", "Iteration")</li>
-                    <li>@Html.ActionLink("Candidates", "Index", "Candidate")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Package Entities
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Package Containers", "Index", "PackageContainer")</li>
+                            <li>@Html.ActionLink("Marketing Asset Packages", "Index", "MarketingAssetPackage")</li>
+                            <li>@Html.ActionLink("Experiments", "Index", "Experiment")</li>
+                            <li>@Html.ActionLink("Variants", "Index", "Variant")</li>
+                        </ul>
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -38,9 +46,9 @@
     <div class="container body-content">
         @RenderBody()
         @*<hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>*@
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>*@
     </div>
 
 

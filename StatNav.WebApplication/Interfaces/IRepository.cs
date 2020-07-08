@@ -25,20 +25,20 @@ namespace StatNav.WebApplication.Interfaces
         IList<ExperimentStatus> GetStatuses();
         IList<Method> GetMethods();
         List<MarketingAssetPackage> SortList(List<MarketingAssetPackage> maps, string sortOrder);
-        List<ExperimentIteration> GetIterations(int Id);
+        List<Experiment> GetExperiments(int Id);
         IList<PackageContainer> GetPCs();
     }
-    public interface IIterationRepository : IRepository<ExperimentIteration>
+    public interface IExperimentRepository : IRepository<Experiment>
     {
         IList<MarketingAssetPackage> GetMAPs();
-        List<ExperimentIteration> SortList(List<ExperimentIteration> iterations, string sortOrder);
-        List<ExperimentCandidate> GetCandidates(int Id);
+        List<Experiment> SortList(List<Experiment> experiments, string sortOrder);
+        List<Variant> GetVariants(int Id);
     }
 
-    public interface ICandidateRepository : IRepository<ExperimentCandidate>
+    public interface IVariantRepository : IRepository<Variant>
     {
-        IList<ExperimentIteration> GetIterations();
+        IList<Experiment> GetExperiments();
         IList<MetricModel> GetMetricModels();
-        List<ExperimentCandidate> SortList(List<ExperimentCandidate> candidates, string sortOrder);
+        List<Variant> SortList(List<Variant> variants, string sortOrder);
     }
 }

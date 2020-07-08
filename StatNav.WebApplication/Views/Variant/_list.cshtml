@@ -1,0 +1,40 @@
+﻿@model IEnumerable<StatNav.WebApplication.Models.Variant>
+
+<table class="table">
+    <caption>List of Experiment Variants</caption>
+    <tr>
+        @if (ViewBag.Sortable != null)
+        {
+            <th scope="col">
+                <a href="@Url.Action("Index","Variant",new { sortOrder = ViewBag.IdSortParm, searchString=ViewBag.SearchString  })">ID <span class="glyphicon glyphicon-sort"></span></a>
+            </th>
+            <th scope="col">
+                <a href="@Url.Action("Index","Variant",new { sortOrder = ViewBag.NameSortParm, searchString=ViewBag.SearchString  })">Variant Name <span class="glyphicon glyphicon-sort"></span></a>
+            </th>
+
+        }
+        else
+        {
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.VariantName)
+            </th>
+        }
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.ActionLink(item.VariantName, "Edit", "Variant", new { id = item.Id }, null)
+            </td>
+        </tr>
+    }
+
+</table>

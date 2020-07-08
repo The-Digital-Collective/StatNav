@@ -93,16 +93,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\CandidateControllerTest.cs" />
+    <Compile Include="Controllers\VariantControllerTest.cs" />
     <Compile Include="Controllers\DashboardControllerTest.cs" />
-    <Compile Include="Controllers\IterationControllerTest.cs" />
+    <Compile Include="Controllers\ExperimentControllerTest.cs" />
     <Compile Include="Controllers\PackageContainerControllerTest.cs" />
     <Compile Include="Controllers\MarketingAssetPackageControllerTest.cs" />
     <Compile Include="ModelValidation\MAPValidationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
-    <Compile Include="TestDAL\DummyCandidateRepository.cs" />
-    <Compile Include="TestDAL\DummyIterationRepository.cs" />
+    <Compile Include="TestDAL\DummyVariantRepository.cs" />
+    <Compile Include="TestDAL\DummyExperimentRepository.cs" />
     <Compile Include="TestDAL\DummyPCRepository.cs" />
     <Compile Include="TestDAL\DummyMAPRepository.cs" />
   </ItemGroup>
