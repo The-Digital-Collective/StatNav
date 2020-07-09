@@ -56,7 +56,7 @@ namespace StatNav.IntegrationTests
             UpdateExperiments.ExperimentUpdateTest();
             UpdateVariant.VariantUpdateTest();
         }
-        [Test, Order(5)]
+        [Test, Order(6)]
         public void DeletePackagesEntities()
         {
             DeletePackages.DeletePackagesTest();
