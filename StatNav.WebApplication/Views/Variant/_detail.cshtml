@@ -1,0 +1,46 @@
+﻿@model StatNav.WebApplication.Models.Variant
+
+<dl class="dl-horizontal">
+
+    @foreach (var prop in ViewData.ModelMetadata.Properties)
+    {
+        //exceptions in the case statements are for the complex object types
+        <dt>
+            @switch (prop.PropertyName)
+            {
+                case "Experiment":
+                case "VariantImpactMetricModel":
+                case "VariantTargetMetricModel":
+                    break;
+                default:
+                    @(prop.DisplayName ?? prop.PropertyName)
+                    break;
+
+            }
+        </dt>
+        <dd>
+            @switch (prop.PropertyName)
+            {
+                case "ExperimentId":
+                    @(Model.Experiment != null ? Model.Experiment.ExperimentName : "");
+                    break;
+                case "VariantImpactMetricModelId":
+                    @(Model.VariantImpactMetricModel != null ? Model.VariantImpactMetricModel.Title : "");
+                    break;
+                case "VariantTargetMetricModelId":
+                    @(Model.VariantTargetMetricModel != null ? Model.VariantTargetMetricModel.Title : "");
+                    break;
+                case "Experiment":
+                case "VariantTargetMetricModel":
+                case "VariantImpactMetricModel":
+                    break;
+                default:
+                    @prop.Model
+                    break;
+            }
+        </dd>
+
+
+
+    }
+</dl>

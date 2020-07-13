@@ -17,8 +17,8 @@ namespace StatNav.IntegrationTests.PageObjects
         [FindsBy(How = How.XPath, Using = "//*[@id='ExperimentProgrammeId']")]
         public IWebElement ddlExperimentProgrammeId { get; set; }
 
-        [FindsBy(How = How.Id, Using = "IterationName")]
-        public IWebElement IterationName { get; set; }
+        [FindsBy(How = How.Id, Using = "ExperimentName")]
+        public IWebElement ExperimentName { get; set; }
 
         [FindsBy(How = How.Id, Using = "RequiredDurationForSignificance")]
         public IWebElement RequiredDurationForSignificance { get; set; }
@@ -45,7 +45,7 @@ namespace StatNav.IntegrationTests.PageObjects
 
 
         [FindsBy(How = How.XPath, Using = "//input[@value='Save']")]
-        public IWebElement SaveCandidate { get; set; }
+        public IWebElement SaveExperiment { get; set; }
 
 
         [FindsBy(How = How.LinkText, Using = "Create Candidate for this Iteration")]

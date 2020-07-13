@@ -18,171 +18,113 @@ namespace StatNav.IntegrationTests
     {
         public static void StatNavLogin()
         {
-            var rand = new Random();
-            int val = rand.Next(999999);
-
-            bool isdisplayed = false;
-
-                string _username = TestContext.Parameters.Get("now");
-                string _password = TestContext.Parameters.Get("next");
-                string url = TestContext.Parameters.Get("webAppUrl");
-                
-                AppDriver.driver.Url = url;
-                AppDriver.driver.Manage().Window.Maximize();
-                AppDriver.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
-                AppDriver.wait = new WebDriverWait(AppDriver.driver, TimeSpan.FromSeconds(70));
-
-                StatNav spage = new StatNav();
-
-                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.Login));
-
-                spage.Login.Click();
-
-                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSAccount));
-
-                spage.MSAccount.SendKeys(_username);
-
-                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
-
-                spage.MSconfirm.Click();
-
-                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSPwd));
-
-                spage.MSPwd.SendKeys(_password);
-
-                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
-
-                spage.MSconfirm.Click();
-
-                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
-
-                spage.MSconfirm.Click();
-
-
-                var filepath = $"{TestContext.CurrentContext.TestDirectory}\\{TestContext.CurrentContext.Test.MethodName + val}.jpg";
-
-                ((ITakesScreenshot)AppDriver.driver).GetScreenshot().SaveAsFile(filepath);
-
-                TestContext.AddTestAttachment(filepath);
-
-                Console.WriteLine("Login Passed1");          
+            string _username = TestContext.Parameters.Get("now");
+            string _password = TestContext.Parameters.Get("next");
+            string url = TestContext.Parameters.Get("webAppUrl");              
+            AppDriver.driver.Url = url;
+            AppDriver.driver.Manage().Window.Maximize();
+            AppDriver.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
+            AppDriver.wait = new WebDriverWait(AppDriver.driver, TimeSpan.FromSeconds(70));
+            StatNav spage = new StatNav();
+            AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.Login));
+            spage.Login.Click();
+            AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSAccount));
+            spage.MSAccount.SendKeys(_username);
+            AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
+            spage.MSconfirm.Click();
+            AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSPwd));
+            spage.MSPwd.SendKeys(_password);
+            AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
+            spage.MSconfirm.Click();
+            AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.MSconfirm));
+            spage.MSconfirm.Click();       
         }
 
-        public static void createprogramme()
+        public static void CreatePackageContainer(string containarname, string type, string stage, string notes)
         {
-            var rand2 = new Random();
-            int val2 = rand2.Next(999999);
-
-            bool isdisplayed = false;
-            try
+            AppDriver.driver.FindElement(By.LinkText("Package Entities")).Click();
+            AppDriver.driver.FindElement(By.LinkText("Package Containers")).Click();
+            AppDriver.driver.FindElement(By.LinkText("Create New")).Click();
+            AppDriver.driver.FindElement(By.Id("PackageContainerName")).SendKeys(containarname);
+            if (type == "Persistent")
             {
-
-                Programmes ppage = new Programmes();
-
-                ppage.btnCreateNew.Click();
-                var rand = new Random();
-                int value = rand.Next(999999);
-                StatNav spage = new StatNav();
-                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(spage.Programmes));
-
-                spage.Programmes.Click();
-
-                isdisplayed = spage.Programmes.Displayed;
-
-                ppage.txtProgrammeName.SendKeys("IntegrationTest Programme" + value);
-
-                ppage.txtProblem.SendKeys("IntegrationTest Problem");
-
-                ppage.txtProblemValidation.SendKeys("IntegrationTest validation");
-
-                ppage.txtHypothesis.SendKeys("New");
-
-                ppage.ddlMethod.selectdropdowntext("Randomised Control Trial");
-
-                ppage.ddlTargetMetric.selectdropdowntext("Basket Adds");
-
-                ppage.txtTargetValue.SendKeys("0");
-
-                ppage.ddlImpactMetric.selectdropdowntext("Bounce Rate");
-
-                ppage.txtImpactValue.SendKeys("0");
-
-                ppage.ddlStatus.selectdropdowntext("Draft");
-
-                ppage.txtNotes.SendKeys("Done");
-
-                IJavaScriptExecutor js = (IJavaScriptExecutor)AppDriver.driver;
-                js.ExecuteScript("javascript:window.scrollBy(0,-250)");
-
-                ppage.btnSave.Click();
-
-                Iterations ipage = new Iterations();
-
-                isdisplayed = ipage.Create_Iteration_Link.Displayed;
-
-                var filepath = $"{TestContext.CurrentContext.WorkDirectory}\\{TestContext.CurrentContext.Test.MethodName + val2}.jpg";
-
-                ((ITakesScreenshot)AppDriver.driver).GetScreenshot().SaveAsFile(filepath);
-
-                TestContext.AddTestAttachment(filepath);
-                Console.WriteLine("Login passed 2");
+                AppDriver.driver.FindElement(By.Id("Type")).Click();
             }
-            
-            catch
+            else
             {
-                var filepath = $"{TestContext.CurrentContext.TestDirectory}\\{TestContext.CurrentContext.Test.MethodName+val2}.jpg";
-
-                ((ITakesScreenshot)AppDriver.driver).GetScreenshot().SaveAsFile(filepath);
-
-                TestContext.AddTestAttachment(filepath);
-
-                Console.WriteLine("Login failed 2");
-
+                AppDriver.driver.FindElement(By.XPath("(//input[@id='Type'])[2]")).Click();
             }
+            AppDriver.driver.FindElement(By.Id("MetricModelStageId")).selectdropdowntext(stage);
+            AppDriver.driver.FindElement(By.Id("Notes")).SendKeys(notes);
+            AppDriver.driver.FindElement(By.XPath("//input[@value='Save']")).Click();
+            AppDriver.driver.FindElement(By.LinkText("Back to List")).Click();
+
+            Assert.IsTrue(AppDriver.driver.PageSource.Contains(containarname));
+            Assert.IsTrue(AppDriver.driver.PageSource.Contains(type));
+            Assert.IsTrue(AppDriver.driver.PageSource.Contains(stage));
+        }
+        public static void CreateAssetPackage(string MAPname, string ddlcid, string Hypothesis, string Problem,string ProblemValidation, string notes)
+        {
+            AppDriver.driver.FindElement(By.LinkText("Package Entities")).Click();
+            AppDriver.driver.FindElement(By.LinkText("Marketing Asset Packages")).Click();
+            AppDriver.driver.FindElement(By.LinkText("Create New")).Click();
+            AppDriver.driver.FindElement(By.Id("MAPName")).SendKeys(MAPname);
+            AppDriver.driver.FindElement(By.Id("PackageContainerId")).selectdropdowntext(ddlcid);
+            AppDriver.driver.FindElement(By.Id("Hypothesis")).SendKeys(Hypothesis);
+            AppDriver.driver.FindElement(By.Id("Problem")).SendKeys(Problem);
+            AppDriver.driver.FindElement(By.Id("ProblemValidation")).SendKeys(ProblemValidation);
+            AppDriver.driver.FindElement(By.Id("Notes")).SendKeys(notes);
+            AppDriver.driver.FindElement(By.XPath("//input[@value='Save']")).Click();
+            AppDriver.driver.FindElement(By.LinkText("Back to List")).Click();
+
+            Assert.IsTrue(AppDriver.driver.PageSource.Contains(MAPname));
+            Assert.IsTrue(AppDriver.driver.PageSource.Contains(Hypothesis));
         }
 
-        public static void createiteration()
+        public static void createiteration(string ddlmap,string NewIteration)
         {
- 
-                Iterations ipage = new Iterations();
+            Iterations ipage = new Iterations();
+            AppDriver.driver.FindElement(By.LinkText("Package Entities")).Click();
+            AppDriver.driver.FindElement(By.LinkText("Experiments")).Click();
+            AppDriver.driver.FindElement(By.LinkText("Create New")).Click(); 
+            AppDriver.driver.FindElement(By.Name("MarketingAssetPackageId")).selectdropdowntext(ddlmap);
+            ipage.ExperimentName.SendKeys(NewIteration);
+            //ipage.RequiredDurationForSignificance.SendKeys("week");
+            //ipage.IterationNumber.SendKeys("10");
+            //ipage.StartDateTime.Clear();
+            //ipage.StartDateTime.SendKeys("13/04/2017");
+            //ipage.EndDateTime.Clear();
+            //ipage.EndDateTime.SendKeys("16/12/2019");
+            ipage.SuccessOutcome.SendKeys("10");
+            ipage.FailureOutcome.SendKeys("5");
+            IJavaScriptExecutor js = (IJavaScriptExecutor)AppDriver.driver;
+            js.ExecuteScript("javascript:window.scrollBy(0,-250)");
+            ipage.SaveExperiment.Click();
+            AppDriver.driver.FindElement(By.LinkText("Back to List")).Click();
 
-                AppDriver.wait.Until(ExpectedConditions.ElementToBeClickable(ipage.Create_Iteration_Link));
-                ipage.Create_Iteration_Link.Click();
-
-
-                ipage.IterationName.SendKeys("NewIteration");
-                ipage.RequiredDurationForSignificance.SendKeys("week");
-
-                ipage.IterationNumber.SendKeys("10");
-                ipage.StartDateTime.Clear();
-                ipage.StartDateTime.SendKeys("13/04/2017");
-                ipage.EndDateTime.Clear();
-                ipage.EndDateTime.SendKeys("16/12/2019");
-                ipage.SuccessOutcome.SendKeys("10");
-                ipage.FailureOutcome.SendKeys("5");
-                IJavaScriptExecutor js = (IJavaScriptExecutor)AppDriver.driver;
-                js.ExecuteScript("javascript:window.scrollBy(0,-250)");
-                ipage.SaveCandidate.Click();
-                ipage.Create_Candidate.Click();
+            Assert.IsTrue(AppDriver.driver.PageSource.Contains(NewIteration));
         }
 
-        public static void createcandidate()
+        public static void createcandidate(string ddlit,string Newcandidate)
         {
 
-                Candidate cpage = new Candidate();
+            Candidate cpage = new Candidate();
+            AppDriver.driver.FindElement(By.LinkText("Package Entities")).Click();
+            AppDriver.driver.FindElement(By.LinkText("Variants")).Click();
+            AppDriver.driver.FindElement(By.LinkText("Create New")).Click(); 
+            AppDriver.driver.FindElement(By.Name("ExperimentId")).selectdropdowntext(ddlit);
+            cpage.VariantName.SendKeys(Newcandidate);
+            cpage.Control.Click();
+            cpage.VariantTargetMetricModelId.selectdropdowntext("Basket Adds");
+            cpage.TargetMet.Click();
+            cpage.VariantImpactMetricModelId.selectdropdowntext("Basket Adds");
+            cpage.ImpactMet.Click();
+            IJavaScriptExecutor js = (IJavaScriptExecutor)AppDriver.driver;
+            js.ExecuteScript("javascript:window.scrollBy(0,-250)");
+            cpage.saveVariant.Click();
+            AppDriver.driver.FindElement(By.LinkText("Back to List")).Click();
 
-                cpage.CandidateName.SendKeys("Newcandidate");
-                cpage.Control.Click();
-
-                cpage.CandidateTargetMetricModelId.selectdropdowntext("Basket Adds");
-                cpage.TargetMet.Click();
-
-                cpage.CandidateImpactMetricModelId.selectdropdowntext("Basket Adds");
-                cpage.ImpactMet.Click();
-
-                IJavaScriptExecutor js = (IJavaScriptExecutor)AppDriver.driver;
-                js.ExecuteScript("javascript:window.scrollBy(0,-250)");
-                cpage.savecandidate.Click();
+            Assert.IsTrue(AppDriver.driver.PageSource.Contains(Newcandidate));
         }
 
         public static void deleteprogrammethod()
@@ -225,6 +167,19 @@ namespace StatNav.IntegrationTests
             if (index > 0)
                 input = input.Substring(0, index);
             return input;
+        }
+
+        public static bool IsElementPresent(By by)
+        {
+            try
+            {
+                AppDriver.driver.FindElement(by);
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
         }
     }
 }

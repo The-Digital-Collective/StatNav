@@ -1,0 +1,16 @@
+﻿@model StatNav.WebApplication.Models.Experiment
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h4>Delete Experiment</h4>
+<div class="alert alert-danger">Are you sure you want to remove this experiment? Removing this experiment will also remove all its variants</div>
+@Html.Partial("_detail", Model)
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <input type="submit" value="Delete" class="btn btn-danger" />
+    @Html.ActionLink("Back to List", "Index")
+}
+

@@ -30,6 +30,7 @@ namespace StatNav.WebApplication.Controllers
             //ViewBag.IdSortParm = sortOrder == "Id" ? "id_desc" : "Id"; //2069 - ID field removed from UI
             List<MarketingAssetPackage> maps = _mapRepository.LoadList(sortOrder, searchString);
             ViewBag.SelectedType = "MarketingAssetPackage";
+            ViewBag.SearchString = searchString;
             return View(maps);
         }
 
@@ -154,7 +155,7 @@ namespace StatNav.WebApplication.Controllers
             SetDDLs();
             if (action == "Edit")
             {
-                ep.ExperimentIterations = _mapRepository.GetIterations(ep.Id);
+                ep.Experiments = _mapRepository.GetExperiments(ep.Id);
             }
         }
     }
