@@ -19,33 +19,13 @@
 			"defaultValue": "SQL_Latin1_General_CP1_CI_AS"
 		},
 		"edition": {
-			"type": "string",
-			"defaultValue": "Basic",
-			"allowedValues": [
-				"Basic",
-				"Standard",
-				"Premium"
-			]
+			"type": "string"
 		},
 		"maxSizeBytes": {
-			"type": "string",
-			"defaultValue": "1073741824"
+			"type": "string"
 		},
 		"requestedServiceObjectiveName": {
-			"type": "string",
-			"defaultValue": "Basic",
-			"allowedValues": [
-				"Basic",
-				"S0",
-				"S1",
-				"S2",
-				"P1",
-				"P2",
-				"P3"
-			],
-			"metadata": {
-				"description": "Describes the performance level for Edition"
-			}
+			"type": "string"
 		}
 	},
 	"variables": {

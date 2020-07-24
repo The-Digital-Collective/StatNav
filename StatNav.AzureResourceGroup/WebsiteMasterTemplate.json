@@ -22,6 +22,18 @@
 		},
 		"databaseName": {
 			"type": "string"
+		},
+		"databasePerformanceLevel": {
+			"type": "string"
+		},
+		"databaseServiceTier": {
+			"type": "string"
+		},
+		"databaseSize": {
+			"type": "string"
+		},
+		"appServiceTier": {
+			"type": "string"
 		}
 	},
 	"variables": {
@@ -74,6 +86,15 @@
 					},
 					"databaseName": {
 						"value": "[parameters('databaseName')]"
+					},
+					"requestedServiceObjectiveName": {
+						"value": "[parameters('databasePerformanceLevel')]"
+					},
+					"edition": {
+						"value": "[parameters('databaseServiceTier')]"
+					},
+					"maxSizeBytes": {
+						"value": "[parameters('databaseSize')]"
 					}
 				}
 			}
@@ -92,6 +113,9 @@
 				"parameters": {
 					"hostingPlanName": {
 						"value": "[variables('hostingPlanName')]"
+					},
+					"skuName": {
+						"value": "[parameters('appServiceTier')]"
 					}
 				}
 			}

@@ -48,6 +48,18 @@
 		},
 		"databaseName": {
 			"value": "statnavsandboxdb"
+		},
+		"databasePerformanceLevel": {
+			"value": "DB-Perf-Level"
+		},
+		"databaseServiceTier": {
+			"value": "DB-Service-Tier"
+		},
+		"databaseSize": {
+			"value": "DB-Size"
+		},
+		"appServiceTier": {
+			"value": "App-Service-Tier"
 		}
 	}
 }
